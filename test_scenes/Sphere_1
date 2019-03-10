@@ -1,0 +1,4 @@
+sphere red 1 1 500 0 -1 3 0 0 0
+cone blue 1 30 500 2 0 4 0 1 0
+cylinder green 1 1 10 -2 0 4 0 1 0
+plane yellow 1 1 1000 -2 -1 0 0 1 0
