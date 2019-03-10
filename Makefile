@@ -6,7 +6,9 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/10 14:05:16 by lwyl-the          #+#    #+#              #
-#    Updated: 2019/03/10 14:07:06 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/03/10 20:04:20 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+all:
+	gcc -F. -framework SDL2 -I SDL2.framework/Headers main.c

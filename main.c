@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:30:54 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/10 20:02:28 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/10 21:23:56 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int main()
 	SDL_Surface *surf;
 	SDL_Event event;
 	int flag = 0;
+	int width;
+	int height;
 	int *data;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -26,7 +28,7 @@ int main()
 		printf("SDL_Init Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	win = SDL_CreateWindow("RT", 100, 100, WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
+	win = SDL_CreateWindow("RT", 100, 100, WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (win == NULL)
 	{
 		printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
@@ -63,6 +65,14 @@ int main()
 			{
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 					flag = 1;
+			}
+			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
+			{
+				surf = SDL_GetWindowSurface(win);
+				data = (int *)surf->pixels;
+				SDL_memset(surf->pixels, 0, surf->h * surf->pitch);
+				data[300 + WIN_WIDTH * 300] = 0xFFFFFF;
+				SDL_UpdateWindowSurface(win);
 			}
 		}
 	}
