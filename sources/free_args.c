@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   free_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 19:31:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/10 14:15:31 by lwyl-the         ###   ########.fr       */
+/*   Created: 2019/03/05 20:27:52 by rgyles            #+#    #+#             */
+/*   Updated: 2019/03/11 19:17:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-#define HEADER_H
+#include "rt.h"
 
-# include <stdio.h>
-# include <SDL.h>
+void	free_args(t_shape *shape, t_light *light)
+{
+	t_shape *tmp_shape;
+	t_light *tmp_light;
 
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 600
-
-#endif
+	while (shape != NULL)
+	{
+		tmp_shape = shape;
+		shape = shape->next;
+		free(tmp_shape);
+	}
+	while (light != NULL)
+	{
+		tmp_light = light;
+		light = light->next;
+		free(tmp_light);
+	}
+}

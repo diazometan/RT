@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 10:34:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/11 14:38:03 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/11 16:35:05 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_strextract(const char *s, int c_s, int c_e)
 	return (str);
 }	
 
-void	get_object(const char *s)
+void	get_objects(const char *s)
 {
 	int		i;
 	char	*object;
@@ -88,17 +88,21 @@ void	get_object(const char *s)
 	}
 }
 
-void	get_light(const char *s)
+void	get_lighting(const char *s)
 {
 	int		i;
-	char	*light;
+	char	*start;
+	char	*object;
 
 	i = 1;
-	while ((light = ft_strextract(s, '{','}')) != NULL)
+	while ((object = ft_strextract(s, '{', '}')) != NULL)
 	{
-		printf("light %d - %s\n\n", i, light);
+		printf("light %d - %s\n\n", i, object);
+		start = ft_strstr(s, "type");
+		start = ft_strchr(start, ':');
+		printf("type - %s\n\n", ft_strextract(start, '"', '"'));
 		i++;
-		s += ft_strlen(light);
+		s += ft_strlen(object);
 	}
 }
 
@@ -111,12 +115,12 @@ int		get_field(char *file)
 		return (-1);
 	str = ft_strextract(start, '[', ']');
 	printf("\nobjects - %s\n\n", str);
-	get_object(str);
+	get_objects(str);
 	if ((start = ft_strstr(file, "lighting")) == NULL)
 		return (-1);
 	str = ft_strextract(start, '[', ']');
 	printf("light - %s\n\n", str);
-	get_light(str);
+	get_lighting(str);
 	if ((start = ft_strstr(file, "camera")) == NULL)
 		return (-1);
 	str = ft_strextract(start, '{', '}');
