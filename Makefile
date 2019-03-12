@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/11 19:21:17 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/12 15:12:51 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,10 @@ FLAGS = -Wall -Wextra -Werror
 INCLUDES = -I SDL2.framework/Headers -I includes 
 
 SRC = main.c\
+	  init_config.c\
+	  get_lighting.c\
 	  event_handler.c\
 	  matrix.c\
-	  get_shapes.c\
-	  check_shape.c\
-	  get_light_sources.c\
-	  init_camera.c\
 	  create_img.c\
 	  check_intersection.c\
 	  plane.c\

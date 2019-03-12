@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/11 19:16:16 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 15:13:48 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	init_camera_ray(int x, int y, t_shape *shape, t_rt *rt)
 {
 	t_matrix	rotation;
 
-	rotation = matrix_multiply(x_rotation_matrix(rt->beta),
-								y_rotation_matrix(rt->alpha));
+	rotation = matrix_multiply(x_rotation_matrix(rt->angle.x),
+								y_rotation_matrix(rt->angle.y));
 	shape->ray.x = (double)((-WIN_WIDTH_HALF) + x) /
 					WIN_WIDTH + rt->camera.x / WIN_WIDTH;
 	shape->ray.y = (double)(WIN_HEIGHT_HALF - y) /

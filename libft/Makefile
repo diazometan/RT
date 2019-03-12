@@ -6,7 +6,7 @@
 #    By: rgyles <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 16:13:15 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/04 17:24:59 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/12 11:21:33 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC = ft_strlen.c\
 	  ft_strnstr.c\
 	  ft_strncmp.c\
 	  ft_atoi.c\
+	  ft_atof.c\
 	  ft_tolower.c\
 	  ft_toupper.c\
 	  ft_isalpha.c\
@@ -55,6 +56,7 @@ SRC = ft_strlen.c\
 	  ft_strjoin.c\
 	  ft_strtrim.c\
 	  ft_strsplit.c\
+	  ft_strextract.c\
 	  ft_itoa.c\
 	  ft_putchar.c\
 	  ft_putstr.c\
@@ -75,8 +77,7 @@ SRC = ft_strlen.c\
 	  ft_swapuni.c\
 	  ft_qsort.c\
 	  ft_realloc.c\
-	  get_next_line.c\
-	  ft_atof.c
+	  get_next_line.c
 
 OBJ = $(SRC:.c=.o)
 
