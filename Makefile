@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/12 20:41:08 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/03/12 20:43:14 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,18 +25,18 @@ FLAGS = -Wall -Wextra -Werror
 INCLUDES = -I SDL2.framework/Headers -I includes
 
 SRC = main.c\
+	  init_config.c\
+	  get_lighting.c\
+	  get_shapes.c\
 	  event_handler.c\
 	  matrix.c\
-	  get_shapes.c\
-	  check_shape.c\
-	  get_light_sources.c\
-	  init_camera.c\
 	  create_img.c\
 	  check_intersection.c\
 	  plane.c\
 	  sphere.c\
 	  cylinder.c\
 	  cone.c\
+	  disk.c\
 	  check_shadow.c\
 	  light.c\
 	  get_color.c\
@@ -53,9 +53,9 @@ NC=\033[0m
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@echo "$(BLUE)Compiling RTv1...$(NC)"
+	@echo "$(BLUE)Compiling RT...$(NC)"
 	@gcc $(FLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT) -F . -framework SDL2
-	@echo "$(GREEN)RTv1 is ready!$(NC)"
+	@echo "$(GREEN)RT is ready!$(NC)"
 
 $(LIBFT):
 	@echo "$(BLUE)Compiling libft...$(NC)"

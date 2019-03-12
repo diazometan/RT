@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/11 19:16:02 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 20:44:27 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,15 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 					exit = 0;
 			}
-			//if (event.window.event == SDL_WINDOWEVENT_RESIZED)
-			//{
-				//sdl.surf = SDL_GetWindowSurface(win);
+			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
+			{
+				sdl->surf = SDL_GetWindowSurface(sdl->win);
 				//data = (int *)surf->pixels;
 				//SDL_memset(surf->pixels, 0, surf->h * surf->pitch);
 				//data[300 + WIN_WIDTH * 300] = 0xFFFFFF;
-				//SDL_UpdateWindowSurface(win);
-			//}
+				create_img(rt, sdl);
+				SDL_UpdateWindowSurface(sdl->win);
+			}
 		}
 	}
 }

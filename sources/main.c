@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/11 19:15:54 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 20:44:37 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,66 @@ int		init_sdl(t_sdl *sdl)
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	SDL_memset(sdl->surf->pixels, 0, sdl->surf->h * sdl->surf->pitch);
+	//SDL_memset(sdl->surf->pixels, 0, sdl->surf->h * sdl->surf->pitch);
 	sdl->img_data = (int *)sdl->surf->pixels;
-	SDL_UpdateWindowSurface(sdl->win);
+	//SDL_UpdateWindowSurface(sdl->win);
 	return (0);
 }
 
-void	init_rt(t_rt *rt, char *file_shapes, char *file_light_sources, char *file_camera)
+char	*get_file(int fd)
 {
-	rt->head_shapes = get_shapes(file_shapes);
-	rt->head_light = get_light_sources(file_light_sources, rt);
-	init_camera(file_camera, rt);
-	rt->canvas = (t_coord) {0.0, 0.0, 1.0};
+	int		error;
+	char	*line;
+	char	*file;
+	char	*tmp;
+
+	file = ft_strnew(1);
+	while ((error = get_next_line(fd, &line)) > 0)
+	{
+		tmp = ft_strjoin(file, ft_strtrim(line));
+		free(file);
+		file = tmp;
+	}
+	if (error == -1)
+	{
+		ft_putendl("gnl error occured");
+		free(file);
+		exit(1);
+	}
+	if (ft_strlen(file) == 0)
+	{
+		ft_putendl("empty file");
+		free(file);
+		exit(1);
+	}
+	return (file);
+}
+
+void	init_rt(t_rt *rt, char *config_file)
+{
+	//rt->head_shapes = get_shapes(file_shapes);
+	//rt->head_light = get_light_sources(file_light_sources, rt);
+	//init_camera(file_camera, rt);
+	//rt->canvas = (t_coord) {0.0, 0.0, 1.0};
+	int		fd;
+	char	*file;
+
+	rt->head_shapes = NULL;
+	rt->head_light = NULL;
+	fd = open(config_file, O_RDONLY);
+	file = get_file(fd);
+	//printf("%s\n", file);
+	if (init_config(file, rt))
+	{
+		free(file);
+		free_args(rt->head_shapes, rt->head_light);
+		exit(1);
+	}
+	//printf("result - %d\n", get_field(file));
+	free(file);
+	close(fd);
+	//return (0);
+
 }
 
 int		main(int args, char **argv)
@@ -56,10 +104,42 @@ int		main(int args, char **argv)
 		ft_putstr("\033[0;31musage: ./RTv1 [configuration_file]\n");
 		return (1);
 	}
-	//init_rt(&rt, argv[1], argv[2], argv[3]);
+	init_rt(&rt, argv[1]);
+	t_shape *h_s = rt.head_shapes;
+	t_light *h_l = rt.head_light;
+	//TEMPORARY CHECK FOR CONFIG PARSER
+	printf("shapes:\n");
+	while (h_s != NULL)
+	{
+		printf("shape - %d, color - %x, specular - %.2f ", h_s->figure, h_s->color, h_s->specular);
+		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER)
+			printf("radius - %f ", h_s->radius);
+		if (h_s->figure == CONE)
+			printf("angle - %.2f ", h_s->angle);
+		printf("\n\tx - %.2f y - %.2f z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
+		printf("\n\tx_u - %.2f y_u - %.2f z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+		printf("\n");
+		h_s = h_s->next;
+	}
+	printf("\nlight sources:\n");
+	while (h_l != NULL)
+	{
+		printf("type - %d intensity - %.2f ", h_l->type, h_l->intensity);
+		if (h_l->type == POINT)
+			printf("center x - %.2f y - %.2f z - %.2f", h_l->point.x, h_l->point.y, h_l->point.z);
+		else if (h_l->type == DIRECTIONAL)
+			printf("direction - x - %.2f y - %.2f z - %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
+		h_l = h_l->next;
+		printf("\n");
+	}
+	printf("\ncamera:\n");
+	printf("centers at x - %.2f y - %.2f z - %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
+	printf("looks at x - %.2f y - %.2f z - %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
+	//END
+	(void)sdl;
 	if (init_sdl(&sdl))
 		return (1);
-	//create_img(&rt);
+	create_img(&rt, &sdl);
 	sdl.img_data[300 + WIN_WIDTH * 300] = 0xFF0000;
 	SDL_UpdateWindowSurface(sdl.win);
 	event_handler(&rt, &sdl);

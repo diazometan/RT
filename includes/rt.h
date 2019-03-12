@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 11:23:06 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/12 20:42:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,22 @@
 # define WIN_HEIGHT 600
 # define WIN_WIDTH_HALF WIN_WIDTH / 2
 # define WIN_HEIGHT_HALF WIN_HEIGHT / 2
+
 # define PLANE 1
 # define SPHERE 2
 # define CYLINDER 3
 # define CONE 4
+# define DISK 5
+
+# define POINT 1
+# define DIRECTIONAL 2
+# define AMBIENT 3
+
+# define RED 0xFF0000
+# define GREEN 0x008000
+# define BLUE 0x0000FF
+# define YELLOW 0xFFFF00
+# define PURPLE 0x800080
 
 # define KEYBOARD_UP 126
 # define KEYBOARD_DOWN 125
@@ -63,6 +75,7 @@ typedef struct		s_shape
 	int				color;
 	double			angle;
 	double			radius;
+	double			specular;
 	double			reflection;
 	double			l_ray;
 	t_coord			center;
@@ -84,11 +97,12 @@ typedef struct		s_light
 
 typedef struct		s_rt
 {
-	double			alpha;
-	double			beta;
+	//double			alpha;
+	//double			beta;
 	double			t_closest;
 	t_shape			*head_shapes;
 	t_light			*head_light;
+	t_coord			angle;
 	t_coord			camera;
 	t_coord			canvas;
 }					t_rt;
@@ -115,13 +129,18 @@ typedef struct		s_matrix
 	double			matrix[3][3];
 }					t_matrix;
 
-t_shape				*get_shapes(char *file_name);
-int					check_shape(t_shape *shape, char **line);
-t_light				*get_light_sources(char *file_name, t_rt *rt);
-void				init_camera(char *file_name, t_rt *rt);
+//t_shape				*get_shapes(char *file_name);
+//int					check_shape(t_shape *shape, char **line);
+//t_light				*get_light_sources(char *file_name, t_rt *rt);
+//void				init_camera(char *file_name, t_rt *rt);
 void				free_args(t_shape *shape, t_light *light);
 
-void				create_img(t_rt *rt);
+int					init_config(char *file, t_rt *rt);
+void				extract_coord(char *str, t_coord *coord);
+void				get_lighting(char *s, t_light **head);
+void				get_shapes(char *s, t_shape **head);
+
+void				create_img(t_rt *rt, t_sdl *sdl);
 int					check_intersection(t_shape *shape, t_rt *rt);
 
 double				sphere_intersection(t_shape *shape, t_ray *ray);

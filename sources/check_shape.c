@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 18:06:18 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/11 19:17:14 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 20:44:18 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int				check_shape(t_shape *shape, char **line)
 	i = 2;
 	shape->radius = ft_atof(line[i++]);
 	shape->angle = (M_PI * ft_atoi(line[i++])) / 180;
-	shape->reflection = ft_atof(line[i++]);
+	shape->specular = ft_atof(line[i++]);
 	shape->center.x = ft_atof(line[i++]);
 	shape->center.y = ft_atof(line[i++]);
 	shape->center.z = ft_atof(line[i++]);

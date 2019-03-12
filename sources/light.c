@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/11 19:18:38 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 20:44:36 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static double	get_reflection(t_shape *shape, t_light *light,
 	{
 		shape->l_ray = vector_length(&shape->ray);
 		light_sum = light->intensity * pow(ray_sum /
-			(r_length * shape->l_ray), shape->reflection);
+			(r_length * shape->l_ray), shape->specular);
 	}
 	return (light_sum);
 }
@@ -50,7 +50,7 @@ static double	get_point_light(t_shape *shape, t_light *light)
 	light_t_norm = dot_product(&light->ray, &shape->normal);
 	if ((light_t_norm) > 0)
 		light_sum = light->intensity * (light_t_norm / l_length);
-	if (shape->reflection > 0)
+	if (shape->specular > 0)
 		light_sum += get_reflection(shape, light, light_t_norm);
 	return (light_sum);
 }
@@ -69,7 +69,7 @@ static double	get_directional_light(t_shape *shape, t_light *light)
 	light_t_norm = dot_product(&light->ray, &shape->normal);
 	if ((light_t_norm) > 0)
 		light_sum = light->intensity * (light_t_norm / l_length);
-	if (shape->reflection > 0)
+	if (shape->specular > 0)
 		light_sum += get_reflection(shape, light, light_t_norm);
 	return (light_sum);
 }

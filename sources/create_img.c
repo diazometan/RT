@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/11 19:16:16 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 20:44:21 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	init_camera_ray(int x, int y, t_shape *shape, t_rt *rt)
 {
 	t_matrix	rotation;
 
-	rotation = matrix_multiply(x_rotation_matrix(rt->beta),
-								y_rotation_matrix(rt->alpha));
+	rotation = matrix_multiply(x_rotation_matrix(rt->angle.x),
+								y_rotation_matrix(rt->angle.y));
 	shape->ray.x = (double)((-WIN_WIDTH_HALF) + x) /
 					WIN_WIDTH + rt->camera.x / WIN_WIDTH;
 	shape->ray.y = (double)(WIN_HEIGHT_HALF - y) /
@@ -27,7 +27,7 @@ static void	init_camera_ray(int x, int y, t_shape *shape, t_rt *rt)
 	vector_matrix_multiply(rotation, shape);
 }
 
-void		get_pixel(int x, int y, t_rt *rt)
+void		get_pixel(int x, int y, t_rt *rt, t_sdl *sdl)
 {
 	t_shape	*first;
 	t_shape *shape;
@@ -44,11 +44,13 @@ void		get_pixel(int x, int y, t_rt *rt)
 	}
 	//if (first != NULL)
 		//rt->mlx.img.img_data[x + y * WIN_WIDTH] = get_color(first, rt);
-	//if (first != NULL)
-		//rt->sdl.img_data[x + y * WIN_WIDTH] = get_color(first, rt);
+	if (first != NULL)
+		sdl->img_data[x + y * WIN_WIDTH] = get_color(first, rt);
+	else
+		sdl->img_data[x + y * WIN_WIDTH] = 0x0;
 }
 
-void		create_img(t_rt *rt)
+void		create_img(t_rt *rt, t_sdl *sdl)
 {
 	int		x;
 	int		y;
@@ -58,9 +60,9 @@ void		create_img(t_rt *rt)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-			get_pixel(x, y, rt);
+			get_pixel(x, y, rt, sdl);
 	}
-	//SDL_UpdateWindowSurface(rt->sdl.win);
+	SDL_UpdateWindowSurface(sdl->win);
 	//mlx_put_image_to_window(rt->mlx.mlx_ptr, rt->mlx.win_ptr,
 								//rt->mlx.img.img_ptr, 0, 0);
 }
