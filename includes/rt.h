@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 14:59:00 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 19:28:43 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,17 @@
 # define SPHERE 2
 # define CYLINDER 3
 # define CONE 4
+# define DISK 5
 
 # define POINT 1
 # define DIRECTIONAL 2
 # define AMBIENT 3
+
+# define RED 0xFF0000
+# define GREEN 0x008000
+# define BLUE 0x0000FF
+# define YELLOW 0xFFFF00
+# define PURPLE 0x800080
 
 # define KEYBOARD_UP 126
 # define KEYBOARD_DOWN 125
@@ -69,6 +76,7 @@ typedef struct		s_shape
 	double			angle;
 	double			radius;
 	double			specular;
+	double			reflection;
 	double			l_ray;
 	t_coord			center;
 	t_coord			ray;
@@ -121,17 +129,18 @@ typedef struct		s_matrix
 	double			matrix[3][3];
 }					t_matrix;
 
-t_shape				*get_shapes(char *file_name);
-int					check_shape(t_shape *shape, char **line);
+//t_shape				*get_shapes(char *file_name);
+//int					check_shape(t_shape *shape, char **line);
 //t_light				*get_light_sources(char *file_name, t_rt *rt);
-void				init_camera(char *file_name, t_rt *rt);
+//void				init_camera(char *file_name, t_rt *rt);
 void				free_args(t_shape *shape, t_light *light);
 
 int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
 void				get_lighting(char *s, t_light **head);
+void				get_shapes(char *s, t_shape **head);
 
-void				create_img(t_rt *rt);
+void				create_img(t_rt *rt, t_sdl *sdl);
 int					check_intersection(t_shape *shape, t_rt *rt);
 
 double				sphere_intersection(t_shape *shape, t_ray *ray);

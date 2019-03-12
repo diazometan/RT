@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 13:51:26 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 14:32:58 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 16:08:19 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void			get_lighting(char *s, t_light **head)
 		start = ft_strstr(s, "intensity");
 		if ((str = ft_strextract(start, ':', ',')) == NULL)
 			str = ft_strextract(start, ':', '}');
-		//printf("str - %s\n", str);
-		//printf("intensity - %s\n", str);
 		new->intensity = ft_atof(str);
 		free(str);
 		if (new->type == POINT)
@@ -75,7 +73,7 @@ void			get_lighting(char *s, t_light **head)
 		{
 			start = ft_strstr(s, "direction");
 			str = ft_strextract(start, '[', ']');
-			extract_coord(str, &new->point);
+			extract_coord(str, &new->ray);
 			free(str);
 		}
 		else if (new->type == AMBIENT)

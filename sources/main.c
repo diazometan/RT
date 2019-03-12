@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 15:18:54 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 19:33:57 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int		init_sdl(t_sdl *sdl)
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	SDL_memset(sdl->surf->pixels, 0, sdl->surf->h * sdl->surf->pitch);
+	//SDL_memset(sdl->surf->pixels, 0, sdl->surf->h * sdl->surf->pitch);
 	sdl->img_data = (int *)sdl->surf->pixels;
-	SDL_UpdateWindowSurface(sdl->win);
+	//SDL_UpdateWindowSurface(sdl->win);
 	return (0);
 }
 
@@ -79,7 +79,7 @@ void	init_rt(t_rt *rt, char *config_file)
 	rt->head_light = NULL;
 	fd = open(config_file, O_RDONLY);
 	file = get_file(fd);
-	printf("%s\n", file);
+	//printf("%s\n", file);
 	if (init_config(file, rt))
 	{
 		free(file);
@@ -108,40 +108,42 @@ int		main(int args, char **argv)
 	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
 	//TEMPORARY CHECK FOR CONFIG PARSER
+	printf("shapes:\n");
 	while (h_s != NULL)
 	{
-		printf("shape - %d color - %x specular - %f ", h_s->figure, h_s->color, h_s->specular);
+		printf("shape - %d, color - %x, specular - %.2f ", h_s->figure, h_s->color, h_s->specular);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER)
 			printf("radius - %f ", h_s->radius);
-		if (h_s->figure != CONE)
-			printf("angle - %f ", h_s->angle);
-		printf("x - %f y - %f z - %f ", h_s->center.x, h_s->center.y, h_s->center.z);
-		printf("x_u - %f y_u - %f z_u - %f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
-		printf("\n\n");
+		if (h_s->figure == CONE)
+			printf("angle - %.2f ", h_s->angle);
+		printf("\n\tx - %.2f y - %.2f z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
+		printf("\n\tx_u - %.2f y_u - %.2f z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+		printf("\n");
 		h_s = h_s->next;
 	}
+	printf("\nlight sources:\n");
 	while (h_l != NULL)
 	{
-		printf("type - %d intensity - %f ", h_l->type, h_l->intensity);
+		printf("type - %d intensity - %.2f ", h_l->type, h_l->intensity);
 		if (h_l->type == POINT)
-			printf("center x - %f y - %f z - %f", h_l->point.x, h_l->point.y, h_l->point.z);
+			printf("center x - %.2f y - %.2f z - %.2f", h_l->point.x, h_l->point.y, h_l->point.z);
 		else if (h_l->type == DIRECTIONAL)
-			printf("direction - x- %f y - %f z - %f", h_l->point.x, h_l->point.y, h_l->point.z);
+			printf("direction - x - %.2f y - %.2f z - %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
 		h_l = h_l->next;
 		printf("\n");
 	}
-	printf("\ncamera centers at x - %f y - %f z - %f\n", rt.camera.x, rt.camera.y, rt.camera.z);
-	printf("camera looks at x - %f y - %f z - %f\n\n", rt.angle.x, rt.angle.y, rt.angle.z);
-	printf("\n");
+	printf("\ncamera:\n");
+	printf("centers at x - %.2f y - %.2f z - %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
+	printf("looks at x - %.2f y - %.2f z - %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
 	//END
 	(void)sdl;
-	//if (init_sdl(&sdl))
-		//return (1);
-	//create_img(&rt);
-	//sdl.img_data[300 + WIN_WIDTH * 300] = 0xFF0000;
-	//SDL_UpdateWindowSurface(sdl.win);
-	//event_handler(&rt, &sdl);
-	//SDL_DestroyWindow(sdl.win);
-	//SDL_Quit();
+	if (init_sdl(&sdl))
+		return (1);
+	create_img(&rt, &sdl);
+	sdl.img_data[300 + WIN_WIDTH * 300] = 0xFF0000;
+	SDL_UpdateWindowSurface(sdl.win);
+	event_handler(&rt, &sdl);
+	SDL_DestroyWindow(sdl.win);
+	SDL_Quit();
 	return (0);
 }

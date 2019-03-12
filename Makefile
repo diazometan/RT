@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/12 15:12:51 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/12 19:25:04 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ INCLUDES = -I SDL2.framework/Headers -I includes
 SRC = main.c\
 	  init_config.c\
 	  get_lighting.c\
+	  get_shapes.c\
 	  event_handler.c\
 	  matrix.c\
 	  create_img.c\
@@ -51,9 +52,9 @@ NC=\033[0m
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@echo "$(BLUE)Compiling RTv1...$(NC)"
+	@echo "$(BLUE)Compiling RT...$(NC)"
 	@gcc $(FLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT) -F . -framework SDL2
-	@echo "$(GREEN)RTv1 is ready!$(NC)"
+	@echo "$(GREEN)RT is ready!$(NC)"
 
 $(LIBFT):
 	@echo "$(BLUE)Compiling libft...$(NC)"

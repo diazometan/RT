@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 15:17:29 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/12 16:17:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,6 @@ void	get_camera(char *s, t_rt *rt)
 	free(str);
 }
 
-void	get_objects(char *s, t_shape *head)
-{
-	int		i;
-	char	*object;
-
-	(void)head;
-	i = 1;
-	while ((object = ft_strextract(s, '{', '}')) != NULL)
-	{
-		printf("object %d - %s\n\n", i, object);
-		i++;
-		s += ft_strlen(object);
-	}
-}
-
 int		init_config(char *file, t_rt *rt)
 {
 	char	*start;
@@ -72,8 +57,8 @@ int		init_config(char *file, t_rt *rt)
 	if ((start = ft_strstr(file, "objects")) == NULL)
 		return (1);
 	shapes = ft_strextract(start, '[', ']');
-	printf("\nobjects - %s\n\n", shapes);
-	get_objects(shapes, rt->head_shapes);
+	//printf("\nobjects - %s\n\n", shapes);
+	get_shapes(shapes, &rt->head_shapes);
 	if ((start = ft_strstr(file, "lighting")) == NULL)
 		return (1);
 	lighting = ft_strextract(start, '[', ']');
@@ -83,6 +68,6 @@ int		init_config(char *file, t_rt *rt)
 		return (1);
 	camera = ft_strextract(start, '{', '}');
 	get_camera(camera, rt);
-	printf("camera - %s\n\n", camera);
+	//printf("camera - %s\n\n", camera);
 	return (0);
 }
