@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/11 19:21:17 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/12 20:41:08 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 FLAGS = -Wall -Wextra -Werror
 
-INCLUDES = -I SDL2.framework/Headers -I includes 
+INCLUDES = -I SDL2.framework/Headers -I includes
 
 SRC = main.c\
 	  event_handler.c\

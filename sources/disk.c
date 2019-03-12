@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.c                                            :+:      :+:    :+:   */
+/*   disk.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/03 14:08:14 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/12 11:12:31 by lwyl-the         ###   ########.fr       */
+/*   Created: 2019/03/12 11:24:34 by lwyl-the          #+#    #+#             */
+/*   Updated: 2019/03/12 20:40:53 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			get_normal_plane(t_shape *shape)
+void			get_normal_disk(t_shape *shape)
 {
 	shape->normal.x = shape->unit.x;
 	shape->normal.y = shape->unit.y;
@@ -21,30 +21,36 @@ void			get_normal_plane(t_shape *shape)
 		scalar_product(&shape->normal, -1.0);
 }
 
-double	ray_plane_intersection(t_ray *ray, t_shape *shape)
+static double	ray_disk_intersection(t_ray *ray, t_shape *shape, t_rt *rt)
 {
 	double	t;
-	double	denominator;
+	double tmp;
+	t_coord v;
+	t_coord p;
 
-	t = 0.0;
-	normalize_vector(&shape->unit, vector_length(&shape->unit));
-	denominator = dot_product(&ray->b, &shape->unit);
-	if (fabs(denominator) > 0.0001)
+	t = INT_MAX;
+	tmp = plane_intersection(shape, ray);
+	if (tmp != INT_MAX)
 	{
-		scalar_product(&ray->a, -1.0);
-		t = dot_product(&ray->a, &shape->unit) / denominator;
+		p.x = rt->camera.x + tmp * shape->ray.x;
+		p.y = rt->camera.y + tmp * shape->ray.y;
+		p.z = rt->camera.z + tmp * shape->ray.z;
+		v.x = p.x - shape->center.x;
+		v.y = p.y - shape->center.y;
+		v.z = p.z - shape->center.z;
+		t = vector_length(&v);
+		if (t <= 1.5)
+			return (tmp);
+		else
+			return (INT_MAX);
 	}
 	return (t);
 }
 
-double			plane_intersection(t_shape *shape, t_ray *ray)
+double			disk_intersection(t_shape *shape, t_ray *ray, t_rt *rt)
 {
 	double	t;
-	double	intersection;
 
-	intersection = INT_MAX;
-	t = ray_plane_intersection(ray, shape);
-	if (t > ray->min && t < ray->max && t < intersection)
-		intersection = t;
-	return (intersection);
+	t = ray_disk_intersection(ray, shape, rt);
+	return (t);
 }
