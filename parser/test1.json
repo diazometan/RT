@@ -23,7 +23,7 @@
 		"lighting":[
 			{
 				"type":"point",
-				"intensity":1.099,
+				"intensity":1.0,
 				"center":[1,2,0]
 			},
 			{

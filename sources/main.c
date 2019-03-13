@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 12:08:53 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/13 12:52:47 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,13 @@ int		main(int args, char **argv)
 	printf("\nlight sources:\n");
 	while (h_l != NULL)
 	{
-		printf("type - %d intensity - %.2f ", h_l->type, h_l->intensity);
+		if (h_l->type == POINT)
+			printf("point, ");
+		else if (h_l->type == DIRECTIONAL)
+			printf("directional, ");
+		else if (h_l->type == AMBIENT)
+			printf("ambient, ");
+		printf("intensity - %.2f ", h_l->intensity);
 		if (h_l->type == POINT)
 			printf("center x - %.2f y - %.2f z - %.2f", h_l->point.x, h_l->point.y, h_l->point.z);
 		else if (h_l->type == DIRECTIONAL)
@@ -143,7 +149,7 @@ int		main(int args, char **argv)
 	sdl.img_data[300 + WIN_WIDTH * 300] = 0xFF0000;
 	SDL_UpdateWindowSurface(sdl.win);
 	event_handler(&rt, &sdl);
-	free_args(&rt.head_shapes, &rt.head_light);
+	free_args(rt.head_shapes, rt.head_light);
 	SDL_DestroyWindow(sdl.win);
 	SDL_Quit();
 	return (0);

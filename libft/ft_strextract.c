@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:19:49 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 11:22:47 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/13 13:21:42 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,14 @@ char		*ft_strextract(const char *s, int c_s, int c_e)
 
 	if ((start = ft_strchr(s, c_s)) == NULL)
 		return (NULL);
-	if ((end = get_end(start + 1, c_s, c_e)) == NULL)
-		return (NULL);
-	len = end - start - 1;
+	if (c_e == '\0')
+		len = ft_strlen(s) - (start - s);
+	else
+	{
+		if ((end = get_end(start + 1, c_s, c_e)) == NULL)
+			return (NULL);
+		len = end - start - 1;
+	}
 	str = ft_strsub(start, 1, len);
 	return (str);
 }
