@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 20:45:50 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 21:10:15 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	init_camera_ray(int x, int y, t_shape *shape, t_rt *rt)
 
 	rotation = matrix_multiply(x_rotation_matrix(rt->angle.x),
 								y_rotation_matrix(rt->angle.y));
-	shape->ray.x = (double)((-WIN_WIDTH_HALF) + x) /
-					WIN_WIDTH + rt->camera.x / WIN_WIDTH;
-	shape->ray.y = (double)(WIN_HEIGHT_HALF - y) /
-					WIN_HEIGHT + rt->camera.y / WIN_WIDTH;
+	shape->ray.x = (double)((-rt->win_width / 2) + x) /
+					rt->win_width + rt->camera.x / rt->win_width;
+	shape->ray.y = (double)(rt->win_height / 2 - y) /
+					rt->win_height + rt->camera.y / rt->win_height;
 	shape->ray.z = 1.0;
 	normalize_vector(&(shape->ray), vector_length(&shape->ray));
 	vector_matrix_multiply(rotation, shape);
@@ -43,9 +43,9 @@ void		get_pixel(int x, int y, t_rt *rt, t_sdl *sdl)
 		shape = shape->next;
 	}
 	if (closest != NULL)
-		sdl->img_data[x + y * WIN_WIDTH] = get_color(closest, rt);
+		sdl->img_data[x + y * rt->win_width] = get_color(closest, rt);
 	else
-		sdl->img_data[x + y * WIN_WIDTH] = 0x0;
+		sdl->img_data[x + y * rt->win_width] = 0x0;
 }
 
 void		create_caps(t_rt *rt)
@@ -90,13 +90,17 @@ void		create_img(t_rt *rt, t_sdl *sdl)
 {
 	int		x;
 	int		y;
+	int		x_limit;
+	int		y_limit;
 
 	y = -1;
 	create_caps(rt);
-	while (++y < WIN_HEIGHT)
+	x_limit = rt->win_width;
+	y_limit = rt->win_height;
+	while (++y < y_limit)
 	{
 		x = -1;
-		while (++x < WIN_WIDTH)
+		while (++x < x_limit)
 			get_pixel(x, y, rt, sdl);
 	}
 	SDL_UpdateWindowSurface(sdl->win);

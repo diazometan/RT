@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 20:40:16 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 21:11:09 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 # define RT_H
 
 # include "../libft/libft.h"
-//# include "../minilibx_macos/mlx.h"
 # include "SDL.h"
 # include <math.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <stdio.h>
-
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 600
-# define WIN_WIDTH_HALF WIN_WIDTH / 2
-# define WIN_HEIGHT_HALF WIN_HEIGHT / 2
 
 # define PLANE 1
 # define SPHERE 2
@@ -41,20 +35,6 @@
 # define BLUE 0x0000FF
 # define YELLOW 0xFFFF00
 # define PURPLE 0x800080
-
-# define KEYBOARD_UP 126
-# define KEYBOARD_DOWN 125
-# define KEYBOARD_RIGHT 124
-# define KEYBOARD_LEFT 123
-# define SPACE 49
-# define ESC 53
-# define KEYBOARD_W 13
-# define KEYBOARD_S 1
-# define KEYBOARD_A 0
-# define KEYBOARD_D 2
-# define KEYBOARD_R 15
-# define KEYBOARD_CTRL 256
-
 
 typedef struct		s_sdl
 {
@@ -98,8 +78,8 @@ typedef struct		s_light
 
 typedef struct		s_rt
 {
-	//double			alpha;
-	//double			beta;
+	int				win_width;
+	int				win_height;
 	double			t_closest;
 	t_shape			*head_shapes;
 	t_light			*head_light;
@@ -130,16 +110,11 @@ typedef struct		s_matrix
 	double			matrix[3][3];
 }					t_matrix;
 
-//t_shape				*get_shapes(char *file_name);
-//int					check_shape(t_shape *shape, char **line);
-//t_light				*get_light_sources(char *file_name, t_rt *rt);
-//void				init_camera(char *file_name, t_rt *rt);
-void				free_args(t_shape *shape, t_light *light);
-
 int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
 void				get_lighting(char *s, t_light **head);
 void				get_shapes(char *s, t_shape **head);
+void				free_args(t_shape *shape, t_light *light);
 
 void				create_img(t_rt *rt, t_sdl *sdl);
 int					check_intersection(t_shape *shape, t_rt *rt);
