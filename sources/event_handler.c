@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 12:12:02 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/13 14:11:17 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,33 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 			{
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 					exit = 1;
+				if (event.key.keysym.sym == SDLK_LEFT)
+					rt->angle.y += (M_PI * 5.0 / 180);
+				if (event.key.keysym.sym == SDLK_RIGHT)
+					rt->angle.y -= (M_PI * 5.0 / 180);
+				if (event.key.keysym.sym == SDLK_UP)
+					rt->angle.x += (M_PI * 5.0 / 180);
+				if (event.key.keysym.sym == SDLK_DOWN)
+					rt->angle.x -= (M_PI * 5.0 / 180);
+				if (event.key.keysym.sym == SDLK_w)
+					rt->camera.z += 0.5;
+				if (event.key.keysym.sym == SDLK_s)
+					rt->camera.z -= 0.5;
+				if (event.key.keysym.sym == SDLK_d)
+					rt->camera.x += 0.5;
+				if (event.key.keysym.sym == SDLK_a)
+					rt->camera.x -= 0.5;
+				if (event.key.keysym.sym == SDLK_SPACE)
+					rt->camera.y += 0.5;
+				if (event.key.keysym.sym == SDLK_LCTRL)
+					rt->camera.y -= 0.5;
+				if (event.key.keysym.sym == SDLK_r)
+				{
+					rt->angle = (t_coord){0, 0, 0};
+					rt->camera = (t_coord){0, 0, 0};
+				}
+				create_img(rt, sdl);
+				SDL_UpdateWindowSurface(sdl->win);
 			}
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 			{

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:36 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 14:07:18 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ static double	get_directional_light(t_shape *shape, t_light *light)
 	double	light_t_norm;
 
 	light_sum = 0.0;
-	light->ray.x = light->point.x;
-	light->ray.y = light->point.y;
-	light->ray.z = light->point.z;
 	l_length = vector_length(&light->ray);
 	light_t_norm = dot_product(&light->ray, &shape->normal);
 	if ((light_t_norm) > 0)

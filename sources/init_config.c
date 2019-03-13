@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 11:29:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/13 14:06:13 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	get_camera(char *s, t_rt *rt)
 	start = ft_strstr(s, "direction");
 	str = ft_strextract(start, '[', ']');
 	extract_coord(str, &rt->angle);
+	rt->angle.x = M_PI * rt->angle.x / 180;
+	rt->angle.y = M_PI * rt->angle.y / 180;
+	rt->angle.z = M_PI * rt->angle.z / 180;
 	free(str);
 }
 

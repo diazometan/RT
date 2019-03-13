@@ -16,8 +16,8 @@
 				"radius":1,
 				"specular":555,
 				"reflection":123,
-				"center":[3,0,5],
-				"direction":[0,0,1]
+				"center":[0,0,5],
+				"direction":[0,0,0]
 			}
 		],
 		"lighting":[
