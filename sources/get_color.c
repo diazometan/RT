@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:28 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:47:57 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int			get_color(t_shape *shape, t_rt *rt)
 		get_normal_cylinder(shape);
 	else if (shape->figure == CONE)
 		get_normal_cone(shape, shape->angle);
+	else if (shape->figure == DISK)
+		get_normal_disk(shape);
 	light = get_light(shape, rt);
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;

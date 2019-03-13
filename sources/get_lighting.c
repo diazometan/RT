@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 13:51:26 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:27:01 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void			get_lighting(char *s, t_light **head)
 			new->type = AMBIENT;
 		else
 		{
-			printf("check config file for mistakes\n");
+			ft_putendl("check config file for mistakes");
 			exit(1);
 		}
 		start = ft_strstr(s, "intensity");
@@ -75,10 +75,6 @@ void			get_lighting(char *s, t_light **head)
 			str = ft_strextract(start, '[', ']');
 			extract_coord(str, &new->ray);
 			free(str);
-		}
-		else if (new->type == AMBIENT)
-		{
-			//printf("OLA!\n");
 		}
 		i++;
 		s += ft_strlen(object);

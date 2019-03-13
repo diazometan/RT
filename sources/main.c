@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:37 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:51:35 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int		init_sdl(t_sdl *sdl)
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	//SDL_memset(sdl->surf->pixels, 0, sdl->surf->h * sdl->surf->pitch);
 	sdl->img_data = (int *)sdl->surf->pixels;
-	//SDL_UpdateWindowSurface(sdl->win);
 	return (0);
 }
 
@@ -68,10 +66,6 @@ char	*get_file(int fd)
 
 void	init_rt(t_rt *rt, char *config_file)
 {
-	//rt->head_shapes = get_shapes(file_shapes);
-	//rt->head_light = get_light_sources(file_light_sources, rt);
-	//init_camera(file_camera, rt);
-	//rt->canvas = (t_coord) {0.0, 0.0, 1.0};
 	int		fd;
 	char	*file;
 
@@ -79,18 +73,14 @@ void	init_rt(t_rt *rt, char *config_file)
 	rt->head_light = NULL;
 	fd = open(config_file, O_RDONLY);
 	file = get_file(fd);
-	//printf("%s\n", file);
 	if (init_config(file, rt))
 	{
 		free(file);
 		free_args(rt->head_shapes, rt->head_light);
 		exit(1);
 	}
-	//printf("result - %d\n", get_field(file));
 	free(file);
 	close(fd);
-	//return (0);
-
 }
 
 int		main(int args, char **argv)
@@ -111,7 +101,17 @@ int		main(int args, char **argv)
 	printf("shapes:\n");
 	while (h_s != NULL)
 	{
-		printf("shape - %d, color - %x, specular - %.2f ", h_s->figure, h_s->color, h_s->specular);
+		if (h_s->figure == 1)
+			printf("plane, ");
+		else if (h_s->figure == 2)
+			printf("sphere, ");
+		else if (h_s->figure == 3)
+			printf("cylinder, ");
+		else if (h_s->figure == 4)
+			printf("cone, ");
+		else if (h_s->figure == 5)
+			printf("disk, ");
+		printf("color - %x, specular - %.2f ", h_s->color, h_s->specular);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER)
 			printf("radius - %f ", h_s->radius);
 		if (h_s->figure == CONE)

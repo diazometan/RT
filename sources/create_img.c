@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:21 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 12:03:59 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,21 @@ static void	init_camera_ray(int x, int y, t_shape *shape, t_rt *rt)
 
 void		get_pixel(int x, int y, t_rt *rt, t_sdl *sdl)
 {
-	t_shape	*first;
+	t_shape	*closest;
 	t_shape *shape;
 
 	shape = rt->head_shapes;
-	first = NULL;
+	closest = NULL;
 	rt->t_closest = INT_MAX;
 	while (shape != NULL)
 	{
 		init_camera_ray(x, y, shape, rt);
 		if (check_intersection(shape, rt))
-			first = shape;
+			closest = shape;
 		shape = shape->next;
 	}
-	//if (first != NULL)
-		//rt->mlx.img.img_data[x + y * WIN_WIDTH] = get_color(first, rt);
-	if (first != NULL)
-		sdl->img_data[x + y * WIN_WIDTH] = get_color(first, rt);
+	if (closest != NULL)
+		sdl->img_data[x + y * WIN_WIDTH] = get_color(closest, rt);
 	else
 		sdl->img_data[x + y * WIN_WIDTH] = 0x0;
 }
@@ -63,6 +61,4 @@ void		create_img(t_rt *rt, t_sdl *sdl)
 			get_pixel(x, y, rt, sdl);
 	}
 	SDL_UpdateWindowSurface(sdl->win);
-	//mlx_put_image_to_window(rt->mlx.mlx_ptr, rt->mlx.win_ptr,
-								//rt->mlx.img.img_ptr, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:34 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:29:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	get_camera(char *s, t_rt *rt)
 	char	*str;
 	char	*start;
 
-	//printf("s - %s\n", s);
 	start = ft_strstr(s, "center");
 	str = ft_strextract(start, '[', ']');
 	extract_coord(str, &rt->camera);

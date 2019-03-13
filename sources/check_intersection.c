@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 12:42:42 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:16 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:44:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int			check_intersection(t_shape *shape, t_rt *rt)
 		intersection = cylinder_intersection(shape, &ray);
 	else if (shape->figure == CONE)
 		intersection = cone_intersection(shape, &ray);
+	else if (shape->figure == DISK)
+		intersection = disk_intersection(shape, &ray, rt);
 	if (intersection < rt->t_closest)
 	{
 		rt->t_closest = intersection;
