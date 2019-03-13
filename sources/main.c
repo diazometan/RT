@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 11:51:35 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/13 12:08:53 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ int		main(int args, char **argv)
 	sdl.img_data[300 + WIN_WIDTH * 300] = 0xFF0000;
 	SDL_UpdateWindowSurface(sdl.win);
 	event_handler(&rt, &sdl);
+	free_args(&rt.head_shapes, &rt.head_light);
 	SDL_DestroyWindow(sdl.win);
 	SDL_Quit();
 	return (0);
