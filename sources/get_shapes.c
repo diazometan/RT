@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 20:23:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		push_back_shape(t_shape **head, t_shape *new)
+void		push_back_shape(t_shape **head, t_shape *new)
 {
 	t_shape	*tmp;
 
@@ -123,7 +123,7 @@ void	get_shapes(char *s, t_shape **head)
 			if ((str = ft_strextract(start, ':', ',')) == NULL)
 				str = ft_strextract(start, ':', '}');
 			//printf("str - %s\n", str);
-			new->angle = ft_atof(str);
+			new->angle = (M_PI * ft_atof(str)) / 180;
 			//printf("angle - %f\n", new->angle);
 			free(str);
 		}

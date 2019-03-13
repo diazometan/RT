@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 14:11:17 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 18:46:47 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 		{
 			SDL_PumpEvents();
 			if (event.type == SDL_QUIT)
-				exit = 1;
+				return ;
 			if (event.type == SDL_KEYDOWN)
 			{
 				if (event.key.keysym.sym == SDLK_ESCAPE)
-					exit = 1;
+					return ;
 				if (event.key.keysym.sym == SDLK_LEFT)
 					rt->angle.y += (M_PI * 5.0 / 180);
 				if (event.key.keysym.sym == SDLK_RIGHT)

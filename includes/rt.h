@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:42:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 20:40:16 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define KEYBOARD_D 2
 # define KEYBOARD_R 15
 # define KEYBOARD_CTRL 256
+
 
 typedef struct		s_sdl
 {
@@ -146,10 +147,10 @@ int					check_intersection(t_shape *shape, t_rt *rt);
 double				sphere_intersection(t_shape *shape, t_ray *ray);
 void				get_normal_sphere(t_shape *shape);
 
-double				cylinder_intersection(t_shape *shape, t_ray *ray);
+double				cylinder_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 void				get_normal_cylinder(t_shape *shape);
 
-double				cone_intersection(t_shape *shape, t_ray *ray);
+double				cone_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 void				get_normal_cone(t_shape *shape, double alpha);
 
 double				plane_intersection(t_shape *shape, t_ray *ray);
@@ -177,5 +178,7 @@ t_matrix			matrix_multiply(t_matrix a, t_matrix b);
 t_matrix			x_rotation_matrix(double alpha);
 t_matrix			y_rotation_matrix(double beta);
 void				vector_matrix_multiply(t_matrix m, t_shape *shape);
+
+void				push_back_shape(t_shape **head, t_shape *new);
 
 #endif

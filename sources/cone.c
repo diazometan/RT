@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:00:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:20 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 21:06:49 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,41 @@ static void	ray_cone_intersection(t_ray *ray, t_shape *shape, t_coef *coef)
 	coef->discriminant = pow(coef->b, 2) - 4 * coef->a * coef_c;
 }
 
-double		cone_intersection(t_shape *shape, t_ray *ray)
+static double		check_cone(t_shape *shape, double t, t_rt *rt)
+{
+	double tmp;
+	t_coord p;
+
+	p.x = rt->camera.x + t * shape->ray.x - shape->center.x;
+	p.y = rt->camera.y + t * shape->ray.y - shape->center.y;
+	p.z = rt->camera.z + t * shape->ray.z - shape->center.z;
+	tmp = dot_product(&p, &shape->unit);
+	return (tmp);
+}
+
+static double		check_cap(t_shape *shape, t_ray *ray, double t, t_coord top)
+{
+	double tmp;
+
+	tmp = shape->unit.x * (top.x + ray->b.x * t) + shape->unit.y * (top.y + ray->b.y * t) +
+			shape->unit.z * (top.z + ray->b.z * t);
+	return (tmp);
+}
+
+double		cone_intersection(t_shape *shape, t_ray *ray, t_rt *rt)
 {
 	double	t_1;
 	double	t_2;
 	double	intersection;
 	t_coef	coef;
+	t_coord	top;
 
 	intersection = INT_MAX;
+	top.x = rt->camera.x - 0.0;
+	top.y = rt->camera.y + 2.0;
+	top.z = rt->camera.z - 10.0;
 	ray_cone_intersection(ray, shape, &coef);
+	normalize_vector(&shape->unit, vector_length(&shape->unit));
 	if (coef.discriminant < 0)
 		return (INT_MAX);
 	t_1 = (-coef.b + sqrt(coef.discriminant)) / (2 * coef.a);
@@ -75,5 +101,10 @@ double		cone_intersection(t_shape *shape, t_ray *ray)
 		intersection = t_1;
 	if (t_2 > ray->min && t_2 < ray->max && t_2 < intersection)
 		intersection = t_2;
+	if (intersection != INT_MAX)
+		if (check_cone(shape, intersection, rt) < 0)
+			intersection = INT_MAX;
+		if (check_cap(shape,ray, intersection, top) > 0)
+			return (INT_MAX);
 	return (intersection);
 }

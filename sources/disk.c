@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:24:34 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/13 11:47:03 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/13 19:43:23 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ double			disk_intersection(t_shape *shape, t_ray *ray, t_rt *rt)
 		//v.y = p.y - shape->center.y;
 		//v.z = p.z - shape->center.z;
 		//t = vector_length(&p);
-		if (vector_length(&p) <= 1.5)
+		if (vector_length(&p) <= shape->radius)
 			return (t);
 		else
 			return (INT_MAX);
