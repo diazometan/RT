@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 18:20:59 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	get_shapes(char *s, t_shape **head)
 			new->figure = CONE;
 		else if (ft_strnstr(start, "disk", end - start))
 			new->figure = DISK;
+		else if (ft_strnstr(start, "triangle", end - start))
+			new->figure = TRIANGLE;
 		else
 		{
 			printf("check config file for mistakes\n");

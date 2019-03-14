@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 16:01:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/13 18:58:58 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define CYLINDER 3
 # define CONE 4
 # define DISK 5
+# define TRIANGLE 6
 
 # define POINT 1
 # define DIRECTIONAL 2
@@ -141,6 +142,7 @@ int					check_shadow(t_shape *source_shape,
 double				get_light(t_shape *shape, t_rt *rt);
 
 void				scalar_product(t_coord *a, double number);
+void				cross_product(t_coord *a, t_coord *b, t_coord *c);
 double				dot_product(t_coord *a, t_coord *b);
 double				vector_length(struct s_coord *vector);
 void				normalize_vector(t_coord *vector, double length);

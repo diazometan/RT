@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 16:38:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:45:04 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 18:57:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 double	dot_product(t_coord *a, t_coord *b)
 {
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
+}
+
+void	cross_product(t_coord *a, t_coord *b, t_coord *c)
+{
+	c->x = a->y * b->z - a->z * b->y;
+	c->y = a->z * b->x - a->x * b->z;
+	c->z = a->x * b->y - a->y * b->x;
 }
 
 void	scalar_product(t_coord *a, double number)
