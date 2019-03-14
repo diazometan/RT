@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 14:08:14 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:38 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/14 17:59:16 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ double	ray_plane_intersection(t_ray *ray, t_shape *shape)
 	t = 0.0;
 	normalize_vector(&shape->unit, vector_length(&shape->unit));
 	denominator = dot_product(&ray->b, &shape->unit);
+	//if (shape->figure == PLANE)
+		////printf("x - %f y - %f z - %f\n", shape->unit.x, shape->unit.y, shape->unit.z);
+		//printf("den - %f\n", denominator);
 	if (fabs(denominator) > 0.0001)
 	{
 		scalar_product(&ray->a, -1.0);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/14 11:07:10 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/14 15:29:59 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	get_shapes(char *s, t_shape **head)
 			new->figure = TRIANGLE;
 		else
 		{
-			printf("check config file for mistakes\n");
+			ft_putendl("\033[0;31mUndefined shape detected!\033[0m");
+			ft_putendl("Please fix config file");
 			exit(1);
 		}
 		//END
@@ -118,7 +119,8 @@ void	get_shapes(char *s, t_shape **head)
 			new->color = PURPLE;
 		else
 		{
-			printf("check config file for mistakes\n");
+			ft_putstr("\033[0;31mUndefined color detected!\033[0m");
+			ft_putendl("Please fix config file");
 			exit(1);
 		}
 		//END
@@ -134,20 +136,41 @@ void	get_shapes(char *s, t_shape **head)
 		new->reflection = ft_atof(str);
 		free(str);
 		//END
-		//GET CENTER
-		start = ft_strstr(s, "center");
-		str = ft_strextract(start, '[', ']');
-		extract_coord(str, &new->center);
-		free(str);
+		//GET CENTER OR TRIANGLE
+		if (new->figure == TRIANGLE)
+		{
+			start = ft_strstr(s, "A");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->triangle[0]);
+			free(str);
+			start = ft_strstr(s, "B");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->triangle[1]);
+			free(str);
+			start = ft_strstr(s, "C");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->triangle[2]);
+			free(str);
+		}
+		else
+		{
+			start = ft_strstr(s, "center");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->center);
+			free(str);
+		}
 		//END
 		//GET DIRECTION
-		start = ft_strstr(s, "direction");
-		str = ft_strextract(start, '[', ']');
-		extract_coord(str, &new->unit);
-		free(str);
+		if (new->figure != TRIANGLE)
+		{
+			start = ft_strstr(s, "direction");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->unit);
+			free(str);
+		}
 		//END
 		//GET RADIUS
-		if (new->figure != PLANE && new->figure != CONE)
+		if (new->figure == SPHERE || new->figure == CYLINDER || new->figure == DISK)
 		{
 			start = ft_strstr(s, "radius");
 			if ((str = ft_strextract(start, ':', ',')) == NULL)

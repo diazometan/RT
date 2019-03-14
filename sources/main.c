@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/14 11:06:12 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/14 15:31:15 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,24 @@ int		main(int args, char **argv)
 			printf("cone, ");
 		else if (h_s->figure == 5)
 			printf("disk, ");
+		else if (h_s->figure == 6)
+			printf("triangle, ");
 		printf("color - %x, specular - %.2f ", h_s->color, h_s->specular);
-		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER)
+		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK)
 			printf("radius - %f ", h_s->radius);
 		if (h_s->figure == CONE)
 			printf("angle - %.2f ", h_s->angle);
-		printf("\n\tx - %.2f y - %.2f z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
-		printf("\n\tx_u - %.2f y_u - %.2f z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+		if (h_s->figure != TRIANGLE)
+		{
+			printf("\n\tx - %.2f y - %.2f z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
+			printf("\n\tx_u - %.2f y_u - %.2f z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+		}
+		else
+		{
+			printf("\n\tA: x - %.2f y - %.2f z - %.2f\n", h_s->triangle[0].x, h_s->triangle[0].y, h_s->triangle[0].z);
+			printf("\tB: x - %.2f y - %.2f z - %.2f\n", h_s->triangle[1].x, h_s->triangle[1].y, h_s->triangle[1].z);
+			printf("\tC: x - %.2f y - %.2f z - %.2f\n", h_s->triangle[2].x, h_s->triangle[2].y, h_s->triangle[2].z);
+		}
 		printf("\n");
 		h_s = h_s->next;
 	}

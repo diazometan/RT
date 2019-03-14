@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/13 11:47:57 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/14 18:00:50 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			get_color(t_shape *shape, t_rt *rt)
 	shape->surface_point.x = rt->camera.x + rt->t_closest * shape->ray.x;
 	shape->surface_point.y = rt->camera.y + rt->t_closest * shape->ray.y;
 	shape->surface_point.z = rt->camera.z + rt->t_closest * shape->ray.z;
-	if (shape->figure == PLANE)
+	if (shape->figure == PLANE || shape->figure == TRIANGLE)
 		get_normal_plane(shape);
 	else if (shape->figure == SPHERE)
 		get_normal_sphere(shape);
@@ -59,6 +59,8 @@ int			get_color(t_shape *shape, t_rt *rt)
 	else if (shape->figure == DISK)
 		get_normal_disk(shape);
 	light = get_light(shape, rt);
+	//if (shape->figure == TRIANGLE)
+		//printf("light = %f\n", light);
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
 	rgb[2] = (shape->color & 0xFF) * light;

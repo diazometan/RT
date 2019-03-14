@@ -2,14 +2,21 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cone",
+				"shape":"plane",
 				"color":"red",
-				"radius":1,
-				"angle":30,
 				"specular":555,
 				"reflection":123,
-				"center":[0,0,10],
-				"direction":[0,-1,0]
+				"center":[0,0,4],
+				"direction":[0,0,-4]
+			},
+			{
+				"shape":"triangle",
+				"color":"blue",
+				"specular":555,
+				"reflection":123,
+				"A":[1,0,3],
+				"B":[3,0,3],
+				"C":[2,2,3]
 			}
 		],
 		"lighting":[
