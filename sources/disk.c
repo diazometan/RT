@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:24:34 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/13 16:43:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/14 10:49:17 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ double			disk_intersection(t_shape *shape, t_ray *ray, t_rt *rt)
 		p.y = rt->camera.y + t * shape->ray.y;
 		p.z = rt->camera.z + t * shape->ray.z;
 		coord_add_subtract(&p, &shape->center, &p, 1);
-		if (vector_length(&p) <= 1.5)
+		if (vector_length(&p) <= shape->radius)
 			return (t);
 		else
 			return (INT_MAX);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:12:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:17 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 20:40:30 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int			check_shadow(t_shape *source_shape, t_light *light, t_rt *rt)
 				(sphere_intersection(head, &ray)) != INT_MAX)
 				return (0);
 			else if (head->figure == CYLINDER &&
-				(cylinder_intersection(head, &ray)) != INT_MAX)
+				(cylinder_intersection(head, &ray, rt)) != INT_MAX)
 				return (0);
 			else if (head->figure == CONE &&
-				(cone_intersection(head, &ray)) != INT_MAX)
+				(cone_intersection(head, &ray, rt)) != INT_MAX)
 				return (0);
 		}
 		head = head->next;

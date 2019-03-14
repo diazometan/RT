@@ -2,22 +2,14 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"sphere",
+				"shape":"cone",
 				"color":"red",
 				"radius":1,
+				"angle":30,
 				"specular":555,
 				"reflection":123,
-				"center":[0,0,5],
-				"direction":[0,1,0]
-			},
-			{
-				"shape":"disk",
-				"color":"green",
-				"radius":1,
-				"specular":555,
-				"reflection":123,
-				"center":[-1,0,3],
-				"direction":[1,1,1]
+				"center":[0,0,10],
+				"direction":[0,-1,0]
 			}
 		],
 		"lighting":[
@@ -28,7 +20,7 @@
 			},
 			{
 				"type":"directional",
-				"intensity":1.25,
+				"intensity":0.5,
 				"direction":[1,2,3]
 			},
 			{

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 18:58:58 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/14 11:13:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
 void				get_lighting(char *s, t_light **head);
 void				get_shapes(char *s, t_shape **head);
+void				create_caps(t_rt *rt);
 void				free_args(t_shape *shape, t_light *light);
 
 void				create_img(t_rt *rt, t_sdl *sdl);
@@ -123,10 +124,10 @@ int					check_intersection(t_shape *shape, t_rt *rt);
 double				sphere_intersection(t_shape *shape, t_ray *ray);
 void				get_normal_sphere(t_shape *shape);
 
-double				cylinder_intersection(t_shape *shape, t_ray *ray);
+double				cylinder_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 void				get_normal_cylinder(t_shape *shape);
 
-double				cone_intersection(t_shape *shape, t_ray *ray);
+double				cone_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 void				get_normal_cone(t_shape *shape, double alpha);
 
 double				plane_intersection(t_shape *shape, t_ray *ray);
@@ -155,5 +156,7 @@ t_matrix			matrix_multiply(t_matrix a, t_matrix b);
 t_matrix			x_rotation_matrix(double alpha);
 t_matrix			y_rotation_matrix(double beta);
 void				vector_matrix_multiply(t_matrix m, t_shape *shape);
+
+void				push_back_shape(t_shape **head, t_shape *new);
 
 #endif

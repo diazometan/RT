@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:11:30 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:22 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/13 20:55:55 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		get_normal_cylinder(t_shape *shape)
 
 	coord_add_subtract(&shape->surface_point, &shape->center, &op, 1);
 	normalize_vector(&op, (op_l = vector_length(&op)));
-	om_l = cos(acos(dot_product(&op, &shape->unit))) * op_l;
+	om_l = dot_product(&op, &shape->unit) * op_l;
 	om.x = shape->unit.x * om_l;
 	om.y = shape->unit.y * om_l;
 	om.z = shape->unit.z * om_l;
@@ -53,15 +53,38 @@ void		ray_cylinder_intersection(t_ray *ray, t_shape *shape, t_coef *coef)
 	coef->discriminant = pow(coef->b, 2) - 4 * coef->a * coef_c;
 }
 
-double		cylinder_intersection(t_shape *shape, t_ray *ray)
+static double check_bot(t_shape *shape, t_ray *ray, double t)
+{
+	double tmp;
+
+	tmp = shape->unit.x * (ray->a.x + ray->b.x * t) + shape->unit.y * (ray->a.y + ray->b.y * t) +
+			shape->unit.z * (ray->a.z + ray->b.z * t);
+	return (tmp);
+}
+
+static double check_top(t_shape *shape, t_ray *ray, double t, t_coord top)
+{
+	double tmp;
+
+	tmp = shape->unit.x * (top.x + ray->b.x * t) + shape->unit.y * (top.y + ray->b.y * t) +
+			shape->unit.z * (top.z + ray->b.z * t);
+	return (tmp);
+}
+
+double		cylinder_intersection(t_shape *shape, t_ray *ray, t_rt *rt)
 {
 	double	t_1;
 	double	t_2;
 	double	intersection;
 	t_coef	coef;
+	t_coord	top;
 
 	intersection = INT_MAX;
+	top.x = rt->camera.x - 0.0;
+	top.y = rt->camera.y - 2.0;
+	top.z = rt->camera.z - 10.0;
 	ray_cylinder_intersection(ray, shape, &coef);
+	normalize_vector(&shape->unit, vector_length(&shape->unit));
 	if (coef.discriminant < 0)
 		return (INT_MAX);
 	t_1 = (-coef.b + sqrt(coef.discriminant)) / (2 * coef.a);
@@ -70,5 +93,7 @@ double		cylinder_intersection(t_shape *shape, t_ray *ray)
 		intersection = t_1;
 	if (t_2 > ray->min && t_2 < ray->max && t_2 < intersection)
 		intersection = t_2;
+	if (intersection != INT_MAX && (check_bot(shape, ray, intersection) < 0 || check_top(shape, ray, intersection, top) > 0))
+		return (INT_MAX);
 	return (intersection);
 }

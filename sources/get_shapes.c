@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 18:20:59 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/14 11:07:10 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		push_back_shape(t_shape **head, t_shape *new)
+void		push_back_shape(t_shape **head, t_shape *new)
 {
 	t_shape	*tmp;
 
@@ -24,6 +24,44 @@ static void		push_back_shape(t_shape **head, t_shape *new)
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		tmp->next = new;
+	}
+}
+
+void		create_caps(t_rt *rt)
+{
+	static 	int flag = 0;
+	t_shape *tmp;
+
+	tmp = rt->head_shapes;
+	while (tmp && flag == 0)
+	{
+		if (tmp->figure == 3)
+		{
+			flag = 1;
+			t_shape *disk_bot = (t_shape*)malloc(sizeof(t_shape));
+			disk_bot->center = (t_coord){tmp->center.x, tmp->center.y, tmp->center.z};
+			disk_bot->color = tmp->color;
+			disk_bot->figure = 5;
+			disk_bot->unit = (t_coord){tmp->unit.x, tmp->unit.y, tmp->unit.z};
+			disk_bot->radius = 1;
+			disk_bot->specular = 555;
+			disk_bot->reflection = 123;
+			disk_bot->next = NULL;
+			push_back_shape(&rt->head_shapes, disk_bot);
+			t_shape *disk_top = (t_shape*)malloc(sizeof(t_shape));
+			normalize_vector(&tmp->unit, vector_length(&tmp->unit));
+			double h = 1 * tmp->unit.y;
+			disk_top->center = (t_coord){tmp->center.x + h * tmp->unit.x, tmp->center.y + h * tmp->unit.y, tmp->center.z + h * tmp->unit.z};
+			disk_top->color = tmp->color;
+			disk_top->figure = 5;
+			disk_top->unit = (t_coord){tmp->unit.x, tmp->unit.y, tmp->unit.z};
+			disk_top->radius = 1;
+			disk_top->specular = 555;
+			disk_top->reflection = 123;
+			disk_top->next = NULL;
+			push_back_shape(&rt->head_shapes, disk_top);
+		}
+		tmp = tmp->next;
 	}
 }
 
@@ -125,7 +163,7 @@ void	get_shapes(char *s, t_shape **head)
 			if ((str = ft_strextract(start, ':', ',')) == NULL)
 				str = ft_strextract(start, ':', '}');
 			//printf("str - %s\n", str);
-			new->angle = ft_atof(str);
+			new->angle = (M_PI * ft_atof(str)) / 180;
 			//printf("angle - %f\n", new->angle);
 			free(str);
 		}

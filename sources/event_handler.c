@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 15:59:09 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/13 21:10:55 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	camera_direction_key(int key, t_rt *rt)
 	else if (key == SDLK_DOWN)
 		rt->angle.x -= (M_PI * 5.0 / 180);
 	// ADD BUTTONS FOR Z ROTATION
-	//else if (key == SDLK_UP) 
+	//else if (key == SDLK_UP)
 		//rt->angle.x += (M_PI * 5.0 / 180);
 	//else if (key == SDLK_DOWN)
 		//rt->angle.x -= (M_PI * 5.0 / 180);
@@ -69,7 +69,7 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 				return ;
 			if (event.type == SDL_KEYDOWN)
 			{
-				key = event.key.keysym.sym; 
+				key = event.key.keysym.sym;
 				if (key == SDLK_ESCAPE)
 					return ;
 				else if (key == SDLK_LEFT || key == SDLK_RIGHT || key == SDLK_UP || key == SDLK_DOWN)
