@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/14 11:07:10 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/14 16:38:52 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		create_caps(t_rt *rt)
 			push_back_shape(&rt->head_shapes, disk_bot);
 			t_shape *disk_top = (t_shape*)malloc(sizeof(t_shape));
 			normalize_vector(&tmp->unit, vector_length(&tmp->unit));
-			double h = 1 * tmp->unit.y;
+			double h = 1;
 			disk_top->center = (t_coord){tmp->center.x + h * tmp->unit.x, tmp->center.y + h * tmp->unit.y, tmp->center.z + h * tmp->unit.z};
 			disk_top->color = tmp->color;
 			disk_top->figure = 5;
@@ -60,6 +60,21 @@ void		create_caps(t_rt *rt)
 			disk_top->reflection = 123;
 			disk_top->next = NULL;
 			push_back_shape(&rt->head_shapes, disk_top);
+		}
+		if (tmp->figure == 4)
+		{
+			t_shape *cone_disk = (t_shape*)malloc(sizeof(t_shape));
+			double h = 1.0;
+			normalize_vector(&tmp->unit, vector_length(&tmp->unit));
+			cone_disk->center = (t_coord){tmp->center.x + fabs(h) * tmp->unit.x, tmp->center.y + fabs(h) * tmp->unit.y, tmp->center.z + fabs(h) * tmp->unit.z};
+			cone_disk->color = 0xFF;
+			cone_disk->figure = 5;
+			cone_disk->unit = (t_coord){tmp->unit.x, tmp->unit.y, tmp->unit.z};
+			cone_disk->radius = fabs(h) * tan(tmp->angle);
+			cone_disk->specular = 555;
+			cone_disk->reflection = 123;
+			cone_disk->next = NULL;
+			push_back_shape(&rt->head_shapes, cone_disk);
 		}
 		tmp = tmp->next;
 	}

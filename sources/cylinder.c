@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:11:30 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 20:55:55 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/14 17:24:21 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,16 @@ double		cylinder_intersection(t_shape *shape, t_ray *ray, t_rt *rt)
 	double	t_1;
 	double	t_2;
 	double	intersection;
+	double	h = 1.0;
 	t_coef	coef;
 	t_coord	top;
 
 	intersection = INT_MAX;
-	top.x = rt->camera.x - 0.0;
-	top.y = rt->camera.y - 2.0;
-	top.z = rt->camera.z - 10.0;
-	ray_cylinder_intersection(ray, shape, &coef);
 	normalize_vector(&shape->unit, vector_length(&shape->unit));
+	top.x = rt->camera.x - (shape->center.x + h * shape->unit.x);
+	top.y = rt->camera.y - (shape->center.y + h * shape->unit.y);
+	top.z = rt->camera.z - (shape->center.z + h * shape->unit.z);
+	ray_cylinder_intersection(ray, shape, &coef);
 	if (coef.discriminant < 0)
 		return (INT_MAX);
 	t_1 = (-coef.b + sqrt(coef.discriminant)) / (2 * coef.a);

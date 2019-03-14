@@ -2,20 +2,20 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cone",
+				"shape":"cylinder",
 				"color":"red",
 				"radius":1,
 				"angle":30,
 				"specular":555,
 				"reflection":123,
-				"center":[0,0,10],
-				"direction":[0,-1,0]
+				"center":[0,1,10],
+				"direction":[1,-1,-1]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
-				"intensity":1.0,
+				"intensity":0.5,
 				"center":[1,2,0]
 			},
 			{
