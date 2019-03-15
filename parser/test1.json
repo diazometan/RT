@@ -2,14 +2,14 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cylinder",
+				"shape":"sphere",
 				"color":"red",
 				"radius":1,
 				"angle":30,
-				"specular":555,
+				"specular":500,
 				"reflection":123,
-				"center":[0,1,10],
-				"direction":[1,-1,-1]
+				"center":[0,0,3],
+				"direction":[0,1,0]
 			}
 		],
 		"lighting":[
@@ -25,7 +25,7 @@
 			},
 			{
 				"type":"ambient",
-				"intensity":0.2
+				"intensity":0.0
 			}
 		],
 		"camera":{
