@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/14 15:29:59 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/15 11:49:33 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	get_shapes(char *s, t_shape **head)
 			new->color = PURPLE;
 		else
 		{
-			ft_putstr("\033[0;31mUndefined color detected!\033[0m");
+			ft_putendl("\033[0;31mUndefined color detected!\033[0m");
 			ft_putendl("Please fix config file");
 			exit(1);
 		}
@@ -151,6 +151,9 @@ void	get_shapes(char *s, t_shape **head)
 			str = ft_strextract(start, '[', ']');
 			extract_coord(str, &new->triangle[2]);
 			free(str);
+			new->center.x = (new->triangle[0].x + new->triangle[1].x + new->triangle[2].x) / 3;
+			new->center.y = (new->triangle[0].y + new->triangle[1].y + new->triangle[2].y) / 3;
+			new->center.z = (new->triangle[0].z + new->triangle[1].z + new->triangle[2].z) / 3;
 		}
 		else
 		{
@@ -168,11 +171,26 @@ void	get_shapes(char *s, t_shape **head)
 			extract_coord(str, &new->unit);
 			free(str);
 		}
+		else
+		{
+			t_coord	a;
+			t_coord	b;
+
+			coord_add_subtract(&new->triangle[1], &new->triangle[0], &a, 1);
+			coord_add_subtract(&new->triangle[2], &new->triangle[0], &b, 1);
+			cross_product(&a, &b, &new->unit);
+		}
 		//END
 		//GET RADIUS
 		if (new->figure == SPHERE || new->figure == CYLINDER || new->figure == DISK)
 		{
 			start = ft_strstr(s, "radius");
+			if (start == NULL)
+			{
+				ft_putendl("\033[0;31mRadius is missing!\033[0m");
+				ft_putendl("Please fix config file");
+				exit(1);
+			}
 			if ((str = ft_strextract(start, ':', ',')) == NULL)
 				str = ft_strextract(start, ':', '}');
 			new->radius = ft_atof(str);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/14 18:10:09 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/15 11:20:21 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void				get_normal_cylinder(t_shape *shape);
 double				cone_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 void				get_normal_cone(t_shape *shape, double alpha);
 
-double				plane_intersection(t_shape *shape, t_ray *ray);
+double				plane_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 double				ray_plane_intersection(t_ray *ray, t_shape *shape);
 void				get_normal_plane(t_shape *shape);
 
@@ -152,6 +152,7 @@ double				vector_length(struct s_coord *vector);
 void				normalize_vector(t_coord *vector, double length);
 void				coord_add_subtract(t_coord *a, t_coord *b,
 										t_coord *result, int flag);
+void				get_intersection_point(t_coord *source, t_coord *ray, double t, t_coord *p);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
 

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:12:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 20:40:30 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/15 11:21:26 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			check_shadow(t_shape *source_shape, t_light *light, t_rt *rt)
 		{
 			init_ray_shadow(&ray, light, source_shape, head);
 			if (head->figure == PLANE &&
-				(plane_intersection(head, &ray)) != INT_MAX)
+				(plane_intersection(head, &ray, rt)) != INT_MAX)
 				return (0);
 			else if (head->figure == SPHERE &&
 				(sphere_intersection(head, &ray)) != INT_MAX)

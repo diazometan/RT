@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/14 17:39:40 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/15 11:33:04 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,6 @@ SRC = main.c\
 	  sphere.c\
 	  cylinder.c\
 	  cone.c\
-	  disk.c\
-	  triangle.c\
 	  check_shadow.c\
 	  light.c\
 	  get_color.c\
