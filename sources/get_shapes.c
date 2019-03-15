@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/15 11:49:33 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/15 19:33:46 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,17 @@ void	get_shapes(char *s, t_shape **head)
 			free(str);
 		}
 		//END
+		//GET H FOR CONE AND CYLINDER
+		if (new->figure == CONE || new->figure == CYLINDER)
+		{
+			start = ft_strstr(s, "angle");
+			if ((str = ft_strextract(start, ':', ',')) == NULL)
+				str = ft_strextract(start, ':', '}');
+			//printf("str - %s\n", str);
+			new->angle = (M_PI * ft_atof(str)) / 180;
+			//printf("angle - %f\n", new->angle);
+			free(str);
+
 		//printf("object %d - %s\n\n", i, object);
 		i++;
 		s += ft_strlen(object);
