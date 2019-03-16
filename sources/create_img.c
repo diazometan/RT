@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/15 19:06:25 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/16 13:57:30 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,71 +27,74 @@ static void	init_camera_ray(double x, double y, t_shape *shape, t_rt *rt)
 	vector_matrix_multiply(rotation, shape);
 }
 
-void		get_pixel(int x, int y, t_rt *rt, t_sdl *sdl, int n)
+static int	create_color(int n, int *color)
 {
-	t_shape	*closest;
-	t_shape *shape;
-	double	dx = 1.0 / n;
-	double	dy = 1.0 / n;
-	double	c_x;
-	double	c_y;
-	int i = 0;
-	int j = 0;
-	int k = 0;
-	int a = 0;
-	int		*color;
-	int		rgb[3];
+	int i;
+	int rgb[3];
 
 	rgb[0] = 0;
 	rgb[1] = 0;
 	rgb[2] = 0;
-	color = (int*)malloc(sizeof(int) * n * n);
-	c_y = y + dy / 2.0;
-	while (c_y <= (y + 1.0))
-	{
-		dx = 1.0 / n;
-		c_x = x + dx / 2.0;
-		while (c_x <= (x + 1.0))
-		{
-			shape = rt->head_shapes;
-			closest = NULL;
-			rt->t_closest = INT_MAX;
-			while (shape != NULL)
-			{
-				init_camera_ray(c_x, c_y, shape, rt);
-				if (check_intersection(shape, rt))
-					closest = shape;
-				shape = shape->next;
-			}
-			if (closest != NULL)
-				color[i] = get_color(closest, rt);
-			else
-				color[i] = 0x0;
-			c_x += dx;
-			i++;
-		}
-		c_y += dy;
-	}
-	while (a < (n * n))
-	{
-		rgb[0] += ((color[a] >> 16) & 0xFF);
-		a++;
-	}
+	i = -1;
+	while (++i < (n * n))
+		rgb[0] += ((color[i] >> 16) & 0xFF);
 	rgb[0] /= (n * n);
-	while (j < (n * n))
-	{
-		rgb[1] += ((color[j] >> 8) & 0xFF);
-		j++;
-	}
+	i = -1;
+	while (++i < (n * n))
+		rgb[1] += ((color[i] >> 8) & 0xFF);
 	rgb[1] /= (n * n);
-	while (k < (n * n))
-	{
-		rgb[2] += (color[k] & 0xFF);
-		k++;
-	}
+	i = -1;
+	while (++i < (n * n))
+		rgb[2] += (color[i] & 0xFF);
 	rgb[2] /= (n * n);
-	sdl->img_data[x + y * rt->win_width] = ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
-	free(color);
+	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
+}
+
+static t_shape	*get_pixel(double x, double y, t_rt *rt)
+{
+	t_shape	*closest;
+	t_shape	*shape;
+
+	shape = rt->head_shapes;
+	closest = NULL;
+	rt->t_closest = INT_MAX;
+	while (shape != NULL)
+	{
+		init_camera_ray(x, y, shape, rt);
+		if (check_intersection(shape, rt))
+			closest = shape;
+		shape = shape->next;
+	}
+	return (closest);
+}
+
+static void		divide_pixel(int x, int y, t_rt *rt, int *img_data)
+{
+	t_shape	*closest;
+	t_pixel	pixel;
+
+	pixel.i = 0;
+	pixel.dx = 1.0 / (rt->sample);
+	pixel.dy = 1.0 / (rt->sample);
+	pixel.color = (int*)malloc(sizeof(int) * (rt->sample) * (rt->sample));
+	pixel.c_y = y + pixel.dy / 2.0;
+	while (pixel.c_y <= (y + 1.0))
+	{
+		pixel.dx = 1.0 / (rt->sample);
+		pixel.c_x = x + pixel.dx / 2.0;
+		while (pixel.c_x <= (x + 1.0))
+		{
+			if ((closest = get_pixel(pixel.c_x, pixel.c_y, rt)) != NULL)
+				pixel.color[pixel.i] = get_color(closest, rt);
+			else
+				pixel.color[pixel.i] = 0x0;
+			pixel.c_x += pixel.dx;
+			(pixel.i)++;
+		}
+		pixel.c_y += pixel.dy;
+	}
+	img_data[x + y * rt->win_width] = create_color((rt->sample), pixel.color);
+	free(pixel.color);
 }
 
 void		create_img(t_rt *rt, t_sdl *sdl)
@@ -108,7 +111,7 @@ void		create_img(t_rt *rt, t_sdl *sdl)
 	{
 		x = -1;
 		while (++x < x_limit)
-			get_pixel(x, y, rt, sdl, 16);
+			divide_pixel(x, y, rt, sdl->img_data);
 	}
 	SDL_UpdateWindowSurface(sdl->win);
 }

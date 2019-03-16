@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/14 11:13:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/16 13:49:15 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct		s_rt
 	t_coord			angle;
 	t_coord			camera;
 	t_coord			canvas;
+	int				sample;
 }					t_rt;
 
 typedef struct		s_ray
@@ -110,6 +111,16 @@ typedef struct		s_matrix
 {
 	double			matrix[3][3];
 }					t_matrix;
+typedef struct		s_pixel
+{
+	double			dx;
+	double			dy;
+	double			c_x;
+	double			c_y;
+	int				*color;
+	int				i;
+}					t_pixel;
+
 
 int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
