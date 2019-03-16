@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/15 19:33:46 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/16 13:37:06 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,9 @@ void	get_shapes(char *s, t_shape **head)
 			new->center.x = (new->triangle[0].x + new->triangle[1].x + new->triangle[2].x) / 3;
 			new->center.y = (new->triangle[0].y + new->triangle[1].y + new->triangle[2].y) / 3;
 			new->center.z = (new->triangle[0].z + new->triangle[1].z + new->triangle[2].z) / 3;
+			coord_add_subtract(&new->triangle[2], &new->triangle[0], &new->abc[0], 1);
+			coord_add_subtract(&new->triangle[1], &new->triangle[2], &new->abc[1], 1);
+			coord_add_subtract(&new->triangle[0], &new->triangle[1], &new->abc[2], 1);
 		}
 		else
 		{
@@ -212,14 +215,15 @@ void	get_shapes(char *s, t_shape **head)
 		//GET H FOR CONE AND CYLINDER
 		if (new->figure == CONE || new->figure == CYLINDER)
 		{
-			start = ft_strstr(s, "angle");
+			start = ft_strstr(s, "height");
 			if ((str = ft_strextract(start, ':', ',')) == NULL)
 				str = ft_strextract(start, ':', '}');
 			//printf("str - %s\n", str);
-			new->angle = (M_PI * ft_atof(str)) / 180;
+			new->h = ft_atof(str);
 			//printf("angle - %f\n", new->angle);
 			free(str);
-
+		}
+		//END
 		//printf("object %d - %s\n\n", i, object);
 		i++;
 		s += ft_strlen(object);

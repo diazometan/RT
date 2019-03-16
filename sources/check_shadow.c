@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:12:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/15 11:21:26 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/16 13:10:25 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_ray_shadow(t_ray *ray, t_light *light,
 	coord_add_subtract(&source_shape->surface_point,
 							&shape->center, &ray->a, 1);
 	ray->min = 0.0001;
-	if (light->type == 1)
+	if (light->type == POINT)
 	{
 		ray->max = 1.0;
 		coord_add_subtract(&light->point,

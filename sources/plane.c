@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 14:08:14 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/15 11:57:05 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/16 13:37:50 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,16 @@ void			get_normal_plane(t_shape *shape)
 
 int	cut_triangle(t_coord *p, t_shape *shape)
 {
-	t_coord	abc[3];
 	t_coord	v[3];
 	t_coord	cross_p[3];
-
-	coord_add_subtract(&shape->triangle[2], &shape->triangle[0], &abc[0], 1);
-	coord_add_subtract(&shape->triangle[1], &shape->triangle[2], &abc[1], 1);
-	coord_add_subtract(&shape->triangle[0], &shape->triangle[1], &abc[2], 1);
 
 	coord_add_subtract(p, &shape->triangle[0], &v[0], 1);
 	coord_add_subtract(p, &shape->triangle[2], &v[1], 1);
 	coord_add_subtract(p, &shape->triangle[1], &v[2], 1);
 
-	cross_product(&v[0], &abc[0], &cross_p[0]);
-	cross_product(&v[1], &abc[1], &cross_p[1]);
-	cross_product(&v[2], &abc[2], &cross_p[2]);
+	cross_product(&v[0], &shape->abc[0], &cross_p[0]);
+	cross_product(&v[1], &shape->abc[1], &cross_p[1]);
+	cross_product(&v[2], &shape->abc[2], &cross_p[2]);
 	if (dot_product(&cross_p[0], &shape->unit) >= 0 && dot_product(&cross_p[1], &shape->unit) >= 0 && dot_product(&cross_p[2], &shape->unit) >= 0)
 		return (1);
 	return (0);

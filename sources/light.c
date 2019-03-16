@@ -6,21 +6,22 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/15 12:26:10 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/16 13:31:33 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static double	get_reflection(t_shape *shape, t_light *light,
+static double	get_specular(t_shape *shape, t_light *light,
 											double light_t_norm)
 {
 	double	r_length;
-	double	light_sum;
+	double	new_r_length;
+	double	specular;
 	double	ray_sum;
 	t_coord	ray;
 
-	light_sum = 0.0;
+	specular = 0.0;
 	ray.x = 2 * shape->normal.x * (light_t_norm) - light->ray.x;
 	ray.y = 2 * shape->normal.y * (light_t_norm) - light->ray.y;
 	ray.z = 2 * shape->normal.z * (light_t_norm) - light->ray.z;
@@ -31,11 +32,11 @@ static double	get_reflection(t_shape *shape, t_light *light,
 	ray_sum = ray.x + ray.y + ray.z;
 	if (ray_sum > 0)
 	{
-		shape->l_ray = vector_length(&shape->ray);
-		light_sum = light->intensity * pow(ray_sum /
-			(r_length * shape->l_ray), shape->specular);
+		new_r_length = vector_length(&shape->ray);
+		specular = light->intensity * pow(ray_sum /
+			(r_length * new_r_length), shape->specular);
 	}
-	return (light_sum);
+	return (specular);
 }
 
 static double	get_point_light(t_shape *shape, t_light *light)
@@ -49,9 +50,11 @@ static double	get_point_light(t_shape *shape, t_light *light)
 	l_length = vector_length(&light->ray);
 	light_t_norm = dot_product(&light->ray, &shape->normal);
 	if ((light_t_norm) > 0)
+	{
 		light_sum = light->intensity * (light_t_norm / l_length);
-	if (shape->specular > 0)
-		light_sum += get_reflection(shape, light, light_t_norm);
+		if (shape->specular > 0)
+			light_sum += get_specular(shape, light, light_t_norm);
+	}
 	return (light_sum);
 }
 
@@ -65,9 +68,11 @@ static double	get_directional_light(t_shape *shape, t_light *light)
 	l_length = vector_length(&light->ray);
 	light_t_norm = dot_product(&light->ray, &shape->normal);
 	if ((light_t_norm) > 0)
+	{
 		light_sum = light->intensity * (light_t_norm / l_length);
-	if (shape->specular > 0)
-		light_sum += get_reflection(shape, light, light_t_norm);
+		if (shape->specular > 0)
+			light_sum += get_specular(shape, light, light_t_norm);
+	}
 	return (light_sum);
 }
 
@@ -80,7 +85,7 @@ double			get_light(t_shape *shape, t_rt *rt)
 	head = rt->head_light;
 	while (head != NULL)
 	{
-		if (head->intensity != 0.0)
+		if (head->intensity > 0.0)
 		{
 			if (head->type == 1 && check_shadow(shape, head, rt))
 				light_sum += get_point_light(shape, head);

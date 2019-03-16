@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/15 18:54:52 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/16 13:33:31 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct		s_shape
 	double			specular;
 	double			reflection;
 	double			h;
-	double			l_ray;
+	t_coord			abc[3];
 	t_coord			triangle[3];
 	t_coord			center;
 	t_coord			ray;
