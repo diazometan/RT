@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/16 18:08:07 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/16 18:33:06 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	int		rgb[3];
 	double	light;
 	int		color;
+	int		color_red;
+	int		color_green;
+	int		color_blue;
 	int		reflected_color;
 
 	reflected_color = 0;
@@ -93,7 +96,10 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	if (shape->reflection && depth > 0)
 	{
 		reflected_color = recursion(dir, shape, rt, depth - 1);
-		color = color * (1 - shape->reflection) + reflected_color * shape->reflection;
+		color_red = (color >> 16 & 0xFF) * (1 - shape->reflection) + (reflected_color >> 16 & 0xFF) * shape->reflection;
+		color_green = (color >> 8 & 0xFF) * (1 - shape->reflection) + (reflected_color >> 8 & 0xFF) * shape->reflection;
+		color_blue = (color & 0xFF) * (1 - shape->reflection) + (reflected_color & 0xFF) * shape->reflection;
+		color = ((color_red << 16) | (color_green << 8) | color_blue);
 	}
 	return (color);
 }
