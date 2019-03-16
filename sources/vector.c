@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 16:38:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 18:57:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/15 10:41:50 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ void	normalize_vector(t_coord *vector, double length)
 	vector->x /= length;
 	vector->y /= length;
 	vector->z /= length;
+}
+
+void	get_intersection_point(t_coord *source, t_coord *ray, double t, t_coord *p)
+{
+	p->x = source->x + t * ray->x;
+	p->y = source->y + t * ray->y;
+	p->z = source->z + t * ray->z;
 }
 
 void	coord_add_subtract(t_coord *a, t_coord *b, t_coord *result, int flag)

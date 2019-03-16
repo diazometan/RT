@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/13 16:31:11 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/15 11:33:04 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRC = main.c\
 	  sphere.c\
 	  cylinder.c\
 	  cone.c\
-	  disk.c\
 	  check_shadow.c\
 	  light.c\
 	  get_color.c\
@@ -82,6 +81,6 @@ re: fclean all
 
 test: all
 	@echo "$(GREEN)Testing...$(NC)"
-	./RT parser/test1.json
+	@./RT parser/test1.json
 
 .PHONY: all clean fclean re test

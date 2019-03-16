@@ -4,12 +4,11 @@
 			{
 				"shape":"sphere",
 				"color":"red",
-				"radius":1,
-				"angle":30,
-				"specular":500,
+				"specular":555,
+				"radius": 1,
 				"reflection":123,
-				"center":[0,0,3],
-				"direction":[0,1,0]
+				"center":[0,0,4],
+				"direction":[0,0,-4]
 			}
 		],
 		"lighting":[

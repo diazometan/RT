@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 13:49:15 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/16 13:59:56 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ typedef struct		s_shape
 	double			radius;
 	double			specular;
 	double			reflection;
-	double			l_ray;
+	double			h;
+	t_coord			abc[3];
+	t_coord			triangle[3];
 	t_coord			center;
 	t_coord			ray;
 	t_coord			surface_point;
@@ -111,6 +113,7 @@ typedef struct		s_matrix
 {
 	double			matrix[3][3];
 }					t_matrix;
+
 typedef struct		s_pixel
 {
 	double			dx;
@@ -141,12 +144,14 @@ void				get_normal_cylinder(t_shape *shape);
 double				cone_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 void				get_normal_cone(t_shape *shape, double alpha);
 
-double				plane_intersection(t_shape *shape, t_ray *ray);
+double				plane_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 double				ray_plane_intersection(t_ray *ray, t_shape *shape);
 void				get_normal_plane(t_shape *shape);
 
 double				disk_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 void				get_normal_disk(t_shape *shape);
+
+double				triangle_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
 
 int					get_color(t_shape *first, t_rt *rt);
 int					check_shadow(t_shape *source_shape,
@@ -160,6 +165,7 @@ double				vector_length(struct s_coord *vector);
 void				normalize_vector(t_coord *vector, double length);
 void				coord_add_subtract(t_coord *a, t_coord *b,
 										t_coord *result, int flag);
+void				get_intersection_point(t_coord *source, t_coord *ray, double t, t_coord *p);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
 
@@ -167,7 +173,5 @@ t_matrix			matrix_multiply(t_matrix a, t_matrix b);
 t_matrix			x_rotation_matrix(double alpha);
 t_matrix			y_rotation_matrix(double beta);
 void				vector_matrix_multiply(t_matrix m, t_shape *shape);
-
-void				push_back_shape(t_shape **head, t_shape *new);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/14 20:29:42 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/16 14:00:37 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ void	get_shapes(char *s, t_shape **head)
 			new->figure = TRIANGLE;
 		else
 		{
-			printf("check config file for mistakes\n");
+			ft_putendl("\033[0;31mUndefined shape detected!\033[0m");
+			ft_putendl("Please fix config file");
 			exit(1);
 		}
 		//END
@@ -133,7 +134,8 @@ void	get_shapes(char *s, t_shape **head)
 			new->color = PURPLE;
 		else
 		{
-			printf("check config file for mistakes\n");
+			ft_putendl("\033[0;31mUndefined color detected!\033[0m");
+			ft_putendl("Please fix config file");
 			exit(1);
 		}
 		//END
@@ -149,22 +151,64 @@ void	get_shapes(char *s, t_shape **head)
 		new->reflection = ft_atof(str);
 		free(str);
 		//END
-		//GET CENTER
-		start = ft_strstr(s, "center");
-		str = ft_strextract(start, '[', ']');
-		extract_coord(str, &new->center);
-		free(str);
+		//GET CENTER OR TRIANGLE
+		if (new->figure == TRIANGLE)
+		{
+			start = ft_strstr(s, "A");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->triangle[0]);
+			free(str);
+			start = ft_strstr(s, "B");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->triangle[1]);
+			free(str);
+			start = ft_strstr(s, "C");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->triangle[2]);
+			free(str);
+			new->center.x = (new->triangle[0].x + new->triangle[1].x + new->triangle[2].x) / 3;
+			new->center.y = (new->triangle[0].y + new->triangle[1].y + new->triangle[2].y) / 3;
+			new->center.z = (new->triangle[0].z + new->triangle[1].z + new->triangle[2].z) / 3;
+			coord_add_subtract(&new->triangle[2], &new->triangle[0], &new->abc[0], 1);
+			coord_add_subtract(&new->triangle[1], &new->triangle[2], &new->abc[1], 1);
+			coord_add_subtract(&new->triangle[0], &new->triangle[1], &new->abc[2], 1);
+		}
+		else
+		{
+			start = ft_strstr(s, "center");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->center);
+			free(str);
+		}
 		//END
 		//GET DIRECTION
-		start = ft_strstr(s, "direction");
-		str = ft_strextract(start, '[', ']');
-		extract_coord(str, &new->unit);
-		free(str);
+		if (new->figure != TRIANGLE)
+		{
+			start = ft_strstr(s, "direction");
+			str = ft_strextract(start, '[', ']');
+			extract_coord(str, &new->unit);
+			free(str);
+		}
+		else
+		{
+			t_coord	a;
+			t_coord	b;
+
+			coord_add_subtract(&new->triangle[1], &new->triangle[0], &a, 1);
+			coord_add_subtract(&new->triangle[2], &new->triangle[0], &b, 1);
+			cross_product(&a, &b, &new->unit);
+		}
 		//END
 		//GET RADIUS
-		if (new->figure != PLANE && new->figure != CONE)
+		if (new->figure == SPHERE || new->figure == CYLINDER || new->figure == DISK)
 		{
 			start = ft_strstr(s, "radius");
+			if (start == NULL)
+			{
+				ft_putendl("\033[0;31mRadius is missing!\033[0m");
+				ft_putendl("Please fix config file");
+				exit(1);
+			}
 			if ((str = ft_strextract(start, ':', ',')) == NULL)
 				str = ft_strextract(start, ':', '}');
 			new->radius = ft_atof(str);
@@ -179,6 +223,18 @@ void	get_shapes(char *s, t_shape **head)
 				str = ft_strextract(start, ':', '}');
 			//printf("str - %s\n", str);
 			new->angle = (M_PI * ft_atof(str)) / 180;
+			//printf("angle - %f\n", new->angle);
+			free(str);
+		}
+		//END
+		//GET H FOR CONE AND CYLINDER
+		if (new->figure == CONE || new->figure == CYLINDER)
+		{
+			start = ft_strstr(s, "height");
+			if ((str = ft_strextract(start, ':', ',')) == NULL)
+				str = ft_strextract(start, ':', '}');
+			//printf("str - %s\n", str);
+			new->h = ft_atof(str);
 			//printf("angle - %f\n", new->angle);
 			free(str);
 		}
