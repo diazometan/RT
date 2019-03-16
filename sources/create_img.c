@@ -6,25 +6,25 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 13:59:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/16 18:07:07 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	init_camera_ray(double x, double y, t_shape *shape, t_rt *rt)
+static void	init_camera_ray(double x, double y, t_coord *ray, t_rt *rt)
 {
 	t_matrix	rotation;
 
 	rotation = matrix_multiply(x_rotation_matrix(rt->angle.x),
 								y_rotation_matrix(rt->angle.y));
-	shape->ray.x = (double)((-rt->win_width / 2) + x) /
+	ray->x = (double)((-rt->win_width / 2) + x) /
 					rt->win_width + rt->camera.x / rt->win_width;
-	shape->ray.y = (double)(rt->win_height / 2 - y) /
+	ray->y = (double)(rt->win_height / 2 - y) /
 					rt->win_height + rt->camera.y / rt->win_height;
-	shape->ray.z = 1.0;
-	normalize_vector(&(shape->ray), vector_length(&shape->ray));
-	vector_matrix_multiply(rotation, shape);
+	ray->z = 1.0;
+	normalize_vector(ray, vector_length(ray));
+	vector_matrix_multiply(rotation, ray);
 }
 
 static int	create_color(int n, int *color)
@@ -50,7 +50,7 @@ static int	create_color(int n, int *color)
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-static t_shape	*get_pixel(double x, double y, t_rt *rt)
+int	get_pixel(t_coord *ray, t_rt *rt, int depth, int flag)
 {
 	t_shape	*closest;
 	t_shape	*shape;
@@ -60,17 +60,19 @@ static t_shape	*get_pixel(double x, double y, t_rt *rt)
 	rt->t_closest = INT_MAX;
 	while (shape != NULL)
 	{
-		init_camera_ray(x, y, shape, rt);
-		if (check_intersection(shape, rt))
+		if (check_intersection(ray, shape, rt, flag))
 			closest = shape;
 		shape = shape->next;
 	}
-	return (closest);
+	if (closest != NULL)
+		return (get_color(closest, rt, ray, depth));
+	return (0);
+
 }
 
 static void		divide_pixel(int x, int y, t_rt *rt, int *img_data)
 {
-	t_shape	*closest;
+	t_coord	ray;
 	t_pixel	pixel;
 
 	pixel.i = 0;
@@ -84,10 +86,8 @@ static void		divide_pixel(int x, int y, t_rt *rt, int *img_data)
 		pixel.c_x = x + pixel.dx / 2.0;
 		while (pixel.c_x <= (x + 1.0))
 		{
-			if ((closest = get_pixel(pixel.c_x, pixel.c_y, rt)) != NULL)
-				pixel.color[pixel.i] = get_color(closest, rt);
-			else
-				pixel.color[pixel.i] = 0x0;
+			init_camera_ray(pixel.c_x, pixel.c_y, &ray, rt);
+			pixel.color[pixel.i] = get_pixel(&ray, rt, 0, 1);
 			pixel.c_x += pixel.dx;
 			(pixel.i)++;
 		}
@@ -103,8 +103,10 @@ void		create_img(t_rt *rt, t_sdl *sdl)
 	int		y;
 	int		x_limit;
 	int		y_limit;
+	int		init_depth;
 
 	y = -1;
+	init_depth = rt->depth;
 	x_limit = rt->win_width;
 	y_limit = rt->win_height;
 	while (++y < y_limit)

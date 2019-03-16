@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 13:59:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/16 17:52:57 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,24 @@ typedef struct		s_rt
 {
 	int				win_width;
 	int				win_height;
+	int				sample;
+	int				depth;
 	double			t_closest;
 	t_shape			*head_shapes;
 	t_light			*head_light;
 	t_coord			angle;
 	t_coord			camera;
 	t_coord			canvas;
-	int				sample;
+	t_coord			*source_point;
 }					t_rt;
 
-typedef struct		s_ray
+typedef struct		s_vectors
 {
 	double			max;
 	double			min;
-	t_coord			a;
-	t_coord			b;
-}					t_ray;
+	t_coord			orig;
+	t_coord			*dir;
+}					t_vectors;
 
 typedef struct		s_coef
 {
@@ -133,30 +135,31 @@ void				create_caps(t_rt *rt);
 void				free_args(t_shape *shape, t_light *light);
 
 void				create_img(t_rt *rt, t_sdl *sdl);
-int					check_intersection(t_shape *shape, t_rt *rt);
+int					check_intersection(t_coord *ray, t_shape *shape, t_rt *rt, int flag);
 
-double				sphere_intersection(t_shape *shape, t_ray *ray);
+double				sphere_intersection(t_shape *shape, t_vectors *vectors);
 void				get_normal_sphere(t_shape *shape);
 
-double				cylinder_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
+double				cylinder_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 void				get_normal_cylinder(t_shape *shape);
 
-double				cone_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
+double				cone_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 void				get_normal_cone(t_shape *shape, double alpha);
 
-double				plane_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
-double				ray_plane_intersection(t_ray *ray, t_shape *shape);
+double				plane_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
+double				ray_plane_intersection(t_vectors *vectors, t_shape *shape);
 void				get_normal_plane(t_shape *shape);
 
-double				disk_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
+double				disk_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 void				get_normal_disk(t_shape *shape);
 
-double				triangle_intersection(t_shape *shape, t_ray *ray, t_rt *rt);
+double				triangle_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 
-int					get_color(t_shape *first, t_rt *rt);
+int					get_pixel(t_coord *ray, t_rt *rt, int depth, int flag);
+int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
 int					check_shadow(t_shape *source_shape,
 									t_light *light, t_rt *rt);
-double				get_light(t_shape *shape, t_rt *rt);
+double				get_light(t_shape *shape, t_rt *rt, t_coord *dir);
 
 void				scalar_product(t_coord *a, double number);
 void				cross_product(t_coord *a, t_coord *b, t_coord *c);
@@ -172,6 +175,6 @@ void				event_handler(t_rt *rt, t_sdl *sdl);
 t_matrix			matrix_multiply(t_matrix a, t_matrix b);
 t_matrix			x_rotation_matrix(double alpha);
 t_matrix			y_rotation_matrix(double beta);
-void				vector_matrix_multiply(t_matrix m, t_shape *shape);
+void				vector_matrix_multiply(t_matrix m, t_coord *ray);
 
 #endif

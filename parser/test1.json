@@ -4,27 +4,45 @@
 			{
 				"shape":"sphere",
 				"color":"red",
-				"specular":555,
+				"specular":500,
 				"radius": 1,
-				"reflection":123,
-				"center":[0,0,4],
+				"reflection":0.2,
+				"center":[0,-1,3],
+				"direction":[0,0,-4]
+			},
+			{
+				"shape":"sphere",
+				"color":"green",
+				"specular":10,
+				"radius": 1,
+				"reflection":0.4,
+				"center":[-2,0,4],
+				"direction":[0,0,-4]
+			},
+			{
+				"shape":"sphere",
+				"color":"blue",
+				"specular":500,
+				"radius": 1,
+				"reflection":0.3,
+				"center":[2,0,4],
 				"direction":[0,0,-4]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
-				"intensity":0.5,
-				"center":[1,2,0]
+				"intensity":0.6,
+				"center":[2,1,0]
 			},
 			{
 				"type":"directional",
-				"intensity":0.5,
-				"direction":[1,2,3]
+				"intensity":0.2,
+				"direction":[1,4,4]
 			},
 			{
 				"type":"ambient",
-				"intensity":0.0
+				"intensity":0.2
 			}
 		],
 		"camera":{

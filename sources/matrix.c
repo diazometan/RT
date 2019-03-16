@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 11:55:32 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/12 20:44:38 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/16 15:57:01 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ t_matrix		y_rotation_matrix(double beta)
 	return (res);
 }
 
-void			vector_matrix_multiply(t_matrix m, t_shape *shape)
+void			vector_matrix_multiply(t_matrix m, t_coord *ray)
 {
 	t_coord	pre;
 
-	pre.x = shape->ray.x;
-	pre.y = shape->ray.y;
-	pre.z = shape->ray.z;
-	shape->ray.x = pre.x * m.matrix[0][0] + pre.y * m.matrix[1][0] +
+	pre.x = ray->x;
+	pre.y = ray->y;
+	pre.z = ray->z;
+	ray->x = pre.x * m.matrix[0][0] + pre.y * m.matrix[1][0] +
 				pre.z * m.matrix[2][0];
-	shape->ray.y = pre.x * m.matrix[0][1] + pre.y * m.matrix[1][1] +
+	ray->y = pre.x * m.matrix[0][1] + pre.y * m.matrix[1][1] +
 				pre.z * m.matrix[2][1];
-	shape->ray.z = pre.x * m.matrix[0][2] + pre.y * m.matrix[1][2] +
+	ray->z = pre.x * m.matrix[0][2] + pre.y * m.matrix[1][2] +
 				pre.z * m.matrix[2][2];
 }

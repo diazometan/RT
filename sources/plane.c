@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 14:08:14 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/16 13:37:50 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/16 15:59:45 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			cut_disk(t_coord *p, t_shape *shape)
 	return (0);
 }
 
-double			plane_intersection(t_shape *shape, t_ray *ray, t_rt *rt)
+double			plane_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 {
 	double	t;
 	double	denominator;
@@ -56,13 +56,13 @@ double			plane_intersection(t_shape *shape, t_ray *ray, t_rt *rt)
 
 	t = INT_MAX;
 	normalize_vector(&shape->unit, vector_length(&shape->unit));
-	denominator = dot_product(&ray->b, &shape->unit);
+	denominator = dot_product(vectors->dir, &shape->unit);
 	if (fabs(denominator) > 0.0001)
 	{
-		scalar_product(&ray->a, -1.0);
-		t = dot_product(&ray->a, &shape->unit) / denominator;
+		scalar_product(&vectors->orig, -1.0);
+		t = dot_product(&vectors->orig, &shape->unit) / denominator;
 	}
-	if (t > ray->min && t < ray->max)
+	if (t > vectors->min && t < vectors->max)
 	{
 		get_intersection_point(&rt->camera, &shape->ray, t, &p);
 		if (shape->figure == PLANE)
