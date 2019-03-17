@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_lighting.c                                     :+:      :+:    :+:   */
+/*   init_lighting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 13:51:26 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 13:42:52 by rgyles           ###   ########.fr       */
+/*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
+/*   Updated: 2019/03/17 18:55:22 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		get_coordinates(char *object, t_light *new)
 	free(str);
 }
 
-void			get_lighting(char *s, t_light **head)
+void			init_lighting(char *s, t_light **head)
 {
 	char	*object;
 	t_light	*new;

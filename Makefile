@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/17 17:36:35 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/03/17 18:55:55 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ INCLUDES = -I SDL2.framework/Headers -I includes
 SRC = main.c\
 	  event_handler.c\
 	  init_config.c\
-	  get_shapes.c\
-	  get_lighting.c\
+	  init_shapes.c\
+	  init_lighting.c\
 	  create_img.c\
 	  matrix.c\
 	  check_intersection.c\

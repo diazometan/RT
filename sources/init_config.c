@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 20:16:21 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 18:56:28 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int		init_config(char *file, t_rt *rt)
 		return (1);
 	shapes = ft_strextract(start, '[', ']');
 	//printf("\nobjects - %s\n\n", shapes);
-	get_shapes(shapes, &rt->head_shapes);
+	init_shapes(shapes, &rt->head_shapes);
 	if ((start = ft_strstr(file, "lighting")) == NULL)
 		return (1);
 	lighting = ft_strextract(start, '[', ']');
 	//printf("light - %s\n\n", lighting);
-	get_lighting(lighting, &rt->head_light);
+	init_lighting(lighting, &rt->head_light);
 	if ((start = ft_strstr(file, "camera")) == NULL)
 		return (1);
 	camera = ft_strextract(start, '{', '}');

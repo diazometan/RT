@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 17:52:34 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 18:55:42 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ typedef struct		s_pixel
 
 int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
-void				get_lighting(char *s, t_light **head);
-void				get_shapes(char *s, t_shape **head);
+void				init_lighting(char *s, t_light **head);
+void				init_shapes(char *s, t_shape **head);
 void				create_caps(t_rt *rt);
 void				free_args(t_shape *shape, t_light *light);
 
