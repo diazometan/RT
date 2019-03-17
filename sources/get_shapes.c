@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 14:00:37 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 13:08:40 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,12 @@ void	get_shapes(char *s, t_shape **head)
 			coord_add_subtract(&new->triangle[2], &new->triangle[0], &b, 1);
 			cross_product(&a, &b, &new->unit);
 		}
+		//if (new->figure != SPHERE && new->figure != CONE && new->figure != CYLINDER)
+		//{
+			//new->normal.x = new->unit.x;
+			//new->normal.y = new->unit.y;
+			//new->normal.z = new->unit.z;
+		//}
 		//END
 		//GET RADIUS
 		if (new->figure == SPHERE || new->figure == CYLINDER || new->figure == DISK)

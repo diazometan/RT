@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 16:41:11 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 13:13:57 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int		main(int args, char **argv)
 			printf("triangle, ");
 		printf("color - %x, specular - %.2f ", h_s->color, h_s->specular);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK)
-			printf("radius - %f ", h_s->radius);
+			printf("radius - %.gf ", h_s->radius);
 		if (h_s->figure == CONE)
 			printf("angle - %.2f ", h_s->angle);
 		if (h_s->figure != TRIANGLE)

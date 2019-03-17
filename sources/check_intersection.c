@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 12:42:42 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 17:51:11 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/16 19:53:12 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,6 @@ static void	init_ray_reflec(t_vectors *vectors, t_shape *shape, t_rt *rt)
 	vectors->min = 0.001;
 	vectors->max = INT_MAX;
 }
-/*static void	reflect_ray(t_ray *ray, t_shape *shape)
-{
-	t_coord	ref;
-
-	scalar_product(&ray->b, (-1));
-	ray->a.x = shape->surface_point.x;
-	ray->a.y = shape->surface_point.y;
-	ray->a.z = shape->surface_point.z;
-	ray->b.x = 2 * shape->normal.x * dot_product(&shape->normal, &ray->b.x) - ray->b.x;
-	ray->b.y = 2 * shape->normal.y * dot_product(&shape->normal, &ray->b.y) - ray->b.y;
-	ray->b.z = 2 * shape->normal.z * dot_product(&shape->normal, &ray->b.z) - ray->b.z;
-	ray->min = 0.001;
-	ray->max = INT_MAX;
-}*/
 
 int			check_intersection(t_coord *ray, t_shape *shape, t_rt *rt, int flag)
 {
