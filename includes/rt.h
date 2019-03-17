@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 17:52:57 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 13:49:56 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void				get_normal_disk(t_shape *shape);
 
 double				triangle_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 
-int					get_pixel(t_coord *ray, t_rt *rt, int depth, int flag);
+int					trace_ray(t_coord *ray, t_rt *rt, int depth, int flag);
 int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
 int					check_shadow(t_shape *source_shape,
 									t_light *light, t_rt *rt);
