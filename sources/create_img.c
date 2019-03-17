@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 13:47:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 14:23:10 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 	t_pixel	pixel;
 
 	pixel.i = 0;
-	pixel.dx = 1.0 / rt->sample;
-	pixel.dy = 1.0 / rt->sample;
-	pixel.color = (int *)malloc(sizeof(int) * rt->sample * rt->sample);
+	pixel.dx = 1.0 / rt->p_division;
+	pixel.dy = 1.0 / rt->p_division;
+	pixel.color = (int *)malloc(sizeof(int) * rt->p_division * rt->p_division);
 	pixel.c_y = y + pixel.dy / 2.0;
 	while (pixel.c_y <= y + 1.0)
 	{
-		pixel.dx = 1.0 / rt->sample;
+		pixel.dx = 1.0 / rt->p_division;
 		pixel.c_x = x + pixel.dx / 2.0;
 		while (pixel.c_x <= x + 1.0)
 		{
@@ -93,7 +93,7 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 		}
 		pixel.c_y += pixel.dy;
 	}
-	img_data[x + y * rt->win_width] = average_color(rt->sample, pixel.color);
+	img_data[x + y * rt->win_width] = average_color(rt->p_division, pixel.color);
 	free(pixel.color);
 }
 
@@ -103,10 +103,8 @@ void		create_img(t_rt *rt, t_sdl *sdl)
 	int		y;
 	int		x_limit;
 	int		y_limit;
-	int		init_depth;
 
 	y = -1;
-	init_depth = rt->depth;
 	x_limit = rt->win_width;
 	y_limit = rt->win_height;
 	while (++y < y_limit)

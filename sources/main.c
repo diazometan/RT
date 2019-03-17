@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 13:13:57 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/17 14:26:28 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	init_rt(t_rt *rt, char *config_file)
 
 	rt->head_shapes = NULL;
 	rt->head_light = NULL;
-	rt->sample = 1;
+	rt->p_division = 1;
 	fd = open(config_file, O_RDONLY);
 	file = get_file(fd);
 	if (init_config(file, rt))
@@ -92,7 +92,6 @@ int		main(int args, char **argv)
 	t_rt	rt;
 	t_sdl	sdl;
 
-	(void)argv;
 	if (args != 2)
 	{
 		ft_putstr("\033[0;31musage: ./RTv1 [configuration_file]\n");

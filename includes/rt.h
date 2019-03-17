@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 13:49:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 14:23:46 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,13 @@
 # define RT_H
 
 # include "../libft/libft.h"
+# include "vector.h"
+# include "constants.h"
 # include "SDL.h"
 # include <math.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <stdio.h>
-
-# define PLANE 1
-# define SPHERE 2
-# define CYLINDER 3
-# define CONE 4
-# define DISK 5
-# define TRIANGLE 6
-
-# define POINT 1
-# define DIRECTIONAL 2
-# define AMBIENT 3
-
-# define RED 0xFF0000
-# define GREEN 0x008000
-# define BLUE 0x0000FF
-# define YELLOW 0xFFFF00
-# define PURPLE 0x800080
 
 typedef struct		s_sdl
 {
@@ -43,13 +28,6 @@ typedef struct		s_sdl
 	SDL_Surface		*surf;
 	int				*img_data;
 }					t_sdl;
-
-typedef struct		s_coord
-{
-	double			x;
-	double			y;
-	double			z;
-}					t_coord;
 
 typedef struct		s_shape
 {
@@ -83,15 +61,15 @@ typedef struct		s_rt
 {
 	int				win_width;
 	int				win_height;
-	int				sample;
+	int				p_division;
 	int				depth;
 	double			t_closest;
-	t_shape			*head_shapes;
-	t_light			*head_light;
 	t_coord			angle;
 	t_coord			camera;
 	t_coord			canvas;
 	t_coord			*source_point;
+	t_shape			*head_shapes;
+	t_light			*head_light;
 }					t_rt;
 
 typedef struct		s_vectors
@@ -125,7 +103,6 @@ typedef struct		s_pixel
 	int				*color;
 	int				i;
 }					t_pixel;
-
 
 int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
@@ -161,13 +138,13 @@ int					check_shadow(t_shape *source_shape,
 									t_light *light, t_rt *rt);
 double				get_light(t_shape *shape, t_rt *rt, t_coord *dir);
 
-void				scalar_product(t_coord *a, double number);
-void				cross_product(t_coord *a, t_coord *b, t_coord *c);
-double				dot_product(t_coord *a, t_coord *b);
-double				vector_length(struct s_coord *vector);
-void				normalize_vector(t_coord *vector, double length);
-void				coord_add_subtract(t_coord *a, t_coord *b,
-										t_coord *result, int flag);
+//void				scalar_product(t_coord *a, double number);
+//void				cross_product(t_coord *a, t_coord *b, t_coord *c);
+//double				dot_product(t_coord *a, t_coord *b);
+//double				vector_length(struct s_coord *vector);
+//void				normalize_vector(t_coord *vector, double length);
+//void				coord_add_subtract(t_coord *a, t_coord *b,
+										//t_coord *result, int flag);
 void				get_intersection_point(t_coord *source, t_coord *ray, double t, t_coord *p);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
