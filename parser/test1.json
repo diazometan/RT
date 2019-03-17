@@ -34,7 +34,7 @@
 				"specular":1000,
 				"reflection":0.5,
 				"center":[0,-1,0],
-				"direction":[0,1,0]
+				"direction":[0,-1,0]
 			}
 		],
 		"lighting":[

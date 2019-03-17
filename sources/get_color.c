@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/17 13:47:00 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 17:07:43 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		recursion(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
 
 	reflect_ray(shape, &r_v, dir);
 	rt->source_point = &shape->surface_point;
-	reflected_color = trace_ray(&r_v, rt, depth, 0);
+	reflected_color = trace_ray(&r_v, rt, depth);
 	return (reflected_color);
 }
 
@@ -67,20 +67,18 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	int		rgb[3];
 	double	light;
 	int		color;
-	int		color_red;
-	int		color_green;
-	int		color_blue;
+	int		rgb_ref[3];
 	int		reflected_color;
 
 	reflected_color = 0;
 	//if (shape->figure != TRIANGLE && shape->figure != DISK)
-		//get_intersection_point(&rt->camera, &shape->ray, rt->t_closest, &shape->surface_point);
-	if (depth == 1)
+		//get_intersection_point(&rt->camera, dir, rt->t_closest, &shape->surface_point);
+	if (depth == DEPTH)
 		get_intersection_point(&rt->camera, dir, rt->t_closest, &shape->surface_point);
 	else
 		get_intersection_point(rt->source_point, dir, rt->t_closest, &shape->surface_point);
 	if (shape->figure == PLANE || shape->figure == TRIANGLE || shape->figure == DISK)
-		get_normal_plane(shape);
+		get_normal_plane(shape, dir);
 	else if (shape->figure == SPHERE)
 		get_normal_sphere(shape);
 	else if (shape->figure == CYLINDER)
@@ -94,12 +92,11 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	color = check_color(rgb);
 	if (shape->reflection && depth > 0)
 	{
-		//printf("check\n");
 		reflected_color = recursion(dir, shape, rt, depth - 1);
-		color_red = (color >> 16 & 0xFF) * (1 - shape->reflection) + (reflected_color >> 16 & 0xFF) * shape->reflection;
-		color_green = (color >> 8 & 0xFF) * (1 - shape->reflection) + (reflected_color >> 8 & 0xFF) * shape->reflection;
-		color_blue = (color & 0xFF) * (1 - shape->reflection) + (reflected_color & 0xFF) * shape->reflection;
-		color = ((color_red << 16) | (color_green << 8) | color_blue);
+		rgb_ref[0] = (color >> 16 & 0xFF) * (1 - shape->reflection) + (reflected_color >> 16 & 0xFF) * shape->reflection;
+		rgb_ref[1] = (color >> 8 & 0xFF) * (1 - shape->reflection) + (reflected_color >> 8 & 0xFF) * shape->reflection;
+		rgb_ref[2] = (color & 0xFF) * (1 - shape->reflection) + (reflected_color & 0xFF) * shape->reflection;
+		color = ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
 	}
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 12:42:42 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 19:53:12 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/17 17:04:59 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ static void	init_ray(t_vectors *vectors, t_shape *shape, t_rt *rt)
 static void	init_ray_reflec(t_vectors *vectors, t_shape *shape, t_rt *rt)
 {
 	coord_add_subtract(rt->source_point, &shape->center, &vectors->orig, 1);
-	vectors->min = 0.001;
+	vectors->min = 0.0001;
 	vectors->max = INT_MAX;
 }
 
-int			check_intersection(t_coord *ray, t_shape *shape, t_rt *rt, int flag)
+int			check_intersection(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	t_vectors	vectors;
 	double	intersection;
 
 	intersection = INT_MAX;
-	vectors.dir = ray;
-	if (flag == 1)
+	vectors.dir = dir;
+	if (depth == DEPTH)
 		init_ray(&vectors, shape, rt);
 	else
 		init_ray_reflec(&vectors, shape, rt);

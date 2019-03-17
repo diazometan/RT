@@ -6,18 +6,18 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 14:08:14 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/16 15:59:45 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 17:01:30 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			get_normal_plane(t_shape *shape)
+void			get_normal_plane(t_shape *shape, t_coord *dir)
 {
 	shape->normal.x = shape->unit.x;
 	shape->normal.y = shape->unit.y;
 	shape->normal.z = shape->unit.z;
-	if (dot_product(&shape->ray, &shape->normal) > 0)
+	if (dot_product(dir, &shape->normal) > 0)
 		scalar_product(&shape->normal, -1.0);
 }
 
@@ -64,7 +64,7 @@ double			plane_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 	}
 	if (t > vectors->min && t < vectors->max)
 	{
-		get_intersection_point(&rt->camera, &shape->ray, t, &p);
+		get_intersection_point(&rt->camera, vectors->dir, t, &p);
 		if (shape->figure == PLANE)
 			return (t);
 		else if (shape->figure == TRIANGLE && cut_triangle(&p, shape))

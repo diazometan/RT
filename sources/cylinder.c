@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:11:30 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 16:03:17 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 16:58:54 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static double check_bot(t_shape *shape, t_vectors *vectors, double t)
 {
 	double tmp;
 
-	tmp = shape->unit.x * (vectors->orig.x + vectors->dir->x * t) + shape->unit.y * (vectors->orig.y + vectors->dir->y * t) +
+	tmp = shape->unit.x * (vectors->orig.x + vectors->dir->x * t) +
+			shape->unit.y * (vectors->orig.y + vectors->dir->y * t) +
 			shape->unit.z * (vectors->orig.z + vectors->dir->z * t);
 	return (tmp);
 }
@@ -65,7 +66,8 @@ static double check_top(t_shape *shape, t_vectors *vectors, double t, t_coord to
 {
 	double tmp;
 
-	tmp = shape->unit.x * (top.x + vectors->dir->x * t) + shape->unit.y * (top.y + vectors->dir->y * t) +
+	tmp = shape->unit.x * (top.x + vectors->dir->x * t) +
+			shape->unit.y * (top.y + vectors->dir->y * t) +
 			shape->unit.z * (top.z + vectors->dir->z * t);
 	return (tmp);
 }
@@ -93,7 +95,8 @@ double		cylinder_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 		intersection = t_1;
 	if (t_2 > vectors->min && t_2 < vectors->max && t_2 < intersection)
 		intersection = t_2;
-	if (intersection != INT_MAX && (check_bot(shape, vectors, intersection) < 0 || check_top(shape, vectors, intersection, top) > 0))
+	if (intersection != INT_MAX && (check_bot(shape, vectors, intersection) < 0 ||
+					check_top(shape, vectors, intersection, top) > 0))
 		return (INT_MAX);
 	return (intersection);
 }

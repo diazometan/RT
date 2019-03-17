@@ -6,26 +6,11 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 13:47:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 17:24:54 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static void	init_camera_ray(double x, double y, t_coord *ray, t_rt *rt)
-{
-	t_matrix	rotation;
-
-	rotation = matrix_multiply(x_rotation_matrix(rt->angle.x),
-								y_rotation_matrix(rt->angle.y));
-	ray->x = (double)((-rt->win_width / 2) + x) /
-					rt->win_width + rt->camera.x / rt->win_width;
-	ray->y = (double)(rt->win_height / 2 - y) /
-					rt->win_height + rt->camera.y / rt->win_height;
-	ray->z = 1.0;
-	normalize_vector(ray, vector_length(ray));
-	vector_matrix_multiply(rotation, ray);
-}
 
 static int	average_color(int n, int *color)
 {
@@ -50,7 +35,22 @@ static int	average_color(int n, int *color)
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-int	trace_ray(t_coord *ray, t_rt *rt, int depth, int flag)
+static void	init_camera_ray(double x, double y, t_coord *dir, t_rt *rt)
+{
+	t_matrix	rotation;
+
+	rotation = matrix_multiply(x_rotation_matrix(rt->angle.x),
+								y_rotation_matrix(rt->angle.y));
+	dir->x = (double)((-rt->win_width / 2) + x) /
+					rt->win_width + rt->camera.x / rt->win_width;
+	dir->y = (double)(rt->win_height / 2 - y) /
+					rt->win_height + rt->camera.y / rt->win_height;
+	dir->z = 1.0;
+	normalize_vector(dir, vector_length(dir));
+	vector_matrix_multiply(rotation, dir);
+}
+
+int	trace_ray(t_coord *dir, t_rt *rt, int depth)
 {
 	t_shape	*closest;
 	t_shape	*shape;
@@ -60,19 +60,18 @@ int	trace_ray(t_coord *ray, t_rt *rt, int depth, int flag)
 	rt->t_closest = INT_MAX;
 	while (shape != NULL)
 	{
-		if (check_intersection(ray, shape, rt, flag))
+		if (check_intersection(dir, shape, rt, depth))
 			closest = shape;
 		shape = shape->next;
 	}
 	if (closest != NULL)
-		return (get_color(closest, rt, ray, depth));
+		return (get_color(closest, rt, dir, depth));
 	return (0);
-
 }
 
 static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 {
-	t_coord	ray;
+	t_coord	dir;
 	t_pixel	pixel;
 
 	pixel.i = 0;
@@ -86,8 +85,8 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 		pixel.c_x = x + pixel.dx / 2.0;
 		while (pixel.c_x <= x + 1.0)
 		{
-			init_camera_ray(pixel.c_x, pixel.c_y, &ray, rt);
-			pixel.color[pixel.i] = trace_ray(&ray, rt, 1, 1);
+			init_camera_ray(pixel.c_x, pixel.c_y, &dir, rt);
+			pixel.color[pixel.i] = trace_ray(&dir, rt, DEPTH);
 			pixel.c_x += pixel.dx;
 			++pixel.i;
 		}
@@ -103,10 +102,8 @@ void		create_img(t_rt *rt, t_sdl *sdl)
 	int		y;
 	int		x_limit;
 	int		y_limit;
-	int		init_depth;
 
 	y = -1;
-	init_depth = rt->depth;
 	x_limit = rt->win_width;
 	y_limit = rt->win_height;
 	while (++y < y_limit)

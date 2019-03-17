@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 13:13:57 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/17 17:28:50 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	init_rt(t_rt *rt, char *config_file)
 
 	rt->head_shapes = NULL;
 	rt->head_light = NULL;
-	rt->sample = 1;
+	rt->sample = 8;
 	fd = open(config_file, O_RDONLY);
 	file = get_file(fd);
 	if (init_config(file, rt))

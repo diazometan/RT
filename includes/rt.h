@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 13:49:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 17:11:54 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define YELLOW 0xFFFF00
 # define PURPLE 0x800080
 
+# define DEPTH 2
+
 typedef struct		s_sdl
 {
 	SDL_Window		*win;
@@ -63,7 +65,6 @@ typedef struct		s_shape
 	t_coord			abc[3];
 	t_coord			triangle[3];
 	t_coord			center;
-	t_coord			ray;
 	t_coord			surface_point;
 	t_coord			unit;
 	t_coord			normal;
@@ -90,7 +91,6 @@ typedef struct		s_rt
 	t_light			*head_light;
 	t_coord			angle;
 	t_coord			camera;
-	t_coord			canvas;
 	t_coord			*source_point;
 }					t_rt;
 
@@ -148,14 +148,14 @@ void				get_normal_cone(t_shape *shape, double alpha);
 
 double				plane_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 double				ray_plane_intersection(t_vectors *vectors, t_shape *shape);
-void				get_normal_plane(t_shape *shape);
+void				get_normal_plane(t_shape *shape, t_coord *dir);
 
 double				disk_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 void				get_normal_disk(t_shape *shape);
 
 double				triangle_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 
-int					trace_ray(t_coord *ray, t_rt *rt, int depth, int flag);
+int					trace_ray(t_coord *ray, t_rt *rt, int depth);
 int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
 int					check_shadow(t_shape *source_shape,
 									t_light *light, t_rt *rt);
