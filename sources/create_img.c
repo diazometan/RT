@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 18:33:40 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 13:14:33 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void		divide_pixel(int x, int y, t_rt *rt, int *img_data)
 		while (pixel.c_x <= (x + 1.0))
 		{
 			init_camera_ray(pixel.c_x, pixel.c_y, &ray, rt);
-			pixel.color[pixel.i] = get_pixel(&ray, rt, 0, 1);
+			pixel.color[pixel.i] = get_pixel(&ray, rt, 1, 1);
 			pixel.c_x += pixel.dx;
 			(pixel.i)++;
 		}
