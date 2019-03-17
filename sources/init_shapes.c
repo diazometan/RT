@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_shapes.c                                       :+:      :+:    :+:   */
+/*   init_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 16:16:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 13:08:40 by rgyles           ###   ########.fr       */
+/*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
+/*   Updated: 2019/03/17 18:54:55 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		create_caps(t_rt *rt)
 	}
 }
 
-void	get_shapes(char *s, t_shape **head)
+void	init_shapes(char *s, t_shape **head)
 {
 	int		i;
 	char	*start;
