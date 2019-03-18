@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 18:56:28 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:27:11 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		extract_coord(char *str, t_coord *coord)
 		i++;
 	if (i != 3)
 	{
-		printf("error!\n");
+		ft_putendl(U_COORD PFCF);
 		exit(1);
 	}
 	coord->x = ft_atof(array[0]);
@@ -31,16 +31,24 @@ void		extract_coord(char *str, t_coord *coord)
 	coord->z = ft_atof(array[2]);
 }
 
-void	get_camera(char *s, t_rt *rt)
+void	init_camera(char *s, t_rt *rt)
 {
 	char	*str;
 	char	*start;
 
-	start = ft_strstr(s, "center");
+	if ((start = ft_strstr(s, "center")) == NULL)
+	{
+		ft_putendl(M_CENTER PFCF);
+		exit(1);
+	}
 	str = ft_strextract(start, '[', ']');
 	extract_coord(str, &rt->camera);
 	free(str);
-	start = ft_strstr(s, "direction");
+	if ((start = ft_strstr(s, "direction")) == NULL)
+	{
+		ft_putendl(M_DIR PFCF);
+		exit(1);
+	}
 	str = ft_strextract(start, '[', ']');
 	extract_coord(str, &rt->angle);
 	rt->angle.x = M_PI * rt->angle.x / 180;
@@ -55,21 +63,23 @@ int		init_config(char *file, t_rt *rt)
 	char	*shapes;
 	char	*lighting;
 	char	*camera;
+	char	*physics;
 
 	if ((start = ft_strstr(file, "objects")) == NULL)
 		return (1);
 	shapes = ft_strextract(start, '[', ']');
-	//printf("\nobjects - %s\n\n", shapes);
 	init_shapes(shapes, &rt->head_shapes);
 	if ((start = ft_strstr(file, "lighting")) == NULL)
 		return (1);
 	lighting = ft_strextract(start, '[', ']');
-	//printf("light - %s\n\n", lighting);
 	init_lighting(lighting, &rt->head_light);
 	if ((start = ft_strstr(file, "camera")) == NULL)
 		return (1);
 	camera = ft_strextract(start, '{', '}');
-	get_camera(camera, rt);
-	//printf("camera - %s\n\n", camera);
+	init_camera(camera, rt);
+	if ((start = ft_strstr(file, "physics")) == NULL)
+		return (1);
+	physics = ft_strextract(start, '{', '}');
+	init_physics(physics, rt);
 	return (0);
 }

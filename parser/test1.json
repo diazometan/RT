@@ -56,6 +56,10 @@
 		"camera":{
 			"center":[0,0,0],
 			"direction":[0,0,0]
+		},
+		"physics":{
+			"reflection depth":3,
+			"pixel division":2
 		}
 	}
 }

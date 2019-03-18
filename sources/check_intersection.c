@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 12:42:42 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 17:04:59 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/18 17:18:50 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			check_intersection(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
 
 	intersection = INT_MAX;
 	vectors.dir = dir;
-	if (depth == DEPTH)
+	if (depth == rt->depth)
 		init_ray(&vectors, shape, rt);
 	else
 		init_ray_reflec(&vectors, shape, rt);

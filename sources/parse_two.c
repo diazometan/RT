@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:26:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 11:09:38 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 15:36:04 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ void	init_direction(char *s, t_shape *new)
 
 	if (new->figure != TRIANGLE)
 	{
-		start = ft_strstr(s, "direction");
+		if ((start = ft_strstr(s, "direction")) == NULL)
+		{
+			ft_putendl(M_DIR PFCF);
+			exit(1);
+		}
 		str = ft_strextract(start, '[', ']');
 		extract_coord(str, &new->unit);
 		free(str);
@@ -45,12 +49,11 @@ void	init_radius(char *s, t_shape *new)
 		start = ft_strstr(s, "radius");
 		if (start == NULL)
 		{
-			ft_putendl("\033[0;31mRadius is missing!\033[0m");
-			ft_putendl("Please fix config file");
+			ft_putendl(M_RADIUS PFCF);
 			exit(1);
 		}
 		if ((str = ft_strextract(start, ':', ',')) == NULL)
-			str = ft_strextract(start, ':', '}');
+			str = ft_strextract(start, ':', '\0');
 		new->radius = ft_atof(str);
 		free(str);
 	}
@@ -65,12 +68,11 @@ void	init_angle(char *s, t_shape *new)
 	{
 		if ((start = ft_strstr(s, "angle")) == NULL)
 		{
-			ft_putendl("\033[0;31mAngle is missing!\033[0m");
-			ft_putendl("Please fix config file");
+			ft_putendl(M_ANGLE PFCF);
 			exit(1);
 		}
 		if ((str = ft_strextract(start, ':', ',')) == NULL)
-			str = ft_strextract(start, ':', '}');
+			str = ft_strextract(start, ':', '\0');
 		new->angle = (M_PI * ft_atof(str)) / 180;
 		free(str);
 	}
@@ -85,12 +87,11 @@ void	init_height(char *s, t_shape *new)
 	{
 		if ((start = ft_strstr(s, "height")) == NULL)
 		{
-			ft_putendl("\033[0;31mHeight is missing!\033[0m");
-			ft_putendl("Please fix config file");
+			ft_putendl(M_HEIGHT PFCF);
 			exit(1);
 		}
 		if ((str = ft_strextract(start, ':', ',')) == NULL)
-			str = ft_strextract(start, ':', '}');
+			str = ft_strextract(start, ':', '\0');
 		new->h = ft_atof(str);
 		free(str);
 	}

@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 10:27:28 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 15:18:35 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static int		identify_shape(char *start, char *end)
 		return (TRIANGLE);
 	else
 	{
-		ft_putendl("\033[0;31mUndefined shape detected!\033[0m");
-		ft_putendl("Please fix config file");
+		ft_putendl(U_SHAPE PFCF);
 		exit(1);
 	}
 }
@@ -54,8 +53,7 @@ static int		identify_color(char *start, char *end)
 		return (PURPLE);
 	else
 	{
-		ft_putendl("\033[0;31mUndefined color detected!\033[0m");
-		ft_putendl("Please fix config file");
+		ft_putendl(U_COLOR PFCF);
 		exit(1);
 	}
 }
@@ -68,16 +66,14 @@ void			init_shape_color(char *s, t_shape *new)
 
 	if ((start = ft_strstr(s, "shape")) == NULL)
 	{
-		ft_putendl("\033[0;31mShape identifier is missing!\033[0m");
-		ft_putendl("Please fix config file");
+		ft_putendl(M_SHAPE PFCF);
 		exit(1);
 	}
 	end = ft_strchr(start, ',');
 	new->figure = identify_shape(++start, end);
 	if ((start = ft_strstr(s, "color")) == NULL)
 	{
-		ft_putendl("\033[0;31mColor identifier is missing!\033[0m");
-		ft_putendl("Please fix config file");
+		ft_putendl(M_COLOR PFCF);
 		exit(1);
 	}
 	end = ft_strchr(start, ',');
@@ -91,22 +87,20 @@ void			init_spec_refl(char *s, t_shape *new)
 
 	if ((start = ft_strstr(s, "specular")) == NULL)
 	{
-		ft_putendl("\033[0;31mSpecular field missing!\033[0m");
-		ft_putendl("Please fix config file");
+		ft_putendl(M_SPEC PFCF);
 		exit(1);
 	}
 	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '}');
+		str = ft_strextract(start, ':', '\0');
 	new->specular = ft_atof(str);
 	free(str);
 	if ((start = ft_strstr(s, "reflection")) == NULL)
 	{
-		ft_putendl("\033[0;31mReflection field missing!\033[0m");
-		ft_putendl("Please fix config file");
+		ft_putendl(M_REFL PFCF);
 		exit(1);
 	}
 	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '}');
+		str = ft_strextract(start, ':', '\0');
 	new->reflection = ft_atof(str);
 	free(str);
 }

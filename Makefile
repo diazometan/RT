@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/18 11:09:19 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/18 17:55:11 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = main.c\
 	  event_handler.c\
 	  init_config.c\
 	  init_shapes.c\
+	  init_physics.c\
 	  parse_one.c\
 	  parse_two.c\
 	  parse_three.c\
@@ -43,6 +44,7 @@ SRC = main.c\
 	  check_shadow.c\
 	  light.c\
 	  get_color.c\
+	  reflection.c\
 	  vector.c\
 	  free_args.c
 
@@ -86,5 +88,9 @@ re: fclean all
 test: all
 	@echo "$(GREEN)Testing...$(NC)"
 	@./RT parser/test1.json
+
+scene: all
+	@echo "$(GREEN)Testing...$(NC)"
+	@./RT parser/scene.json
 
 .PHONY: all clean fclean re test

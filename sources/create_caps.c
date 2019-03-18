@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 11:10:19 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 12:31:08 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:39:51 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static void		init_cylinder_caps(t_shape *cylinder, t_rt *rt, int flag)
 				cylinder->unit.y, cylinder->center.z + cylinder->h *
 													cylinder->unit.z};
 	else
-		cap->center = (t_coord) {cylinder->center.x, cylinder->center.y,
-													cylinder->center.z};
+		cap->center = (t_coord) {cylinder->center.x,
+				cylinder->center.y, cylinder->center.z};
 	cap->radius = cylinder->radius;
-	cap->unit = (t_coord) {cylinder->unit.x, cylinder->unit.y,
-											cylinder->unit.z};
+	cap->unit = (t_coord) {cylinder->unit.x,
+			cylinder->unit.y, cylinder->unit.z};
 	cap->next = NULL;
 	push_back_shape(&rt->head_shapes, cap);
 }

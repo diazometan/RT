@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 18:55:22 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 15:35:12 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		get_light_type(char *object, t_light *new)
 		new->type = AMBIENT;
 	else
 	{
-		ft_putendl("check config file for mistakes");
+		ft_putendl(U_LIGHT PFCF);
 		exit(1);
 	}
 }
@@ -57,7 +57,11 @@ static void		get_intensity(char *object, t_light *new)
 	start = ft_strstr(object, "intensity");
 	if ((str = ft_strextract(start, ':', ',')) == NULL)
 		str = ft_strextract(start, ':', '\0');
-	new->intensity = ft_atof(str);
+	if ((new->intensity = ft_atof(str)) > 2)
+	{
+		ft_putendl(U_INTENS PFCF);
+		exit(1);
+	}
 	free(str);
 }
 
@@ -68,13 +72,21 @@ static void		get_coordinates(char *object, t_light *new)
 
 	if (new->type == POINT)
 	{
-		start = ft_strstr(object, "center");
+		if ((start = ft_strstr(object, "center")) == NULL)
+		{
+			ft_putendl(M_CENTER PFCF);
+			exit(1);
+		}
 		str = ft_strextract(start, '[', ']');
 		extract_coord(str, &new->point);
 	}
 	else //no more need to store in the same structure as point light sourcem check later!!!
 	{
-		start = ft_strstr(object, "direction");
+		if ((start = ft_strstr(object, "direction")) == NULL)
+		{
+			ft_putendl(M_DIR PFCF);
+			exit(1);
+		}
 		str = ft_strextract(start, '[', ']');
 		extract_coord(str, &new->ray);
 	}

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 12:22:58 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:47:10 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct		s_rt
 	int				win_height;
 	int				p_division;
 	int				depth;
+	double			pixel_step;
+	double			leha_help;
 	double			t_closest;
 	t_coord			angle;
 	t_coord			camera;
@@ -92,20 +94,11 @@ typedef struct		s_matrix
 	double			matrix[3][3];
 }					t_matrix;
 
-typedef struct		s_pixel
-{
-	double			dx;
-	double			dy;
-	double			c_x;
-	double			c_y;
-	int				*color;
-	int				i;
-}					t_pixel;
-
 int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
 void				init_lighting(char *s, t_light **head);
 void				init_shapes(char *s, t_shape **head);
+void				init_physics(char *s, t_rt *rt);
 void				create_caps(t_rt *rt);
 void				free_args(t_shape *shape, t_light *light);
 
@@ -126,12 +119,11 @@ double				ray_plane_intersection(t_vectors *vectors, t_shape *shape);
 void				get_normal_plane(t_shape *shape, t_coord *dir);
 
 double				disk_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
-void				get_normal_disk(t_shape *shape);
-
 double				triangle_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 
 int					trace_ray(t_coord *ray, t_rt *rt, int depth);
 int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
+int					reflection(t_coord *dir, t_shape *shape, t_rt *rt, int depth);
 int					check_shadow(t_shape *source_shape,
 									t_light *light, t_rt *rt);
 double				get_light(t_shape *shape, t_rt *rt, t_coord *dir);

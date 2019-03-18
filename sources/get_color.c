@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/17 19:06:08 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/18 18:02:22 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,6 @@ static int	check_color(int rgb[3])
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-static void	reflect_ray(t_shape *shape, t_coord *r_v, t_coord *dir)
-{
-	double	n_dot_r;
-
-	scalar_product(dir, (-1));
-	n_dot_r = dot_product(&shape->normal, dir);
-	r_v->x = 2 * shape->normal.x * n_dot_r - dir->x;
-	r_v->y = 2 * shape->normal.y * n_dot_r - dir->y;
-	r_v->z = 2 * shape->normal.z * n_dot_r - dir->z;
-}
-
-int		recursion(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
-{
-	int	reflected_color;
-	t_coord r_v;
-
-	reflect_ray(shape, &r_v, dir);
-	rt->source_point = &shape->surface_point;
-	reflected_color = trace_ray(&r_v, rt, depth);
-	return (reflected_color);
-}
-
 int		reflect_color(int color, int reflected_color, t_shape *shape)
 {
 	int		rgb_ref[3];
@@ -79,7 +57,7 @@ void		get_normal(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 {
 	//if (shape->figure != TRIANGLE && shape->figure != DISK)
 		//get_intersection_point(&rt->camera, dir, rt->t_closest, &shape->surface_point);
-	if (depth == DEPTH)
+	if (depth == rt->depth)
 		get_intersection_point(&rt->camera, dir, rt->t_closest, &shape->surface_point);
 	else
 		get_intersection_point(rt->source_point, dir, rt->t_closest, &shape->surface_point);
@@ -109,7 +87,7 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	color = check_color(rgb);
 	if (shape->reflection && depth > 0)
 	{
-		reflected_color = recursion(dir, shape, rt, depth - 1);
+		reflected_color = reflection(dir, shape, rt, depth - 1);
 		color = reflect_color(color, reflected_color, shape);
 	}
 	return (color);

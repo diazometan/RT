@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 12:33:15 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:03:48 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void	init_rt(t_rt *rt, char *config_file)
 	file = get_file(fd);
 	if (init_config(file, rt))
 	{
+		printf("Error in config file...\n");
 		free(file);
 		free_args(rt->head_shapes, rt->head_light);
 		exit(1);
@@ -98,9 +99,9 @@ int		main(int args, char **argv)
 		return (1);
 	}
 	init_rt(&rt, argv[1]);
+	//TEMPORARY CHECK FOR CONFIG PARSER
 	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
-	//TEMPORARY CHECK FOR CONFIG PARSER
 	printf("shapes:\n");
 	while (h_s != NULL)
 	{
@@ -139,12 +140,12 @@ int		main(int args, char **argv)
 	while (h_l != NULL)
 	{
 		if (h_l->type == POINT)
-			printf("point, ");
+			printf("\tpoint, ");
 		else if (h_l->type == DIRECTIONAL)
-			printf("directional, ");
+			printf("\tdirectional, ");
 		else if (h_l->type == AMBIENT)
-			printf("ambient, ");
-		printf("intensity - %.2f ", h_l->intensity);
+			printf("\tambient, ");
+		printf("intensity - %.2f, ", h_l->intensity);
 		if (h_l->type == POINT)
 			printf("center x - %.2f, y - %.2f, z - %.2f", h_l->point.x, h_l->point.y, h_l->point.z);
 		else if (h_l->type == DIRECTIONAL)
@@ -153,14 +154,15 @@ int		main(int args, char **argv)
 		printf("\n");
 	}
 	printf("\ncamera:\n");
-	printf("centers at x - %.2f, y - %.2f, z - %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
-	printf("looks at x - %.2f, y - %.2f, z - %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
+	printf("\tlocated at x - %.2f, y - %.2f, z - %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
+	printf("\tlooks at x - %.2f, y - %.2f, z - %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
+	printf("\nphysics:\n");
+	printf("\treflection depth - %d\n", rt.depth);
+	printf("\tpixel division - %d\n", rt.p_division);
 	//END
-	(void)sdl;
 	if (init_sdl(&sdl))
 		return (1);
 	create_img(&rt, &sdl);
-	//sdl.img_data[300 + rt.win_width * 300] = 0x00FF00;
 	SDL_UpdateWindowSurface(sdl.win);
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light);
