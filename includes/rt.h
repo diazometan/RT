@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 18:55:42 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 12:22:58 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,16 @@ t_matrix			matrix_multiply(t_matrix a, t_matrix b);
 t_matrix			x_rotation_matrix(double alpha);
 t_matrix			y_rotation_matrix(double beta);
 void				vector_matrix_multiply(t_matrix m, t_coord *ray);
+
+void				push_back_shape(t_shape **head, t_shape *new);
+void				init_shape_color(char *s, t_shape *new);
+void				init_spec_refl(char *s, t_shape *new);
+void				init_direction(char *s, t_shape *new);
+void				init_radius(char *s, t_shape *new);
+void				init_angle(char *s, t_shape *new);
+void				init_height(char *s, t_shape *new);
+void				init_triangle(char *s, t_shape *new);
+void				init_center(char *s, t_shape *new);
+void				create_caps(t_rt *rt);
 
 #endif

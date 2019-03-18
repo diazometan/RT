@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/17 18:55:55 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/18 11:09:19 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,10 @@ SRC = main.c\
 	  event_handler.c\
 	  init_config.c\
 	  init_shapes.c\
+	  parse_one.c\
+	  parse_two.c\
+	  parse_three.c\
+	  create_caps.c\
 	  init_lighting.c\
 	  create_img.c\
 	  matrix.c\
