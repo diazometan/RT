@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/17 17:07:43 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 19:06:08 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,21 @@ int		recursion(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
 	return (reflected_color);
 }
 
-int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
+int		reflect_color(int color, int reflected_color, t_shape *shape)
 {
-	int		rgb[3];
-	double	light;
-	int		color;
 	int		rgb_ref[3];
-	int		reflected_color;
 
-	reflected_color = 0;
+	rgb_ref[0] = (color >> 16 & 0xFF) * (1 - shape->reflection) +
+					(reflected_color >> 16 & 0xFF) * shape->reflection;
+	rgb_ref[1] = (color >> 8 & 0xFF) * (1 - shape->reflection) +
+					(reflected_color >> 8 & 0xFF) * shape->reflection;
+	rgb_ref[2] = (color & 0xFF) * (1 - shape->reflection) +
+					(reflected_color & 0xFF) * shape->reflection;
+	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
+}
+
+void		get_normal(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
+{
 	//if (shape->figure != TRIANGLE && shape->figure != DISK)
 		//get_intersection_point(&rt->camera, dir, rt->t_closest, &shape->surface_point);
 	if (depth == DEPTH)
@@ -85,6 +91,17 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 		get_normal_cylinder(shape);
 	else if (shape->figure == CONE)
 		get_normal_cone(shape, shape->angle);
+}
+
+int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
+{
+	int		rgb[3];
+	double	light;
+	int		color;
+	int		reflected_color;
+
+	reflected_color = 0;
+	get_normal(shape, rt, dir, depth);
 	light = get_light(shape, rt, dir);
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
@@ -93,10 +110,7 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	if (shape->reflection && depth > 0)
 	{
 		reflected_color = recursion(dir, shape, rt, depth - 1);
-		rgb_ref[0] = (color >> 16 & 0xFF) * (1 - shape->reflection) + (reflected_color >> 16 & 0xFF) * shape->reflection;
-		rgb_ref[1] = (color >> 8 & 0xFF) * (1 - shape->reflection) + (reflected_color >> 8 & 0xFF) * shape->reflection;
-		rgb_ref[2] = (color & 0xFF) * (1 - shape->reflection) + (reflected_color & 0xFF) * shape->reflection;
-		color = ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
+		color = reflect_color(color, reflected_color, shape);
 	}
 	return (color);
 }

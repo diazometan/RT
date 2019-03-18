@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/13 21:10:55 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/17 19:29:25 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 					return ;
 				else if (key == SDLK_LEFT || key == SDLK_RIGHT || key == SDLK_UP || key == SDLK_DOWN)
 					camera_direction_key(key, rt);
-				else if (key == SDLK_w || key == SDLK_s || key == SDLK_d || key == SDLK_a || key == SDLK_SPACE || key == SDLK_LCTRL)
+				else if (key == SDLK_w || key == SDLK_s || key == SDLK_d ||
+							key == SDLK_a || key == SDLK_SPACE || key == SDLK_LCTRL)
 					camera_position_key(key, rt);
 				else if (key == SDLK_r)
 				{
