@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/19 17:07:06 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/19 20:33:41 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		get_normal(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 		get_normal_cone(shape, shape->angle);
 }
 
-/*void	ft_swap_new(double *a, double *b)
+void	ft_swap_new(double *a, double *b)
 {
 	double tmp;
 
@@ -102,10 +102,14 @@ void	refract_ray(t_coord *dir, t_shape *shape, t_coord *ref_r)
 	double cosi;
 	t_coord normal;
 
-	*ref_r = (t_coord) {0, 0, 0};
+	ref_r->x = 1;
+	ref_r->y = 0;
+	ref_r->z = 0;
 	etai = 1.0;
 	etat = shape->refract;
-	normal = shape->normal;
+	normal.x = shape->normal.x;
+	normal.y = shape->normal.y;
+	normal.z = shape->normal.z;
 	n_dot_d = dot_product(dir, &normal);
 	cosi = (-1.0) * ft_biggest(-1.0, ft_smallest(1.0, n_dot_d));
 	if (cosi < 0)
@@ -123,16 +127,28 @@ void	refract_ray(t_coord *dir, t_shape *shape, t_coord *ref_r)
 	ref_r->z = dir->z * eta + normal.z * (eta * cosi - sqrt(k));
 }
 
-int refract_color(t_coord *dir, t_shape *shape, t_rt *rt)
+int refraction(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	int	trans_color;
 	t_coord ref_r;
 
 	refract_ray(dir, shape, &ref_r);
 	rt->source_point = &shape->surface_point;
-	trans_color = trace_ray(&ref_r, rt, 0);
+	trans_color = trace_ray(&ref_r, rt, depth);
 	return (trans_color);
-}*/
+}
+
+int	reflact_color(int color, int refracted_color, t_shape *shape)
+{
+	int		rgb_ref[3];
+	(void)shape;
+	color = 0;
+
+	rgb_ref[0] = (refracted_color >> 16 & 0xFF);
+	rgb_ref[1] = (refracted_color >> 8 & 0xFF);
+	rgb_ref[2] = (refracted_color & 0xFF);
+	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
+}
 
 int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 {
@@ -151,14 +167,15 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
 	rgb[2] = (shape->color & 0xFF) * light;
 	color = check_color(rgb);
-	/*if (shape->refract)
+	if (shape->refract > 0)
 	{
-		refracted_color = refract_color(dir, shape, rt);
-	}*/
-	if (shape->reflection && depth > 0)
+		refracted_color = refraction(dir, shape, rt, depth - 1);
+		color = reflact_color(color, refracted_color, shape);
+	}
+	/*if (shape->reflection && depth > 0)
 	{
 		reflected_color = reflection(dir, shape, rt, depth - 1);
 		color = reflect_color(color, reflected_color, shape);
-	}
+	}*/
 	return (color);
 }

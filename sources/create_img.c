@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/19 16:34:07 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/19 20:41:29 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	trace_ray(t_coord *dir, t_rt *rt, int depth)
 	t_shape	*shape;
 
 	shape = rt->head_shapes;
-	shape->refract = 0.5;
 	closest = NULL;
 	rt->t_closest = INT_MAX;
 	while (shape != NULL)
@@ -68,7 +67,13 @@ int	trace_ray(t_coord *dir, t_rt *rt, int depth)
 		shape = shape->next;
 	}
 	if (closest != NULL)
+	{
+		if (closest->figure == SPHERE && closest->color == RED)
+			closest->refract = 1.5;
+		else
+			closest->refract = 0.0;
 		return (get_color(closest, rt, dir, depth));
+	}
 	return (0);
 }
 
