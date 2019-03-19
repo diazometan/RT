@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/18 18:02:22 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 18:47:05 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int		reflect_color(int color, int reflected_color, t_shape *shape)
 
 void		get_normal(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 {
-	//if (shape->figure != TRIANGLE && shape->figure != DISK)
-		//get_intersection_point(&rt->camera, dir, rt->t_closest, &shape->surface_point);
 	if (depth == rt->depth)
 		get_intersection_point(&rt->camera, dir, rt->t_closest, &shape->surface_point);
 	else

@@ -6,16 +6,17 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 17:47:10 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/18 18:54:33 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include "vector.h"
 # include "constants.h"
+# include "shape.h"
 # include "SDL.h"
 # include <math.h>
 # include <limits.h>
@@ -28,24 +29,6 @@ typedef struct		s_sdl
 	SDL_Surface		*surf;
 	int				*img_data;
 }					t_sdl;
-
-typedef struct		s_shape
-{
-	int				figure;
-	int				color;
-	double			angle;
-	double			radius;
-	double			specular;
-	double			reflection;
-	double			h;
-	t_coord			abc[3];
-	t_coord			triangle[3];
-	t_coord			center;
-	t_coord			surface_point;
-	t_coord			unit;
-	t_coord			normal;
-	struct s_shape	*next;
-}					t_shape;
 
 typedef struct		s_light
 {
@@ -136,16 +119,5 @@ t_matrix			matrix_multiply(t_matrix a, t_matrix b);
 t_matrix			x_rotation_matrix(double alpha);
 t_matrix			y_rotation_matrix(double beta);
 void				vector_matrix_multiply(t_matrix m, t_coord *ray);
-
-void				push_back_shape(t_shape **head, t_shape *new);
-void				init_shape_color(char *s, t_shape *new);
-void				init_spec_refl(char *s, t_shape *new);
-void				init_direction(char *s, t_shape *new);
-void				init_radius(char *s, t_shape *new);
-void				init_angle(char *s, t_shape *new);
-void				init_height(char *s, t_shape *new);
-void				init_triangle(char *s, t_shape *new);
-void				init_center(char *s, t_shape *new);
-void				create_caps(t_rt *rt);
 
 #endif
