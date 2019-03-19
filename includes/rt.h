@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 18:54:33 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/19 11:36:28 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct		s_rt
 	int				win_height;
 	int				p_division;
 	int				depth;
-	double			pixel_step;
-	double			leha_help;
+	double			sample_step;
+	double			sample_center;
 	double			t_closest;
 	t_coord			angle;
 	t_coord			camera;

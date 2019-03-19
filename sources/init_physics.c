@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_physics.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:26:15 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 17:38:10 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/19 11:36:03 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	init_physics(char *s, t_rt *rt)
 		ft_putendl(U_PDIV PFCF);
 		exit(1);
 	}
-	rt->pixel_step = 1.0 / rt->p_division;
-	rt->leha_help = rt->pixel_step / 2.0;
+	rt->sample_step = 1.0 / rt->p_division;
+	rt->sample_center = rt->sample_step / 2.0;
 }

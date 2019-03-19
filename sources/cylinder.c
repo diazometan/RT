@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:11:30 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 16:58:54 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/19 13:44:18 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,27 @@ void		ray_cylinder_intersection(t_vectors *vectors, t_shape *shape, t_coef *coef
 			pow(shape->radius, 2);
 	coef->discriminant = pow(coef->b, 2) - 4 * coef->a * coef_c;
 }
-static double check_bot(t_shape *shape, t_vectors *vectors, double t)
+static double check_bot(t_shape *shape, t_vectors *vectors, double t, t_coord *source)
 {
 	double tmp;
 
-	tmp = shape->unit.x * (vectors->orig.x + vectors->dir->x * t) +
-			shape->unit.y * (vectors->orig.y + vectors->dir->y * t) +
-			shape->unit.z * (vectors->orig.z + vectors->dir->z * t);
+	tmp = shape->unit.x * (source->x + vectors->dir->x * t - shape->center.x) +
+			shape->unit.y * (source->y + vectors->dir->y * t - shape->center.y) +
+			shape->unit.z * (source->z + vectors->dir->z * t - shape->center.z);
 	return (tmp);
 }
 
-static double check_top(t_shape *shape, t_vectors *vectors, double t, t_coord top)
+static double check_top(t_shape *shape, t_vectors *vectors, double t, t_coord *source)
 {
 	double tmp;
+	t_coord	top;
 
-	tmp = shape->unit.x * (top.x + vectors->dir->x * t) +
-			shape->unit.y * (top.y + vectors->dir->y * t) +
-			shape->unit.z * (top.z + vectors->dir->z * t);
+	top.x = shape->center.x + shape->h * shape->unit.x;
+	top.y = shape->center.y + shape->h * shape->unit.y;
+	top.z = shape->center.z + shape->h * shape->unit.z;
+	tmp = shape->unit.x * (source->x + vectors->dir->x * t - top.x) +
+			shape->unit.y * (source->y + vectors->dir->y * t - top.y) +
+			shape->unit.z * (source->z + vectors->dir->z * t - top.z);
 	return (tmp);
 }
 
@@ -77,15 +81,15 @@ double		cylinder_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 	double	t_1;
 	double	t_2;
 	double	intersection;
-	double	h = 1.0;
 	t_coef	coef;
-	t_coord	top;
+	t_coord *source;
 
+	if (vectors->min == 1.0)
+		source = &rt->camera;
+	else
+		source = rt->source_point;
 	intersection = INT_MAX;
 	normalize_vector(&shape->unit, vector_length(&shape->unit));
-	top.x = rt->camera.x - (shape->center.x + h * shape->unit.x);
-	top.y = rt->camera.y - (shape->center.y + h * shape->unit.y);
-	top.z = rt->camera.z - (shape->center.z + h * shape->unit.z);
 	ray_cylinder_intersection(vectors, shape, &coef);
 	if (coef.discriminant < 0)
 		return (INT_MAX);
@@ -95,8 +99,8 @@ double		cylinder_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 		intersection = t_1;
 	if (t_2 > vectors->min && t_2 < vectors->max && t_2 < intersection)
 		intersection = t_2;
-	if (intersection != INT_MAX && (check_bot(shape, vectors, intersection) < 0 ||
-					check_top(shape, vectors, intersection, top) > 0))
+	if (intersection != INT_MAX && (check_bot(shape, vectors, intersection,source) < 0 ||
+					check_top(shape, vectors, intersection, source) > 0))
 		return (INT_MAX);
 	return (intersection);
 }

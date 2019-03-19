@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 18:54:16 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/19 15:24:29 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_shape
 	double			specular;
 	double			reflection;
 	double			h;
+	double			refract;
 	t_coord			abc[3];
 	t_coord			triangle[3];
 	t_coord			center;

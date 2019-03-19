@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 14:08:14 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/17 17:01:30 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/19 13:41:00 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ double			plane_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 	}
 	if (t > vectors->min && t < vectors->max)
 	{
-		get_intersection_point(&rt->camera, vectors->dir, t, &p);
+		if (vectors->min == 1.0)
+			get_intersection_point(&rt->camera, vectors->dir, t, &p);
+		else
+			get_intersection_point(rt->source_point, vectors->dir, t, &p);
 		if (shape->figure == PLANE)
 			return (t);
 		else if (shape->figure == TRIANGLE && cut_triangle(&p, shape))

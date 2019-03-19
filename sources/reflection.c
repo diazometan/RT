@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reflection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:40:19 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 18:02:52 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/19 16:55:16 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int		reflection(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
 
 	reflect_ray(shape, &r_v, dir);
 	rt->source_point = &shape->surface_point;
-	reflected_color = trace_ray(&r_v, rt, depth - 1);
+	reflected_color = trace_ray(&r_v, rt, depth);
 	return (reflected_color);
 }

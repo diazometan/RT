@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 18:57:53 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/19 16:34:07 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	trace_ray(t_coord *dir, t_rt *rt, int depth)
 	t_shape	*shape;
 
 	shape = rt->head_shapes;
+	shape->refract = 0.5;
 	closest = NULL;
 	rt->t_closest = INT_MAX;
 	while (shape != NULL)
@@ -80,17 +81,17 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 	t_coord	dir;
 
 	i = -1;
-	c_y = y + rt->leha_help;
+	c_y = y + rt->sample_center;
 	while (c_y <= y + 1.0)
 	{
-		c_x = x + rt->pixel_step / 2.0;
+		c_x = x + rt->sample_center;
 		while (c_x <= x + 1.0)
 		{
 			init_camera_ray(c_x, c_y, &dir, rt);
 			pixel_color[++i] = trace_ray(&dir, rt, rt->depth);
-			c_x += rt->pixel_step;
+			c_x += rt->sample_step;
 		}
-		c_y += rt->pixel_step;
+		c_y += rt->sample_step;
 	}
 	img_data[x + y * rt->win_width] = average_color(rt->p_division, pixel_color);
 }

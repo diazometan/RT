@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:00:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/16 16:03:38 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/19 12:21:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,24 @@ static void	ray_cone_intersection(t_vectors *vectors, t_shape *shape, t_coef *co
 	coef->discriminant = pow(coef->b, 2) - 4 * coef->a * coef_c;
 }
 
-static double		check_cone(t_coord *dir, t_shape *shape, double t, t_rt *rt)
+static double		check_cone(t_coord *dir, t_shape *shape, double t, t_rt *rt, int flag)
 {
 	double tmp;
 	t_coord p;
 
-	p.x = rt->camera.x + t * dir->x - shape->center.x;
-	p.y = rt->camera.y + t * dir->y - shape->center.y;
-	p.z = rt->camera.z + t * dir->z - shape->center.z;
+	if (flag == 1)
+	{
+		p.x = rt->camera.x + t * dir->x - shape->center.x;
+		p.y = rt->camera.y + t * dir->y - shape->center.y;
+		p.z = rt->camera.z + t * dir->z - shape->center.z;
+	}
+	else
+	{
+		p.x = rt->source_point->x + t * dir->x - shape->center.x;
+		p.y = rt->source_point->y + t * dir->y - shape->center.y;
+		p.z = rt->source_point->z + t * dir->z - shape->center.z;
+	}
+
 	tmp = dot_product(&p, &shape->unit);
 	return (tmp);
 }
@@ -83,16 +93,27 @@ double		cone_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 {
 	double	t_1;
 	double	t_2;
-	double	h = 1.0;
 	double	intersection;
+	int flag;
 	t_coef	coef;
 	t_coord	top;
 
 	intersection = INT_MAX;
 	normalize_vector(&shape->unit, vector_length(&shape->unit));
-	top.x = rt->camera.x - (shape->center.x + h * shape->unit.x);
-	top.y = rt->camera.y - (shape->center.y + h * shape->unit.y);
-	top.z = rt->camera.z - (shape->center.z + h * shape->unit.z);
+	if (vectors->min == 1.0)
+	{
+		top.x = rt->camera.x - (shape->center.x + shape->h * shape->unit.x);
+		top.y = rt->camera.y - (shape->center.y + shape->h * shape->unit.y);
+		top.z = rt->camera.z - (shape->center.z + shape->h * shape->unit.z);
+		flag = 1;
+	}
+	else
+	{
+		top.x = rt->source_point->x - (shape->center.x + shape->h * shape->unit.x);
+		top.y = rt->source_point->y - (shape->center.y + shape->h * shape->unit.y);
+		top.z = rt->source_point->z - (shape->center.z + shape->h * shape->unit.z);
+		flag = 2;
+	}
 	ray_cone_intersection(vectors, shape, &coef);
 	if (coef.discriminant < 0)
 		return (INT_MAX);
@@ -103,7 +124,7 @@ double		cone_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 	if (t_2 > vectors->min && t_2 < vectors->max && t_2 < intersection)
 		intersection = t_2;
 	if (intersection != INT_MAX)
-		if (check_cone(vectors->dir, shape, intersection, rt) < 0)
+		if (check_cone(vectors->dir, shape, intersection, rt, flag) < 0)
 			intersection = INT_MAX;
 		if (check_cap(shape,vectors, intersection, top) > 0)
 			return (INT_MAX);

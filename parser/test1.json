@@ -58,8 +58,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":3,
-			"pixel division":2
+			"reflection depth":1,
+			"pixel division":1
 		}
 	}
 }
