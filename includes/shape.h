@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/19 15:24:29 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/20 10:05:57 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void				init_angle(char *s, t_shape *new);
 void				init_height(char *s, t_shape *new);
 void				init_triangle(char *s, t_shape *new);
 void				init_center(char *s, t_shape *new);
+void				init_refraction(char *s, t_shape *new);
 
 #endif

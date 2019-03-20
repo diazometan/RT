@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 11:08:06 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/20 09:57:55 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_shapes(char *s, t_shape **head)
 		init_radius(object, new);
 		init_angle(object, new);
 		init_height(object, new);
+		init_refraction(object, new);
 		s += ft_strlen(object);
 		free(object);
 		push_back_shape(head, new);

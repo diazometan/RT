@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:26:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 15:36:04 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/20 10:06:40 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,26 @@ void	init_height(char *s, t_shape *new)
 			str = ft_strextract(start, ':', '\0');
 		new->h = ft_atof(str);
 		free(str);
+	}
+}
+
+void	init_refraction(char *s, t_shape *new)
+{
+	char	*start;
+	char	*str;
+
+	if ((start = ft_strstr(s, "refraction")) == NULL)
+		new->refract = 0;
+	else
+	{
+		if ((str = ft_strextract(start, ':', ',')) == NULL)
+			str = ft_strextract(start, ':', '\0');
+		new->refract = ft_atof(str);
+		free(str);
+		if (new->refract < 1)
+		{
+			ft_putendl(U_REFRACT PFCF);
+			exit(1);
+		}
 	}
 }

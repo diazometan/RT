@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/19 11:36:28 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/20 10:25:01 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,6 @@ typedef struct		s_coef
 	double			discriminant;
 }					t_coef;
 
-typedef struct		s_matrix
-{
-	double			matrix[3][3];
-}					t_matrix;
-
 int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
 void				init_lighting(char *s, t_light **head);
@@ -107,6 +102,7 @@ double				triangle_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 int					trace_ray(t_coord *ray, t_rt *rt, int depth);
 int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
 int					reflection(t_coord *dir, t_shape *shape, t_rt *rt, int depth);
+int					refraction(t_coord *dir, t_shape *shape, t_rt *rt, int depth);
 int					check_shadow(t_shape *source_shape,
 									t_light *light, t_rt *rt);
 double				get_light(t_shape *shape, t_rt *rt, t_coord *dir);
@@ -114,10 +110,5 @@ double				get_light(t_shape *shape, t_rt *rt, t_coord *dir);
 void				get_intersection_point(t_coord *source, t_coord *ray, double t, t_coord *p);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
-
-t_matrix			matrix_multiply(t_matrix a, t_matrix b);
-t_matrix			x_rotation_matrix(double alpha);
-t_matrix			y_rotation_matrix(double beta);
-void				vector_matrix_multiply(t_matrix m, t_coord *ray);
 
 #endif

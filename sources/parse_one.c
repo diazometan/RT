@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 15:18:35 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/20 10:30:15 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,21 @@ void			init_spec_refl(char *s, t_shape *new)
 	char	*str;
 
 	if ((start = ft_strstr(s, "specular")) == NULL)
+		new->specular = 0.0;
+	else
 	{
-		ft_putendl(M_SPEC PFCF);
-		exit(1);
+		if ((str = ft_strextract(start, ':', ',')) == NULL)
+			str = ft_strextract(start, ':', '\0');
+		new->specular = ft_atof(str);
+		free(str);
 	}
-	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '\0');
-	new->specular = ft_atof(str);
-	free(str);
 	if ((start = ft_strstr(s, "reflection")) == NULL)
+		new->reflection = 0.0;
+	else
 	{
-		ft_putendl(M_REFL PFCF);
-		exit(1);
+		if ((str = ft_strextract(start, ':', ',')) == NULL)
+			str = ft_strextract(start, ':', '\0');
+		new->reflection = ft_atof(str);
+		free(str);
 	}
-	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '\0');
-	new->reflection = ft_atof(str);
-	free(str);
 }

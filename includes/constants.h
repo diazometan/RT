@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 17:20:21 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/20 10:02:20 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@
 # define M_HEIGHT O_RED "Height is missing!"
 # define M_CENTER O_RED "Center coordinates are missing!"
 # define M_DIR O_RED "Direction coordinates are missing!"
-# define M_DEPTH O_RED "Refclection depth is missing!"
+# define M_DEPTH O_RED "Reflection depth is missing!"
 # define M_PDIV O_RED "Pixel division is missing!"
 # define M_VERTEX O_RED "Triangle vertex is missing!"
+# define M_REFRACT O_RED "Refraction coefficient is missing!"
 
 # define U_SHAPE O_RED "Undefined shape detected!"
 # define U_COLOR O_RED "Undefined color detected!"
@@ -53,6 +54,7 @@
 # define U_DEPTH O_RED "Reflection depth is too big!"
 # define U_PDIV O_RED "Pixel divison is too big!"
 # define U_COORD O_RED "Need just 3 coordinates!"
+# define U_REFRACT O_RED "Refraction coefficient cant be less than 1!"
 
 # define PFCF  O_NC "\nPlease fix config file"
 
