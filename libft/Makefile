@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 16:13:15 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/19 17:44:59 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/03/20 10:49:54 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ SRC = ft_strlen.c\
 	  ft_lstcount.c\
 	  ft_lstiter.c\
 	  ft_lstmap.c\
-	  ft_swapuni.c\
+	  ft_swap.c\
 	  ft_qsort.c\
 	  ft_realloc.c\
 	  get_next_line.c

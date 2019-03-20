@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:12:06 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/20 10:25:00 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/20 12:40:31 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ typedef struct		s_coord
 typedef struct		s_matrix
 {
 	double			matrix[3][3];
+	//double	xx;
+	//double	xy;
+	//double	xz;
+	//double	yx;
+	//double	yy;
+	//double	yz;
+	//double	zx;
+	//double	zy;
+	//double	zz;
 }					t_matrix;
 
 void	scalar_product(t_coord *a, double number);
