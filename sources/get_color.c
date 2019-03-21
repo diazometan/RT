@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/20 10:26:34 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/21 20:00:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,43 @@ void		get_normal(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 		get_normal_cone(shape, shape->angle);
 }
 
+int			ft_bmp(t_rt *rt, t_shape *shape)
+{
+	t_coord normal;
+	double	u;
+	double	v;
+	int x_data;
+	int y_data;
+	int color;
+	int *data;
+
+	int bpp = rt->surf_bmp->format->BytesPerPixel;
+	data = (int*)rt->surf_bmp->pixels;
+	coord_add_subtract(&shape->surface_point, &shape->center, &normal, 1);
+	normalize_vector(&normal, vector_length(&normal));
+	u = 0.5 + atan2(normal.z, normal.x) / (2 * M_PI);
+	v = 0.5 - asin(normal.y) / M_PI;
+	x_data = u * rt->surf_bmp->w;
+	y_data = v * rt->surf_bmp->h;
+	Uint8 *p = (Uint8 *)rt->surf_bmp->pixels + y_data * rt->surf_bmp->pitch + x_data * bpp;
+	//printf("%d\n", rt->surf_bmp->format->BytesPerPixel);
+	//color = data[x_data * rt->surf_bmp->format->BytesPerPixel + y_data * rt->surf_bmp->pitch];
+	color = (p[0] | p[1] << 8 | p[2] << 16);
+	return (color);
+}
+
 int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 {
 	int		rgb[3];
 	double	light;
-	int		color;
+	int		color = 0;
 	int		new_color;
 
 	get_normal(shape, rt, dir, depth);
 	rt->source_point = &shape->surface_point;
 	light = get_light(shape, rt, dir);
+	if (shape->figure == SPHERE)
+		shape->color = ft_bmp(rt, shape);
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
 	rgb[2] = (shape->color & 0xFF) * light;

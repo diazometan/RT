@@ -6,17 +6,20 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 19:30:54 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/10 21:23:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/20 19:59:36 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "SDL.h"
+
+#define WIN_WIDTH 600
+#define WIN_HEIGHT 600
 
 int main()
 {
 	SDL_Window *win;
-	SDL_Renderer *ren;
 	SDL_Surface *surf;
+	SDL_Surface *surf_bmp;
 	SDL_Event event;
 	int flag = 0;
 	int width;
@@ -34,26 +37,24 @@ int main()
 		printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	/*ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (ren == NULL)
-	{
-		printf("SDL_CreateRenderer Error: %s\n", SDL_GetError());
-		return (1);
-	}*/
 	surf = SDL_GetWindowSurface(win);
 	if (surf == NULL)
 	{
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	//SDL_RenderClear(ren);
-	//SDL_SetRenderDrawColor(ren, 255, 0, 0, 255);
-	//SDL_RenderDrawPoint(ren, 300, 300);
 	SDL_memset(surf->pixels, 0, surf->h * surf->pitch);
-	data = (int *)surf->pixels;
-	data[300 + WIN_WIDTH * 300] = 0xFF0000;
+	/*data = (int *)surf->pixels;
+	data[300 + WIN_WIDTH * 300] = 0xFF0000;*/
+	//kosmos_otkrytyj_kosmos_planety_135213_3840x2160
+	surf_bmp = SDL_LoadBMP("/Users/lwyl-the/Downloads/383.bmp");
+	if (surf_bmp == NULL)
+	{
+		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
+		return (1);
+	}
+	SDL_BlitSurface(surf_bmp, NULL, surf, NULL);
 	SDL_UpdateWindowSurface(win);
-	//SDL_RenderPresent(ren);
 	while (!flag)
 	{
 		while (SDL_PollEvent(&event))
@@ -76,7 +77,6 @@ int main()
 			}
 		}
 	}
-	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(win);
 	SDL_Quit();
 	return (0);

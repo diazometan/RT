@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/20 10:25:01 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/21 17:44:49 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_rt
 	t_coord			*source_point;
 	t_shape			*head_shapes;
 	t_light			*head_light;
+	SDL_Surface		*surf_bmp;
 }					t_rt;
 
 typedef struct		s_vectors

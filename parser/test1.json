@@ -4,24 +4,16 @@
 			{
 				"shape":"sphere",
 				"color":"red",
-				"specular":500,
+				"specular":10,
 				"radius": 1,
-				"refraction":1.7,
-				"center":[0,0.7,3],
-				"direction":[0,0,-4]
-			},
-			{
-				"shape":"sphere",
-				"color":"green",
-				"specular":500,
-				"radius": 1,
-				"center":[-1,0,7],
+				"center":[0,0,5],
 				"direction":[0,0,-4]
 			},
 			{
 				"shape":"plane",
 				"color":"yellow",
 				"specular":1000,
+				"reflection":0.5,
 				"center":[0,-1,0],
 				"direction":[0,-1,0]
 			},
@@ -54,7 +46,7 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":1,
+			"reflection depth":2,
 			"pixel division":1
 		}
 	}
