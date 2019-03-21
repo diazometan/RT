@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/21 20:12:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/21 20:19:36 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int		main(int args, char **argv)
 	//END
 	if (init_sdl(&sdl))
 		return (1);
-	rt.surf_bmp = SDL_LoadBMP("/Users/lwyl-the/Downloads/kosmos_otkrytyj_kosmos_planety_135213_3840x2160.bmp");
+	rt.surf_bmp = SDL_LoadBMP("texture/383.bmp");
 	if (rt.surf_bmp == NULL)
 	{
 		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
@@ -173,6 +173,7 @@ int		main(int args, char **argv)
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light);
 	SDL_FreeSurface(sdl.surf);
+	SDL_FreeSurface(rt.surf_bmp);
 	SDL_DestroyWindow(sdl.win);
 	SDL_Quit();
 	return (0);
