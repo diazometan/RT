@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/21 20:19:36 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/22 17:35:47 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,8 +162,14 @@ int		main(int args, char **argv)
 	//END
 	if (init_sdl(&sdl))
 		return (1);
-	rt.surf_bmp = SDL_LoadBMP("texture/383.bmp");
+	rt.surf_bmp = SDL_LoadBMP("texture/brick.bmp");
 	if (rt.surf_bmp == NULL)
+	{
+		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
+		return (1);
+	}
+	rt.surf_norm = SDL_LoadBMP("texture/nm_brick.bmp");
+	if (rt.surf_norm == NULL)
 	{
 		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
 		return (1);

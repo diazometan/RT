@@ -2,12 +2,13 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"sphere",
+				"shape":"cylinder",
 				"color":"red",
 				"specular":10,
-				"radius": 1,
-				"center":[0,0,5],
-				"direction":[0,0,-4]
+				"radius":1,
+				"height":3,
+				"center":[0,0,8],
+				"direction":[0,1,0]
 			},
 			{
 				"shape":"plane",
