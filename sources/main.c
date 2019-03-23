@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/22 17:35:47 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/23 16:49:51 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int		main(int args, char **argv)
 			printf("\n\tA: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[0].x, h_s->triangle[0].y, h_s->triangle[0].z);
 			printf("\tB: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[1].x, h_s->triangle[1].y, h_s->triangle[1].z);
 			printf("\tC: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[2].x, h_s->triangle[2].y, h_s->triangle[2].z);
+			printf("\tx_u - %.2f, y_u - %.2f, z_u - %.2f\n", h_s->unit.x, h_s->unit.y, h_s->unit.z);
 		}
 		printf("\n");
 		h_s = h_s->next;

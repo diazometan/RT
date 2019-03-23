@@ -2,12 +2,21 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cylinder",
+				"shape":"triangle",
 				"color":"red",
 				"specular":10,
+				"A":[-1,2,5],
+				"B":[-1,0,5],
+				"C":[1,0,5]
+			},
+			{
+				"shape":"cylinder",
+				"color":"yellow",
+				"specular":1000,
+				"reflection":0.5,
 				"radius":1,
-				"height":3,
-				"center":[0,0,8],
+				"height":1,
+				"center":[0,0,5],
 				"direction":[0,1,0]
 			},
 			{
