@@ -2,37 +2,15 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"triangle",
-				"color":"red",
-				"specular":10,
-				"A":[-1,2,5],
-				"B":[-1,0,5],
-				"C":[1,0,5]
-			},
-			{
 				"shape":"cylinder",
-				"color":"yellow",
-				"specular":1000,
-				"reflection":0.0,
+				"color":"red",
+				"specular":500,
 				"radius":1,
 				"height":1,
-				"center":[0,0,5],
-				"direction":[0,1,0]
-			},
-			{
-				"shape":"plane",
-				"color":"yellow",
-				"specular":1000,
+				"angle":30,
 				"reflection":0.0,
-				"center":[0,-1,0],
-				"direction":[0,-1,0]
-			},
-			{
-				"shape":"plane",
-				"color":"blue",
-				"specular":1000,
-				"center":[0,0,15],
-				"direction":[0,0,1]
+				"center":[0,0,4],
+				"direction":[0,1,0]
 			}
 		],
 		"lighting":[

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/23 19:15:28 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/24 18:40:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ int			ft_bmp_sphere(t_rt *rt, t_shape *shape)
 	x_data = u * rt->surf_bmp->w;
 	y_data = v * rt->surf_bmp->h;
 	Uint8 *p = (Uint8 *)rt->surf_bmp->pixels + y_data * rt->surf_bmp->pitch + x_data * bpp;
-	//printf("%d\n", rt->surf_bmp->format->BytesPerPixel);
-	//color = data[x_data * rt->surf_bmp->format->BytesPerPixel + y_data * rt->surf_bmp->pitch];
 	color = (p[0] | p[1] << 8 | p[2] << 16);
 	return (color);
 }
@@ -125,18 +123,16 @@ int			ft_bmp_cylinder(t_rt *rt, t_shape *shape)
 	om_l = dot_product(&op, &shape->unit) * op_l;
 	int bpp = rt->surf_bmp->format->BytesPerPixel;
 	//normalize_vector(&normal, vector_length(&normal));
-	u = dot_product(&shape->normal, &r) / 2;
-	v = om_l / shape->h;
+	u = (dot_product(&shape->normal, &r) + 1);
+	v = 1 - om_l / shape->h;
 	x_data = u * rt->surf_bmp->w;
 	y_data = v * rt->surf_bmp->h;
 	Uint8 *p = (Uint8 *)rt->surf_bmp->pixels + y_data * rt->surf_bmp->pitch + x_data * bpp;
-	//printf("%d\n", rt->surf_bmp->format->BytesPerPixel);
-	//color = data[x_data * rt->surf_bmp->format->BytesPerPixel + y_data * rt->surf_bmp->pitch];
 	color = (p[0] | p[1] << 8 | p[2] << 16);
 	return (color);
 }
 
-int			ft_bmp_triangle(t_rt *rt, t_shape *shape)
+/*int			ft_bmp_triangle(t_rt *rt, t_shape *shape)
 {
 	int x_data;
 	int y_data;
@@ -144,24 +140,82 @@ int			ft_bmp_triangle(t_rt *rt, t_shape *shape)
 	double bary_a;
 	double bary_b;
 	double bary_c;
-	double len;
-	//t_coord uv_triangle[3];
+	t_coord tri[3];
 
-	len = 1.0 / vector_length(&shape->abc[1]);
+	tri[0].x = 1;
+	tri[0].y = 2;
+
+	tri[1].x = 1;
+	tri[1].y = 0;
+
+	tri[2].x = 3;
+	tri[2].y = 0;
+
 	int bpp = rt->surf_bmp->format->BytesPerPixel;
 
-	bary_a = ((shape->triangle[1].y - shape->triangle[2].y) * (shape->surface_point.x - shape->triangle[2].x) +
-				(shape->triangle[2].x - shape->triangle[1].x) * (shape->surface_point.y - shape->triangle[2].y))/
-				((shape->triangle[1].y - shape->triangle[2].y) * (shape->triangle[0].x - shape->triangle[2].x) +
-				(shape->triangle[2].x - shape->triangle[1].x) * (shape->triangle[0].y - shape->triangle[2].y));
-	bary_b = ((shape->triangle[2].y - shape->triangle[0].y) * (shape->surface_point.x - shape->triangle[2].x) +
-				(shape->triangle[0].x - shape->triangle[2].x) * (shape->surface_point.y - shape->triangle[2].y))/
-				((shape->triangle[1].y - shape->triangle[2].y) * (shape->triangle[0].x - shape->triangle[2].x) +
-				(shape->triangle[2].x - shape->triangle[1].x) * (shape->triangle[0].y - shape->triangle[2].y));
+	bary_a = ((tri[1].y - tri[2].y) * (shape->surface_point.x - tri[2].x) +
+				(tri[2].x - tri[1].x) * (shape->surface_point.y - tri[2].y))/
+				((tri[1].y - tri[2].y) * (tri[0].x - tri[2].x) +
+				(tri[2].x - tri[1].x) * (tri[0].y - tri[2].y));
+	bary_b = ((tri[2].y - tri[0].y) * (shape->surface_point.x - tri[2].x) +
+				(tri[0].x - tri[2].x) * (shape->surface_point.y - tri[2].y))/
+				((tri[1].y - tri[2].y) * (tri[0].x - tri[2].x) +
+				(tri[2].x - tri[1].x) * (tri[0].y - tri[2].y));
 	bary_c = 1 - bary_a - bary_b;
 
-	x_data = (bary_c) * rt->surf_bmp->w;
-	y_data = (bary_a) * rt->surf_bmp->h;
+	x_data = bary_c * rt->surf_bmp->w;
+	y_data = bary_a * rt->surf_bmp->h;
+
+	Uint8 *p = (Uint8 *)rt->surf_bmp->pixels + y_data * rt->surf_bmp->pitch + x_data * bpp;
+
+	color = (p[0] | p[1] << 8 | p[2] << 16);
+	return (color);
+}*/
+
+int			ft_bmp_plane(t_rt *rt, t_shape *shape)
+{
+	int x_data;
+	int y_data;
+	double u = 0;
+	double v = 0;
+	int color;
+
+	int bpp = rt->surf_bmp->format->BytesPerPixel;
+
+	if (fabs(shape->unit.z) >= fabs(shape->unit.y) && fabs(shape->unit.z) >= fabs(shape->unit.x))
+	{
+		u = shape->surface_point.x;
+		v = shape->surface_point.y;
+	}
+
+	else if (fabs(shape->unit.y) >= fabs(shape->unit.x) && fabs(shape->unit.y) >= fabs(shape->unit.z))
+	{
+		u = shape->surface_point.x;
+		v = shape->surface_point.z;
+	}
+
+	else //if (fabs(shape->unit.x) >= fabs(shape->unit.y) && fabs(shape->unit.x) >= fabs(shape->unit.z))
+	{
+		u = shape->surface_point.z;
+		v = shape->surface_point.y;
+	}
+
+	while (u > 2)
+		u -= 2;
+
+	while ( u < 0)
+		u += 2;
+
+	while (v > 2)
+		v -= 2;
+
+	while ( v < 0)
+		v += 2;
+
+	x_data = u * rt->surf_bmp->w / 2;
+	y_data = (2 - v) * rt->surf_bmp->h / 2;
+
+
 	Uint8 *p = (Uint8 *)rt->surf_bmp->pixels + y_data * rt->surf_bmp->pitch + x_data * bpp;
 
 	color = (p[0] | p[1] << 8 | p[2] << 16);
@@ -182,8 +236,8 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 		shape->color = ft_bmp_sphere(rt, shape);
 	if (shape->figure == CYLINDER)
 		shape->color = ft_bmp_cylinder(rt, shape);
-	if (shape->figure == TRIANGLE)
-		shape->color = ft_bmp_triangle(rt, shape);
+	if (shape->figure == PLANE || shape->figure == TRIANGLE || shape->figure == DISK)
+		shape->color = ft_bmp_plane(rt, shape);
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
 	rgb[2] = (shape->color & 0xFF) * light;
