@@ -13,7 +13,7 @@
 				"shape":"cylinder",
 				"color":"yellow",
 				"specular":1000,
-				"reflection":0.5,
+				"reflection":0.0,
 				"radius":1,
 				"height":1,
 				"center":[0,0,5],
@@ -23,7 +23,7 @@
 				"shape":"plane",
 				"color":"yellow",
 				"specular":1000,
-				"reflection":0.5,
+				"reflection":0.0,
 				"center":[0,-1,0],
 				"direction":[0,-1,0]
 			},
