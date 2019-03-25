@@ -6,12 +6,20 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/20 10:05:57 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/25 13:30:50 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_H
 # define SHAPE_H
+
+typedef struct		s_texture
+{
+	char				*name;
+	unsigned char		*pixel;
+	SDL_Surface			*surface;
+	struct s_texture	*next;
+}					t_texture;
 
 typedef struct		s_shape
 {
@@ -23,6 +31,7 @@ typedef struct		s_shape
 	double			reflection;
 	double			h;
 	double			refract;
+	t_texture		*texture;
 	t_coord			abc[3];
 	t_coord			triangle[3];
 	t_coord			center;

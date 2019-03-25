@@ -6,6 +6,7 @@
 				"color":"red",
 				"specular":500,
 				"radius":1,
+				"texture":"brick",
 				"reflection":0.0,
 				"center":[0,0,4],
 				"direction":[0,1,0]

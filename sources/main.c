@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/24 18:00:36 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/25 13:46:21 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	init_rt(t_rt *rt, char *config_file)
 
 	rt->head_shapes = NULL;
 	rt->head_light = NULL;
+	rt->head_textures = NULL;
 	rt->p_division = 1;
 	fd = open(config_file, O_RDONLY);
 	file = get_file(fd);
@@ -118,6 +119,8 @@ int		main(int args, char **argv)
 		else if (h_s->figure == 6)
 			printf("triangle, ");
 		printf("color - %x, specular - %.2f, refraction - %.2f, ", h_s->color, h_s->specular, h_s->refract);
+		if (h_s->texture != NULL)
+			printf("texture - %s, ", h_s->texture->name);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK)
 			printf("radius - %.2f ", h_s->radius);
 		if (h_s->figure == CONE)
@@ -163,13 +166,13 @@ int		main(int args, char **argv)
 	//END
 	if (init_sdl(&sdl))
 		return (1);
-	rt.surf_bmp = SDL_LoadBMP("texture/383.bmp");
+	rt.surf_bmp = SDL_LoadBMP("textures/383.bmp");
 	if (rt.surf_bmp == NULL)
 	{
 		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	rt.surf_norm = SDL_LoadBMP("texture/nm_brick.bmp");
+	rt.surf_norm = SDL_LoadBMP("textures/nm_brick.bmp");
 	if (rt.surf_norm == NULL)
 	{
 		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());

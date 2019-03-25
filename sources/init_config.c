@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 17:27:11 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/25 12:11:04 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		init_config(char *file, t_rt *rt)
 	if ((start = ft_strstr(file, "objects")) == NULL)
 		return (1);
 	shapes = ft_strextract(start, '[', ']');
-	init_shapes(shapes, &rt->head_shapes);
+	init_shapes(shapes, &rt->head_shapes, &rt->head_textures);
 	if ((start = ft_strstr(file, "lighting")) == NULL)
 		return (1);
 	lighting = ft_strextract(start, '[', ']');

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 10:55:14 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/25 13:34:49 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "libft.h"
 # include "vector.h"
 # include "constants.h"
-# include "shape.h"
 # include "SDL.h"
+# include "shape.h"
 # include <math.h>
 # include <limits.h>
 # include <fcntl.h>
@@ -53,6 +53,7 @@ typedef struct		s_rt
 	t_coord			*source_point;
 	t_shape			*head_shapes;
 	t_light			*head_light;
+	t_texture		*head_textures;
 	SDL_Surface		*surf_bmp;
 	SDL_Surface		*surf_norm;
 }					t_rt;
@@ -77,8 +78,9 @@ typedef struct		s_coef
 int					init_config(char *file, t_rt *rt);
 void				extract_coord(char *str, t_coord *coord);
 void				init_lighting(char *s, t_light **head);
-void				init_shapes(char *s, t_shape **head);
+void				init_shapes(char *s, t_shape **head, t_texture **head_textures);
 void				init_physics(char *s, t_rt *rt);
+int					init_texture(char *object, t_shape *new, t_texture **head_textures);
 void				create_caps(t_rt *rt);
 void				free_args(t_shape *shape, t_light *light);
 

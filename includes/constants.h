@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/20 10:02:20 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/25 11:25:13 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@
 # define U_REFRACT O_RED "Refraction coefficient cant be less than 1!"
 
 # define PFCF  O_NC "\nPlease fix config file"
+
+# define TEXTURE_DIR "textures/"
 
 #endif
