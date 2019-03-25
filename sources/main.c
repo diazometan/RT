@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 13:46:21 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/25 14:46:46 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	init_rt(t_rt *rt, char *config_file)
 	{
 		printf("Error in config file...\n");
 		free(file);
-		free_args(rt->head_shapes, rt->head_light);
+		free_args(rt->head_shapes, rt->head_light, rt->head_textures);
 		exit(1);
 	}
 	free(file);
@@ -181,7 +181,7 @@ int		main(int args, char **argv)
 	create_img(&rt, &sdl);
 	SDL_UpdateWindowSurface(sdl.win);
 	event_handler(&rt, &sdl);
-	free_args(rt.head_shapes, rt.head_light);
+	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_FreeSurface(sdl.surf);
 	SDL_FreeSurface(rt.surf_bmp);
 	SDL_DestroyWindow(sdl.win);

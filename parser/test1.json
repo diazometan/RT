@@ -14,6 +14,7 @@
 			{
 				"shape":"plane",
 				"color":"blue",
+				"texture":"383",
 				"center":[0,-1,0],
 				"direction":[0,1,0]
 			}

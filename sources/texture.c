@@ -6,13 +6,13 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 10:56:03 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/25 15:10:52 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			sphere_texture(t_shape *shape, t_rt *rt)
+int			sphere_texture(t_texture *texture, t_shape *shape)
 {
 	int				x;
 	int				y;
@@ -21,13 +21,13 @@ int			sphere_texture(t_shape *shape, t_rt *rt)
 
 	coord_add_subtract(&shape->surface_point, &shape->center, &normal, 1);
 	normalize_vector(&normal, vector_length(&normal));
-	x = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI)) * rt->surf_bmp->w;
-	y = (0.5 - asin(normal.y) / M_PI) * rt->surf_bmp->h;
-	pixel = (unsigned char *)rt->surf_bmp->pixels + y * rt->surf_bmp->pitch + x * 4;
+	x = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI)) * texture->surface->w;
+	y = (0.5 - asin(normal.y) / M_PI) * texture->surface->h;
+	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
-int			plane_texture(t_shape *shape, t_rt *rt)
+int			plane_texture(t_texture *texture, t_shape *shape)
 {
 	int				x;
 	int				y;
@@ -55,9 +55,9 @@ int			plane_texture(t_shape *shape, t_rt *rt)
 		v -= 2;
 	while (v < 0)
 		v += 2;
-	x = u * rt->surf_bmp->w / 2;
-	y = (2 - v) * rt->surf_bmp->h / 2;
-	pixel = (unsigned char *)rt->surf_bmp->pixels + y * rt->surf_bmp->pitch + x * 4;
+	x = u * texture->surface->w / 2;
+	y = (2 - v) * texture->surface->h / 2;
+	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 

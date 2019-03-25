@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/25 10:54:58 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/25 15:11:46 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,15 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	get_normal(shape, rt, dir, depth);
 	rt->source_point = &shape->surface_point;
 	light = get_light(shape, rt, dir);
-	if (shape->figure == SPHERE)
-		shape->color = sphere_texture(shape, rt);
-	else if (shape->figure == CYLINDER || shape->figure == CYLINDER)
-		shape->color = cylinder_texture(shape, rt);
-	else 
-		shape->color = plane_texture(shape, rt);
+	if (shape->texture != NULL)
+	{
+		if (shape->figure == SPHERE)
+			shape->color = sphere_texture(shape->texture, shape);
+		else if (shape->figure == CYLINDER || shape->figure == CONE)
+			shape->color = cylinder_texture(shape, rt);
+		else 
+			shape->color = plane_texture(shape->texture, shape);
+	}
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
 	rgb[2] = (shape->color & 0xFF) * light;
