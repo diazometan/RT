@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/22 13:58:12 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/25 10:55:14 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,22 @@ int					check_intersection(t_coord *ray, t_shape *shape, t_rt *rt, int flag);
 
 double				sphere_intersection(t_shape *shape, t_vectors *vectors);
 void				get_normal_sphere(t_shape *shape);
+int					sphere_texture(t_shape *shape, t_rt *rt);
 
 double				cylinder_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 void				get_normal_cylinder(t_shape *shape);
+int					cylinder_texture(t_shape *shape, t_rt *rt);
 
 double				cone_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 void				get_normal_cone(t_shape *shape, double alpha);
 
 double				plane_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
-double				ray_plane_intersection(t_vectors *vectors, t_shape *shape);
+//double				ray_plane_intersection(t_vectors *vectors, t_shape *shape);
 void				get_normal_plane(t_shape *shape, t_coord *dir);
+int					plane_texture(t_shape *shape, t_rt *rt);
 
-double				disk_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
-double				triangle_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
+//double				disk_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
+//double				triangle_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 
 int					trace_ray(t_coord *ray, t_rt *rt, int depth);
 int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);

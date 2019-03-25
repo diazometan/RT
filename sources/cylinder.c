@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:11:30 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/19 13:44:18 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/25 10:39:55 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		ray_cylinder_intersection(t_vectors *vectors, t_shape *shape, t_coef *coef
 			pow(shape->radius, 2);
 	coef->discriminant = pow(coef->b, 2) - 4 * coef->a * coef_c;
 }
+
 static double check_bot(t_shape *shape, t_vectors *vectors, double t, t_coord *source)
 {
 	double tmp;
@@ -99,8 +100,8 @@ double		cylinder_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt)
 		intersection = t_1;
 	if (t_2 > vectors->min && t_2 < vectors->max && t_2 < intersection)
 		intersection = t_2;
-	if (intersection != INT_MAX && (check_bot(shape, vectors, intersection,source) < 0 ||
-					check_top(shape, vectors, intersection, source) > 0))
-		return (INT_MAX);
-	return (intersection);
+	if (intersection != INT_MAX && (check_bot(shape, vectors, intersection,source) > 0 &&
+					check_top(shape, vectors, intersection, source) < 0))
+		return (intersection);
+	return (INT_MAX);
 }

@@ -3,18 +3,25 @@
 		"objects":[
 			{
 				"shape":"sphere",
-				"color":"red",
+				"color":"green",
 				"specular":500,
-				"radius":1,
-				"reflection":0.0,
-				"center":[0,0,4],
-				"direction":[0,1,0]
+				"radius": 1,
+				"center":[0,0,5],
+				"direction":[0,0,-4]
+			},
+			{
+				"shape":"plane",
+				"color":"yellow",
+				"specular":1000,
+				"center":[0,-1,0],
+				"direction":[0,-1,0]
 			},
 			{
 				"shape":"plane",
 				"color":"blue",
-				"center":[0,-1,0],
-				"direction":[0,1,0]
+				"specular":1000,
+				"center":[0,0,15],
+				"direction":[0,0,1]
 			}
 		],
 		"lighting":[
@@ -38,7 +45,7 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":2,
+			"reflection depth":1,
 			"pixel division":1
 		}
 	}

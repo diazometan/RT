@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/20 10:27:11 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/25 10:50:00 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC = main.c\
 	  check_shadow.c\
 	  light.c\
 	  get_color.c\
+	  texture.c\
 	  reflection.c\
 	  refraction.c\
 	  vector.c\

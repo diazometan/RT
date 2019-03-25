@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 14:08:14 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/19 13:41:00 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/25 10:46:34 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ void			get_normal_plane(t_shape *shape, t_coord *dir)
 		scalar_product(&shape->normal, -1.0);
 }
 
+int			cut_disk(t_coord *p, t_shape *shape)
+{
+	t_coord	v;
+
+	coord_add_subtract(p, &shape->center, &v, 1);
+	if (vector_length(&v) <= shape->radius)
+		return (1);
+	return (0);
+}
+
 int	cut_triangle(t_coord *p, t_shape *shape)
 {
 	t_coord	v[3];
@@ -33,17 +43,9 @@ int	cut_triangle(t_coord *p, t_shape *shape)
 	cross_product(&v[0], &shape->abc[0], &cross_p[0]);
 	cross_product(&v[1], &shape->abc[1], &cross_p[1]);
 	cross_product(&v[2], &shape->abc[2], &cross_p[2]);
-	if (dot_product(&cross_p[0], &shape->unit) >= 0 && dot_product(&cross_p[1], &shape->unit) >= 0 && dot_product(&cross_p[2], &shape->unit) >= 0)
-		return (1);
-	return (0);
-}
-
-int			cut_disk(t_coord *p, t_shape *shape)
-{
-	t_coord	v;
-
-	coord_add_subtract(p, &shape->center, &v, 1);
-	if (vector_length(&v) <= shape->radius)
+	if (dot_product(&cross_p[0], &shape->unit) >= 0 &&
+		dot_product(&cross_p[1], &shape->unit) >= 0 &&
+		dot_product(&cross_p[2], &shape->unit) >= 0)
 		return (1);
 	return (0);
 }
