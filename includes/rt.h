@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 15:11:19 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/27 17:30:31 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int					plane_texture(t_texture *texture, t_shape *shape);
 
 int					trace_ray(t_coord *ray, t_rt *rt, int depth);
 int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
+double				path_tracing(t_shape *shape, t_rt *rt, int depth);
 int					reflection(t_coord *dir, t_shape *shape, t_rt *rt, int depth);
 int					refraction(t_coord *dir, t_shape *shape, t_rt *rt, int depth);
 int					check_shadow(t_shape *source_shape,

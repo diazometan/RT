@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/25 13:01:45 by rgyles           ###   ########.fr        #
+#    Updated: 2019/03/27 17:38:27 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT_DIR = libft
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-FLAGS = -Wall -Wextra -Werror -o2
+FLAGS = -o2 -g -Wall -Wextra #-Werror
 
 INCLUDES = -I SDL2.framework/Headers -I includes -I libft
 
@@ -45,6 +45,7 @@ SRC = main.c\
 	  check_shadow.c\
 	  light.c\
 	  get_color.c\
+	  path_tracing.c\
 	  texture.c\
 	  reflection.c\
 	  refraction.c\

@@ -4,9 +4,7 @@
 			{
 				"shape":"sphere",
 				"color":"red",
-				"specular":500,
 				"radius":1,
-				"texture":"brick",
 				"reflection":0.0,
 				"center":[0,0,4],
 				"direction":[0,1,0]
@@ -14,9 +12,14 @@
 			{
 				"shape":"plane",
 				"color":"blue",
-				"texture":"383",
 				"center":[0,-1,0],
 				"direction":[0,1,0]
+			},
+			{
+				"shape":"plane",
+				"color":"green",
+				"center":[-2,-1,0],
+				"direction":[1,0,0]
 			}
 		],
 		"lighting":[
@@ -24,15 +27,6 @@
 				"type":"point",
 				"intensity":0.6,
 				"center":[2,1,0]
-			},
-			{
-				"type":"directional",
-				"intensity":0.2,
-				"direction":[1,4,4]
-			},
-			{
-				"type":"ambient",
-				"intensity":0.2
 			}
 		],
 		"camera":{

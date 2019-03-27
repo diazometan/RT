@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/25 15:11:46 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/27 17:36:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,26 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	int		rgb[3];
 	double	light;
 	int		color = 0;
-	int		new_color;
+	//int		new_color;
 
 	get_normal(shape, rt, dir, depth);
 	rt->source_point = &shape->surface_point;
 	light = get_light(shape, rt, dir);
-	if (shape->texture != NULL)
+	light += path_tracing(shape, rt, depth);
+	/*if (shape->texture != NULL)
 	{
 		if (shape->figure == SPHERE)
 			shape->color = sphere_texture(shape->texture, shape);
 		else if (shape->figure == CYLINDER || shape->figure == CONE)
 			shape->color = cylinder_texture(shape, rt);
-		else 
+		else
 			shape->color = plane_texture(shape->texture, shape);
-	}
+	}*/
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
 	rgb[2] = (shape->color & 0xFF) * light;
 	color = check_color(rgb);
-	if (shape->refract > 0)
+	/*if (shape->refract > 0)
 	{
 		new_color = refraction(dir, shape, rt, depth - 1);
 		color = refract_color(color, new_color);
@@ -112,6 +113,6 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	{
 		new_color = reflection(dir, shape, rt, depth - 1);
 		color = reflect_color(color, new_color, shape);
-	}
+	}*/
 	return (color);
 }
