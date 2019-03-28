@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:48:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/27 17:36:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/28 11:25:27 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,20 @@ double path_tracing(t_shape *shape, t_rt *rt, int depth)
 		rt->t_closest = INT_MAX;
 		while (shape != NULL)
 		{
-			if (check_intersection(&sample_world, shape, rt, depth - 1))
+			if (check_intersection(&sample_world, shape, rt, depth))
 				closest = shape;
 			shape = shape->next;
 		}
 		if (closest == NULL)
-			cur_light = 0;
+			light = 0;
 		else
-			cur_light = get_light(shape, rt, &sample_world);
-		light += r1 * cur_light / pdf;
+		{
+			get_normal(closest, rt, &sample_world, depth);
+			rt->source_point = &closest->surface_point;
+			cur_light = get_light(closest, rt, &sample_world);
+			light = cur_light + r1 * path_tracing(closest, rt, depth - 1) / pdf;
+		}
+		i++;
 	}
 	light /= 16.0;
 	return (light);
