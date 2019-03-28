@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/27 17:36:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/28 19:02:35 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	int		rgb[3];
 	double	light;
 	int		color = 0;
-	//int		new_color;
+	int		new_color = 0;
 
 	get_normal(shape, rt, dir, depth);
 	rt->source_point = &shape->surface_point;
 	light = get_light(shape, rt, dir);
-	light += path_tracing(shape, rt, depth);
+	//light += path_tracing(shape, rt, depth);
 	/*if (shape->texture != NULL)
 	{
 		if (shape->figure == SPHERE)
@@ -103,6 +103,12 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
 	rgb[2] = (shape->color & 0xFF) * light;
+	color = check_color(rgb);
+	new_color = path_tracing(shape, rt, depth - 1);
+	rgb[0] = (color >> 16 & 0xFF) * 0.85 + (new_color >> 16 & 0xFF) * 0.15;
+	rgb[1] = (color >> 8 & 0xFF) * 0.85 + (new_color >> 8 & 0xFF) * 0.15;
+	rgb[2] = (color & 0xFF) * 0.85 + (new_color & 0xFF) * 0.15;
+	//color = ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 	color = check_color(rgb);
 	/*if (shape->refract > 0)
 	{

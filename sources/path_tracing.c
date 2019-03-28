@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:48:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/28 11:25:27 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/28 18:58:39 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void create_coord_system(t_shape *shape, t_coord *n_t, t_coord *n_b)
 	else
 	{
 		n_t->x = 0;
-		n_t->y = -shape->normal.z;
+		n_t->y = shape->normal.z;
 		n_t->z = shape->normal.y;
 	}
 	normalize_vector(n_t, vector_length(n_t));
@@ -56,8 +56,8 @@ void init_sample_world(t_shape *shape, t_coord n_b, t_coord n_t, t_coord sample,
 
 double path_tracing(t_shape *shape, t_rt *rt, int depth)
 {
-	double light;
-	double cur_light;
+	int rgb[3];
+	int color;
 	double r1;
 	double r2;
 	int i = 0;
@@ -66,12 +66,15 @@ double path_tracing(t_shape *shape, t_rt *rt, int depth)
 	t_coord sample;
 	t_coord sample_world;
 
-	light = 0.0;
+	color = 0;
+	rgb[0] = 0;
+	rgb[1] = 0;
+	rgb[2] = 0;
 	if (depth == 0)
 		return (0);
 	create_coord_system(shape, &n_t, &n_b);
 	double pdf = 1 / (2 * M_PI);
-	while (i < 16)
+	while (i < 32)
 	{
 		r1 = drand48();
 		r2 = drand48();
@@ -90,16 +93,21 @@ double path_tracing(t_shape *shape, t_rt *rt, int depth)
 			shape = shape->next;
 		}
 		if (closest == NULL)
-			light = 0;
+			;
 		else
 		{
-			get_normal(closest, rt, &sample_world, depth);
-			rt->source_point = &closest->surface_point;
-			cur_light = get_light(closest, rt, &sample_world);
-			light = cur_light + r1 * path_tracing(closest, rt, depth - 1) / pdf;
+			//get_normal(closest, rt, &sample_world, depth);
+			//rt->source_point = &closest->surface_point;
+			color = get_color(closest, rt, &sample_world, depth);
+			rgb[0] += (color >> 16 & 0xFF) * r1;
+			rgb[1] += (color >> 8 & 0xFF) * r1;
+			rgb[2] += (color) * r1;
 		}
 		i++;
 	}
-	light /= 16.0;
-	return (light);
+	rgb[0] /= 32;
+	rgb[1] /= 32;
+	rgb[2] /= 32;
+	color = ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
+	return (color);
 }

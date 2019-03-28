@@ -2,22 +2,14 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"sphere",
-				"color":"red",
-				"radius":1,
-				"reflection":0.0,
-				"center":[0,0,4],
-				"direction":[0,1,0]
-			},
-			{
 				"shape":"plane",
-				"color":"blue",
+				"color":"red",
 				"center":[0,-1,0],
 				"direction":[0,1,0]
 			},
 			{
 				"shape":"plane",
-				"color":"green",
+				"color":"yellow",
 				"center":[-2,-1,0],
 				"direction":[1,0,0]
 			}
