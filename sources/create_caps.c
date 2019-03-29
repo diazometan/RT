@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 11:10:19 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/23 14:14:10 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/29 12:10:33 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void		init_cone_cap(t_shape *cone, t_rt *rt)
 	cap->specular = cone->specular;
 	cap->reflection = cone->reflection;
 	cap->refract = cone->refract;
+	cap->texture = cone->texture;
 	cap->next = NULL;
 	cap->center = (t_coord) {cone->center.x + cone->h * cone->unit.x,
 							cone->center.y + cone->h * cone->unit.y,
@@ -41,6 +42,7 @@ static void		init_cylinder_caps(t_shape *cylinder, t_rt *rt, int flag)
 	cap->specular = cylinder->specular;
 	cap->reflection = cylinder->reflection;
 	cap->refract = cylinder->refract;
+	cap->texture = cylinder->texture;
 	if (flag)
 		cap->center = (t_coord) {cylinder->center.x + cylinder->h *
 				cylinder->unit.x, cylinder->center.y + cylinder->h *

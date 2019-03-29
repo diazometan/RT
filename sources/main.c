@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/28 18:52:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/29 12:10:48 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int		main(int args, char **argv)
 			printf("disk, ");
 		else if (h_s->figure == 6)
 			printf("triangle, ");
-		printf("color - %x, specular - %.2f, refraction - %.2f, ", h_s->color, h_s->specular, h_s->refract);
+		printf("color - %x, specular - %.2f, reflection = %.2f, refraction - %.2f, ", h_s->color, h_s->specular, h_s->reflection, h_s->refract);
 		if (h_s->texture != NULL)
 			printf("texture - %s, ", h_s->texture->name);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK)

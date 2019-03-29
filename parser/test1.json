@@ -2,6 +2,14 @@
 	"scene":{
 		"objects":[
 			{
+				"shape":"cylinder",
+				"color":"blue",
+				"center":[0,0,4],
+				"radius":1,
+				"height":1,
+				"direction":[0,1,0]
+			},
+			{
 				"shape":"plane",
 				"color":"red",
 				"center":[0,-1,0],
