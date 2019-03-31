@@ -1,0 +1,35 @@
+{
+	"scene":{
+		"objects":[
+			{
+				"shape":"sphere",
+				"color":"blue",
+				"center":[-1,0,6],
+				"radius":1,
+				"direction":[0,1,0]
+			},
+			{
+				"shape":"sphere",
+				"color":"red",
+				"center":[1,0,4],
+				"radius":1,
+				"direction":[0,1,0]
+			}
+		],
+		"lighting":[
+			{
+				"type":"point",
+				"intensity":0.6,
+				"center":[4,2,0]
+			}
+		],
+		"camera":{
+			"center":[0,0,0],
+			"direction":[0,0,0]
+		},
+		"physics":{
+			"reflection depth":2,
+			"pixel division":1
+		}
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/21 18:07:15 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/31 21:13:13 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	init_camera_ray(double x, double y, t_coord *dir, t_rt *rt)
 	vector_matrix_multiply(rotation, dir);
 }
 
-int	trace_ray(t_coord *dir, t_rt *rt, int depth)
+/*int	trace_ray(t_coord *dir, t_rt *rt, int depth)
 {
 	t_shape	*closest;
 	t_shape	*shape;
@@ -68,6 +68,153 @@ int	trace_ray(t_coord *dir, t_rt *rt, int depth)
 	}
 	if (closest != NULL)
 		return (get_color(closest, rt, dir, depth));
+	return (0);
+}*/
+
+double			get_distance(t_coord *from, t_shape *shape)
+{
+	double distance;
+	t_coord tmp;
+
+	coord_add_subtract(from, &shape->center, &tmp, 1);
+	distance = vector_length(&tmp) - shape->radius;
+	return (distance);
+}
+
+int				shadow_sphere(t_coord *orig, t_coord *dir, t_rt *rt, double max_distance)
+{
+	double min_distance;
+	double epsilon;
+	double t;
+	double d;
+	t_coord from;
+	t_shape *head;
+
+	t = 0.0;
+	epsilon = 10e-5;
+	while (t < max_distance)
+	{
+		head = rt->head_shapes;
+		min_distance = INT_MAX;
+		from.x = orig->x + t * dir->x;
+		from.y = orig->y + t * dir->y;
+		from.z = orig->z + t * dir->z;
+		while (head != NULL)
+		{
+			d = get_distance(&from, head);
+			if (d < min_distance)
+				min_distance = d;
+			if (min_distance <= t * epsilon)
+				return (0);
+			head = head->next;
+		}
+		t += min_distance;
+	}
+	return (1);
+}
+
+int			light_sphere(t_shape *shape, t_rt *rt, double t, t_coord *dir)
+{
+	double delta;
+	double dist2;
+	double ligth_dot_norm;
+	double intens;
+	int rgb[3];
+	t_coord light;
+	t_light *head_light;
+	t_coord tmp_up;
+	t_coord tmp_down;
+
+	intens = 0.0;
+	delta = 10e-5;
+	shape->surface_point.x = rt->camera.x + t * dir->x;
+	shape->surface_point.y = rt->camera.y + t * dir->y;
+	shape->surface_point.z = rt->camera.z + t * dir->z;
+
+	tmp_up.x = shape->surface_point.x + delta;
+	tmp_down.x = shape->surface_point.x - delta;
+	tmp_up.y = shape->surface_point.y;
+	tmp_down.y = shape->surface_point.y;
+	tmp_up.z = shape->surface_point.z;
+	tmp_down.z = shape->surface_point.z;
+	shape->normal.x = get_distance(&tmp_up, shape) - get_distance(&tmp_down, shape);
+
+	tmp_up.x = shape->surface_point.x;
+	tmp_down.x = shape->surface_point.x;
+	tmp_up.y = shape->surface_point.y + delta;
+	tmp_down.y = shape->surface_point.y - delta;
+	tmp_up.z = shape->surface_point.z;
+	tmp_down.z = shape->surface_point.z;
+	shape->normal.y = get_distance(&tmp_up, shape) - get_distance(&tmp_down, shape);
+
+	tmp_up.x = shape->surface_point.x;
+	tmp_down.x = shape->surface_point.x;
+	tmp_up.y = shape->surface_point.y;
+	tmp_down.y = shape->surface_point.y;
+	tmp_up.z = shape->surface_point.z + delta;
+	tmp_down.z = shape->surface_point.z - delta;
+	shape->normal.z = get_distance(&tmp_up, shape) - get_distance(&tmp_down, shape);
+
+	normalize_vector(&shape->normal, vector_length(&shape->normal));
+
+	head_light = rt->head_light;
+	while (head_light != NULL)
+	{
+		light.x = head_light->point.x - shape->surface_point.x;
+		light.y = head_light->point.y - shape->surface_point.y;
+		light.z = head_light->point.z - shape->surface_point.z;
+		ligth_dot_norm = dot_product(&light, &shape->normal);
+		if (ligth_dot_norm > 0)
+		{
+			dist2 = vector_length(&light);
+			normalize_vector(&light, dist2);
+			if (shadow_sphere(&shape->surface_point, &light, rt, dist2) == 1)
+				intens += ligth_dot_norm * head_light->intensity / dist2;
+		}
+		head_light = head_light->next;
+	}
+	rgb[0] = (shape->color >> 16 & 0xFF) * intens;
+	rgb[1] = (shape->color >> 8 & 0xFF) * intens;
+	rgb[2] = (shape->color & 0xFF) * intens;
+	return (((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]));
+}
+
+int				trace_ray(t_coord *dir, t_rt *rt)
+{
+	double max_distance;
+	double min_distance;
+	double epsilon;
+	double t;
+	double d;
+	t_shape *head;
+	t_shape	*closest;
+
+	max_distance = 100;
+	epsilon = 10e-6;
+	t = 0;
+	closest = NULL;
+	while (t < max_distance)
+	{
+		head = rt->head_shapes;
+		min_distance = INT_MAX;
+		t_coord from;
+		from.x = rt->camera.x + t * dir->x;
+		from.y = rt->camera.y + t * dir->y;
+		from.z = rt->camera.z + t * dir->z;
+		while (head != NULL)
+		{
+			d = get_distance(&from, head);
+			if (d < min_distance)
+			{
+				min_distance = d;
+				closest = head;
+			}
+			head = head->next;
+		}
+		if (min_distance <= epsilon * t)
+			return (light_sphere(closest, rt, t, dir));
+		t += min_distance;
+	}
 	return (0);
 }
 
@@ -87,7 +234,7 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 		while (c_x <= x + 1.0)
 		{
 			init_camera_ray(c_x, c_y, &dir, rt);
-			pixel_color[++i] = trace_ray(&dir, rt, rt->depth);
+			pixel_color[++i] = trace_ray(&dir, rt); //rt->depth);
 			c_x += rt->sample_step;
 		}
 		c_y += rt->sample_step;

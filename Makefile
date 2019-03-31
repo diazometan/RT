@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/28 17:56:52 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/03/31 16:22:30 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,22 +33,9 @@ SRC = main.c\
 	  parse_one.c\
 	  parse_two.c\
 	  parse_three.c\
-	  create_caps.c\
 	  init_lighting.c\
 	  create_img.c\
 	  matrix.c\
-	  check_intersection.c\
-	  plane.c\
-	  sphere.c\
-	  cylinder.c\
-	  cone.c\
-	  check_shadow.c\
-	  light.c\
-	  get_color.c\
-	  path_tracing.c\
-	  texture.c\
-	  reflection.c\
-	  refraction.c\
 	  vector.c\
 	  free_args.c
 

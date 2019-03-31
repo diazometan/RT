@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/29 12:10:48 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/03/31 16:22:40 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	init_rt(t_rt *rt, char *config_file)
 	}
 	free(file);
 	close(fd);
-	create_caps(rt);
+	//create_caps(rt);
 	rt->win_width = 600;
 	rt->win_height = 600;
 }

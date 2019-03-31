@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/27 17:30:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/03/31 16:21:05 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int					plane_texture(t_texture *texture, t_shape *shape);
 //double				disk_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 //double				triangle_intersection(t_shape *shape, t_vectors *vectors, t_rt *rt);
 
-int					trace_ray(t_coord *ray, t_rt *rt, int depth);
+int					trace_ray(t_coord *ray, t_rt *rt); //int depth);
 int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
 double				path_tracing(t_shape *shape, t_rt *rt, int depth);
 int					reflection(t_coord *dir, t_shape *shape, t_rt *rt, int depth);
