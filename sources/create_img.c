@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/31 21:13:13 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:11:11 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,68 @@ double			get_distance(t_coord *from, t_shape *shape)
 	return (distance);
 }
 
+double			get_distance_plane(t_coord *from, t_shape *shape)
+{
+	double distance;
+	t_coord tmp;
+
+	coord_add_subtract(from, &shape->center, &tmp, 1);
+	distance = dot_product(&shape->unit, &tmp);
+	return (distance);
+}
+
+double			get_distance_torus(t_coord *from, t_shape *shape, double r1, double r2)
+{
+	double tmp_x;
+	double tmp_y;
+	double distance;
+	t_coord tmp;
+
+	coord_add_subtract(from, &shape->center, &tmp, 1);
+	tmp_x = sqrt(tmp.x * tmp.x + tmp.y * tmp.y) - r1;
+	tmp_y = tmp.z;
+
+	distance = sqrt(tmp_x * tmp_x + tmp_y * tmp_y) - r2;
+	return (distance);
+}
+
+double			get_distance_cylinder(t_coord *from, t_shape *shape)
+{
+	t_coord tmp;
+	double distance;
+
+	coord_add_subtract(from, &shape->center, &tmp, 1);
+
+	distance = sqrt(tmp.x * tmp.x + tmp.z * tmp.z) - shape->radius;
+	return (distance);
+}
+
+double			get_distance_cone(t_coord *from, t_shape *shape)
+{
+	t_coord d;
+	t_coord dimension;
+	t_coord tmp;
+	double len;
+	double distance;
+
+	coord_add_subtract(from, &shape->center, &d, 1);
+	len = sqrt(d.x * d.x + d.z * d.z);
+	dimension.x = 1.0;//shape->radius;
+	dimension.y = shape->h;
+	//printf("h - %f\n", shape->radius);
+	dimension.z = 0;
+
+	tmp.x = len;
+	tmp.y = d.y;
+	tmp.z = 0;
+	normalize_vector(&dimension, vector_length(&dimension));
+	//printf("x1 - %f y1 - %f\n", dimension.x, dimension.y);
+	distance = dot_product(&dimension, &tmp);
+
+	//printf("dist - %f\n", distance);
+	return (distance);
+}
+
 int				shadow_sphere(t_coord *orig, t_coord *dir, t_rt *rt, double max_distance)
 {
 	double min_distance;
@@ -101,7 +163,7 @@ int				shadow_sphere(t_coord *orig, t_coord *dir, t_rt *rt, double max_distance)
 		from.z = orig->z + t * dir->z;
 		while (head != NULL)
 		{
-			d = get_distance(&from, head);
+			d = get_distance_cone(&from, head);
 			if (d < min_distance)
 				min_distance = d;
 			if (min_distance <= t * epsilon)
@@ -113,31 +175,20 @@ int				shadow_sphere(t_coord *orig, t_coord *dir, t_rt *rt, double max_distance)
 	return (1);
 }
 
-int			light_sphere(t_shape *shape, t_rt *rt, double t, t_coord *dir)
+void		normal_for_object(t_shape *shape)
 {
-	double delta;
-	double dist2;
-	double ligth_dot_norm;
-	double intens;
-	int rgb[3];
-	t_coord light;
-	t_light *head_light;
 	t_coord tmp_up;
 	t_coord tmp_down;
+	double delta;
 
-	intens = 0.0;
 	delta = 10e-5;
-	shape->surface_point.x = rt->camera.x + t * dir->x;
-	shape->surface_point.y = rt->camera.y + t * dir->y;
-	shape->surface_point.z = rt->camera.z + t * dir->z;
-
 	tmp_up.x = shape->surface_point.x + delta;
 	tmp_down.x = shape->surface_point.x - delta;
 	tmp_up.y = shape->surface_point.y;
 	tmp_down.y = shape->surface_point.y;
 	tmp_up.z = shape->surface_point.z;
 	tmp_down.z = shape->surface_point.z;
-	shape->normal.x = get_distance(&tmp_up, shape) - get_distance(&tmp_down, shape);
+	shape->normal.x = get_distance_cone(&tmp_up, shape) - get_distance_cone(&tmp_down, shape);
 
 	tmp_up.x = shape->surface_point.x;
 	tmp_down.x = shape->surface_point.x;
@@ -145,7 +196,7 @@ int			light_sphere(t_shape *shape, t_rt *rt, double t, t_coord *dir)
 	tmp_down.y = shape->surface_point.y - delta;
 	tmp_up.z = shape->surface_point.z;
 	tmp_down.z = shape->surface_point.z;
-	shape->normal.y = get_distance(&tmp_up, shape) - get_distance(&tmp_down, shape);
+	shape->normal.y = get_distance_cone(&tmp_up, shape) - get_distance_cone(&tmp_down, shape);
 
 	tmp_up.x = shape->surface_point.x;
 	tmp_down.x = shape->surface_point.x;
@@ -153,9 +204,27 @@ int			light_sphere(t_shape *shape, t_rt *rt, double t, t_coord *dir)
 	tmp_down.y = shape->surface_point.y;
 	tmp_up.z = shape->surface_point.z + delta;
 	tmp_down.z = shape->surface_point.z - delta;
-	shape->normal.z = get_distance(&tmp_up, shape) - get_distance(&tmp_down, shape);
+	shape->normal.z = get_distance_cone(&tmp_up, shape) - get_distance_cone(&tmp_down, shape);
 
 	normalize_vector(&shape->normal, vector_length(&shape->normal));
+}
+
+int			light_sphere(t_shape *shape, t_rt *rt, double t, t_coord *dir)
+{
+
+	double dist2;
+	double ligth_dot_norm;
+	double intens;
+	int rgb[3];
+	t_coord light;
+	t_light *head_light;
+
+	intens = 0.0;
+	shape->surface_point.x = rt->camera.x + t * dir->x;
+	shape->surface_point.y = rt->camera.y + t * dir->y;
+	shape->surface_point.z = rt->camera.z + t * dir->z;
+
+	normal_for_object(shape);
 
 	head_light = rt->head_light;
 	while (head_light != NULL)
@@ -203,7 +272,7 @@ int				trace_ray(t_coord *dir, t_rt *rt)
 		from.z = rt->camera.z + t * dir->z;
 		while (head != NULL)
 		{
-			d = get_distance(&from, head);
+			d = get_distance_cone(&from, head);
 			if (d < min_distance)
 			{
 				min_distance = d;

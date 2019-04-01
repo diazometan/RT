@@ -2,17 +2,12 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"sphere",
+				"shape":"cone",
 				"color":"blue",
-				"center":[-1,0,6],
+				"center":[0,1,10],
 				"radius":1,
-				"direction":[0,1,0]
-			},
-			{
-				"shape":"sphere",
-				"color":"red",
-				"center":[1,0,4],
-				"radius":1,
+				"angle":45,
+				"height":1,
 				"direction":[0,1,0]
 			}
 		],
@@ -20,7 +15,7 @@
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[4,2,0]
+				"center":[1,1,0]
 			}
 		],
 		"camera":{
