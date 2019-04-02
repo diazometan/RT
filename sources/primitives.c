@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   primitives.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 18:03:28 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 18:39:06 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,36 @@ double			gd_cone(t_vec3 *p, t_shape *shape)
 	if (k2.x < 0.0 && dim.y < 0.0)
 		return ((-1) * sqrt(ft_dmin((dim.x * dim.x + dim.y * dim.y), (k2.x * k2.x + k2.y * k2.y))));
 	return (sqrt(ft_dmin((dim.x * dim.x + dim.y * dim.y), (k2.x * k2.x + k2.y * k2.y))));
+}
+
+double			get_capsule(t_vec3 *from, t_shape *shape)
+{
+	t_vec3 tmp;
+
+	coord_add_subtract(from, &shape->center, &tmp, 1);
+
+	tmp.y -= ft_dclamp(tmp.y, shape->h, 0.0);
+	return (vector_length(&tmp) - shape->radius);
+}
+
+double			get_distance_box(t_vec3 *from, t_shape *shape)
+{
+	t_vec3 d;
+	t_vec3 b;
+	t_vec3 tmp;
+	t_vec3 len;
+
+	coord_add_subtract(from, &shape->center, &tmp, 1);
+	b.x = 1.2;
+	b.y = 1.2;
+	b.z = 1.2;
+
+	d.x = fabs(tmp.x) - b.x;
+	d.y = fabs(tmp.y) - b.y;
+	d.z = fabs(tmp.z) - b.z;
+
+	len.x = ft_dmax(d.x, 0.0);
+	len.y = ft_dmax(d.y, 0.0);
+	len.z = ft_dmax(d.z, 0.0);
+	return (vector_length(&len) - shape->radius + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
 }

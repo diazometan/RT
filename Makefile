@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/02 17:39:27 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/02 18:37:39 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC = main.c\
 	  matrix_euler.c\
 	  vec3.c\
 	  vec2.c\
+	  constructive_geometry.c\
 	  free_args.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
