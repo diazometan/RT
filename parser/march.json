@@ -2,10 +2,19 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cylinder",
-				"color":"blue",
-				"center":[0,0,10],
-				"radius":1,
+				"shape":"sphere",
+				"color":"red",
+				"center":[0,0,0],
+				"radius":0.5,
+				"angle":45,
+				"height":1,
+				"direction":[0,1,0]
+			},
+			{
+				"shape":"sphere",
+				"color":"green",
+				"center":[-1,0,5],
+				"radius":0.5,
 				"angle":45,
 				"height":1,
 				"direction":[0,1,0]
@@ -15,11 +24,15 @@
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[1,1,0]
+				"center":[1,1,-5]
+			},
+			{
+				"type":"ambient",
+				"intensity":0.2
 			}
 		],
 		"camera":{
-			"center":[0,0,0],
+			"center":[0,0,-10],
 			"direction":[0,0,0]
 		},
 		"physics":{
