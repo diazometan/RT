@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:35:15 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 15:52:52 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 20:16:27 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 static void	init_vertex(char *s, t_shape *new, int i, char *vertex)
-{	
+{
 	char	*start;
 	char	*str;
 

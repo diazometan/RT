@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 18:00:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 20:51:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ double				gd_sphere(t_vec3 *p, t_shape *shape);
 double				gd_plane(t_vec3 *p, t_shape *shape);
 double				gd_cylinder(t_vec3 *p, t_shape *shape);
 double				gd_cone(t_vec3 *p, t_shape *shape);
+double				gd_capsule(t_vec3 *p, t_shape *shape);
+double				gd_box(t_vec3 *p, t_shape *shape);
+
+double				intersect(double dist_a, double dist_b);
+double				unite(double dist_a, double dist_b);
+double				difference(double dist_a, double dist_b);
 
 int					get_color(double t, t_vec3 *dir, t_shape *shape, t_rt *rt);
 double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);

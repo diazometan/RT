@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 11:25:13 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 20:20:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define CONE 4
 # define DISK 5
 # define TRIANGLE 6
+# define TORUS 7
+# define BOX 8
+# define CAPSULE 9
 
 # define POINT 1
 # define DIRECTIONAL 2

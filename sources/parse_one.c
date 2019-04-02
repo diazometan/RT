@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 19:02:07 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 21:30:36 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static int		identify_shape(char *start, char *end)
 		return (DISK);
 	else if (ft_strnstr(start, "triangle", len))
 		return (TRIANGLE);
+	else if (ft_strnstr(start, "torus", len))
+		return (TORUS);
+	else if (ft_strnstr(start, "capsule", len))
+		return (CAPSULE);
+	else if (ft_strnstr(start, "box", len))
+		return (BOX);
 	else
 	{
 		ft_putendl(U_SHAPE PFCF);
@@ -68,6 +74,12 @@ void			init_shape_function(t_shape *new)
 		new->gd_fun = &gd_cylinder;
 	else if (new->figure == CONE)
 		new->gd_fun = &gd_cone;
+	//else if (new->figure == TORUS)
+	//	new->gd_fun = &gd_torus;
+	else if (new->figure == BOX)
+		new->gd_fun = &gd_box;
+	else if (new->figure == CAPSULE)
+		new->gd_fun = &gd_capsule;
 }
 
 void			init_shape_color(char *s, t_shape *new)

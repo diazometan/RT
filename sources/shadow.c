@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:10:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 17:50:47 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 21:02:39 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				shadow(t_vec3 *orig, t_vec3 *dir, t_shape *head_shape, double max_distanc
 		from.z = orig->z + t * dir->z;
 		while (head != NULL)
 		{
-			d = gd_cone(&from, head);
+			d = head->gd_fun(&from, head);
 			if (d < min_distance)
 				min_distance = d;
 			if (min_distance <= t * epsilon)

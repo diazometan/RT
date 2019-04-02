@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 19:05:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 21:05:01 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,6 @@ static void	init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 	vector_matrix_multiply(rotation, dir);
 }
 
-/*int	trace_ray(t_coord *dir, t_rt *rt, int depth)
-{
-	t_shape	*closest;
-	t_shape	*shape;
-
-	shape = rt->head_shapes;
-	closest = NULL;
-	rt->t_closest = INT_MAX;
-	while (shape != NULL)
-	{
-		if (check_intersection(dir, shape, rt, depth))
-			closest = shape;
-		shape = shape->next;
-	}
-	if (closest != NULL)
-		return (get_color(closest, rt, dir, depth));
-	return (0);
-}*/
-
 /*double			get_distance_torus(t_coord *from, t_shape *shape, double r1, double r2)
 {
 	double tmp_x;
@@ -101,30 +82,6 @@ double			get_distance_cylinder(t_coord *from, t_shape *shape)
 	return (distance);
 }
 
-double			get_distance_capped_cylinder(t_coord *from, t_shape *shape)
-{
-	t_coord tmp;
-	double tmp_x;
-	double tmp_y;
-	double distance;
-	t_coord a;
-	t_matrix	rotation;
-
-	rotation = matrix_multiply(inverse_x_rotate(-0.5), matrix_multiply(inverse_y_rotate(0.5), inverse_z_rotate(0.5)));
-
-	coord_add_subtract(from, &shape->center, &tmp, 1);
-	vector_matrix_multiply(rotation, &tmp);
-	tmp_x = sqrt(tmp.x * tmp.x + tmp.z * tmp.z) - shape->radius;
-	tmp_y = fabs(tmp.y) - shape->h;
-
-	a.x = max(tmp_x, 0.0);
-	a.y = max(tmp_y, 0.0);
-	a.z = 0.0;
-	distance = min(max(tmp_x, tmp_y), 0.0) + sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
-
-	return (distance);
-}
-
 double			get_distance_cone(t_coord *from, t_shape *shape)
 {
 	t_coord d;
@@ -146,133 +103,6 @@ double			get_distance_cone(t_coord *from, t_shape *shape)
 	distance = dot_product(&dimension, &tmp);
 
 	return (distance);
-}
-
-double			get_distance_capped_cone(t_coord *from, t_shape *shape)
-{
-	double r1 = 1.0;
-	double r2 = 2.0;
-
-	double tmp_x;
-	double tmp_y;
-	double k_1_x;
-	double k_1_y;
-	double k_2_x;
-	double k_2_y;
-	double ca_x;
-	double ca_y;
-	double cb_x;
-	double cb_y;
-
-	double distance;
-	double s;
-
-	t_coord d;
-
-	coord_add_subtract(from, &shape->center, &d, 1);
-
-	tmp_x = sqrt(d.x * d.x + d.z * d.z);
-	tmp_y = -d.y;
-
-	k_1_x = r2;
-	k_1_y = shape->h;
-
-	k_2_x = r2 - r1;
-	k_2_y = 2.0 * shape->h;
-
-	ca_x = tmp_x - min(tmp_x, (tmp_y < 0.0) ? r1 : r2);
-	ca_y = fabs(tmp_y) - shape->h;
-
-	double kek;
-	double lol;
-	kek = (k_1_x - tmp_x) * k_2_x + (k_1_y - tmp_y) * k_2_y;
-	lol = k_2_x * k_2_x + k_2_y * k_2_y;
-	cb_x = tmp_x - k_1_x + k_2_x * clamp((kek / lol), 1.0, 0.0);
-	cb_y = tmp_y - k_1_y + k_2_y * clamp((kek / lol), 1.0, 0.0);
-
-	s = (cb_x < 0.0 && ca_y < 0.0) ? -1.0 : 1.0;
-
-	distance = s * sqrt(min((ca_x * ca_x + ca_y * ca_y), (cb_x * cb_x + cb_y * cb_y)));
-	return (distance);
-}
-
-double			get_distance_box(t_coord *from, t_shape *shape)
-{
-	t_coord d;
-	t_coord b;
-	t_coord tmp;
-	t_coord len;
-
-	coord_add_subtract(from, &shape->center, &tmp, 1);
-	b.x = 1.2;
-	b.y = 1.2;
-	b.z = 1.2;
-
-	d.x = fabs(tmp.x) - b.x;
-	d.y = fabs(tmp.y) - b.y;
-	d.z = fabs(tmp.z) - b.z;
-
-	len.x = max(d.x, 0.0);
-	len.y = max(d.y, 0.0);
-	len.z = max(d.z, 0.0);
-	return (vector_length(&len) - shape->radius + min(max(d.x, max(d.y, d.z)), 0.0));
-}
-
-double			get_capsule(t_coord *from, t_shape *shape)
-{
-	t_coord tmp;
-
-	coord_add_subtract(from, &shape->center, &tmp, 1);
-
-	tmp.y -= clamp(tmp.y, shape->h, 0.0);
-	return (vector_length(&tmp) - shape->radius);
-}
-
-double			intersect(double dist_a, double dist_b)
-{
-	 return (max(dist_a, dist_b));
-}
-
-double			unin(double dist_a, double dist_b)
-{
-	return (min(dist_a, dist_b));
-}
-
-double			difference(double dist_a, double dist_b)
-{
-	return (max(-dist_a, dist_b));
-}
-
-/*int				shadow_sphere(t_vec3 *orig, t_vec3 *dir, t_rt *rt, double max_distance)
-{
-	double min_distance;
-	double epsilon;
-	double t;
-	double d;
-	t_vec3 from;
-	t_shape *head;
-
-	t = 0.0;
-	epsilon = 10e-5;
-	while (t < max_distance)
-	{
-		head = rt->head_shapes;
-		min_distance = INT_MAX;
-		from.x = orig->x + t * dir->x;
-		from.y = orig->y + t * dir->y;
-		from.z = orig->z + t * dir->z;
-		while (head != NULL)
-		{
-			d = gd_cone(&from, head);
-			if (d < min_distance)
-				min_distance = d;
-			if (min_distance <= t * epsilon)
-				return (0);
-			head = head->next;
-		}
-		t += min_distance;
-	}
-	return (1);
 }*/
 
 void		get_normal(t_shape *shape)
@@ -288,7 +118,7 @@ void		get_normal(t_shape *shape)
 	tmp_down.y = shape->surface_point.y;
 	tmp_up.z = shape->surface_point.z;
 	tmp_down.z = shape->surface_point.z;
-	shape->normal.x = gd_cone(&tmp_up, shape) - gd_cone(&tmp_down, shape);
+	shape->normal.x = shape->gd_fun(&tmp_up, shape) - shape->gd_fun(&tmp_down, shape);
 
 	tmp_up.x = shape->surface_point.x;
 	tmp_down.x = shape->surface_point.x;
@@ -296,7 +126,7 @@ void		get_normal(t_shape *shape)
 	tmp_down.y = shape->surface_point.y - delta;
 	tmp_up.z = shape->surface_point.z;
 	tmp_down.z = shape->surface_point.z;
-	shape->normal.y = gd_cone(&tmp_up, shape) - gd_cone(&tmp_down, shape);
+	shape->normal.y = shape->gd_fun(&tmp_up, shape) - shape->gd_fun(&tmp_down, shape);
 
 	tmp_up.x = shape->surface_point.x;
 	tmp_down.x = shape->surface_point.x;
@@ -304,7 +134,7 @@ void		get_normal(t_shape *shape)
 	tmp_down.y = shape->surface_point.y;
 	tmp_up.z = shape->surface_point.z + delta;
 	tmp_down.z = shape->surface_point.z - delta;
-	shape->normal.z = gd_cone(&tmp_up, shape) - gd_cone(&tmp_down, shape);
+	shape->normal.z = shape->gd_fun(&tmp_up, shape) - shape->gd_fun(&tmp_down, shape);
 
 	vec3_normalize(&shape->normal, vec3_length(&shape->normal));
 }
@@ -333,7 +163,9 @@ int				trace_ray(t_vec3 *dir, t_rt *rt)
 		from.z = rt->camera.z + t * dir->z;
 		while (head != NULL)
 		{
-			d = gd_cone(&from, head);
+			head->rotation = matrix_multiply(inverse_x_rotate(head->unit.x),
+							matrix_multiply(inverse_y_rotate(head->unit.y), inverse_z_rotate(head->unit.z)));
+			d = head->gd_fun(&from, head);
 			if (d < min_distance)
 			{
 				min_distance = d;

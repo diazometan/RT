@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 13:08:31 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 21:31:21 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,16 @@ int		main(int args, char **argv)
 			printf("disk, ");
 		else if (h_s->figure == 6)
 			printf("triangle, ");
+		else if (h_s->figure == 7)
+			printf("torus, ");
+		else if (h_s->figure == 8)
+			printf("box, ");
+		else if (h_s->figure == 9)
+			printf("capsule, ");
 		printf("color - %x, specular - %.2f, reflection = %.2f, refraction - %.2f, ", h_s->color, h_s->specular, h_s->reflection, h_s->refract);
 		if (h_s->texture != NULL)
 			printf("texture - %s, ", h_s->texture->name);
-		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK)
+		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK || h_s->figure == CONE || h_s->figure == BOX || h_s->figure == CAPSULE)
 			printf("radius - %.2f ", h_s->radius);
 		/*if (h_s->figure != TRIANGLE)
 		{

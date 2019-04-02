@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:26:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 13:14:54 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 21:39:01 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ void	init_direction(char *s, t_shape *new)
 	str = ft_strextract(start, '[', ']');
 	extract_coord(str, &new->unit);
 	free(str);
-	vec3_normalize(&new->unit, vec3_length(&new->unit));
+	if (new->figure != PLANE)
+	{
+		new->unit.x = M_PI * new->unit.x/ 180;
+		new->unit.y = M_PI * new->unit.y/ 180;
+		new->unit.z = M_PI * new->unit.z/ 180;
+	}
+	//else
+		//vec3_normalize(&new->unit, vec3_length(&new->unit));
 }
 
 void	init_radius(char *s, t_shape *new)
@@ -35,7 +42,8 @@ void	init_radius(char *s, t_shape *new)
 	char	*start;
 	char	*str;
 
-	if (new->figure == SPHERE || new->figure == CYLINDER || new->figure == DISK)
+	if (new->figure == SPHERE || new->figure == CYLINDER || new->figure == DISK || new->figure == CONE || new->figure == BOX ||
+		new->figure == CAPSULE)
 	{
 		start = ft_strstr(s, "radius");
 		if (start == NULL)
@@ -55,7 +63,7 @@ void	init_height(char *s, t_shape *new)
 	char	*start;
 	char	*str;
 
-	if (new->figure == CONE || new->figure == CYLINDER)
+	if (new->figure == CONE || new->figure == CYLINDER || new->figure == CAPSULE)
 	{
 		if ((start = ft_strstr(s, "height")) == NULL)
 		{
