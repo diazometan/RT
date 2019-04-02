@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/02 15:14:59 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/02 17:39:27 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SRC = main.c\
 	  init_lighting.c\
 	  create_img.c\
 	  primitives.c\
+	  get_color.c\
+	  light.c\
 	  shadow.c\
 	  matrix.c\
 	  matrix_euler.c\

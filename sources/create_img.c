@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 15:14:29 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 18:01:13 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ static void	init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 	return (1);
 }*/
 
-void		normal_for_object(t_shape *shape)
+void		get_normal(t_shape *shape)
 {
 	t_vec3 tmp_up;
 	t_vec3 tmp_down;
@@ -154,45 +154,6 @@ void		normal_for_object(t_shape *shape)
 	shape->normal.z = gd_cone(&tmp_up, shape) - gd_cone(&tmp_down, shape);
 
 	vec3_normalize(&shape->normal, vec3_length(&shape->normal));
-}
-
-int			light_sphere(t_shape *shape, t_rt *rt, double t, t_vec3 *dir)
-{
-
-	double dist2;
-	double ligth_dot_norm;
-	double intens;
-	int rgb[3];
-	t_vec3 light;
-	t_light *head_light;
-
-	intens = 0.0;
-	shape->surface_point.x = rt->camera.x + t * dir->x;
-	shape->surface_point.y = rt->camera.y + t * dir->y;
-	shape->surface_point.z = rt->camera.z + t * dir->z;
-
-	normal_for_object(shape);
-
-	head_light = rt->head_light;
-	while (head_light != NULL)
-	{
-		light.x = head_light->point.x - shape->surface_point.x;
-		light.y = head_light->point.y - shape->surface_point.y;
-		light.z = head_light->point.z - shape->surface_point.z;
-		ligth_dot_norm = vec3_dot(&light, &shape->normal);
-		if (ligth_dot_norm > 0)
-		{
-			dist2 = vec3_length(&light);
-			vec3_normalize(&light, dist2);
-			if (shadow(&shape->surface_point, &light, rt, dist2) == 1)
-				intens += ligth_dot_norm * head_light->intensity / dist2;
-		}
-		head_light = head_light->next;
-	}
-	rgb[0] = (shape->color >> 16 & 0xFF) * intens;
-	rgb[1] = (shape->color >> 8 & 0xFF) * intens;
-	rgb[2] = (shape->color & 0xFF) * intens;
-	return (((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]));
 }
 
 int				trace_ray(t_vec3 *dir, t_rt *rt)
@@ -228,7 +189,7 @@ int				trace_ray(t_vec3 *dir, t_rt *rt)
 			head = head->next;
 		}
 		if (min_distance <= epsilon * t)
-			return (light_sphere(closest, rt, t, dir));
+			return (get_color(t, dir, closest, rt));
 		t += min_distance;
 	}
 	return (0);

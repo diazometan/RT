@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 15:13:38 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 18:00:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_rt
 	int				depth;
 	double			sample_step;
 	double			sample_center;
-	double			t_closest;
+	//double			t_closest;
 	t_vec3			angle;
 	t_vec3			camera;
 	t_vec3			*source_point;
@@ -73,7 +73,10 @@ double				gd_plane(t_vec3 *p, t_shape *shape);
 double				gd_cylinder(t_vec3 *p, t_shape *shape);
 double				gd_cone(t_vec3 *p, t_shape *shape);
 
-int					shadow(t_vec3 *orig, t_vec3 *dir, t_rt *rt, double max_distance);
+int					get_color(double t, t_vec3 *dir, t_shape *shape, t_rt *rt);
+double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
+void				get_normal(t_shape *shape);
+int					shadow(t_vec3 *orig, t_vec3 *dir, t_shape *head_shapes, double max_distance);
 //int					trace_ray(t_coord *ray, t_rt *rt); //int depth);
 //int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
 //double				path_tracing(t_shape *shape, t_rt *rt, int depth);

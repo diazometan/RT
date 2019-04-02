@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/03/28 19:02:35 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 18:00:26 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int	check_color(int rgb[3])
+/*static int	check_color(int rgb[3])
 {
 	int	i;
 	int	j;
@@ -78,18 +78,18 @@ void		get_normal(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 		get_normal_cone(shape, shape->angle);
 	else
 		get_normal_plane(shape, dir);
-}
+}*/
 
-int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
-{
-	int		rgb[3];
-	double	light;
-	int		color = 0;
-	int		new_color = 0;
-
-	get_normal(shape, rt, dir, depth);
-	rt->source_point = &shape->surface_point;
-	light = get_light(shape, rt, dir);
+//int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
+//{
+	//int		rgb[3];
+	//double	light;
+	//int		color = 0;
+	//int		new_color = 0;
+//
+	//get_normal(shape, rt, dir, depth);
+	//rt->source_point = &shape->surface_point;
+	//light = get_light(shape, rt, dir);
 	//light += path_tracing(shape, rt, depth);
 	/*if (shape->texture != NULL)
 	{
@@ -100,16 +100,16 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 		else
 			shape->color = plane_texture(shape->texture, shape);
 	}*/
-	rgb[0] = (shape->color >> 16 & 0xFF) * light;
-	rgb[1] = (shape->color >> 8 & 0xFF) * light;
-	rgb[2] = (shape->color & 0xFF) * light;
-	color = check_color(rgb);
-	new_color = path_tracing(shape, rt, depth - 1);
-	rgb[0] = (color >> 16 & 0xFF) * 0.85 + (new_color >> 16 & 0xFF) * 0.15;
-	rgb[1] = (color >> 8 & 0xFF) * 0.85 + (new_color >> 8 & 0xFF) * 0.15;
-	rgb[2] = (color & 0xFF) * 0.85 + (new_color & 0xFF) * 0.15;
+	//rgb[0] = (shape->color >> 16 & 0xFF) * light;
+	//rgb[1] = (shape->color >> 8 & 0xFF) * light;
+	//rgb[2] = (shape->color & 0xFF) * light;
+	//color = check_color(rgb);
+	//new_color = path_tracing(shape, rt, depth - 1);
+	//rgb[0] = (color >> 16 & 0xFF) * 0.85 + (new_color >> 16 & 0xFF) * 0.15;
+	//rgb[1] = (color >> 8 & 0xFF) * 0.85 + (new_color >> 8 & 0xFF) * 0.15;
+	//rgb[2] = (color & 0xFF) * 0.85 + (new_color & 0xFF) * 0.15;
 	//color = ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
-	color = check_color(rgb);
+	//color = check_color(rgb);
 	/*if (shape->refract > 0)
 	{
 		new_color = refraction(dir, shape, rt, depth - 1);
@@ -120,5 +120,21 @@ int			get_color(t_shape *shape, t_rt *rt, t_coord *dir, int depth)
 		new_color = reflection(dir, shape, rt, depth - 1);
 		color = reflect_color(color, new_color, shape);
 	}*/
-	return (color);
+	//return (color);
+//}
+
+int		get_color(double t, t_vec3 *dir, t_shape *shape, t_rt *rt)
+{
+	int		rgb[3];
+	double	light;
+
+	get_intersection_point(&rt->camera, dir, t, &shape->surface_point);
+	get_normal(shape);
+	light = get_light(dir, shape, rt);
+	//printf("light - %f\n", light);
+
+	rgb[0] = (shape->color >> 16 & 0xFF) * light;
+	rgb[1] = (shape->color >> 8 & 0xFF) * light;
+	rgb[2] = (shape->color & 0xFF) * light;
+	return (((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]));
 }
