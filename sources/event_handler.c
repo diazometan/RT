@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/17 19:29:25 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 13:09:25 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 					camera_position_key(key, rt);
 				else if (key == SDLK_r)
 				{
-					rt->angle = (t_coord){0, 0, 0};
-					rt->camera = (t_coord){0, 0, 0};
+					rt->angle = (t_vec3){0, 0, 0};
+					rt->camera = (t_vec3){0, 0, 0};
 				}
 				create_img(rt, sdl);
 			}

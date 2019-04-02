@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 11:55:32 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/01 18:19:13 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 13:24:34 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ t_matrix		y_rotation_matrix(double beta)
 	//return (matrix);
 }
 
-void			vector_matrix_multiply(t_matrix m, t_coord *ray)
+void			vector_matrix_multiply(t_matrix m, t_vec3 *ray)
 {
-	t_coord	pre;
+	t_vec3	pre;
 
 	pre.x = ray->x;
 	pre.y = ray->y;

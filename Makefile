@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/01 19:38:20 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/02 17:39:27 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,16 @@ SRC = main.c\
 	  init_texture.c\
 	  parse_one.c\
 	  parse_two.c\
-	  parse_three.c\
 	  init_lighting.c\
 	  create_img.c\
+	  primitives.c\
+	  get_color.c\
+	  light.c\
+	  shadow.c\
 	  matrix.c\
 	  matrix_euler.c\
-	  vector.c\
+	  vec3.c\
+	  vec2.c\
 	  free_args.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -84,5 +88,9 @@ test: all
 scene: all
 	@echo "$(GREEN)Testing...$(NC)"
 	@./RT parser/scene.json
+
+march: all
+	@echo "$(GREEN)Testing...$(NC)"
+	@./RT parser/march.json
 
 .PHONY: all clean fclean re test

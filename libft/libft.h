@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 16:12:31 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/12 11:25:13 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 14:50:52 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,8 @@ void			*ft_realloc(void *ptr, size_t size);
 void			ft_lstaddlast(t_list **alst, t_list *new);
 int				ft_lstcount(t_list *begin_list);
 int				get_next_line(const int fd, char **line);
+double			ft_dmax(double a, double b);
+double			ft_dmin(double a, double b);
+double			ft_dclamp(double x, double higher, double lower);
 
 #endif
