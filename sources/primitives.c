@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 18:39:06 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:04:57 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ double			get_capsule(t_vec3 *from, t_shape *shape)
 {
 	t_vec3 tmp;
 
-	coord_add_subtract(from, &shape->center, &tmp, 1);
+	vec3_subtract(from, &shape->center, &tmp);
 
 	tmp.y -= ft_dclamp(tmp.y, shape->h, 0.0);
-	return (vector_length(&tmp) - shape->radius);
+	return (vec3_length(&tmp) - shape->radius);
 }
 
 double			get_distance_box(t_vec3 *from, t_shape *shape)
@@ -94,7 +94,7 @@ double			get_distance_box(t_vec3 *from, t_shape *shape)
 	t_vec3 tmp;
 	t_vec3 len;
 
-	coord_add_subtract(from, &shape->center, &tmp, 1);
+	vec3_subtract(from, &shape->center, &tmp);
 	b.x = 1.2;
 	b.y = 1.2;
 	b.z = 1.2;
@@ -106,5 +106,5 @@ double			get_distance_box(t_vec3 *from, t_shape *shape)
 	len.x = ft_dmax(d.x, 0.0);
 	len.y = ft_dmax(d.y, 0.0);
 	len.z = ft_dmax(d.z, 0.0);
-	return (vector_length(&len) - shape->radius + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
+	return (vec3_length(&len) - shape->radius + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
 }

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 18:31:38 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:05:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,8 +315,6 @@ int				trace_ray(t_vec3 *dir, t_rt *rt)
 	double min_distance;
 	double epsilon;
 	double t;
-	double d_1;
-	double d_2;
 	double d;
 	t_shape *head;
 	t_shape	*closest;
