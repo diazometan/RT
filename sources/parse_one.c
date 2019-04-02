@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/20 10:30:15 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 15:56:35 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ static int		identify_color(char *start, char *end)
 		ft_putendl(U_COLOR PFCF);
 		exit(1);
 	}
+}
+
+void			init_shape_function(t_shape *new)
+{
+	if (new->figure == PLANE)
+		new->gd_fun = &gd_plane;
+	else if (new->figure == SPHERE)
+		new->gd_fun = &gd_sphere;
+	else if (new->figure == CYLINDER)
+		new->gd_fun = &gd_cylinder;
+	else if (new->figure == CONE)
+		new->gd_fun = &gd_cone;
 }
 
 void			init_shape_color(char *s, t_shape *new)

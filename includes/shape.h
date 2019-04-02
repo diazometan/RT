@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 15:13:15 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 15:37:56 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ typedef struct		s_shape
 	t_vec3			surface_point;
 	t_vec3			unit;
 	t_vec3			normal;
+	double			(*gd_fun)();
 	struct s_shape	*next;
 }					t_shape;
 
 void				push_back_shape(t_shape **head, t_shape *new);
 void				init_shape_color(char *s, t_shape *new);
+void				init_shape_function(t_shape *new);
 void				init_spec_refl(char *s, t_shape *new);
 void				init_direction(char *s, t_shape *new);
 void				init_radius(char *s, t_shape *new);
