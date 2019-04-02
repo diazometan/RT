@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/31 16:22:40 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 13:08:31 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,7 @@ int		main(int args, char **argv)
 			printf("texture - %s, ", h_s->texture->name);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK)
 			printf("radius - %.2f ", h_s->radius);
-		if (h_s->figure == CONE)
-			printf("angle - %.2f ", h_s->angle);
-		if (h_s->figure != TRIANGLE)
+		/*if (h_s->figure != TRIANGLE)
 		{
 			printf("\n\tx - %.2f, y - %.2f, z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
 			printf("\n\tx_u - %.2f, y_u - %.2f, z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
@@ -137,7 +135,7 @@ int		main(int args, char **argv)
 			printf("\tB: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[1].x, h_s->triangle[1].y, h_s->triangle[1].z);
 			printf("\tC: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[2].x, h_s->triangle[2].y, h_s->triangle[2].z);
 			printf("\tx_u - %.2f, y_u - %.2f, z_u - %.2f\n", h_s->unit.x, h_s->unit.y, h_s->unit.z);
-		}
+		}*/
 		printf("\n");
 		h_s = h_s->next;
 	}

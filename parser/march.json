@@ -2,11 +2,10 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cylinder",
-				"color":"blue",
-				"center":[0,0,10],
+				"shape":"cone",
+				"color":"green",
+				"center":[0,-1,10],
 				"radius":1,
-				"angle":45,
 				"height":1,
 				"direction":[0,1,0]
 			}

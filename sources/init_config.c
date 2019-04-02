@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 12:11:04 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/02 13:10:01 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		extract_coord(char *str, t_coord *coord)
+void		extract_coord(char *str, t_vec3 *p)
 {
 	int		i;
 	char	**array;
@@ -26,9 +26,9 @@ void		extract_coord(char *str, t_coord *coord)
 		ft_putendl(U_COORD PFCF);
 		exit(1);
 	}
-	coord->x = ft_atof(array[0]);
-	coord->y = ft_atof(array[1]);
-	coord->z = ft_atof(array[2]);
+	p->x = ft_atof(array[0]);
+	p->y = ft_atof(array[1]);
+	p->z = ft_atof(array[2]);
 }
 
 void	init_camera(char *s, t_rt *rt)
