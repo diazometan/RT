@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/03/31 16:22:30 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/01 19:38:20 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT_DIR = libft
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-FLAGS = -o2 -g -Wall -Wextra #-Werror
+FLAGS = -O2 -g -Wall -Wextra #-Werror
 
 INCLUDES = -I SDL2.framework/Headers -I includes -I libft
 
@@ -36,6 +36,7 @@ SRC = main.c\
 	  init_lighting.c\
 	  create_img.c\
 	  matrix.c\
+	  matrix_euler.c\
 	  vector.c\
 	  free_args.c
 
