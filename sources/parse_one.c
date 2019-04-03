@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 21:30:36 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 12:09:36 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int		identify_color(char *start, char *end)
 	}
 }
 
-void			init_shape_function(t_shape *new)
+void			init_function(t_shape *new)
 {
 	if (new->figure == PLANE)
 		new->gd_fun = &gd_plane;

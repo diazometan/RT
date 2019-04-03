@@ -6,30 +6,22 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:40:19 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/19 16:55:16 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:20:08 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	reflect_ray(t_shape *shape, t_coord *r_v, t_coord *dir)
+int		reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	double	n_dot_r;
+	t_vec3 r_v;
 
-	scalar_product(dir, (-1));
-	n_dot_r = dot_product(&shape->normal, dir);
-	r_v->x = 2 * shape->normal.x * n_dot_r - dir->x;
-	r_v->y = 2 * shape->normal.y * n_dot_r - dir->y;
-	r_v->z = 2 * shape->normal.z * n_dot_r - dir->z;
-}
-
-int		reflection(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
-{
-	int	reflected_color;
-	t_coord r_v;
-
-	reflect_ray(shape, &r_v, dir);
+	vec3_scalar(dir, (-1)); //WHY THIS DOESNT WORK HELP ME
+	n_dot_r = vec3_dot(&shape->normal, dir);
+	r_v.x = 2 * shape->normal.x * n_dot_r - dir->x;
+	r_v.y = 2 * shape->normal.y * n_dot_r - dir->y;
+	r_v.z = 2 * shape->normal.z * n_dot_r - dir->z;
 	rt->source_point = &shape->surface_point;
-	reflected_color = trace_ray(&r_v, rt, depth);
-	return (reflected_color);
+	return (trace_ray(&r_v, rt, depth));
 }

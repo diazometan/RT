@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 10:40:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 19:26:52 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 14:57:41 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	vec3_subtract(t_vec3 *a, t_vec3 *b, t_vec3 *result)
 	result->z = a->z - b->z;
 }
 
-double	vec3_length(t_vec3 *vector)
+void	vec3_scalar(t_vec3 *a, double number)
 {
-	return (sqrt(pow(vector->x, 2) + pow(vector->y, 2) + pow(vector->z, 2)));
+	a->x *= number;
+	a->y *= number;
+	a->z *= number;
 }
 
 double	vec3_dot(t_vec3 *a, t_vec3 *b)
@@ -43,11 +45,9 @@ void	vec3_cross(t_vec3 *a, t_vec3 *b, t_vec3 *c)
 	c->z = a->x * b->y - a->y * b->x;
 }
 
-void	vec3_scalar(t_vec3 *a, double number)
+double	vec3_length(t_vec3 *vector)
 {
-	a->x *= number;
-	a->y *= number;
-	a->z *= number;
+	return (sqrt(pow(vector->x, 2) + pow(vector->y, 2) + pow(vector->z, 2)));
 }
 
 void	vec3_normalize(t_vec3 *vector, double length)

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 20:51:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 15:46:59 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ typedef struct		s_rt
 	int				depth;
 	double			sample_step;
 	double			sample_center;
-	//double			t_closest;
+	double			t_closest;
 	t_vec3			angle;
 	t_vec3			camera;
 	t_vec3			*source_point;
 	t_shape			*head_shapes;
 	t_light			*head_light;
 	t_texture		*head_textures;
-	SDL_Surface		*surf_bmp;
-	SDL_Surface		*surf_norm;
+	//SDL_Surface		*surf_bmp;
+	//SDL_Surface		*surf_norm;
 }					t_rt;
 
 int					init_config(char *file, t_rt *rt);
@@ -68,6 +68,7 @@ void				create_caps(t_rt *rt);
 void				free_args(t_shape *shape, t_light *light, t_texture *texture);
 
 void				create_img(t_rt *rt, t_sdl *sdl);
+int					trace_ray(t_vec3 *dir, t_rt *rt, int depth);
 double				gd_sphere(t_vec3 *p, t_shape *shape);
 double				gd_plane(t_vec3 *p, t_shape *shape);
 double				gd_cylinder(t_vec3 *p, t_shape *shape);
@@ -79,10 +80,11 @@ double				intersect(double dist_a, double dist_b);
 double				unite(double dist_a, double dist_b);
 double				difference(double dist_a, double dist_b);
 
-int					get_color(double t, t_vec3 *dir, t_shape *shape, t_rt *rt);
+int					get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
 void				get_normal(t_shape *shape);
 int					shadow(t_vec3 *orig, t_vec3 *dir, t_shape *head_shapes, double max_distance);
+int					reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 //int					trace_ray(t_coord *ray, t_rt *rt); //int depth);
 //int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
 //double				path_tracing(t_shape *shape, t_rt *rt, int depth);

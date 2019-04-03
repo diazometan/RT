@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:12:06 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 19:27:43 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 11:42:31 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void				get_intersection_point(t_vec3 *source, t_vec3 *ray, double t, t_vec3 *p)
 double				vec2_length(t_vec2 *vector);
 double				vec2_dot(t_vec2 *a, t_vec2 *b);
 
-t_matrix			inverse_z_rotate(double alpha);
-t_matrix			inverse_y_rotate(double gamma);
 t_matrix			inverse_x_rotate(double beta);
+t_matrix			inverse_y_rotate(double gamma);
+t_matrix			inverse_z_rotate(double alpha);
 //END
 
 #endif

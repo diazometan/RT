@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 20:07:13 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 13:58:27 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_center(char *s, t_shape *new)
 	free(str);
 }
 
-void		push_back_shape(t_shape **head, t_shape *new)
+void	push_back_shape(t_shape **head, t_shape *new)
 {
 	t_shape	*tmp;
 
@@ -47,7 +47,7 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 	char	*object;
 	t_shape	*new;
 
-	while ((object = ft_strextract(s, '{', '}')) != NULL)
+	while ((object = ft_strextract(s, '{', '}')) != NULL) //need extra check - segfault when extra spaces after object
 	{
 		new = (t_shape *)malloc(sizeof(*new));
 		new->next = NULL;
@@ -55,11 +55,11 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		init_spec_refl(object, new);
 		init_center(object, new);
 		init_direction(object, new);
-		init_radius(object, new);
-		//init_angle(object, new);
-		init_height(object, new);
+		init_dimensions(object, new);
+		//init_radius(object, new);
+		//init_height(object, new);
 		init_refraction(object, new);
-		init_shape_function(new);
+		init_function(new);
 		if (init_texture(object, new, head_textures))
 			new->texture = NULL;
 		s += ft_strlen(object);

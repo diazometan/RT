@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 20:20:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 12:31:34 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define M_SPEC O_RED "Specular field is missing!"
 # define M_REFL O_RED "Refclection field is missing!"
 # define M_RADIUS O_RED "Radius is missing!"
+# define M_IRADIUS O_RED "Inner radius is missing!"
+# define M_ORADIUS O_RED "Outer radius is missing!"
 # define M_ANGLE O_RED "Angle is missing!"
 # define M_HEIGHT O_RED "Height is missing!"
 # define M_CENTER O_RED "Center coordinates are missing!"

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 21:05:01 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 15:19:49 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,96 +50,11 @@ static void	init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 	dir->z = 1.0;
 	vec3_normalize(dir, vec3_length(dir));
 	vector_matrix_multiply(rotation, dir);
+	//init source_point
+	rt->source_point = &rt->camera;
 }
 
-/*double			get_distance_torus(t_coord *from, t_shape *shape, double r1, double r2)
-{
-	double tmp_x;
-	double tmp_y;
-	double distance;
-	t_coord tmp;
-	t_matrix	rotation;
-
-	rotation = matrix_multiply(inverse_x_rotate(0.5), matrix_multiply(inverse_y_rotate(0.5), inverse_z_rotate(0.5)));
-
-	coord_add_subtract(from, &shape->center, &tmp, 1);
-	vector_matrix_multiply(rotation, &tmp);
-	tmp_x = sqrt(tmp.x * tmp.x + tmp.y * tmp.y) - r1;
-	tmp_y = tmp.z;
-
-	distance = sqrt(tmp_x * tmp_x + tmp_y * tmp_y) - r2;
-	return (distance);
-}
-
-double			get_distance_cylinder(t_coord *from, t_shape *shape)
-{
-	t_coord tmp;
-	double distance;
-
-	coord_add_subtract(from, &shape->center, &tmp, 1);
-
-	distance = sqrt(tmp.x * tmp.x + tmp.z * tmp.z) - shape->radius;
-	return (distance);
-}
-
-double			get_distance_cone(t_coord *from, t_shape *shape)
-{
-	t_coord d;
-	t_coord dimension;
-	t_coord tmp;
-	double len;
-	double distance;
-
-	coord_add_subtract(from, &shape->center, &d, 1);
-	len = sqrt(d.x * d.x + d.z * d.z);
-	dimension.x = 1.0;//shape->radius;
-	dimension.y = shape->h;
-	dimension.z = 0;
-
-	tmp.x = len;
-	tmp.y = d.y;
-	tmp.z = 0;
-	normalize_vector(&dimension, vector_length(&dimension));
-	distance = dot_product(&dimension, &tmp);
-
-	return (distance);
-}*/
-
-void		get_normal(t_shape *shape)
-{
-	t_vec3 tmp_up;
-	t_vec3 tmp_down;
-	double delta;
-
-	delta = 10e-5;
-	tmp_up.x = shape->surface_point.x + delta;
-	tmp_down.x = shape->surface_point.x - delta;
-	tmp_up.y = shape->surface_point.y;
-	tmp_down.y = shape->surface_point.y;
-	tmp_up.z = shape->surface_point.z;
-	tmp_down.z = shape->surface_point.z;
-	shape->normal.x = shape->gd_fun(&tmp_up, shape) - shape->gd_fun(&tmp_down, shape);
-
-	tmp_up.x = shape->surface_point.x;
-	tmp_down.x = shape->surface_point.x;
-	tmp_up.y = shape->surface_point.y + delta;
-	tmp_down.y = shape->surface_point.y - delta;
-	tmp_up.z = shape->surface_point.z;
-	tmp_down.z = shape->surface_point.z;
-	shape->normal.y = shape->gd_fun(&tmp_up, shape) - shape->gd_fun(&tmp_down, shape);
-
-	tmp_up.x = shape->surface_point.x;
-	tmp_down.x = shape->surface_point.x;
-	tmp_up.y = shape->surface_point.y;
-	tmp_down.y = shape->surface_point.y;
-	tmp_up.z = shape->surface_point.z + delta;
-	tmp_down.z = shape->surface_point.z - delta;
-	shape->normal.z = shape->gd_fun(&tmp_up, shape) - shape->gd_fun(&tmp_down, shape);
-
-	vec3_normalize(&shape->normal, vec3_length(&shape->normal));
-}
-
-int				trace_ray(t_vec3 *dir, t_rt *rt)
+int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 {
 	double max_distance;
 	double min_distance;
@@ -158,9 +73,9 @@ int				trace_ray(t_vec3 *dir, t_rt *rt)
 		head = rt->head_shapes;
 		min_distance = INT_MAX;
 		t_vec3 from;
-		from.x = rt->camera.x + t * dir->x;
-		from.y = rt->camera.y + t * dir->y;
-		from.z = rt->camera.z + t * dir->z;
+		from.x = rt->source_point->x + t * dir->x;
+		from.y = rt->source_point->y + t * dir->y;
+		from.z = rt->source_point->z + t * dir->z;
 		while (head != NULL)
 		{
 			head->rotation = matrix_multiply(inverse_x_rotate(head->unit.x),
@@ -174,7 +89,10 @@ int				trace_ray(t_vec3 *dir, t_rt *rt)
 			head = head->next;
 		}
 		if (min_distance <= epsilon * t)
-			return (get_color(t, dir, closest, rt));
+		{
+			rt->t_closest = t;
+			return (get_color(dir, closest, rt, depth));
+		}
 		t += min_distance;
 	}
 	return (0);
@@ -196,7 +114,7 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 		while (c_x <= x + 1.0)
 		{
 			init_camera_ray(c_x, c_y, &dir, rt);
-			pixel_color[++i] = trace_ray(&dir, rt); //rt->depth);
+			pixel_color[++i] = trace_ray(&dir, rt, rt->depth);
 			c_x += rt->sample_step;
 		}
 		c_y += rt->sample_step;

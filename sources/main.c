@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 21:31:21 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/03 15:18:00 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,9 @@ int		main(int args, char **argv)
 		if (h_s->texture != NULL)
 			printf("texture - %s, ", h_s->texture->name);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK || h_s->figure == CONE || h_s->figure == BOX || h_s->figure == CAPSULE)
-			printf("radius - %.2f ", h_s->radius);
+			printf("radius - %.2f ", h_s->dims.x);
+		if (h_s->figure == CYLINDER || h_s->figure == CONE || h_s->figure == CAPSULE)
+			printf("height - %.2f ", h_s->dims.y);
 		/*if (h_s->figure != TRIANGLE)
 		{
 			printf("\n\tx - %.2f, y - %.2f, z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
@@ -171,24 +173,10 @@ int		main(int args, char **argv)
 	//END
 	if (init_sdl(&sdl))
 		return (1);
-	rt.surf_bmp = SDL_LoadBMP("textures/383.bmp");
-	if (rt.surf_bmp == NULL)
-	{
-		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
-		return (1);
-	}
-	rt.surf_norm = SDL_LoadBMP("textures/nm_brick.bmp");
-	if (rt.surf_norm == NULL)
-	{
-		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
-		return (1);
-	}
 	create_img(&rt, &sdl);
 	SDL_UpdateWindowSurface(sdl.win);
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
-	SDL_FreeSurface(sdl.surf);
-	SDL_FreeSurface(rt.surf_bmp);
 	SDL_DestroyWindow(sdl.win);
 	SDL_Quit();
 	return (0);

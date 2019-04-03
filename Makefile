@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/02 19:03:01 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/03 15:28:13 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,16 +28,19 @@ SRC = main.c\
 	  event_handler.c\
 	  init_config.c\
 	  init_shapes.c\
-	  init_physics.c\
-	  init_texture.c\
 	  parse_one.c\
 	  parse_two.c\
+	  init_dimensions.c\
+	  init_physics.c\
+	  init_texture.c\
 	  init_lighting.c\
 	  create_img.c\
 	  primitives.c\
 	  get_color.c\
+	  normal.c\
 	  light.c\
 	  shadow.c\
+	  reflection.c\
 	  matrix.c\
 	  matrix_euler.c\
 	  vec3.c\
@@ -93,5 +96,9 @@ scene: all
 march: all
 	@echo "$(GREEN)Testing...$(NC)"
 	@./RT parser/march.json
+
+kk: all
+	@echo "$(GREEN)Testing...$(NC)"
+	@./RT parser/kk.json
 
 .PHONY: all clean fclean re test

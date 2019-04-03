@@ -1,0 +1,50 @@
+{
+	"scene":{
+		"objects":[
+			{
+				"shape":"sphere",
+				"color":"red",
+				"reflection":0.5,
+				"center":[2,0,0],
+				"radius":1,
+				"direction":[0,0,0]
+			},
+			{
+				"shape":"sphere",
+				"color":"blue",
+				"specular":500,
+				"reflection":0.5,
+				"center":[-2,0,0],
+				"radius":1,
+				"direction":[0,0,0]
+			},
+			{
+				"shape":"sphere",
+				"color":"green",
+				"reflection":0.5,
+				"center":[0,0,2],
+				"radius":1,
+				"direction":[0,0,0]
+			}
+		],
+		"lighting":[
+			{
+				"type":"point",
+				"intensity":0.6,
+				"center":[1,1,-5]
+			},
+			{
+				"type":"ambient",
+				"intensity":0.2
+			}
+		],
+		"camera":{
+			"center":[0,0,-5],
+			"direction":[0,0,0]
+		},
+		"physics":{
+			"reflection depth":2,
+			"pixel division":1
+		}
+	}
+}
