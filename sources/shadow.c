@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:10:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 21:02:39 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/04 14:37:45 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int				shadow(t_vec3 *orig, t_vec3 *dir, t_shape *head_shape, double max_distance)
+int				shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shape, double max_distance)
 {
 	double min_distance;
 	double epsilon;
@@ -23,13 +23,14 @@ int				shadow(t_vec3 *orig, t_vec3 *dir, t_shape *head_shape, double max_distanc
 
 	t = 0.0;
 	epsilon = 10e-5;
+	vec3_normalize(&dir, max_distance);
 	while (t < max_distance)
 	{
 		head = head_shape;
 		min_distance = INT_MAX;
-		from.x = orig->x + t * dir->x;
-		from.y = orig->y + t * dir->y;
-		from.z = orig->z + t * dir->z;
+		from.x = orig->x + t * dir.x;
+		from.y = orig->y + t * dir.y;
+		from.z = orig->z + t * dir.z;
 		while (head != NULL)
 		{
 			d = head->gd_fun(&from, head);

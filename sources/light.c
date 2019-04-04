@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/03 10:55:08 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/04 14:39:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static double	get_specular(t_shape *shape, t_light *light,
 								t_vec3 *dir, double light_t_norm)
 {
 	double	r_length;
-	double	new_r_length;
 	double	specular;
 	double	ray_sum;
 	t_vec3	ray;
@@ -31,11 +30,8 @@ static double	get_specular(t_shape *shape, t_light *light,
 	ray.z *= -dir->z;
 	ray_sum = ray.x + ray.y + ray.z;
 	if (ray_sum > 0)
-	{
-		new_r_length = vec3_length(dir);
 		specular = light->intensity * pow(ray_sum /
-			(r_length * new_r_length), shape->specular);
-	}
+			(r_length * vec3_length(dir)), shape->specular);
 	return (specular);
 }
 
@@ -51,8 +47,7 @@ static double	get_point_light(t_vec3 *dir, t_shape *shape, t_light *light, t_sha
 	if ((light_t_norm) > 0)
 	{
 		l_length = vec3_length(&light->ray);
-		vec3_normalize(&light->ray, l_length);
-		if (shadow(&shape->surface_point, &light->ray, head_shape, l_length))
+		if (shadow(&shape->surface_point, light->ray, head_shape, l_length))
 			return (0);
 		light_sum = light->intensity * (light_t_norm / l_length);
 		if (shape->specular > 0)
@@ -72,8 +67,7 @@ static double	get_directional_light(t_vec3 *dir, t_shape *shape, t_light *light,
 	if ((light_t_norm) > 0)
 	{
 		l_length = vec3_length(&light->ray);
-		vec3_normalize(&light->ray, l_length);
-		if (shadow(&shape->surface_point, &light->ray, head_shape, l_length))
+		if (shadow(&shape->surface_point, light->ray, head_shape, l_length))
 			return (0);
 		light_sum = light->intensity * (light_t_norm / l_length);
 		if (shape->specular > 0)
