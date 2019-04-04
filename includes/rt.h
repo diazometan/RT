@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 14:38:00 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/04 19:25:30 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
 void				get_normal(t_shape *shape);
 int					shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
 int					reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
+double			emission(t_shape *shape, t_rt *rt, int depth);
 //int					trace_ray(t_coord *ray, t_rt *rt); //int depth);
 //int					get_color(t_shape *first, t_rt *rt, t_coord *dir, int depth);
 //double				path_tracing(t_shape *shape, t_rt *rt, int depth);

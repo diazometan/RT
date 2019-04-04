@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/03 15:18:00 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/04 19:40:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int		main(int args, char **argv)
 			printf("box, ");
 		else if (h_s->figure == 9)
 			printf("capsule, ");
-		printf("color - %x, specular - %.2f, reflection = %.2f, refraction - %.2f, ", h_s->color, h_s->specular, h_s->reflection, h_s->refract);
+		printf("color - %x, specular - %.2f, reflection = %.2f, refraction - %.2f, emission - %f, ", h_s->color, h_s->specular, h_s->reflection, h_s->refract, h_s->emission);
 		if (h_s->texture != NULL)
 			printf("texture - %s, ", h_s->texture->name);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK || h_s->figure == CONE || h_s->figure == BOX || h_s->figure == CAPSULE)
@@ -174,7 +174,7 @@ int		main(int args, char **argv)
 	if (init_sdl(&sdl))
 		return (1);
 	create_img(&rt, &sdl);
-	SDL_UpdateWindowSurface(sdl.win);
+	//SDL_UpdateWindowSurface(sdl.win);
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_DestroyWindow(sdl.win);

@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/03 15:28:13 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/04 17:52:50 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = main.c\
 	  create_img.c\
 	  primitives.c\
 	  get_color.c\
+	  path_tracing.c\
 	  normal.c\
 	  light.c\
 	  shadow.c\

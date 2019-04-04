@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:26:15 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/19 11:36:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/04 19:23:42 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	init_pixel_division(char *s, int *p_division)
 void	init_physics(char *s, t_rt *rt)
 {
 	init_reflection_depth(s, &rt->depth);
-	if (rt->depth > 4)
+	if (rt->depth > 11)
 	{
 		ft_putendl(U_DEPTH PFCF);
 		exit(1);
