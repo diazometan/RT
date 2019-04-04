@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/03 13:58:27 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/04 15:47:43 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ void	push_back_shape(t_shape **head, t_shape *new)
 	}
 }
 
+void	init_rotation(t_shape *new)
+{
+	new->rotation = matrix_multiply(inverse_x_rotate(new->unit.x),
+							matrix_multiply(inverse_y_rotate(new->unit.y), inverse_z_rotate(new->unit.z)));
+}
+
 void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 {
 	char	*object;
@@ -55,6 +61,7 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		init_spec_refl(object, new);
 		init_center(object, new);
 		init_direction(object, new);
+		init_rotation(new);
 		init_dimensions(object, new);
 		//init_radius(object, new);
 		//init_height(object, new);

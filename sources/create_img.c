@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 15:26:34 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/04 15:46:09 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 		from.z = rt->source_point->z + t * dir->z;
 		while (head != NULL)
 		{
-			head->rotation = matrix_multiply(inverse_x_rotate(head->unit.x),
-							matrix_multiply(inverse_y_rotate(head->unit.y), inverse_z_rotate(head->unit.z)));
 			d = head->gd_fun(&from, head);
 			if (d < min_distance)
 			{
