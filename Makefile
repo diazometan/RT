@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/04 17:52:50 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/05 17:38:05 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC = main.c\
 	  shadow.c\
 	  reflection.c\
 	  matrix.c\
+	  constructive_shapes.c\
 	  matrix_euler.c\
 	  vec3.c\
 	  vec2.c\

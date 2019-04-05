@@ -4,28 +4,9 @@
 			{
 				"shape":"sphere",
 				"color":"red",
-				"center":[-1,0,5],
-				"radius":0.8,
+				"center":[0,0,10],
+				"radius":1.6,
 				"direction":[0,0,0]
-			},
-			{
-				"shape":"sphere",
-				"color":"yellow",
-				"center":[1,1,5],
-				"radius":1.0,
-				"direction":[0,0,0]
-			},
-			{
-				"shape":"plane",
-				"color":"blue",
-				"center":[0, -1, 0],
-				"direction":[0, 1, 0]
-			},
-			{
-				"shape":"plane",
-				"color":"blue",
-				"center":[-2, 0, 0],
-				"direction":[1, 0, 0]
 			}
 		],
 		"lighting":[

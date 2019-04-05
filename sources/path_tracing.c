@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:48:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/04 20:02:20 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:57:20 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,31 +182,23 @@ double			path_tracing(t_vec3 source, t_shape *shape, t_rt *rt, int depth)
 	//vec3_normalize(&new_dir, vec3_length(&new_dir));
 	if ((hit = trace_ray_emmision(&new_dir, rt)) == NULL)
 		return (shape->emission);
-	emittance = shape->emission;
+	emittance = hit->emission;
 
 	get_intersection_point(&source, &new_dir, rt->t_closest, &hit->surface_point);
-	//printf("%f   %f   %f\n", new_dir.x, new_dir.y, new_dir.z);
-	//new_dir = hit->normal;
 
-	//printf("%f   %f   %f   ", new_dir.x, new_dir.y, new_dir.z);
-	//rotation = matrix_multiply(x_rotation_matrix(M_PI / 6.0), y_rotation_matrix(M_PI / 6.0));
-	//vector_matrix_multiply(rotation, &new_dir);
-	//printf("%f   %f   %f\n", new_dir.x, new_dir.y, new_dir.z);
-	cos_theta = vec3_dot(&new_dir, &hit->normal);
+	//cos_theta = vec3_dot(&new_dir, &hit->normal) / (vec3_length(&new_dir));
 	incoming = path_tracing(hit->surface_point, shape, rt, depth - 1);
-	return (emittance + ((1 / M_PI) * incoming * 1 / (1 / (2 * M_PI))));
+	return (emittance + ((1 / M_PI) * r1 * incoming * 1 / (1 / (2 * M_PI))));
 }
 
 double			emission(t_shape *shape, t_rt *rt, int depth)
 {
 	int i = 0;
 	double	light = 0.0;
-	double max;
-	t_vec3 	dir;
 	t_vec3	p;
 
 	p = shape->surface_point;
-	while (i < 1)
+	while (i < 32)
 	{
 		light += path_tracing(p, shape, rt, depth);
 		i++;

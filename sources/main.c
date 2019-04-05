@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 19:40:22 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/05 18:31:11 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void	init_rt(t_rt *rt, char *config_file)
 	//create_caps(rt);
 	rt->win_width = 600;
 	rt->win_height = 600;
+	//rt->light_array = (int *)malloc(sizeof(int) * rt->win_width * rt->win_height);
 }
 
 int		main(int args, char **argv)

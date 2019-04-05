@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 15:53:27 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:37:38 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ double			gd_sphere(t_vec3 *p, t_shape *shape)
 	t_vec3 orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	vector_matrix_multiply(shape->rotation, &orig);
+	//vector_matrix_multiply(shape->rotation, &orig);
 	return (vec3_length(&orig) - shape->dims.x);
 }
 
@@ -106,7 +106,7 @@ double			gd_box(t_vec3 *p, t_shape *shape)
 	t_vec3 len;
 
 	vec3_subtract(p, &shape->center, &orig);
-	vector_matrix_multiply(shape->rotation, &orig);
+	//vector_matrix_multiply(shape->rotation, &orig);
 	b.x = 1.2;
 	b.y = 1.2;
 	b.z = 1.2;
@@ -118,7 +118,7 @@ double			gd_box(t_vec3 *p, t_shape *shape)
 	len.x = ft_dmax(d.x, 0.0);
 	len.y = ft_dmax(d.y, 0.0);
 	len.z = ft_dmax(d.z, 0.0);
-	return (vec3_length(&len) - shape->dims.x + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
+	return (vec3_length(&len) - 0 + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
 }
 
 /*double			get_distance_torus(t_coord *from, t_shape *shape, double r1, double r2)

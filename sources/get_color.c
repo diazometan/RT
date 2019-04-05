@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/04 20:01:55 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/05 19:10:00 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,8 +173,8 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 
 	get_intersection_point(rt->source_point, dir, rt->t_closest, &shape->surface_point);
 	get_normal(shape);
-	//light = get_light(dir, shape, rt);
-	light = emission(shape, rt, depth);
+	light = get_light(dir, shape, rt);
+	//light = emission(shape, rt, depth);
 
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
