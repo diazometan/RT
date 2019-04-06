@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 18:52:54 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/06 20:42:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void			init_id(char *s, t_shape *new)
 
 void			init_shape_child(t_shape *new, t_shape *shape1, t_shape *shape2)
 {
+	new->f_is_in_group = 0;
 	new->shape1 = shape1;
 	new->shape2 = shape2;
 	new->f_is_group = (new->shape1 != NULL && new->shape2 != NULL);
