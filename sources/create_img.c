@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 17:27:52 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/06 19:07:11 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,15 @@ int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 		from.z = rt->source_point->z + t * dir->z;
 		while (head != NULL)
 		{
-			d = head->gd_fun(&from, head);
-			if (d < min_distance)
+			if (head->f_is_in_group == 0)
 			{
-				min_distance = d;
-				closest = head;
+				// d = head->gd_fun(&from, head);
+				d = shape_summ(&from, head);
+				if (d < min_distance)
+				{
+					min_distance = d;
+					closest = head;
+				}
 			}
 			head = head->next;
 		}

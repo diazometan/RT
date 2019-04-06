@@ -29,13 +29,11 @@
 				"id":3,
 				"shape":"intersect",
 				"shape1":0,
-				"shape2":1
-			},
-			{
-				"id":4,
-				"shape":"difference",
-				"shape1":3,
-				"shape2":2
+				"shape2":1,
+				"color":"red",
+				"center":[0,-2,10],
+				"radius":1,
+				"direction":[0,0,0]
 			}
 		],
 		"lighting":[

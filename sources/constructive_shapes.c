@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:31:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/06 18:13:42 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/06 18:37:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ double	shape_summ(t_vec3 *p, t_shape *shape)
 	double shape1;
 	double shape2;
 
-	if(shape->shape2 == NULL)
+	if(!shape->f_is_group)
 		return (shape->gd_fun(p, shape));
 	else
 	{

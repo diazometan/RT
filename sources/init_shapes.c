@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 17:41:07 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/06 18:59:18 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,32 @@ void	init_rotation(t_shape *new)
 							matrix_multiply(inverse_y_rotate(new->unit.y), inverse_z_rotate(new->unit.z)));
 }
 
+t_shape	*get_shape_from_id(t_shape **head, char *s, char *identification)
+{
+	char	*start;
+	char	*str;
+	int		id;
+
+	start = ft_strstr(s, identification);
+	if (start == NULL)
+		return (NULL);
+	if ((str = ft_strextract(start, ':', ',')) == NULL)
+		str = ft_strextract(start, ':', '\0');
+	id = ft_atof(str);
+	free(str);
+
+	t_shape	*index;
+
+	index = *head;
+	while (index != NULL)
+	{
+		if (index->id == id)
+			return (index);
+		index = index->next;
+	}
+	return (NULL);
+}
+
 void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 {
 	char	*object;
@@ -71,7 +97,8 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		//init_height(object, new);
 		init_refraction(object, new);
 		init_function(new);
-		init_shape_child(new, NULL, NULL);
+		init_id(object, new);
+		init_shape_child(new, get_shape_from_id(head, object, "shape1"), get_shape_from_id(head, object, "shape2"));
 		if (init_texture(object, new, head_textures))
 			new->texture = NULL;
 		s += ft_strlen(object);

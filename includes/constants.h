@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 15:33:37 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/06 18:52:16 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define TORUS 7
 # define BOX 8
 # define CAPSULE 9
+# define INTERSECT 10
+# define UNITE 11
+# define DIFFERENCE 12
 
 # define POINT 1
 # define DIRECTIONAL 2
@@ -41,6 +44,7 @@
 # define M_SPEC O_RED "Specular field is missing!"
 # define M_REFL O_RED "Refclection field is missing!"
 # define M_RADIUS O_RED "Radius is missing!"
+# define M_ID O_RED "ID is missing!"
 # define M_IRADIUS O_RED "Inner radius is missing!"
 # define M_ORADIUS O_RED "Outer radius is missing!"
 # define M_ANGLE O_RED "Angle is missing!"

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:10:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 17:57:20 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/06 19:10:24 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@ int				shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shape, double max_distance
 		from.z = orig->z + t * dir.z;
 		while (head != NULL)
 		{
-			// d = head->gd_fun(&from, head);
-			d = shape_summ(&from, head);
-			if (d < min_distance)
-				min_distance = d;
-			if (min_distance <= t * epsilon)
-				return (1);
+			if (head->f_is_in_group == 0)
+			{
+				// d = head->gd_fun(&from, head);
+				d = shape_summ(&from, head);
+				if (d < min_distance)
+					min_distance = d;
+				if (min_distance <= t * epsilon)
+					return (1);
+			}
 			head = head->next;
 		}
 		t += min_distance;

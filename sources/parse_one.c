@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 17:43:45 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/06 18:52:54 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ static int		identify_shape(char *start, char *end)
 		return (CAPSULE);
 	else if (ft_strnstr(start, "box", len))
 		return (BOX);
+	else if (ft_strnstr(start, "intersect", len))
+		return (INTERSECT);
+	else if (ft_strnstr(start, "unite", len))
+		return (UNITE);
+	else if (ft_strnstr(start, "difference", len))
+		return (DIFFERENCE);
 	else
 	{
 		ft_putendl(U_SHAPE PFCF);
@@ -80,13 +86,41 @@ void			init_function(t_shape *new)
 		new->gd_fun = &gd_box;
 	else if (new->figure == CAPSULE)
 		new->gd_fun = &gd_capsule;
+	else if (new->figure == INTERSECT)
+		new->gd_fun = &intersect;
+	else if (new->figure == UNITE)
+		new->gd_fun = &unite;
+	else if (new->figure == DIFFERENCE)
+		new->gd_fun = &difference;
 }
+
+void			init_id(char *s, t_shape *new)
+{
+	char	*start;
+	char	*str;
+
+	start = ft_strstr(s, "id");
+	if (start == NULL)
+	{
+		ft_putendl(M_ID PFCF);
+		exit(1);
+	}
+	if ((str = ft_strextract(start, ':', ',')) == NULL)
+		str = ft_strextract(start, ':', '\0');
+	new->id = ft_atof(str);
+	free(str);
+}
+
 
 void			init_shape_child(t_shape *new, t_shape *shape1, t_shape *shape2)
 {
-	new->f_is_group = (shape1 != NULL && shape2 != NULL);
 	new->shape1 = shape1;
 	new->shape2 = shape2;
+	new->f_is_group = (new->shape1 != NULL && new->shape2 != NULL);
+	if (new->shape1 != NULL)
+		new->shape1->f_is_in_group = 1;
+	if (new->shape2 != NULL)
+		new->shape2->f_is_in_group = 1;
 }
 
 void			init_shape_color(char *s, t_shape *new)
