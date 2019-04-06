@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/05 17:04:35 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/06 17:41:07 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		//init_height(object, new);
 		init_refraction(object, new);
 		init_function(new);
+		init_shape_child(new, NULL, NULL);
 		if (init_texture(object, new, head_textures))
 			new->texture = NULL;
 		s += ft_strlen(object);

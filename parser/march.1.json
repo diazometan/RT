@@ -13,7 +13,7 @@
 				"id":1,
 				"shape":"sphere",
 				"color":"red",
-				"center":[0,2,10],
+				"center":[0,3,10],
 				"radius":1.6,
 				"direction":[0,0,0]
 			},
@@ -21,23 +21,37 @@
 				"id":2,
 				"shape":"sphere",
 				"color":"red",
-				"center":[0,-2,10],
+				"center":[0,-3,10],
 				"radius":1.6,
 				"direction":[0,0,0]
 			},
 			{
 				"id":3,
-				"shape":"group",
-				"fun":"intersect",
-				"shape1":0,
-				"shape2":1
-			},
+				"shape":"sphere",
+				"color":"red",
+				"center":[0,-3,10],
+				"radius":1.6,
+				"direction":[0,0,0]
+			}
+		],
+		"group":[
 			{
 				"id":4,
-				"shape":"group",
+				"fun":"intersect",
+				"obj1":0,
+				"obj2":1
+			},
+			{
+				"id":5,
 				"fun":"difference",
-				"shape1":3,
-				"shape2":2
+				"obj1":4,
+				"obj2":2
+			},
+			{
+				"id":6,
+				"obj1":3,
+				"obj2":3,
+				"fun":"unite"
 			}
 		],
 		"lighting":[

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/03 13:42:45 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/06 17:43:12 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ typedef struct		s_shape
 	t_vec3			unit;
 	t_vec3			normal;
 	double			(*gd_fun)();
+	double			(*constructive_fun)(double dist_a, double dist_b);
 	struct s_shape	*next;
+	int				f_is_group;
+	struct s_shape	*shape1;
+	struct s_shape	*shape2;
 }					t_shape;
 
 void				push_back_shape(t_shape **head, t_shape *new);
@@ -55,5 +59,6 @@ void				init_dimensions(char *s, t_shape *new);
 void				init_center(char *s, t_shape *new);
 void				init_refraction(char *s, t_shape *new);
 void				init_function(t_shape *new);
+void				init_shape_child(t_shape *new, t_shape *shape1, t_shape *shape2);
 
 #endif

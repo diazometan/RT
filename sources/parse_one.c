@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/05 19:09:35 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/06 17:43:45 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			init_function(t_shape *new)
 	if (new->figure == PLANE)
 		new->gd_fun = &gd_plane;
 	else if (new->figure == SPHERE)
-		new->gd_fun = &shape_one;
+		new->gd_fun = &gd_sphere;
 	else if (new->figure == CYLINDER)
 		new->gd_fun = &gd_cylinder;
 	else if (new->figure == CONE)
@@ -80,6 +80,13 @@ void			init_function(t_shape *new)
 		new->gd_fun = &gd_box;
 	else if (new->figure == CAPSULE)
 		new->gd_fun = &gd_capsule;
+}
+
+void			init_shape_child(t_shape *new, t_shape *shape1, t_shape *shape2)
+{
+	new->f_is_group = (shape1 != NULL && shape2 != NULL);
+	new->shape1 = shape1;
+	new->shape2 = shape2;
 }
 
 void			init_shape_color(char *s, t_shape *new)
