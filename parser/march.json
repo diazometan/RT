@@ -27,15 +27,13 @@
 			},
 			{
 				"id":3,
-				"shape":"group",
-				"fun":"intersect",
+				"shape":"intersect",
 				"shape1":0,
 				"shape2":1
 			},
 			{
 				"id":4,
-				"shape":"group",
-				"fun":"difference",
+				"shape":"difference",
 				"shape1":3,
 				"shape2":2
 			}

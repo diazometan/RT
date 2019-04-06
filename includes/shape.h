@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 17:43:12 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/06 18:11:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct		s_shape
 	t_vec3			unit;
 	t_vec3			normal;
 	double			(*gd_fun)();
-	double			(*constructive_fun)(double dist_a, double dist_b);
 	struct s_shape	*next;
 	int				f_is_group;
 	struct s_shape	*shape1;

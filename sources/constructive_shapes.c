@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:31:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/06 17:57:20 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/06 18:13:42 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ double	shape_summ(t_vec3 *p, t_shape *shape)
 	{
 		shape1 = shape_summ(p, shape->shape1);
 		shape2 = shape_summ(p, shape->shape2);
-		return (shape->constructive_fun(shape1, shape2));
+		return (shape->gd_fun(shape1, shape2));
 	}
 }
