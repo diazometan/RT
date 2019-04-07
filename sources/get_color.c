@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/07 18:13:06 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/07 18:24:32 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,7 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	light = get_light(dir, shape, rt);
 	//light = emission(shape, rt, depth);
 
-	ft_set_color_grey(shape, rgb, light);
+	ft_set_color(shape, rgb, light);
 	color = check_color(rgb);
 
 	//ADDING REFLECTION
