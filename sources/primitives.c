@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/05 17:37:38 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/07 14:16:55 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ double			gd_cylinder(t_vec3 *p, t_shape *shape)
 	t_vec3		orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	vector_matrix_multiply(shape->rotation, &orig);
+	//vector_matrix_multiply(shape->rotation, &orig);
 	dim.x = sqrt(orig.x * orig.x + orig.z * orig.z) - shape->dims.x;
 	dim.y = fabs(orig.y) - shape->dims.y;
 	m = ft_dmin(ft_dmax(dim.x, dim.y), 0.0);
@@ -58,7 +58,7 @@ double			gd_cone(t_vec3 *p, t_shape *shape)
 	t_vec3		orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	vector_matrix_multiply(shape->rotation, &orig);
+	//vector_matrix_multiply(shape->rotation, &orig);
 	dim.x = sqrt(orig.x * orig.x + orig.z * orig.z);
 	dim.y = -orig.y;
 	k1.x = r2 - r1;
@@ -73,27 +73,26 @@ double			gd_cone(t_vec3 *p, t_shape *shape)
 	return (sqrt(ft_dmin((dim.x * dim.x + dim.y * dim.y), (k2.x * k2.x + k2.y * k2.y))));
 }
 
-//NEED ADD RADIUS IN SHAPE
-/*double			gd_torux(t_vec3 *p, t_shape *shape)
+double			gd_torus(t_vec3 *p, t_shape *shape)
 {
 	double		rad;
 	t_vec3		orig;
-	t_matrix	rotation;
+	//t_matrix	rotation;
 
-	rotation = matrix_multiply(inverse_x_rotate(0.5), matrix_multiply(inverse_y_rotate(0.5), inverse_z_rotate(0.5)));
+	//rotation = matrix_multiply(inverse_x_rotate(0.5), matrix_multiply(inverse_y_rotate(0.5), inverse_z_rotate(0.5)));
 
 	vec3_subtract(p, &shape->center, &orig);
-	vector_matrix_multiply(rotation, &tmp);
-	rad = sqrt(orig.x * orig.x + orig.y * orig.y) - r1;
-	return (sqrt(rad * rad + orig.z * orig.z) - r2);
-}*/
+	//vector_matrix_multiply(rotation, &tmp);
+	rad = sqrt(orig.x * orig.x + orig.y * orig.y) - shape->dims.y;
+	return (sqrt(rad * rad + orig.z * orig.z) - shape->dims.x);
+}
 
 double			gd_capsule(t_vec3 *p, t_shape *shape)
 {
 	t_vec3 orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	vector_matrix_multiply(shape->rotation, &orig);
+	//vector_matrix_multiply(shape->rotation, &orig);
 	orig.y -= ft_dclamp(orig.y, shape->dims.y, 0.0);
 	return (vec3_length(&orig) - shape->dims.x);
 }
@@ -107,13 +106,13 @@ double			gd_box(t_vec3 *p, t_shape *shape)
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(shape->rotation, &orig);
-	b.x = 1.2;
-	b.y = 1.2;
-	b.z = 1.2;
+	//b.x = 1.2;
+	//b.y = 1.2;
+	//b.z = 1.2;
 
-	d.x = fabs(orig.x) - b.x;
-	d.y = fabs(orig.y) - b.y;
-	d.z = fabs(orig.z) - b.z;
+	d.x = fabs(orig.x) - shape->dims.x;//b.x;
+	d.y = fabs(orig.y) - shape->dims.y;//b.y;
+	d.z = fabs(orig.z) - shape->dims.z;//b.z;
 
 	len.x = ft_dmax(d.x, 0.0);
 	len.y = ft_dmax(d.y, 0.0);

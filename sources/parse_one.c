@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 16:07:08 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/07 13:53:13 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void			init_function(t_shape *new)
 	if (new->figure == PLANE)
 		new->gd_fun = &gd_plane;
 	else if (new->figure == SPHERE)
-		new->gd_fun = &shape_one;
+		new->gd_fun = &gd_sphere;
 	else if (new->figure == CYLINDER)
 		new->gd_fun = &gd_cylinder;
 	else if (new->figure == CONE)
 		new->gd_fun = &gd_cone;
-	//else if (new->figure == TORUS)
-	//	new->gd_fun = &gd_torus;
+	else if (new->figure == TORUS)
+		new->gd_fun = &gd_torus;
 	else if (new->figure == BOX)
 		new->gd_fun = &gd_box;
 	else if (new->figure == CAPSULE)

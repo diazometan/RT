@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/05 18:31:11 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/07 13:52:09 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,9 @@ int		main(int args, char **argv)
 			printf("radius - %.2f ", h_s->dims.x);
 		if (h_s->figure == CYLINDER || h_s->figure == CONE || h_s->figure == CAPSULE)
 			printf("height - %.2f ", h_s->dims.y);
-		/*if (h_s->figure != TRIANGLE)
-		{
-			printf("\n\tx - %.2f, y - %.2f, z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
-			printf("\n\tx_u - %.2f, y_u - %.2f, z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
-		}
-		else
+		printf("\n\tx - %.2f, y - %.2f, z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
+		printf("\n\tx_u - %.2f, y_u - %.2f, z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+		/*else
 		{
 			printf("\n\tA: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[0].x, h_s->triangle[0].y, h_s->triangle[0].z);
 			printf("\tB: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[1].x, h_s->triangle[1].y, h_s->triangle[1].z);
