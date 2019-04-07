@@ -2,27 +2,27 @@
 	"scene":{
 		"objects":[
 			{
-				"id":1,
-				"shape":"plane",
-				"color":"green",
-				"center":[0,0,3],
-				"direction":[1,0,0]
+				"id":0,
+				"shape":"sphere",
+				"color":"red",
+				"center":[0,0,4],
+				"radius":1.6,
+				"direction":[0,0,0]
 			},
 			{
 				"id":1,
 				"shape":"plane",
 				"color":"green",
-				"center":[0,0,3],
-				"direction":[0,-1,0]
+				"center":[0,0,4],
+				"direction":[0,1,0]
 			},
 			{
 				"id":2,
-				"shape":"intersect",
-				"shape1":0,
-				"shape2":1,
+				"shape":"cut",
+				"shape1":1,
+				"shape2":0,
 				"color":"red",
-				"center":[0,0,3],
-				"radius":0.65,
+				"center":[0,-1,0],
 				"direction":[0,1,0]
 			}
 		],
