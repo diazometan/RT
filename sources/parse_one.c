@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 20:42:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/07 15:01:20 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void			init_function(t_shape *new)
 		new->gd_fun = &gd_cylinder;
 	else if (new->figure == CONE)
 		new->gd_fun = &gd_cone;
-	//else if (new->figure == TORUS)
-	//	new->gd_fun = &gd_torus;
+	else if (new->figure == TORUS)
+		new->gd_fun = &gd_torus;
 	else if (new->figure == BOX)
 		new->gd_fun = &gd_box;
 	else if (new->figure == CAPSULE)

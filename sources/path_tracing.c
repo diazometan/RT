@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:48:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/06 17:57:20 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/07 15:01:32 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,31 +154,39 @@ t_shape				*trace_ray_emmision(t_vec3 *dir, t_rt *rt)
 	return (NULL);
 }
 
-double			path_tracing(t_vec3 source, t_shape *shape, t_rt *rt, int depth)
+void			create_randow_ray(t_shape *shape, t_vec3 *new_dir)
+{
+	double r1;
+	double r2;
+
+	t_vec3 n_t;
+	t_vec3 n_b;
+	t_vec3 sample;
+
+	r1 = drand48();
+	r2 = drand48();
+
+	create_coord_system(shape, &n_t, &n_b);
+	init_ray_pt(r1, r2, &sample);
+	init_sample_world(shape, n_b, n_t, sample, new_dir);
+}
+
+/*double			path_tracing(t_vec3 source, t_shape *shape, t_rt *rt, int depth)
 {
 	t_shape *hit;
 	t_vec3	new_dir;
 	double	emittance;
 	double	cos_theta;
 	double	incoming;
-	t_matrix rotation;
 
-	t_vec3 n_t;
-	t_vec3 n_b;
-	t_vec3 sample;
 	double r1;
-	double r2;
-
 	r1 = drand48();
-	r2 = drand48();
 
 	if (depth < 0)
 		return (0);
 
 	rt->source_point = &source;
-	create_coord_system(shape, &n_t, &n_b);
-	init_ray_pt(r1, r2, &sample);
-	init_sample_world(shape, n_b, n_t, sample, &new_dir);
+	create_randow_ray(shape, &new_dir);
 	//vec3_subtract(&new_dir, &source, &new_dir);
 	//vec3_normalize(&new_dir, vec3_length(&new_dir));
 	if ((hit = trace_ray_emmision(&new_dir, rt)) == NULL)
@@ -190,6 +198,43 @@ double			path_tracing(t_vec3 source, t_shape *shape, t_rt *rt, int depth)
 	//cos_theta = vec3_dot(&new_dir, &hit->normal) / (vec3_length(&new_dir));
 	incoming = path_tracing(hit->surface_point, shape, rt, depth - 1);
 	return (emittance + ((1 / M_PI) * r1 * incoming * 1 / (1 / (2 * M_PI))));
+}*/
+
+t_vec3			path_tracing(t_vec3 source, t_shape *shape, t_rt *rt, int depth)
+{
+	t_vec3 tcol;
+	t_vec3 fcol;
+	t_vec3 scol;
+	double emission;
+	t_shape *hit;
+	int i;
+
+	i = 0;
+	emission = 0.0;
+	tcol = (t_vec3) {0, 0, 0};
+	fcol = (t_vec3) {(shape->color >> 16 & 0xFF) / 255, (shape->color >> 8 & 0xFF) / 255, (shape->color & 0xFF) / 255};
+
+	t_vec3 new_dir;
+
+	create_randow_ray(shape, &new_dir);
+	rt->source_point = &source;
+	while (i < depth)
+	{
+		if ((hit = trace_ray_emmision(&new_dir, rt)) == NULL)
+			break;
+		emission += hit->emission; //* exp(-i);;
+		scol = (t_vec3) {(hit->color >> 16 & 0xFF) / 255, (hit->color >> 8 & 0xFF) / 255, (hit->color & 0xFF) / 255};
+		get_intersection_point(rt->source_point, &new_dir, rt->t_closest, &hit->surface_point);
+		get_normal(hit);
+		create_randow_ray(hit, &new_dir);
+
+		fcol.x *= scol.x;
+		fcol.y *= scol.y;
+		fcol.z *= scol.z;
+
+		tcol.x += fcol.x;
+		i++;
+	}
 }
 
 double			emission(t_shape *shape, t_rt *rt, int depth)

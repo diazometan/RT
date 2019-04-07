@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 18:52:16 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/07 15:00:45 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define M_SHAPE O_RED "Shape identifier is missing!"
 # define M_COLOR O_RED "Color identifier is missing!"
 # define M_SPEC O_RED "Specular field is missing!"
-# define M_REFL O_RED "Refclection field is missing!"
+# define M_REFL O_RED "Reflection field is missing!"
 # define M_RADIUS O_RED "Radius is missing!"
 # define M_ID O_RED "ID is missing!"
 # define M_IRADIUS O_RED "Inner radius is missing!"
@@ -50,6 +50,7 @@
 # define M_ANGLE O_RED "Angle is missing!"
 # define M_HEIGHT O_RED "Height is missing!"
 # define M_CENTER O_RED "Center coordinates are missing!"
+# define M_SIDES O_RED "Box sides are missing!"
 # define M_DIR O_RED "Direction coordinates are missing!"
 # define M_DEPTH O_RED "Reflection depth is missing!"
 # define M_PDIV O_RED "Pixel division is missing!"

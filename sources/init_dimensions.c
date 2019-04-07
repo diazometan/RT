@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:37:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/03 13:56:17 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/07 13:19:59 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,21 @@ static void	init_height(char *s, t_shape *new)
 	free(str);
 }
 
+static void	init_sides(char *s, t_shape *new)
+{
+	char	*start;
+	char	*str;
+
+	if ((start = ft_strstr(s, "sides")) == NULL)
+	{
+		ft_putendl(M_SIDES PFCF);
+		exit(1);
+	}
+	str = ft_strextract(start, '[', ']');
+	extract_coord(str, &new->dims);
+	free(str);
+}
+
 void		init_dimensions(char *s, t_shape *new)
 {
 	if (new->figure == SPHERE)
@@ -79,6 +94,8 @@ void		init_dimensions(char *s, t_shape *new)
 		init_radius(s, new);
 		init_height(s, new);
 	}
+	else if (new->figure == BOX)
+		init_sides(s, new);
 	else if (new->figure == TORUS)
 		init_radius_torus(s, new);
 }

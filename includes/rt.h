@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 17:57:20 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/07 15:00:54 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ double				gd_sphere(t_vec3 *p, t_shape *shape);
 double				gd_plane(t_vec3 *p, t_shape *shape);
 double				gd_cylinder(t_vec3 *p, t_shape *shape);
 double				gd_cone(t_vec3 *p, t_shape *shape);
+double				gd_torus(t_vec3 *p, t_shape *shape);
 double				gd_capsule(t_vec3 *p, t_shape *shape);
 double				gd_box(t_vec3 *p, t_shape *shape);
 

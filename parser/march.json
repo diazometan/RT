@@ -3,10 +3,11 @@
 		"objects":[
 			{
 				"id":0,
-				"shape":"sphere",
+				"shape":"cone",
 				"color":"red",
 				"center":[0,0,10],
 				"radius":1.6,
+				"height":0.5,
 				"direction":[0,0,0]
 			},
 			{
@@ -23,16 +24,6 @@
 				"color":"red",
 				"center":[0,-2,10],
 				"radius":1.6,
-				"direction":[0,0,0]
-			},
-			{
-				"id":3,
-				"shape":"intersect",
-				"shape1":0,
-				"shape2":1,
-				"color":"red",
-				"center":[0,-2,10],
-				"radius":1,
 				"direction":[0,0,0]
 			}
 		],
