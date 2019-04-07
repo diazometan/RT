@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/06 16:06:14 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/07 17:39:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,145 @@ static int	reflect_color(int color, int reflected_color, double reflection)
 	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
 }
 
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef struct		s_hsv_color
+{
+    unsigned char	h;
+    unsigned char	s;
+    unsigned char	v;
+}					t_hsv_color;
+
+typedef struct		s_rgb_color
+{
+    unsigned char	r;
+    unsigned char	g;
+    unsigned char	b;
+}					t_rgb_color;
+
+t_hsv_color	ft_rgb_to_hsv(t_rgb_color rgb)
+{
+    t_hsv_color		hsv;
+    unsigned char	rgb_min;
+	unsigned char	rgb_max;
+
+	rgb_min = ft_dmin(rgb.r, ft_dmin(rgb.g, rgb.b));
+	rgb_max = ft_dmax(rgb.r, ft_dmax(rgb.g, rgb.b));
+
+    hsv.v = rgb_max;
+    if (hsv.v == 0)
+    {
+        hsv.h = 0;
+        hsv.s = 0;
+        return hsv;
+    }
+
+    hsv.s = 255 * (long)(rgb_max - rgb_min) / hsv.v;
+    if (hsv.s == 0)
+    {
+        hsv.h = 0;
+        return hsv;
+    }
+
+    if (rgb_max == rgb.r)
+        hsv.h = 0 + 43 * (rgb.g - rgb.b) / (rgb_max - rgb_min);
+    else if (rgb_max == rgb.g)
+        hsv.h = 85 + 43 * (rgb.b - rgb.r) / (rgb_max - rgb_min);
+    else
+        hsv.h = 171 + 43 * (rgb.r - rgb.g) / (rgb_max - rgb_min);
+
+    return hsv;
+}
+
+t_rgb_color ft_hsv_to_rgb(t_hsv_color hsv)
+{
+    t_rgb_color rgb;
+    unsigned char region, remainder, p, q, t;
+
+    if (hsv.s == 0)
+    {
+        rgb.r = hsv.v;
+        rgb.g = hsv.v;
+        rgb.b = hsv.v;
+        return rgb;
+    }
+
+    region = hsv.h / 43;
+    remainder = (hsv.h - (region * 43)) * 6; 
+
+    p = (hsv.v * (255 - hsv.s)) >> 8;
+    q = (hsv.v * (255 - ((hsv.s * remainder) >> 8))) >> 8;
+    t = (hsv.v * (255 - ((hsv.s * (255 - remainder)) >> 8))) >> 8;
+
+    switch (region)
+    {
+        case 0:
+            rgb.r = hsv.v; rgb.g = t; rgb.b = p;
+            break;
+        case 1:
+            rgb.r = q; rgb.g = hsv.v; rgb.b = p;
+            break;
+        case 2:
+            rgb.r = p; rgb.g = hsv.v; rgb.b = t;
+            break;
+        case 3:
+            rgb.r = p; rgb.g = q; rgb.b = hsv.v;
+            break;
+        case 4:
+            rgb.r = t; rgb.g = p; rgb.b = hsv.v;
+            break;
+        default:
+            rgb.r = hsv.v; rgb.g = p; rgb.b = q;
+            break;
+    }
+
+    return rgb;
+}
+
+void	ft_set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light)
+{
+	int	max_rgb;
+	int min_rgb;
+	t_hsv_color	hsv;
+	t_rgb_color rgb;
+
+	rgb_m[0] = (shape->color >> 16 & 0xFF) * light;
+	rgb_m[1] = (shape->color >> 8 & 0xFF) * light;
+	rgb_m[2] = (shape->color & 0xFF) * light;
+	rgb = (t_rgb_color){rgb_m[0], rgb_m[1], rgb_m[2]};
+	hsv = ft_rgb_to_hsv(rgb);
+	hsv.h = 360 - hsv.h;
+	rgb = ft_hsv_to_rgb(hsv);
+	rgb_m[0] = rgb.r;
+	rgb_m[1] = rgb.g;
+	rgb_m[2] = rgb.b;
+}
+
+void	ft_set_color_grey(t_shape *shape, int rgb_m[3], double light)
+{
+	rgb_m[0] = (shape->color >> 16 & 0xFF);
+	rgb_m[1] = (shape->color >> 8 & 0xFF);
+	rgb_m[2] = (shape->color & 0xFF);
+	rgb_m[0] = ((rgb_m[0] + (0xFF / 2)) % 0xFF) * light;
+	rgb_m[1] = ((rgb_m[1] + (0xFF / 2)) % 0xFF) * light;
+	rgb_m[2] = ((rgb_m[2] + (0xFF / 2)) % 0xFF) * light;
+}
+
+void	ft_set_color_invers(t_shape *shape, int rgb_m[3], double light)
+{
+	rgb_m[0] = 0xFF - ((shape->color >> 16 & 0xFF)) * light;
+	rgb_m[1] = 0xFF - ((shape->color >> 8 & 0xFF)) * light;
+	rgb_m[2] = 0xFF - ((shape->color & 0xFF)) * light;
+}
+
+void	ft_set_color(t_shape *shape, int rgb_m[3], double light)
+{
+	rgb_m[0] = (shape->color >> 16 & 0xFF) * light;
+	rgb_m[1] = (shape->color >> 8 & 0xFF) * light;
+	rgb_m[2] = (shape->color & 0xFF) * light;
+}
+
 int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	int		rgb[3];
@@ -176,9 +315,7 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	light = get_light(dir, shape, rt);
 	//light = emission(shape, rt, depth);
 
-	rgb[0] = (shape->color >> 16 & 0xFF) * light;
-	rgb[1] = (shape->color >> 8 & 0xFF) * light;
-	rgb[2] = (shape->color & 0xFF) * light;
+	ft_set_color_invers(shape, rgb, light);
 	color = check_color(rgb);
 
 	//ADDING REFLECTION
