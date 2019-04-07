@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/07 17:39:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/07 18:13:06 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,12 +221,7 @@ t_rgb_color ft_hsv_to_rgb(t_hsv_color hsv)
     unsigned char region, remainder, p, q, t;
 
     if (hsv.s == 0)
-    {
-        rgb.r = hsv.v;
-        rgb.g = hsv.v;
-        rgb.b = hsv.v;
-        return rgb;
-    }
+        return ((t_rgb_color){hsv.v, hsv.v, hsv.v});
 
     region = hsv.h / 43;
     remainder = (hsv.h - (region * 43)) * 6; 
@@ -235,28 +230,18 @@ t_rgb_color ft_hsv_to_rgb(t_hsv_color hsv)
     q = (hsv.v * (255 - ((hsv.s * remainder) >> 8))) >> 8;
     t = (hsv.v * (255 - ((hsv.s * (255 - remainder)) >> 8))) >> 8;
 
-    switch (region)
-    {
-        case 0:
-            rgb.r = hsv.v; rgb.g = t; rgb.b = p;
-            break;
-        case 1:
-            rgb.r = q; rgb.g = hsv.v; rgb.b = p;
-            break;
-        case 2:
-            rgb.r = p; rgb.g = hsv.v; rgb.b = t;
-            break;
-        case 3:
-            rgb.r = p; rgb.g = q; rgb.b = hsv.v;
-            break;
-        case 4:
-            rgb.r = t; rgb.g = p; rgb.b = hsv.v;
-            break;
-        default:
-            rgb.r = hsv.v; rgb.g = p; rgb.b = q;
-            break;
-    }
-
+	if (region == 0)
+		rgb = (t_rgb_color){hsv.v, t, p};
+	else if (region == 1)
+		rgb = (t_rgb_color){q, hsv.v, p};
+	else if (region == 2)
+		rgb = (t_rgb_color){p, hsv.v, t};
+	else if (region == 3)
+		rgb = (t_rgb_color){p, q, hsv.v};
+	else if (region == 4)
+		rgb = (t_rgb_color){t, p, hsv.v};
+	else
+		rgb = (t_rgb_color){hsv.v, p, q};
     return rgb;
 }
 
@@ -281,12 +266,14 @@ void	ft_set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light)
 
 void	ft_set_color_grey(t_shape *shape, int rgb_m[3], double light)
 {
+	int	color;
 	rgb_m[0] = (shape->color >> 16 & 0xFF);
 	rgb_m[1] = (shape->color >> 8 & 0xFF);
 	rgb_m[2] = (shape->color & 0xFF);
-	rgb_m[0] = ((rgb_m[0] + (0xFF / 2)) % 0xFF) * light;
-	rgb_m[1] = ((rgb_m[1] + (0xFF / 2)) % 0xFF) * light;
-	rgb_m[2] = ((rgb_m[2] + (0xFF / 2)) % 0xFF) * light;
+	color = (rgb_m[0] + rgb_m[1] + rgb_m[2]) / 3;
+	rgb_m[0] = (color) * light;
+	rgb_m[1] = (color) * light;
+	rgb_m[2] = (color) * light;
 }
 
 void	ft_set_color_invers(t_shape *shape, int rgb_m[3], double light)
@@ -315,7 +302,7 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	light = get_light(dir, shape, rt);
 	//light = emission(shape, rt, depth);
 
-	ft_set_color_invers(shape, rgb, light);
+	ft_set_color_grey(shape, rgb, light);
 	color = check_color(rgb);
 
 	//ADDING REFLECTION
