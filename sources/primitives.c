@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   primitives.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 14:44:42 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/07 15:31:06 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ double			gd_cylinder(t_vec3 *p, t_shape *shape)
 	t_vec3		orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(shape->rotation, &orig);
+	vector_matrix_multiply(shape->rotation, &orig);
 	dim.x = sqrt(orig.x * orig.x + orig.z * orig.z) - shape->dims.x;
 	dim.y = fabs(orig.y) - shape->dims.y;
 	m = ft_dmin(ft_dmax(dim.x, dim.y), 0.0);
@@ -77,9 +77,6 @@ double			gd_torus(t_vec3 *p, t_shape *shape)
 {
 	double		rad;
 	t_vec3		orig;
-	//t_matrix	rotation;
-
-	//rotation = matrix_multiply(inverse_x_rotate(0.5), matrix_multiply(inverse_y_rotate(0.5), inverse_z_rotate(0.5)));
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(rotation, &tmp);
