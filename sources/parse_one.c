@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 13:53:13 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/07 16:25:30 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static int		identify_color(char *start, char *end)
 		return (YELLOW);
 	else if (ft_strnstr(start, "purple", end - start))
 		return (PURPLE);
+	else if (ft_strnstr(start, "white", end - start))
+		return (WHITE);
 	else
 	{
 		ft_putendl(U_COLOR PFCF);

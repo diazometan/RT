@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 13:21:29 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/07 16:24:20 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define GREEN 0x008000
 # define BLUE 0x0000FF
 # define YELLOW 0xFFFF00
+# define WHITE 0xFFFFFF
 # define PURPLE 0x800080
 
 # define O_RED "\033[0;31m"

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 17:27:52 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/07 19:28:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 
 	max_distance = 100;
 	epsilon = 10e-6;
-	t = 0;
+	t = 0.0001;
 	closest = NULL;
 	while (t < max_distance)
 	{

@@ -2,12 +2,10 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cone",
-				"color":"red",
-				"center":[0,0,10],
-				"radius":1.6,
-				"height":0.5,
-				"direction":[0,0,0]
+				"shape":"plane",
+				"color":"white",
+				"center":[0,-1,0],
+				"direction":[0,1,0]
 			}
 		],
 		"lighting":[
@@ -22,7 +20,7 @@
 			}
 		],
 		"camera":{
-			"center":[0,0,0],
+			"center":[0,0,-10],
 			"direction":[0,0,0]
 		},
 		"physics":{

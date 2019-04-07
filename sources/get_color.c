@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/06 16:06:14 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/07 17:23:06 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ static int	reflect_color(int color, int reflected_color, double reflection)
 int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	int		rgb[3];
-	double	light;
+	double	light = 0.0;
 	double	color;
 	double	new_color;
 
@@ -180,6 +180,10 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;
 	rgb[2] = (shape->color & 0xFF) * light;
 	color = check_color(rgb);
+	/*if (shape->emission == 0.0)
+		color = emission(shape, rt, depth);
+	else
+		color = 0xFFFFFF;*/
 
 	//ADDING REFLECTION
 	/*if (depth > 0 && shape->reflection)
