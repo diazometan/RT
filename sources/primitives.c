@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 14:16:55 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/07 14:44:42 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ double			gd_cone(t_vec3 *p, t_shape *shape)
 	dim.y = -orig.y;
 	k1.x = r2 - r1;
 	k1.y = 2.0 * shape->dims.y;
-	coef = ft_dclamp(((r2 - dim.x) * k1.x + (shape->dims.y - dim.y) * k1.y) / (k1.x * k1.x + k1.y + k1.y), 1.0, 0.0);
+	coef = ft_dclamp(((r2 - dim.x) * k1.x + (shape->dims.y - dim.y) * k1.y) / vec2_dot(&k1, &k1), 1.0, 0.0);
 	k2.x = dim.x - r2 + k1.x * coef;
 	k2.y = dim.y - shape->dims.y + k1.y * coef;
 	dim.x = dim.x - ft_dmin(dim.x, (dim.y < 0.0) ? r1 : r2);
 	dim.y = fabs(dim.y) - shape->dims.y;
 	if (k2.x < 0.0 && dim.y < 0.0)
-		return ((-1) * sqrt(ft_dmin((dim.x * dim.x + dim.y * dim.y), (k2.x * k2.x + k2.y * k2.y))));
-	return (sqrt(ft_dmin((dim.x * dim.x + dim.y * dim.y), (k2.x * k2.x + k2.y * k2.y))));
+		return ((-1) * sqrt(ft_dmin(vec2_dot(&dim, &dim), vec2_dot(&k2, &k2))));
+	return (sqrt(ft_dmin(vec2_dot(&dim, &dim), vec2_dot(&k2, &k2))));
 }
 
 double			gd_torus(t_vec3 *p, t_shape *shape)
@@ -106,40 +106,16 @@ double			gd_box(t_vec3 *p, t_shape *shape)
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(shape->rotation, &orig);
-	//b.x = 1.2;
-	//b.y = 1.2;
-	//b.z = 1.2;
-
-	d.x = fabs(orig.x) - shape->dims.x;//b.x;
-	d.y = fabs(orig.y) - shape->dims.y;//b.y;
-	d.z = fabs(orig.z) - shape->dims.z;//b.z;
-
+	d.x = fabs(orig.x) - shape->dims.x;
+	d.y = fabs(orig.y) - shape->dims.y;
+	d.z = fabs(orig.z) - shape->dims.z;
 	len.x = ft_dmax(d.x, 0.0);
 	len.y = ft_dmax(d.y, 0.0);
 	len.z = ft_dmax(d.z, 0.0);
 	return (vec3_length(&len) - 0 + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
 }
 
-/*double			get_distance_torus(t_coord *from, t_shape *shape, double r1, double r2)
-{
-	double tmp_x;
-	double tmp_y;
-	double distance;
-	t_coord tmp;
-	t_matrix	rotation;
-
-	rotation = matrix_multiply(inverse_x_rotate(0.5), matrix_multiply(inverse_y_rotate(0.5), inverse_z_rotate(0.5)));
-
-	coord_add_subtract(from, &shape->center, &tmp, 1);
-	vector_matrix_multiply(rotation, &tmp);
-	tmp_x = sqrt(tmp.x * tmp.x + tmp.y * tmp.y) - r1;
-	tmp_y = tmp.z;
-
-	distance = sqrt(tmp_x * tmp_x + tmp_y * tmp_y) - r2;
-	return (distance);
-}
-
-double			get_distance_cylinder(t_coord *from, t_shape *shape)
+/*double			get_distance_cylinder(t_coord *from, t_shape *shape)
 {
 	t_coord tmp;
 	double distance;
