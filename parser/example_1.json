@@ -77,8 +77,8 @@
 			{
 				"id":5,
 				"shape":"difference",
-				"shape1":7,
-				"shape2":2,
+				"shape1":2,
+				"shape2":7,
 				"color":"red",
 				"center":[0,0,3],
 				"radius":0.65,
@@ -89,7 +89,7 @@
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[1,1,-5]
+				"center":[1,1,2]
 			},
 			{
 				"type":"ambient",

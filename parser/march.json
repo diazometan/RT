@@ -8,21 +8,11 @@
 				"center":[0,-1,5],
 				"radius":1.6,
 				"direction":[0,0,0]
-			},
 			{
 				"id":1,
 				"shape":"half_space",
 				"color":"green",
 				"center":[0,-1,5],
-				"direction":[0,1,0]
-			},
-			{
-				"id":2,
-				"shape":"difference",
-				"shape1":1,
-				"shape2":0,
-				"color":"red",
-				"center":[0,-1,0],
 				"direction":[0,1,0]
 			}
 		],

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/07 18:24:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/08 15:21:21 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,19 @@ void	ft_set_color_invers(t_shape *shape, int rgb_m[3], double light)
 	rgb_m[2] = 0xFF - ((shape->color & 0xFF)) * light;
 }
 
+void	ft_set_color_toon_shading(t_shape *shape, int rgb_m[3], double light)
+{
+	if (light < 0.3)
+		light = 0.3;
+	else if (light < 0.7)
+		light = 0.7;
+	else
+		light = 1.0;
+	rgb_m[0] = (shape->color >> 16 & 0xFF) * light;
+	rgb_m[1] = (shape->color >> 8 & 0xFF) * light;
+	rgb_m[2] = (shape->color & 0xFF) * light;
+}
+
 void	ft_set_color(t_shape *shape, int rgb_m[3], double light)
 {
 	rgb_m[0] = (shape->color >> 16 & 0xFF) * light;
@@ -302,7 +315,8 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	light = get_light(dir, shape, rt);
 	//light = emission(shape, rt, depth);
 
-	ft_set_color(shape, rgb, light);
+	ft_set_color_toon_shading(shape, rgb, light);
+
 	color = check_color(rgb);
 
 	//ADDING REFLECTION
