@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/08 17:05:17 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/08 18:52:11 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ double			gd_cylinder(t_vec3 *p, t_shape *shape)
 	t_vec3		orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(shape->rotation, &orig);
+	vector_matrix_multiply(shape->rotation, &orig);
 	dim.x = sqrt(orig.x * orig.x + orig.z * orig.z) - shape->dims.x;
 	dim.y = fabs(orig.y) - shape->dims.y;
 	m = ft_dmin(ft_dmax(dim.x, dim.y), 0.0);
@@ -100,7 +100,6 @@ double			gd_capsule(t_vec3 *p, t_shape *shape)
 double			gd_box(t_vec3 *p, t_shape *shape)
 {
 	t_vec3 d;
-	t_vec3 b;
 	t_vec3 orig;
 	t_vec3 len;
 
@@ -121,7 +120,7 @@ double				gd_hyperboloid(t_vec3 *p, t_shape *shape)
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(shape->rotation, &orig);
-	return (fabs(4 * orig.z + orig.x * orig.x - orig.y - orig.y));
+	return (fabs(orig.z + orig.x * orig.x - orig.y - orig.y));
 }
 
 /*double			get_distance_cylinder(t_coord *from, t_shape *shape)

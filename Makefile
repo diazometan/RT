@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/07 16:31:59 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/08 16:44:21 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = main.c\
 	  create_img.c\
 	  primitives.c\
 	  get_color.c\
+	  texture.c\
 	  path_tracing.c\
 	  normal.c\
 	  light.c\
@@ -102,5 +103,9 @@ march: all
 kk: all
 	@echo "$(GREEN)Testing...$(NC)"
 	@./RT parser/kk.json
+
+allf: all
+	@echo "$(GREEN)Testing...$(NC)"
+	@./RT parser/all_figures.json
 
 .PHONY: all clean fclean re test

@@ -2,7 +2,7 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"plane",
+				"shape":"sphere",
 				"color":"red",
 				"center":[0,-1,0],
 				"radius":1.0,
