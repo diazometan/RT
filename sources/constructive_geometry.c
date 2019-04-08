@@ -6,59 +6,25 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:36:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/07 21:03:02 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/08 14:05:32 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double			intersect(t_vec3 *p, t_shape *shape1, t_shape *shape2)
+double			intersect(double dist_a, double dist_b)
 {
-	double dist_a;
-	double dist_b;
-
-	dist_a = shape_summ(p, shape1);
-	dist_b = shape_summ(p, shape2);
 	return (ft_dmax(dist_a, dist_b));
 }
 
-double			unite(t_vec3 *p, t_shape *shape1, t_shape *shape2)
+double			unite(double dist_a, double dist_b)
 {
-	double dist_a;
-	double dist_b;
-
-	dist_a = shape_summ(p, shape1);
-	dist_b = shape_summ(p, shape2);
 	return (ft_dmin(dist_a, dist_b));
 }
 
-double			difference(t_vec3 *p, t_shape *shape1, t_shape *shape2)
+double			difference(double dist_a, double dist_b)
 {
-	double dist_a;
-	double dist_b;
-
-	dist_a = shape_summ(p, shape1);
-	dist_b = shape_summ(p, shape2);
-	return (ft_dmax(-dist_a, dist_b));
-}
-
-double			cut(t_vec3 *p, t_shape *shape1, t_shape *shape2)
-{
-
-
-	double dist_a;
-	double dist_b;
-	t_vec3 orig;
-
-	dist_a = shape_summ(p, shape1);
-	if (shape2->figure != PLANE)
-	{
-		ft_putstr("shape2 mast be plane\n");
-		exit(0);
-	}
-	vec3_subtract(p, &shape2->center, &orig);
-	dist_b = vec3_dot(&shape2->unit, &orig);
-	return (ft_dmax(dist_a, dist_b));
+	return (ft_dmax(dist_a, -dist_b));
 }
 
 double			blend(double dist_a, double dist_b)

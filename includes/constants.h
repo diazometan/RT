@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 20:39:34 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/08 13:50:25 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define INTERSECT 10
 # define UNITE 11
 # define DIFFERENCE 12
-# define CUT 13
+# define HALF_SPACE 13
 
 # define POINT 1
 # define DIRECTIONAL 2

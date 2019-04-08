@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 20:52:17 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/08 13:57:10 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ double				gd_cone(t_vec3 *p, t_shape *shape);
 double				gd_torus(t_vec3 *p, t_shape *shape);
 double				gd_capsule(t_vec3 *p, t_shape *shape);
 double				gd_box(t_vec3 *p, t_shape *shape);
+double				gd_half_space(t_vec3 *p, t_shape *shape);
 
 double				shape_one(t_vec3 *p, t_shape *shape);
 double				shape_summ(t_vec3 *p, t_shape *shape);
 
-double				intersect(t_vec3 *p, t_shape *shape1, t_shape *shape2);
-double				unite(t_vec3 *p, t_shape *shape1, t_shape *shape2);
-double				difference(t_vec3 *p, t_shape *shape1, t_shape *shape2);
-double				cut(t_vec3 *p, t_shape *shape1, t_shape *shape2);
+double				intersect(double dist_a, double dist_b);
+double				unite(double dist_a, double dist_b);
+double				difference(double dist_a, double dist_b);
 double				blend(double dist_a, double dist_b);
 double				mix(double dist_a, double dist_b);
 

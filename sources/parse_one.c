@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 20:42:44 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/08 13:52:35 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static int		identify_shape(char *start, char *end)
 		return (UNITE);
 	else if (ft_strnstr(start, "difference", len))
 		return (DIFFERENCE);
-	else if (ft_strnstr(start, "cut", len))
-		return (CUT);
+	else if (ft_strnstr(start, "half_space", len))
+		return (HALF_SPACE);
 	else
 	{
 		ft_putendl(U_SHAPE PFCF);
@@ -94,8 +94,8 @@ void			init_function(t_shape *new)
 		new->gd_fun = &unite;
 	else if (new->figure == DIFFERENCE)
 		new->gd_fun = &difference;
-	else if (new->figure == CUT)
-		new->gd_fun = &cut;
+	else if (new->figure == HALF_SPACE)
+		new->gd_fun = &gd_half_space;
 }
 
 void			init_id(char *s, t_shape *new)
