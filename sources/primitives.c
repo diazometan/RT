@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 20:13:28 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/08 16:11:48 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ double			gd_capsule(t_vec3 *p, t_shape *shape)
 double			gd_box(t_vec3 *p, t_shape *shape)
 {
 	t_vec3 d;
-	t_vec3 b;
 	t_vec3 orig;
 	t_vec3 len;
 

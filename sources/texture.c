@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 15:10:52 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/08 17:53:39 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int			sphere_texture(t_texture *texture, t_shape *shape)
 {
 	int				x;
 	int				y;
-	t_coord			normal;
+	t_vec3			normal;
 	unsigned char	*pixel;
 
-	coord_add_subtract(&shape->surface_point, &shape->center, &normal, 1);
-	normalize_vector(&normal, vector_length(&normal));
+	vec3_subtract(&shape->surface_point, &shape->center, &normal);
+	vec3_normalize(&normal, vec3_length(&normal));
 	x = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI)) * texture->surface->w;
 	y = (0.5 - asin(normal.y) / M_PI) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
@@ -61,29 +61,27 @@ int			plane_texture(t_texture *texture, t_shape *shape)
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
-int			cylinder_texture(t_shape *shape, t_rt *rt)
+int			cylinder_texture(t_texture *texture, t_shape *shape)
 {
-	t_coord op;
-	t_coord r;
+	t_vec3	unit;
 	double	u;
 	double	v;
 	int x;
 	int y;
 	unsigned char	*pixel;
 
-	double	op_l;
-	double	om_l;
 
-	r = (t_coord) {1, 0, 0};
-	normalize_vector(&r, vector_length(&r));
-	coord_add_subtract(&shape->surface_point, &shape->center, &op, 1);
-	normalize_vector(&op, (op_l = vector_length(&op)));
-	om_l = dot_product(&op, &shape->unit) * op_l;
-	//normalize_vector(&normal, vector_length(&normal));
-	u = (dot_product(&shape->normal, &r) + 1);
-	v = 1 - om_l / shape->h;
-	x = u * rt->surf_bmp->w;
-	y = v * rt->surf_bmp->h;
-	pixel = (unsigned char *)rt->surf_bmp->pixels + y * rt->surf_bmp->pitch + x * 4;
+	unit = shape->unit;
+	vec3_normalize(&unit, vec3_length(&unit));
+	if (vec3_dot(&unit, &shape->normal) != 0)
+		return (sphere_texture(texture, shape));
+	u = acos(shape->surface_point.x / shape->dims.x);
+	v = shape->surface_point.y / shape->dims.y;
+	u = (u + 1) / 2;
+	v = (v + 1) / 2;
+	//printf("v = %f\n", v);
+	x = u * texture->surface->w;
+	y = v * texture->surface->h;
+	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
