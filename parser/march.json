@@ -3,8 +3,9 @@
 		"objects":[
 			{
 				"shape":"plane",
-				"color":"white",
+				"color":"red",
 				"center":[0,-1,0],
+				"radius":1.0,
 				"direction":[0,1,0]
 			}
 		],

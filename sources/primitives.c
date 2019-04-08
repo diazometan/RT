@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 20:13:28 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/08 17:05:17 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,15 @@ double			gd_box(t_vec3 *p, t_shape *shape)
 	len.y = ft_dmax(d.y, 0.0);
 	len.z = ft_dmax(d.z, 0.0);
 	return (vec3_length(&len) - 0 + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
+}
+
+double				gd_hyperboloid(t_vec3 *p, t_shape *shape)
+{
+	t_vec3 orig;
+
+	vec3_subtract(p, &shape->center, &orig);
+	//vector_matrix_multiply(shape->rotation, &orig);
+	return (fabs(4 * orig.z + orig.x * orig.x - orig.y - orig.y));
 }
 
 /*double			get_distance_cylinder(t_coord *from, t_shape *shape)
