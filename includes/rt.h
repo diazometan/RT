@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 16:44:08 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/09 20:19:40 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ double				gd_cone(t_vec3 *p, t_shape *shape);
 double				gd_torus(t_vec3 *p, t_shape *shape);
 double				gd_capsule(t_vec3 *p, t_shape *shape);
 double				gd_box(t_vec3 *p, t_shape *shape);
-double				gd_hyperboloid(t_vec3 *p, t_shape *shape);
+double				gd_elispoid(t_vec3 *p, t_shape *shape);
 
-double				shape_one(t_vec3 *p, t_shape *shape);
+double				fractal(t_vec3 *p, t_shape *shape);
 
 double				intersect(double dist_a, double dist_b);
 double				unite(double dist_a, double dist_b);

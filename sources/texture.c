@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 19:10:37 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/09 20:20:27 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,16 @@ int			cone_texture(t_texture *texture, t_shape *shape)
 	vector_matrix_multiply(shape->rotation, &r);
 
 	//u = acos(ft_dclamp(r.x , shape->dims.x * 1.0, shape->dims.x * -1.0) / (shape->dims.x * (1 - r.y / shape->dims.y)));
+	// v = r.y / shape->dims.y;
+	// //u = u / M_PI;
+	// v = (v + 1) / 2;
+	// u = acos(ft_dclamp(ft_dclamp(r.x , shape->dims.x * 1.0, shape->dims.x * -1.0) / (shape->dims.x * (shape->dims.y - v)), 1.0, -1.0));
+	// u = u / M_PI;
 	v = r.y / shape->dims.y;
-	//u = u / M_PI;
-	v = (v + 1) / 2;
-	u = acos(ft_dclamp(ft_dclamp(r.x , shape->dims.x * 1.0, shape->dims.x * -1.0) / (shape->dims.x * (shape->dims.y - v)), 1.0, -1.0));
-	u = u / M_PI;
+	u = acos(r.x / (shape->dims.x + (0.0 - shape->dims.x) * v)) / (M_PI);
+	if (r.y < 0)
+		u = 1 - u;
+	//printf("%f   %f\n", u, v);
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
@@ -147,7 +152,7 @@ int			torus_texture(t_texture *texture, t_shape *shape)
 
 	v = 0.5 - asin(r.z / shape->dims.x) / M_PI;
 	u = (acos(r.x / (shape->dims.x + shape->dims.y * cos(2 * M_PI * v)))) / M_PI;
-	printf("%f   %f\n", v, u);
+	//printf("%f   %f\n", v, u);
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;

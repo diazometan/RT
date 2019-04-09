@@ -4,7 +4,7 @@
 			{
 				"shape":"sphere",
 				"color":"red",
-				"center":[0,-1,0],
+				"center":[0,0,0],
 				"radius":1.0,
 				"direction":[0,1,0]
 			}
@@ -21,8 +21,8 @@
 			}
 		],
 		"camera":{
-			"center":[0,0,-10],
-			"direction":[0,0,0]
+			"center":[5,0,-10],
+			"direction":[0,30,0]
 		},
 		"physics":{
 			"reflection depth":3,

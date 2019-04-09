@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 19:12:00 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/09 20:08:51 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,30 @@ double			gd_box(t_vec3 *p, t_shape *shape)
 	return (vec3_length(&len) - 0 + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
 }
 
-double				gd_hyperboloid(t_vec3 *p, t_shape *shape)
+double				gd_elispoid(t_vec3 *p, t_shape *shape)
 {
 	t_vec3 orig;
+	t_vec3 tmp;
+	t_vec3 tmp_1;
+	double k1;
+	double k2;
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(shape->rotation, &orig);
-	return (fabs(orig.z + orig.x * orig.x - orig.y - orig.y));
+
+	tmp.x = orig.x / shape->dims.x;
+	tmp.y = orig.y / shape->dims.y;
+	tmp.z = orig.z / shape->dims.z;
+
+	k1 = vec3_length(&tmp);
+
+	tmp_1.x = orig.x / (shape->dims.x * shape->dims.x);
+	tmp_1.y = orig.y / (shape->dims.y * shape->dims.y);
+	tmp_1.z = orig.z / (shape->dims.z * shape->dims.z);
+
+	k2 = vec3_length(&tmp_1);
+
+	return (k1 * (k1 - 1.0) / k2);
 }
 
 /*double			get_distance_cylinder(t_coord *from, t_shape *shape)
