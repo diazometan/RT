@@ -11,13 +11,13 @@
 				"direction":[0,0,0]
 			},
 			{
-				"shape":"cylinder",
+				"shape":"torus",
 				"color":"green",
 				"texture":"brick",
-				"height":1,
-				"center":[-2,0,4],
-				"radius":1,
-				"direction":[45,0,0]
+				"center":[-2,1,4],
+				"inner_radius":0.5,
+				"outer_radius":1,
+				"direction":[0,0,0]
 			},
 			{
 				"shape":"plane",

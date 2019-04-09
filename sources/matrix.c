@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 11:55:32 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/09 12:35:54 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/09 15:40:20 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ t_matrix		x_rotation_matrix(double alpha)
 	//matrix.zy = sin_t;
 	//matrix.zz = cos_t;
 	res.matrix[1][1] = cos_t;
-	res.matrix[2][1] = sin_t;
 	res.matrix[1][2] = -sin_t;
+	res.matrix[2][1] = sin_t;
 	res.matrix[2][2] = cos_t;
 	return (res);
 	//return (matrix);

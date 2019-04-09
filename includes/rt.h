@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/08 16:23:16 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/09 16:44:08 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,11 @@ int					emission(t_shape *shape, t_rt *rt, int depth);
 //void				get_intersection_point(t_coord *source, t_coord *ray, double t, t_coord *p);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
+
+int					sphere_texture(t_texture *texture, t_shape *shape);
+int					plane_texture(t_texture *texture, t_shape *shape);
+int					cylinder_texture(t_texture *texture, t_shape *shape);
+int					cone_texture(t_texture *texture, t_shape *shape);
+int					torus_texture(t_texture *texture, t_shape *shape);
 
 #endif

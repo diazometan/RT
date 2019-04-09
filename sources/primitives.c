@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 12:11:04 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/09 16:28:50 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ double			gd_cylinder(t_vec3 *p, t_shape *shape)
 double			gd_cone(t_vec3 *p, t_shape *shape)
 {
 	//NEW
-	double		r1 = 1.0;
-	double		r2 = 2.0;
+	double		r1 = 0.0;
+	double		r2 = 1.0;
 	double		coef;
 	t_vec2		k1;
 	t_vec2		k2;
@@ -58,7 +58,7 @@ double			gd_cone(t_vec3 *p, t_shape *shape)
 	t_vec3		orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(shape->rotation, &orig);
+	vector_matrix_multiply(shape->rotation, &orig);
 	dim.x = sqrt(orig.x * orig.x + orig.z * orig.z);
 	dim.y = -orig.y;
 	k1.x = r2 - r1;
