@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 11:55:32 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/02 13:24:34 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/09 12:35:54 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,22 @@ t_matrix		y_rotation_matrix(double beta)
 	res.matrix[2][2] = cos_t;
 	return (res);
 	//return (matrix);
+}
+
+t_matrix		z_rotation_matrix(double gamma)
+{
+	t_matrix	res;
+	double		sin_t;
+	double		cos_t;
+
+	sin_t = sin(gamma);
+	cos_t = cos(gamma);
+	res = (t_matrix) {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
+	res.matrix[0][0] = cos_t;
+	res.matrix[0][1] = -sin_t;
+	res.matrix[1][0] = sin_t;
+	res.matrix[1][1] = cos_t;
+	return (res);
 }
 
 void			vector_matrix_multiply(t_matrix m, t_vec3 *ray)

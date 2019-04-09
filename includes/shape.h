@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/03 13:42:45 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/09 12:01:42 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct		s_shape
 	//double			h;
 	double			refract;
 	double			emission;
+	double			u;
+	double			v;
 	t_matrix		rotation;
 	t_texture		*texture;
 	t_vec3			dims;

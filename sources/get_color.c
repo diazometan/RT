@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/08 17:21:28 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/09 12:17:33 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	if (shape->texture != NULL)
 	{
 		if (shape->figure == SPHERE)
-			shape->color = sphere_texture(shape->texture, shape);	
+			shape->color = sphere_texture(shape->texture, shape);
 		else if (shape->figure == PLANE)
 			shape->color = plane_texture(shape->texture, shape);
 		else

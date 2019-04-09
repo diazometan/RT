@@ -17,7 +17,7 @@
 				"height":1,
 				"center":[-2,0,4],
 				"radius":1,
-				"direction":[0,1,0]
+				"direction":[45,0,0]
 			},
 			{
 				"shape":"plane",

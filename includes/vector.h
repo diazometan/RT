@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:12:06 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/03 11:42:31 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/09 12:36:04 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_matrix
 t_matrix			matrix_multiply(t_matrix a, t_matrix b);
 t_matrix			x_rotation_matrix(double alpha);
 t_matrix			y_rotation_matrix(double beta);
+t_matrix			z_rotation_matrix(double gamma);
 void				vector_matrix_multiply(t_matrix m, t_vec3 *ray);
 
 //NEW
