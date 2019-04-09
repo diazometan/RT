@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 17:35:45 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:10:37 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int			cone_texture(t_texture *texture, t_shape *shape)
 	v = r.y / shape->dims.y;
 	//u = u / M_PI;
 	v = (v + 1) / 2;
-	u = acos(ft_dclamp(r.x , shape->dims.x * 1.0, shape->dims.x * -1.0) / (shape->dims.x * (1 - v)));
+	u = acos(ft_dclamp(ft_dclamp(r.x , shape->dims.x * 1.0, shape->dims.x * -1.0) / (shape->dims.x * (shape->dims.y - v)), 1.0, -1.0));
 	u = u / M_PI;
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
