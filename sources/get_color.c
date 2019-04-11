@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/09 19:20:12 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/11 20:06:09 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 			shape->color = cone_texture(shape->texture, shape);
 		else if (shape->figure == TORUS)
 			shape->color = torus_texture(shape->texture, shape);
+		else if (shape->figure == BOX)
+			shape->color = box_texture(shape->texture, shape);
 	}
 	rgb[0] = (shape->color >> 16 & 0xFF) * light;
 	rgb[1] = (shape->color >> 8 & 0xFF) * light;

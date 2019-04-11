@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 20:20:27 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/11 21:10:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,11 @@ int			cone_texture(t_texture *texture, t_shape *shape)
 	// u = acos(ft_dclamp(ft_dclamp(r.x , shape->dims.x * 1.0, shape->dims.x * -1.0) / (shape->dims.x * (shape->dims.y - v)), 1.0, -1.0));
 	// u = u / M_PI;
 	v = r.y / shape->dims.y;
-	u = acos(r.x / (shape->dims.x + (0.0 - shape->dims.x) * v)) / (M_PI);
-	if (r.y < 0)
-		u = 1 - u;
+	u = acos(ft_dclamp(r.x / (shape->dims.x + (0.0 - shape->dims.x) * v), 1.0, -1.0)) / M_PI;
+	v = (v + 1) / 2;
 	//printf("%f   %f\n", u, v);
+	if (r.z < 0)
+		u = 1 - u;
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
@@ -140,19 +141,54 @@ int			torus_texture(t_texture *texture, t_shape *shape)
 	t_vec3	r;
 	double	u;
 	double	v;
-	double tmp;
 	int x;
 	int y;
 	unsigned char	*pixel;
-	t_matrix		rotation;
 
 	vec3_subtract(&shape->surface_point, &shape->center, &r);
 	vector_matrix_multiply(shape->rotation, &r);
-	vec3_normalize(&r, vec3_length(&r));
+	//vec3_normalize(&r, vec3_length(&r));
 
-	v = 0.5 - asin(r.z / shape->dims.x) / M_PI;
+	/*v = 0.5 - asin(r.z / shape->dims.x) / M_PI;
 	u = (acos(r.x / (shape->dims.x + shape->dims.y * cos(2 * M_PI * v)))) / M_PI;
 	//printf("%f   %f\n", v, u);
+	x = (1 - u) * texture->surface->w;
+	y = (1 - v) * texture->surface->h;*/
+	u = 0.5 + atan2(r.y, r.x) / (2 * M_PI);
+	v = 0.5 + atan2(r.z, sqrt(r.x * r.x + r.y * r.y) - shape->dims.y) / (2 * M_PI);
+	x = (1 - u) * texture->surface->w;
+	y = (1 - v) * texture->surface->h;
+	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
+}
+
+int			box_texture(t_texture *texture, t_shape *shape)
+{
+	t_vec3	r;
+	double	u;
+	double	v;
+	int x;
+	int y;
+	unsigned char	*pixel;
+
+	vec3_subtract(&shape->surface_point, &shape->center, &r);
+	vector_matrix_multiply(shape->rotation, &r);
+
+	if (fabs(r.x) / shape->dims.x >= 1)
+	{
+		u = (r.z / shape->dims.z + 1) / 2;
+		v = (r.y / shape->dims.y + 1) / 2;
+	}
+	else if (fabs(r.y) / shape->dims.y >= 1)
+	{
+		u = (r.x / shape->dims.x + 1) / 2;
+		v = (r.z / shape->dims.z + 1) / 2;
+	}
+	else
+	{
+		u = (r.x / shape->dims.x + 1) / 2;
+		v = (r.y / shape->dims.y + 1) / 2;
+	}
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;

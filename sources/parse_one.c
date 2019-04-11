@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 11:50:40 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/11 19:03:42 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static int		identify_shape(char *start, char *end)
 		return (BOX);
 	else if (ft_strnstr(start, "elipsoid", len))
 		return (ELIPSIOD);
+	else if (ft_strnstr(start, "fractal", len))
+		return (FRACTAL);
 	else
 	{
 		ft_putendl(U_SHAPE PFCF);
@@ -86,6 +88,8 @@ void			init_function(t_shape *new)
 		new->gd_fun = &gd_capsule;
 	else if (new->figure == ELIPSIOD)
 		new->gd_fun = &gd_elispoid;
+	else if (new->figure == FRACTAL)
+		new->gd_fun = &fractal;
 }
 
 void			init_shape_color(char *s, t_shape *new)

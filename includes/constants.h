@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 20:05:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:40:27 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define BOX 8
 # define CAPSULE 9
 # define ELIPSIOD 10
+# define FRACTAL 11
 
 # define POINT 1
 # define DIRECTIONAL 2

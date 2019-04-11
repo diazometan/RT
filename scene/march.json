@@ -2,12 +2,11 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"box",
+				"shape":"fractal",
 				"color":"red",
-				"center":[0,0,5],
-				"sides":[1,1,1],
-				"texture":"brick",
-				"direction":[0,60,0]
+				"center":[0,0,15],
+				"sides":[4,4,4],
+				"direction":[0,1,0]
 			}
 		],
 		"lighting":[

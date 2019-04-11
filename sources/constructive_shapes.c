@@ -6,20 +6,18 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:31:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/11 11:27:23 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/11 20:19:20 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double			gd_box_two(double x, double y, double z, t_shape *shape, t_vec3 dim)
+/*double			gd_box_two(double x, double y, double z, t_shape *shape, t_vec3 dim)
 {
 	t_vec3 d;
 	t_vec3 orig;
 	t_vec3 len;
 
-	//vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(shape->rotation, &orig);
 	d.x = fabs(x) - dim.x;
 	d.y = fabs(y) - dim.y;
 	d.z = fabs(z) - dim.z;
@@ -45,19 +43,15 @@ double	cross(t_vec3 *p, t_shape *shape)
 	dim3 = (t_vec3) {1.0, 1.0, INFINITY};
 
 	tmp = (t_vec3) {p->x, p->y, p->z};
-
-	/*tmp.x *= 3.0;
-	tmp.y *= 3.0;
-	tmp.z *= 3.0;*/
 	box1 = gd_box_two(tmp.x, tmp.y, tmp.z, shape, dim1);
 	box2 = gd_box_two(tmp.y, tmp.z, tmp.x, shape, dim2);
 	box3 = gd_box_two(tmp.z, tmp.x, tmp.y, shape, dim3);
 	return (unite(box1, unite(box2, box3)));
-}
+}*/
 
-double	mod(double a, double b)
+double	ft_dmod(double a, double b)
 {
-	return (a - (b * floor(a/b)));
+	return (a - b * floor(a/b));
 }
 
 double	fractal(t_vec3 *p, t_shape *shape)
@@ -65,37 +59,37 @@ double	fractal(t_vec3 *p, t_shape *shape)
 	double d;
 	double c;
 	double s;
-	double ret;
 	int i;
-	t_vec3 dim;
+	//t_vec3 dim;
 	t_vec3 a;
 	t_vec3 r;
 	t_vec3 tmp;
 
-	tmp = (t_vec3) {p->x, p->y, p->z};
+	vec3_subtract(p, &shape->center, &tmp);
+	//vector_matrix_multiply(shape->rotation, &tmp);
 
 	i = 0;
 	s = 1.0;
 
-	dim = (t_vec3) {1.0, 1.0, 1.0};
-	d = gd_box_two(p->x, p->y, p->z, shape, dim);
-	while (i < 3)
+	//dim = (t_vec3) {shape->dims.x, shape->dims.y, shape->dims.z};
+	d = gd_box(p, shape);//gd_box_two(tmp.x, tmp.y, tmp.z, shape, dim);
+	while (i < 4)
 	{
-		tmp.x *= s;
-		tmp.y *= s;
-		tmp.z *= s;
-		a.x = mod(tmp.x, 2.0) - 1.0;
-		a.x = mod(tmp.y, 2.0) - 1.0;
-		a.x = mod(tmp.z, 2.0) - 1.0;
+		a.x = ft_dmod(tmp.x * s, 2.0) - 1.0;
+		a.y = ft_dmod(tmp.y * s, 2.0) - 1.0;
+		a.z = ft_dmod(tmp.z * s, 2.0) - 1.0;
 		s *= 3.0;
 		r.x = fabs(1.0 - 3.0 * fabs(a.x));
 		r.y = fabs(1.0 - 3.0 * fabs(a.y));
 		r.z = fabs(1.0 - 3.0 * fabs(a.z));
 
-		c = cross(&r, shape) / s;
-		ret = difference(c, d);
+		//c = cross(&r, shape) / s;
+		float da = ft_dmax(r.x, r.y);
+		float db = ft_dmax(r.y, r.z);
+		float dc = ft_dmax(r.z, r.x);
+		c = (ft_dmin(da, ft_dmin(db, dc)) - 1.0) / s;
+		d = difference(-c, d);
 		i++;
 	}
-	return (ret);
+	return (d);
 }
-

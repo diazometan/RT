@@ -12,7 +12,6 @@
 			{
 				"shape":"plane",
 				"color":"yellow",
-				"texture":"brick",
 				"specular":1000,
 				"center":[0,-1,0],
 				"direction":[0,-1,0]

@@ -11,9 +11,8 @@
 				"direction":[0,0,0]
 			},
 			{
-				"shape":"cone",
+				"shape":"cylinder",
 				"color":"green",
-				"texture":"brick",
 				"center":[-2,1,4],
 				"radius":1,
 				"height":2,
@@ -22,6 +21,7 @@
 			{
 				"shape":"plane",
 				"color":"yellow",
+				"texture":"checkboard",
 				"reflection":0.5,
 				"specular":1000,
 				"center":[0,-1,0],

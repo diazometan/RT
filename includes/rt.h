@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 20:19:40 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/11 20:06:21 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ int					plane_texture(t_texture *texture, t_shape *shape);
 int					cylinder_texture(t_texture *texture, t_shape *shape);
 int					cone_texture(t_texture *texture, t_shape *shape);
 int					torus_texture(t_texture *texture, t_shape *shape);
+int					box_texture(t_texture *texture, t_shape *shape);
 
 #endif

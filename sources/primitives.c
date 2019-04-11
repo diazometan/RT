@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 20:08:51 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/11 21:14:44 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,9 @@ double			gd_torus(t_vec3 *p, t_shape *shape)
 {
 	double		rad;
 	t_vec3		orig;
-	//t_matrix	rotation;
-
-	//rotation = matrix_multiply(inverse_x_rotate(0.5), matrix_multiply(inverse_y_rotate(0.5), inverse_z_rotate(0.5)));
 
 	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(rotation, &tmp);
+	vector_matrix_multiply(shape->rotation, &orig);
 	rad = sqrt(orig.x * orig.x + orig.y * orig.y) - shape->dims.y;
 	return (sqrt(rad * rad + orig.z * orig.z) - shape->dims.x);
 }
@@ -104,7 +101,7 @@ double			gd_box(t_vec3 *p, t_shape *shape)
 	t_vec3 len;
 
 	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(shape->rotation, &orig);
+	vector_matrix_multiply(shape->rotation, &orig);
 	d.x = fabs(orig.x) - shape->dims.x;
 	d.y = fabs(orig.y) - shape->dims.y;
 	d.z = fabs(orig.z) - shape->dims.z;
