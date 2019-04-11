@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 19:48:36 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/08 17:42:47 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 				window_resized(rt, sdl, &event);
 		}
+		//rt->sample++;
+		//create_img(rt, sdl);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/07 13:24:05 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/09 12:02:40 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ SRC = main.c\
 	  create_img.c\
 	  primitives.c\
 	  get_color.c\
+	  texture.c\
+	  path_tracing.c\
 	  normal.c\
 	  light.c\
 	  shadow.c\
@@ -71,7 +73,7 @@ $(OBJ_DIR):
 	@echo "$(GREEN)Objects directory is created!$(NC)"
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h| $(OBJ_DIR)
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
@@ -105,6 +107,5 @@ kk: all
 allf: all
 	@echo "$(GREEN)Testing...$(NC)"
 	@./RT parser/all_figures.json
-
 
 .PHONY: all clean fclean re test

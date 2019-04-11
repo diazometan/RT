@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:48:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/07 15:01:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:48:02 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void			create_randow_ray(t_shape *shape, t_vec3 *new_dir)
 
 	//cos_theta = vec3_dot(&new_dir, &hit->normal) / (vec3_length(&new_dir));
 	incoming = path_tracing(hit->surface_point, shape, rt, depth - 1);
-	return (emittance + ((1 / M_PI) * r1 * incoming * 1 / (1 / (2 * M_PI))));
+	return (emittance + ((1 / M_PI) * incoming * 1 / (1 / (2 * M_PI))));
 }*/
 
 t_vec3			path_tracing(t_vec3 source, t_shape *shape, t_rt *rt, int depth)
@@ -232,25 +232,35 @@ t_vec3			path_tracing(t_vec3 source, t_shape *shape, t_rt *rt, int depth)
 		fcol.y *= scol.y;
 		fcol.z *= scol.z;
 
-		tcol.x += fcol.x;
+		tcol.x += fcol.x * emission;
+		tcol.y += fcol.y * emission;
+		tcol.z += fcol.z * emission;
 		i++;
 	}
+	return (tcol);
 }
 
-double			emission(t_shape *shape, t_rt *rt, int depth)
+int			emission(t_shape *shape, t_rt *rt, int depth)
 {
 	int i = 0;
-	double	light = 0.0;
+	// double	light = 0.0;
+	t_vec3 color;
+	t_vec3 tmp;
 	t_vec3	p;
 
+	color = (t_vec3) {0, 0, 0};
+
 	p = shape->surface_point;
-	while (i < 32)
+	while (i < rt->sample)
 	{
-		light += path_tracing(p, shape, rt, depth);
+		//color += path_tracing(p, shape, rt, depth);
+		tmp = path_tracing(p, shape, rt, depth);
+		vec3_add(&color, &tmp, &color);
 		i++;
 	}
-	light = light / (double)i;
-	if (light > 1)
-		light = 1.0;
-	return (light);
+	vec3_scalar(&color, (1.0 / (double)i));
+
+	vec3_scalar(&color, 255);
+
+	return (((int)color.x << 16) | ((int)color.y << 8) | (int)color.z);
 }

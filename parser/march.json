@@ -2,17 +2,10 @@
 	"scene":{
 		"objects":[
 			{
-				"id":0,
 				"shape":"sphere",
 				"color":"red",
-				"center":[0,-1,5],
-				"radius":1.6,
-				"direction":[0,0,0]
-			{
-				"id":1,
-				"shape":"half_space",
-				"color":"green",
-				"center":[0,-1,5],
+				"center":[0,0,0],
+				"radius":1.0,
 				"direction":[0,1,0]
 			}
 		],
@@ -28,8 +21,8 @@
 			}
 		],
 		"camera":{
-			"center":[0,0,0],
-			"direction":[0,0,0]
+			"center":[5,0,-10],
+			"direction":[0,30,0]
 		},
 		"physics":{
 			"reflection depth":3,

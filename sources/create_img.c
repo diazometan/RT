@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 19:01:51 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:49:31 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 
 	max_distance = 100;
 	epsilon = 10e-6;
-	t = epsilon * 1.5;
+	t = 0.0001;
 	closest = NULL;
 	while (t < max_distance)
 	{

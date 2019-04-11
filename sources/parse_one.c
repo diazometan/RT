@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/08 13:52:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:51:03 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,8 @@ static int		identify_shape(char *start, char *end)
 		return (CAPSULE);
 	else if (ft_strnstr(start, "box", len))
 		return (BOX);
-	else if (ft_strnstr(start, "intersect", len))
-		return (INTERSECT);
-	else if (ft_strnstr(start, "unite", len))
-		return (UNITE);
-	else if (ft_strnstr(start, "difference", len))
-		return (DIFFERENCE);
-	else if (ft_strnstr(start, "half_space", len))
-		return (HALF_SPACE);
+	else if (ft_strnstr(start, "elipsoid", len))
+		return (ELIPSIOD);
 	else
 	{
 		ft_putendl(U_SHAPE PFCF);
@@ -65,6 +59,8 @@ static int		identify_color(char *start, char *end)
 		return (YELLOW);
 	else if (ft_strnstr(start, "purple", end - start))
 		return (PURPLE);
+	else if (ft_strnstr(start, "white", end - start))
+		return (WHITE);
 	else
 	{
 		ft_putendl(U_COLOR PFCF);
@@ -88,44 +84,8 @@ void			init_function(t_shape *new)
 		new->gd_fun = &gd_box;
 	else if (new->figure == CAPSULE)
 		new->gd_fun = &gd_capsule;
-	else if (new->figure == INTERSECT)
-		new->gd_fun = &intersect;
-	else if (new->figure == UNITE)
-		new->gd_fun = &unite;
-	else if (new->figure == DIFFERENCE)
-		new->gd_fun = &difference;
-	else if (new->figure == HALF_SPACE)
-		new->gd_fun = &gd_half_space;
-}
-
-void			init_id(char *s, t_shape *new)
-{
-	char	*start;
-	char	*str;
-
-	start = ft_strstr(s, "id");
-	if (start == NULL)
-	{
-		ft_putendl(M_ID PFCF);
-		exit(1);
-	}
-	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '\0');
-	new->id = ft_atof(str);
-	free(str);
-}
-
-
-void			init_shape_child(t_shape *new, t_shape *shape1, t_shape *shape2)
-{
-	new->f_is_in_group = 0;
-	new->shape1 = shape1;
-	new->shape2 = shape2;
-	new->f_is_group = (new->shape1 != NULL && new->shape2 != NULL);
-	if (new->shape1 != NULL)
-		new->shape1->f_is_in_group = 1;
-	if (new->shape2 != NULL)
-		new->shape2->f_is_in_group = 1;
+	else if (new->figure == ELIPSIOD)
+		new->gd_fun = &gd_elispoid;
 }
 
 void			init_shape_color(char *s, t_shape *new)

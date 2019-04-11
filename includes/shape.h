@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/06 18:52:52 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:50:41 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct		s_shape
 	//double			h;
 	double			refract;
 	double			emission;
+	double			u;
+	double			v;
 	t_matrix		rotation;
 	t_texture		*texture;
 	t_vec3			dims;

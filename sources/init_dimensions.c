@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_dimensions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:37:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/07 13:19:59 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/09 20:07:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		init_dimensions(char *s, t_shape *new)
 		init_radius(s, new);
 		init_height(s, new);
 	}
-	else if (new->figure == BOX)
+	else if (new->figure == BOX || new->figure == ELIPSIOD)
 		init_sides(s, new);
 	else if (new->figure == TORUS)
 		init_radius_torus(s, new);

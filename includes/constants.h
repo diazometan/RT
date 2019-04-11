@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/08 13:50:25 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:50:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@
 # define TORUS 7
 # define BOX 8
 # define CAPSULE 9
-# define INTERSECT 10
-# define UNITE 11
-# define DIFFERENCE 12
-# define HALF_SPACE 13
+# define ELIPSIOD 10
 
 # define POINT 1
 # define DIRECTIONAL 2
@@ -35,6 +32,7 @@
 # define GREEN 0x008000
 # define BLUE 0x0000FF
 # define YELLOW 0xFFFF00
+# define WHITE 0xFFFFFF
 # define PURPLE 0x800080
 
 # define O_RED "\033[0;31m"

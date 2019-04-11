@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/08 13:59:22 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:47:55 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,7 @@ double			gd_plane(t_vec3 *p, t_shape *shape)
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(shape->rotation, &orig);
-	return (fabs(vec3_dot(&shape->unit, &orig)));
-}
-
-double			gd_half_space(t_vec3 *p, t_shape *shape)
-{
-	t_vec3 orig;
-
-	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(shape->rotation, &orig);
-	return (vec3_dot(&shape->unit, &orig));
+	return fabs((vec3_dot(&shape->unit, &orig)));
 }
 
 double			gd_cylinder(t_vec3 *p, t_shape *shape)
@@ -58,8 +49,8 @@ double			gd_cylinder(t_vec3 *p, t_shape *shape)
 double			gd_cone(t_vec3 *p, t_shape *shape)
 {
 	//NEW
-	double		r1 = 1.0;
-	double		r2 = 2.0;
+	double		r1 = 0.0;
+	double		r2 = 1.0;
 	double		coef;
 	t_vec2		k1;
 	t_vec2		k2;
@@ -67,7 +58,7 @@ double			gd_cone(t_vec3 *p, t_shape *shape)
 	t_vec3		orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(shape->rotation, &orig);
+	vector_matrix_multiply(shape->rotation, &orig);
 	dim.x = sqrt(orig.x * orig.x + orig.z * orig.z);
 	dim.y = -orig.y;
 	k1.x = r2 - r1;
@@ -106,7 +97,6 @@ double			gd_capsule(t_vec3 *p, t_shape *shape)
 double			gd_box(t_vec3 *p, t_shape *shape)
 {
 	t_vec3 d;
-	t_vec3 b;
 	t_vec3 orig;
 	t_vec3 len;
 
@@ -119,6 +109,32 @@ double			gd_box(t_vec3 *p, t_shape *shape)
 	len.y = ft_dmax(d.y, 0.0);
 	len.z = ft_dmax(d.z, 0.0);
 	return (vec3_length(&len) - 0 + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
+}
+
+double				gd_elispoid(t_vec3 *p, t_shape *shape)
+{
+	t_vec3 orig;
+	t_vec3 tmp;
+	t_vec3 tmp_1;
+	double k1;
+	double k2;
+
+	vec3_subtract(p, &shape->center, &orig);
+	//vector_matrix_multiply(shape->rotation, &orig);
+
+	tmp.x = orig.x / shape->dims.x;
+	tmp.y = orig.y / shape->dims.y;
+	tmp.z = orig.z / shape->dims.z;
+
+	k1 = vec3_length(&tmp);
+
+	tmp_1.x = orig.x / (shape->dims.x * shape->dims.x);
+	tmp_1.y = orig.y / (shape->dims.y * shape->dims.y);
+	tmp_1.z = orig.z / (shape->dims.z * shape->dims.z);
+
+	k2 = vec3_length(&tmp_1);
+
+	return (k1 * (k1 - 1.0) / k2);
 }
 
 /*double			get_distance_cylinder(t_coord *from, t_shape *shape)
