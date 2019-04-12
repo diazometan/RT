@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 16:35:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:43:27 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int			sphere_texture(t_texture *texture, t_shape *shape)
 	x = (int)(u * 2 * M_PI * shape->dims.x * 100);
 	y = (int)(v * M_PI * shape->dims.x * 100);
 	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch + (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
-	// return ((int)turbulence(x, y, 64) * 0x010101);
-	// return (chess_board(x, y));
+	return ((int)turbulence(x, y, 64) * 0x010101);
+	return (chess_board(x, y));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -70,6 +70,7 @@ int			plane_texture(t_texture *texture, t_shape *shape)
 	x = u * texture->surface->w / 2;
 	y = (2 - v) * texture->surface->h / 2;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	return ((int)turbulence(x, y, 64) * 0x010101);
 	return (chess_board(x, y));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
@@ -105,7 +106,8 @@ int			cylinder_texture(t_texture *texture, t_shape *shape)
 	x = (int)((1 - u) * M_PI * shape->dims.x * 100);
 	y = (int)((1 - v) * 2.0 * shape->dims.y * 100);
 	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch + (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
-	// return (chess_board(x, y));
+	return ((int)turbulence(x, y, 64) * 0x010101);
+	return (chess_board(x, y));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
