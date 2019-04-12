@@ -2,12 +2,13 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"box",
+				"shape":"torus",
 				"color":"red",
 				"center":[0,0,5],
-				"sides":[1,1,1],
+				"inner_radius":0.4,
+				"outer_radius":1.0,
 				"texture":"brick",
-				"direction":[0,60,0]
+				"direction":[0,60,60]
 			}
 		],
 		"lighting":[

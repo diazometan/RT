@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:31:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/11 20:19:20 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/11 21:21:05 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ double	fractal(t_vec3 *p, t_shape *shape)
 	t_vec3 tmp;
 
 	vec3_subtract(p, &shape->center, &tmp);
-	//vector_matrix_multiply(shape->rotation, &tmp);
+	vector_matrix_multiply(shape->rotation, &tmp);
 
 	i = 0;
 	s = 1.0;
