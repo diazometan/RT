@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 13:51:34 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/12 17:45:58 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ static void		push_back_texture(t_texture **head, t_texture *new)
 	}
 }
 
-static int	texture_check(char *name, t_shape *new, t_texture *head)
+static int	texture_check(char *name, t_shape *new, t_texture *head, int normal)
 {
 	while (head != NULL)
 	{
 		if (ft_strequ(head->name, name))
 		{
-			new->texture = head;
+			if (normal)
+				new->tex_normal = head;
+			else
+				new->texture = head;
 			return (0);
 		}
 		head = head->next;
@@ -41,7 +44,7 @@ static int	texture_check(char *name, t_shape *new, t_texture *head)
 	return (1);
 }
 
-static t_texture	*create_texture(char *str, t_shape *shape)
+static t_texture	*create_texture(char *str, t_shape *shape, int normal)
 {
 	char		*file_name;
 	t_texture	*new;
@@ -59,7 +62,10 @@ static t_texture	*create_texture(char *str, t_shape *shape)
 	}
 	new->pixel = (unsigned char *)new->surface->pixels;
 	new->next = NULL;
-	shape->texture = new;
+	if (normal)
+		shape->tex_normal = new;
+	else
+		shape->texture = new;
 	return (new);
 }
 
@@ -71,11 +77,19 @@ int	init_texture(char *object, t_shape *shape, t_texture **head_textures)
 	if ((start = ft_strstr(object, "texture")) != NULL)
 	{
 		str = ft_strextract(start + 8, '"', '"');
-		if (texture_check(str, shape, *head_textures))
-			push_back_texture(head_textures, create_texture(str, shape));
+		if (texture_check(str, shape, *head_textures, 0))
+			push_back_texture(head_textures, create_texture(str, shape, 0));
 		else
 			free(str);
 		return (0);
+	}
+	if ((start = ft_strstr(object, "normal_mapping")) != NULL)
+	{
+		str = ft_strextract(start + 15, '"', '"');
+		if (texture_check(str, shape, *head_textures, 1))
+			push_back_texture(head_textures, create_texture(str, shape, 1));
+		else
+			free(str);
 	}
 	return (1);
 }

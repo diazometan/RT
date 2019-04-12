@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 21:10:22 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/12 17:41:26 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			cylinder_texture(t_texture *texture, t_shape *shape)
 	t_vec3	r;
 	double	u;
 	double	v;
-	double tmp;
+	//double tmp;
 	int x;
 	int y;
 	unsigned char	*pixel;
@@ -101,7 +101,7 @@ int			cone_texture(t_texture *texture, t_shape *shape)
 	t_vec3	r;
 	double	u;
 	double	v;
-	double tmp;
+	//double tmp;
 	int x;
 	int y;
 	unsigned char	*pixel;

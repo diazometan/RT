@@ -2,29 +2,21 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"torus",
+				"shape":"plane",
 				"color":"red",
-				"center":[0,0,5],
-				"inner_radius":0.4,
-				"outer_radius":1.0,
-				"texture":"brick",
-				"direction":[0,60,60]
+				"center":[0,-1,5],
+				"direction":[0,1,0]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[1,1,-5]
-			},
-			{
-				"type":"point",
-				"intensity":0.6,
-				"center":[5,0,2]
+				"center":[2,2,0]
 			},
 			{
 				"type":"ambient",
-				"intensity":0.2
+				"intensity":0.8
 			}
 		],
 		"camera":{

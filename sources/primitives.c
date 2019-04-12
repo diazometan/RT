@@ -6,11 +6,19 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 21:14:44 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/12 18:19:26 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+double displacement(t_vec3 *p)
+{
+	double d;
+
+	d = cos(p->x) + cos(p->y) + cos(p->z);
+	return (d);
+}
 
 double			gd_sphere(t_vec3 *p, t_shape *shape)
 {
@@ -24,10 +32,14 @@ double			gd_sphere(t_vec3 *p, t_shape *shape)
 double			gd_plane(t_vec3 *p, t_shape *shape)
 {
 	t_vec3 orig;
+	double d;
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(shape->rotation, &orig);
-	return fabs((vec3_dot(&shape->unit, &orig)));
+	d = displacement(p);
+	if (d > 0)
+		d *= -1.0;
+	return (fabs((vec3_dot(&shape->unit, &orig))));
 }
 
 double			gd_cylinder(t_vec3 *p, t_shape *shape)

@@ -6,11 +6,18 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 10:55:22 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/08 17:55:34 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/12 18:08:44 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void		create_texute_normal(t_shape *shape)
+{
+	t_vec3 normal;
+
+
+}
 
 void		get_normal(t_shape *shape)
 {

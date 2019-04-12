@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 13:02:15 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/12 17:47:11 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		init_direction(object, new);
 		init_rotation(new);
 		init_dimensions(object, new);
-		//init_radius(object, new);
-		//init_height(object, new);
 		init_refraction(object, new);
 		init_function(new);
 		if (init_texture(object, new, head_textures))
