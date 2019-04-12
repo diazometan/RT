@@ -6,7 +6,7 @@
 #    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/12 14:36:42 by rrhaenys         ###   ########.fr        #
+#    Updated: 2019/04/12 16:32:32 by rrhaenys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,10 @@ SRC = main.c\
 	  free_args.c\
 	  init_id.c\
 	  shape_summ.c\
-	  init_shape_child.c
+	  init_shape_child.c\
+	  generateNoise.c\
+	  smooth_noise.c\
+	  turbulence.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

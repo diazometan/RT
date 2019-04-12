@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 14:26:44 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:32:21 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,12 @@ int					torus_texture(t_texture *texture, t_shape *shape);
 int					box_texture(t_texture *texture, t_shape *shape);
 
 double				shape_summ(t_vec3 *p, t_shape *shape);
+
+# define NOISE_HEIGHT 128
+# define NOISE_WIDTH 128
+double				noise[NOISE_HEIGHT][NOISE_WIDTH];
+void				generateNoise();
+double				smooth_noise(double x, double y);
+double				turbulence(double x, double y, double size);
 
 #endif

@@ -6,8 +6,8 @@
 				"shape":"sphere",
 				"color":"red",
 				"texture":"brick",
-				"center":[0,0,-6],
-				"radius":1.0,
+				"center":[2,0,6],
+				"radius":3.0,
 				"direction":[0,1,0]
 			},
 			{
@@ -15,7 +15,7 @@
 				"shape":"cylinder",
 				"color":"blue",
 				"texture":"brick",
-				"center":[2,0,15],
+				"center":[-2,0,15],
 				"radius":4.0,
 				"height":8.0,
 				"direction":[0,1,0]
@@ -25,7 +25,7 @@
 				"shape":"sphere",
 				"color":"red",
 				"texture":"brick",
-				"center":[-2,0,-6],
+				"center":[-2,0,6],
 				"radius":1.0,
 				"direction":[0,1,0]
 			}
