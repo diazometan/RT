@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 16:47:22 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:26:44 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,13 @@ double				gd_cone(t_vec3 *p, t_shape *shape);
 double				gd_torus(t_vec3 *p, t_shape *shape);
 double				gd_capsule(t_vec3 *p, t_shape *shape);
 double				gd_box(t_vec3 *p, t_shape *shape);
-double				gd_half_space(t_vec3 *p, t_shape *shape);
+double				gd_elispoid(t_vec3 *p, t_shape *shape);
 
-double				shape_one(t_vec3 *p, t_shape *shape);
+double				fractal(t_vec3 *p, t_shape *shape);
 
 double				intersect(double dist_a, double dist_b);
 double				unite(double dist_a, double dist_b);
+double				difference(double dist_a, double dist_b);
 double				blend(double dist_a, double dist_b);
 double				mix(double dist_a, double dist_b);
 
@@ -110,5 +111,8 @@ int					plane_texture(t_texture *texture, t_shape *shape);
 int					cylinder_texture(t_texture *texture, t_shape *shape);
 int					cone_texture(t_texture *texture, t_shape *shape);
 int					torus_texture(t_texture *texture, t_shape *shape);
+int					box_texture(t_texture *texture, t_shape *shape);
+
+double				shape_summ(t_vec3 *p, t_shape *shape);
 
 #endif

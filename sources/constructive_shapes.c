@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:31:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/11 16:50:26 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:30:41 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,4 @@ double	fractal(t_vec3 *p, t_shape *shape)
 		i++;
 	}
 	return (ret);
-}
-
-	if(!shape->f_is_group)
-		return (shape->gd_fun(p, shape));
-	else
-	{
-		dist_a = shape_summ(p, shape->shape1);
-		dist_b = shape_summ(p, shape->shape2);
-		return (shape->gd_fun(dist_a, dist_b));
-	}
 }
