@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generateNoise.c                                    :+:      :+:    :+:   */
+/*   chess_board.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/12 16:27:37 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/12 17:02:42 by rrhaenys         ###   ########.fr       */
+/*   Created: 2019/04/12 18:04:59 by rrhaenys          #+#    #+#             */
+/*   Updated: 2019/04/12 18:05:07 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	generateNoise()
+int			chess_board(int x, int y)
 {
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < NOISE_HEIGHT)
-	{
-		x = -1;
-		while (++x < NOISE_WIDTH)
-			g_noise[y][x] = (rand() % 32768) / 32768.0;
-	}
+	return (0xffffff * (((y / 10) % 2) == ((x / 10) % 2)));
 }

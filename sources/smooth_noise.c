@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 16:29:45 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/12 16:31:18 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/12 17:03:00 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ double	smooth_noise(double x, double y)
 
    //smooth the noise with bilinear interpolation
    double value = 0.0;
-   value += fractX     * fractY     * noise[y1][x1];
-   value += (1 - fractX) * fractY     * noise[y1][x2];
-   value += fractX     * (1 - fractY) * noise[y2][x1];
-   value += (1 - fractX) * (1 - fractY) * noise[y2][x2];
+   value += fractX     * fractY     * g_noise[y1][x1];
+   value += (1 - fractX) * fractY     * g_noise[y1][x2];
+   value += fractX     * (1 - fractY) * g_noise[y2][x1];
+   value += (1 - fractX) * (1 - fractY) * g_noise[y2][x2];
 
    return value;
 }
