@@ -6,11 +6,16 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 14:14:09 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/12 15:58:04 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+int			chess_board(int x, int y, double dy)
+{
+	return (0xffffff * (((y / (int)(dy * 10)) % 2) == ((x / 10) % 2)));
+}
 
 int			sphere_texture(t_texture *texture, t_shape *shape)
 {
@@ -25,6 +30,7 @@ int			sphere_texture(t_texture *texture, t_shape *shape)
 	x = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI)) * texture->surface->w;
 	y = (0.5 - asin(normal.y) / M_PI) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	return (chess_board(x, y, 2));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -59,6 +65,7 @@ int			plane_texture(t_texture *texture, t_shape *shape)
 	x = u * texture->surface->w / 2;
 	y = (2 - v) * texture->surface->h / 2;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	return (chess_board(x, y, 2));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -89,9 +96,14 @@ int			cylinder_texture(t_texture *texture, t_shape *shape)
 	v = r.y / shape->dims.y;
 	u = u / M_PI;
 	v = (v + 1) / 2;
-	x = (1 - u) * texture->surface->w;
-	y = (1 - v) * texture->surface->h;
+	// printf("%f\n", u);
+	x = (int)((1 - u) * M_PI * shape->dims.x * 100) % texture->surface->w;
+	y = (int)((1 - v) * 2.0 * shape->dims.y * 100) % texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	// printf("%f\n", shape->dims.x / shape->dims.y);
+	// return (chess_board(x, y, 2));
+	// x = (1 - u) * texture->surface->w;
+	// y = (1 - v) * texture->surface->h;
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -132,6 +144,7 @@ int			cone_texture(t_texture *texture, t_shape *shape)
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	return (chess_board(x, y, 1));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -156,5 +169,6 @@ int			torus_texture(t_texture *texture, t_shape *shape)
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	return (chess_board(x, y, 1));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }

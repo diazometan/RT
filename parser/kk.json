@@ -2,6 +2,7 @@
 	"scene":{
 		"objects":[
 			{
+				"id":0,
 				"shape":"elipsoid",
 				"color":"blue",
 				"specular":500,
@@ -11,6 +12,7 @@
 				"direction":[0,0,0]
 			},
 			{
+				"id":0,
 				"shape":"cone",
 				"color":"green",
 				"texture":"brick",
@@ -20,6 +22,7 @@
 				"direction":[0,0,0]
 			},
 			{
+				"id":0,
 				"shape":"plane",
 				"color":"yellow",
 				"reflection":0.5,
