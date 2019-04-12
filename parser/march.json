@@ -6,8 +6,8 @@
 				"shape":"sphere",
 				"color":"red",
 				"texture":"brick",
-				"center":[2,0,6],
-				"radius":3.0,
+				"center":[1,0,8],
+				"radius":1.0,
 				"direction":[0,1,0]
 			},
 			{
@@ -15,19 +15,38 @@
 				"shape":"cylinder",
 				"color":"blue",
 				"texture":"brick",
-				"center":[-2,0,15],
-				"radius":4.0,
-				"height":8.0,
+				"center":[-3.5,0,15],
+				"radius":3.0,
+				"height":3.0,
 				"direction":[0,1,0]
 			},
 			{
-				"id":0,
-				"shape":"sphere",
-				"color":"red",
+				"id":1,
+				"shape":"cone",
+				"color":"blue",
 				"texture":"brick",
-				"center":[-2,0,6],
+				"center":[0,0.2,7],
 				"radius":1.0,
+				"height":1.0,
 				"direction":[0,1,0]
+			},
+			{
+				"id":2,
+				"shape":"plane",
+				"color":"green",
+				"texture":"brick",
+				"center":[0,-3,0],
+				"direction":[0,1,0]
+			},
+			{
+				"id":3,
+				"shape":"torus",
+				"color":"blue",
+				"texture":"brick",
+				"center":[2,0,6],
+				"inner_radius":0.5,
+				"outer_radius":1.0,
+				"direction":[0,0,1]
 			}
 		],
 		"lighting":[

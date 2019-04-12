@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 18:05:06 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/12 20:17:01 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int			sphere_texture(t_texture *texture, t_shape *shape)
 	vec3_normalize(&normal, vec3_length(&normal));
 	u = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI));
 	v = (0.5 - asin(normal.y) / M_PI);
-	x = (int)(u * 2 * M_PI * shape->dims.x * 100);
-	y = (int)(v * M_PI * shape->dims.x * 100);
+	x = (int)(u * 2 * M_PI * shape->dims.x * PIXELS_BLOCK);
+	y = (int)(v * M_PI * shape->dims.x * PIXELS_BLOCK);
 	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch + (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
 	// return (wood(x, y));
 	// return (marble(x, y));
-	return (noise(x, y));
-	return (chess_board(x, y));
+	// return (noise(x, y));
+	// return (chess_board(x, y));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -67,9 +67,9 @@ int			plane_texture(t_texture *texture, t_shape *shape)
 	x = u * texture->surface->w / 2;
 	y = (2 - v) * texture->surface->h / 2;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (wood(x, y));
-	return ((int)turbulence(x, y, 64) * 0x010101);
-	return (chess_board(x, y));
+	// return (wood(x, y));
+	// return (noise(x, y));
+	// return (chess_board(x, y));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -100,13 +100,12 @@ int			cylinder_texture(t_texture *texture, t_shape *shape)
 	v = r.y / shape->dims.y;
 	u = u / M_PI;
 	v = (v + 1) / 2;
-	// printf("%f\n", u);
-	x = (int)((1 - u) * M_PI * shape->dims.x * 100);
-	y = (int)((1 - v) * 2.0 * shape->dims.y * 100);
+	x = (int)((1 - u) * M_PI * shape->dims.x * PIXELS_BLOCK);
+	y = (int)((1 - v) * 2.0 * shape->dims.y * PIXELS_BLOCK);
 	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch + (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
-	return (wood(x, y));
-	return ((int)turbulence(x, y, 64) * 0x010101);
-	return (chess_board(x, y));
+	// return (wood(x, y));
+	// return ((int)turbulence(x, y, 64) * 0x010101);
+	// return (chess_board(x, y));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -141,13 +140,15 @@ int			cone_texture(t_texture *texture, t_shape *shape)
 	// u = u / M_PI;
 	v = r.y / shape->dims.y;
 	u = acos(r.x / (shape->dims.x + (0.0 - shape->dims.x) * v)) / (M_PI);
-	if (r.y < 0)
-		u = 1 - u;
-	x = (1 - u) * texture->surface->w;
-	y = (1 - v) * texture->surface->h;
-	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (wood(x, y));
-	return (chess_board(x, y));
+	// if (r.y < 0)
+	// 	u = 1 - u;
+	// if ((1 - v) >= 0.8)
+	// 	return (0xff0000);
+	x = (int)((1 - u) * M_PI * shape->dims.x * PIXELS_BLOCK);
+	y = (int)(((1 - v) / 2.0) * shape->dims.y * PIXELS_BLOCK);
+	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch + (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
+	// return (wood(x, y));
+	// return (chess_board(x, y));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
 
@@ -171,7 +172,7 @@ int			torus_texture(t_texture *texture, t_shape *shape)
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (wood(x, y));
+	// return (wood(x, y));
 	return (chess_board(x, y));
 	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
 }
