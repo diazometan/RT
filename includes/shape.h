@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/13 15:47:25 by lwyl-the         ###   ########.fr       */
+/*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
+/*   Updated: 2019/04/14 18:49:32 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct		s_texture
 typedef struct		s_shape
 {
 	int				figure;
-	//int				color;
 	double			specular;
 	double			reflection;
 	double			refract;
@@ -41,6 +40,7 @@ typedef struct		s_shape
 	t_vec3			unit;
 	t_vec3			normal;
 	double			(*gd_fun)();
+	t_vec3			(*map_texture)();
 	struct s_shape	*next;
 }					t_shape;
 
@@ -53,6 +53,7 @@ void				init_dimensions(char *s, t_shape *new);
 void				init_center(char *s, t_shape *new);
 void				init_refraction(char *s, t_shape *new);
 void				init_function(t_shape *new);
+void				init_function_texture(t_shape *new);
 int					init_texture(char *object, t_shape *new, t_texture **head_textures);
 int					init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
 

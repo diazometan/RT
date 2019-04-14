@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/13 15:48:48 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/14 18:53:55 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		init_dimensions(object, new);
 		init_refraction(object, new);
 		init_function(new);
+		init_function_texture(new);
 		if (init_texture(object, new, head_textures))
 			new->texture = NULL;
 		if (init_texture_map(object, new, head_textures))
