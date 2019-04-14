@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/13 15:28:28 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/14 19:05:20 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,3 +182,4 @@ double			get_distance_cone(t_coord *from, t_shape *shape)
 
 	return (distance);
 }*/
+

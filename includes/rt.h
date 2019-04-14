@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/13 16:41:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/14 19:21:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct		s_light
 	double			intensity;
 	t_vec3			ray;
 	t_vec3			point;
+	t_vec3			dir;
 	struct s_light	*next;
 }					t_light;
 
@@ -87,7 +88,7 @@ double				mix(double dist_a, double dist_b);
 int					get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
 void				get_normal(t_shape *shape);
-double					shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
+double				shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
 int					reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 int					emission(t_shape *shape, t_rt *rt, int depth);
 //int					trace_ray(t_coord *ray, t_rt *rt); //int depth);
@@ -109,5 +110,7 @@ t_vec3					cylinder_texture(t_texture *texture, t_shape *shape);
 t_vec3					cone_texture(t_texture *texture, t_shape *shape);
 t_vec3					torus_texture(t_texture *texture, t_shape *shape);
 t_vec3					box_texture(t_texture *texture, t_shape *shape);
+
+double			gd_mobius(t_vec3 *p, t_shape *shape);
 
 #endif

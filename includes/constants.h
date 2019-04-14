@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 17:40:27 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/14 19:23:19 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define POINT 1
 # define DIRECTIONAL 2
 # define AMBIENT 3
+# define SPOT 4
 
 # define RED 0xFF0000
 # define GREEN 0x008000

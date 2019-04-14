@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 14:57:42 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/14 20:00:49 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,42 @@ static double	get_specular(t_shape *shape, t_light *light,
 	return (specular);
 }
 
+static double	get_spot_light(t_vec3 *dir, t_shape *shape, t_light *light, t_shape *head_shape)
+{
+	double	l_length;
+	double	light_sum;
+	double	light_t_norm;
+	double	cosi;
+	double	sini;
+
+	light_sum = 0.0;
+	vec3_subtract(&shape->surface_point, &light->point, &light->ray);
+	vec3_normalize(&light->ray, vec3_length(&light->ray));
+	cosi = vec3_dot(&light->ray, &light->dir);
+	sini = sqrt(1 - cosi * cosi);
+	if (cosi > 0.9 && cosi < 1.0 && sini > 0 && sini < 0.5)
+	{
+		vec3_subtract(&light->point, &shape->surface_point, &light->ray);
+		light_t_norm = vec3_dot(&light->ray, &shape->normal);
+		if ((light_t_norm) > 0)
+		{
+			l_length = vec3_length(&light->ray);
+			if (shadow(&shape->surface_point, light->ray, head_shape, l_length) == 0)
+				return (0);
+			cosi = (cosi - 0.9) / 0.1;
+			light_sum = cosi * light->intensity * (light_t_norm / l_length);
+			if (shape->specular > 0)
+				light_sum += get_specular(shape, light, dir, light_t_norm);
+		}
+	}
+	return (light_sum);
+}
+
 static double	get_point_light(t_vec3 *dir, t_shape *shape, t_light *light, t_shape *head_shape)
 {
 	double	l_length;
 	double	light_sum;
 	double	light_t_norm;
-	//double	shadow_value;
 
 	light_sum = 0.0;
 	vec3_subtract(&light->point, &shape->surface_point, &light->ray);
@@ -90,6 +120,8 @@ double			get_light(t_vec3 *dir, t_shape *shape, t_rt *rt)
 		{
 			if (head->type == POINT)
 				light_sum += get_point_light(dir, shape, head, rt->head_shapes);
+			else if (head->type == SPOT)
+				light_sum += get_spot_light(dir, shape, head, rt->head_shapes);
 			else if (head->type == DIRECTIONAL)
 				light_sum += get_directional_light(dir, shape, head, rt->head_shapes);
 			else if (head->type == AMBIENT)

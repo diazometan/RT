@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lighting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/18 15:35:12 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/14 19:37:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void		get_light_type(char *object, t_light *new)
 		new->type = DIRECTIONAL;
 	else if (ft_strnstr(start, "ambient", len))
 		new->type = AMBIENT;
+	else if (ft_strnstr(start, "spot", len))
+		new->type = SPOT;
 	else
 	{
 		ft_putendl(U_LIGHT PFCF);
@@ -70,7 +72,7 @@ static void		get_coordinates(char *object, t_light *new)
 	char	*str;
 	char	*start;
 
-	if (new->type == POINT)
+	if (new->type == POINT || new->type == SPOT)
 	{
 		if ((start = ft_strstr(object, "center")) == NULL)
 		{
@@ -90,6 +92,17 @@ static void		get_coordinates(char *object, t_light *new)
 		str = ft_strextract(start, '[', ']');
 		extract_coord(str, &new->ray);
 	}
+	if (new->type == SPOT)
+	{
+		if ((start = ft_strstr(object, "dir")) == NULL)
+		{
+			ft_putendl(M_CENTER PFCF);
+			exit(1);
+		}
+		str = ft_strextract(start, '[', ']');
+		extract_coord(str, &new->dir);
+		vec3_normalize(&new->dir, vec3_length(&new->dir));
+	}
 	free(str);
 }
 
@@ -104,7 +117,7 @@ void			init_lighting(char *s, t_light **head)
 		new->next = NULL;
 		get_light_type(object, new);
 		get_intensity(object, new);
-		if (new->type == POINT || new->type == DIRECTIONAL)
+		if (new->type == POINT || new->type == DIRECTIONAL || new->type == SPOT)
 			get_coordinates(object, new);
 		free(object);
 		s += ft_strlen(object);
