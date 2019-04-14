@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 17:13:25 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/13 16:41:31 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void				extract_coord(char *str, t_vec3 *coord);
 void				init_lighting(char *s, t_light **head);
 void				init_shapes(char *s, t_shape **head, t_texture **head_textures);
 void				init_physics(char *s, t_rt *rt);
-int					init_texture(char *object, t_shape *new, t_texture **head_textures);
-void				create_caps(t_rt *rt);
 void				free_args(t_shape *shape, t_light *light, t_texture *texture);
 
 void				create_img(t_rt *rt, t_sdl *sdl);
@@ -105,11 +103,11 @@ int					emission(t_shape *shape, t_rt *rt, int depth);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
 
-int					sphere_texture(t_texture *texture, t_shape *shape);
-int					plane_texture(t_texture *texture, t_shape *shape);
-int					cylinder_texture(t_texture *texture, t_shape *shape);
-int					cone_texture(t_texture *texture, t_shape *shape);
-int					torus_texture(t_texture *texture, t_shape *shape);
-int					box_texture(t_texture *texture, t_shape *shape);
+t_vec3					sphere_texture(t_texture *texture, t_shape *shape);
+t_vec3					plane_texture(t_texture *texture, t_shape *shape);
+t_vec3					cylinder_texture(t_texture *texture, t_shape *shape);
+t_vec3					cone_texture(t_texture *texture, t_shape *shape);
+t_vec3					torus_texture(t_texture *texture, t_shape *shape);
+t_vec3					box_texture(t_texture *texture, t_shape *shape);
 
 #endif

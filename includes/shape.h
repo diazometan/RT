@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:49:50 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 17:47:09 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:47:25 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct		s_texture
 typedef struct		s_shape
 {
 	int				figure;
-	int				color;
+	//int				color;
 	double			specular;
 	double			reflection;
 	double			refract;
@@ -34,6 +34,7 @@ typedef struct		s_shape
 	t_matrix		rotation;
 	t_texture		*texture;
 	t_texture		*tex_normal;
+	t_vec3			color;
 	t_vec3			dims;
 	t_vec3			center;
 	t_vec3			surface_point;
@@ -52,5 +53,7 @@ void				init_dimensions(char *s, t_shape *new);
 void				init_center(char *s, t_shape *new);
 void				init_refraction(char *s, t_shape *new);
 void				init_function(t_shape *new);
+int					init_texture(char *object, t_shape *new, t_texture **head_textures);
+int					init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
 
 #endif

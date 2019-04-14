@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 17:41:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:37:30 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			sphere_texture(t_texture *texture, t_shape *shape)
+t_vec3			sphere_texture(t_texture *texture, t_shape *shape)
 {
 	int				x;
 	int				y;
@@ -25,10 +25,10 @@ int			sphere_texture(t_texture *texture, t_shape *shape)
 	x = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI)) * texture->surface->w;
 	y = (0.5 - asin(normal.y) / M_PI) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
+	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
-int			plane_texture(t_texture *texture, t_shape *shape)
+t_vec3			plane_texture(t_texture *texture, t_shape *shape)
 {
 	int				x;
 	int				y;
@@ -59,10 +59,10 @@ int			plane_texture(t_texture *texture, t_shape *shape)
 	x = u * texture->surface->w / 2;
 	y = (2 - v) * texture->surface->h / 2;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
+	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
-int			cylinder_texture(t_texture *texture, t_shape *shape)
+t_vec3			cylinder_texture(t_texture *texture, t_shape *shape)
 {
 	t_vec3	unit;
 	t_vec3	r;
@@ -92,10 +92,10 @@ int			cylinder_texture(t_texture *texture, t_shape *shape)
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
+	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
-int			cone_texture(t_texture *texture, t_shape *shape)
+t_vec3			cone_texture(t_texture *texture, t_shape *shape)
 {
 	t_vec3	unit;
 	t_vec3	r;
@@ -133,10 +133,10 @@ int			cone_texture(t_texture *texture, t_shape *shape)
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
+	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
-int			torus_texture(t_texture *texture, t_shape *shape)
+t_vec3			torus_texture(t_texture *texture, t_shape *shape)
 {
 	t_vec3	r;
 	double	u;
@@ -159,10 +159,10 @@ int			torus_texture(t_texture *texture, t_shape *shape)
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
+	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
-int			box_texture(t_texture *texture, t_shape *shape)
+t_vec3			box_texture(t_texture *texture, t_shape *shape)
 {
 	t_vec3	r;
 	double	u;
@@ -192,5 +192,5 @@ int			box_texture(t_texture *texture, t_shape *shape)
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	return (*pixel | *(pixel + 1) << 8 | *(pixel + 2) << 16);
+	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }

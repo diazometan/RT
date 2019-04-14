@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 19:03:42 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/13 13:47:45 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,23 @@ static int		identify_shape(char *start, char *end)
 	}
 }
 
-static int		identify_color(char *start, char *end)
+static t_vec3		identify_color(char *start, char *end)
 {
 	size_t	len;
 
 	len = end - start;
 	if (ft_strnstr(start, "red", end - start))
-		return (RED);
+		return ((t_vec3){255, 0, 0});
 	else if (ft_strnstr(start, "green", end - start))
-		return (GREEN);
+		return ((t_vec3){0, 255, 0});
 	else if (ft_strnstr(start, "blue", end - start))
-		return (BLUE);
+		return ((t_vec3){0, 0, 255});
 	else if (ft_strnstr(start, "yellow", end - start))
-		return (YELLOW);
+		return ((t_vec3){255, 255, 0});
 	else if (ft_strnstr(start, "purple", end - start))
-		return (PURPLE);
+		return ((t_vec3){0, 255, 255});
 	else if (ft_strnstr(start, "white", end - start))
-		return (WHITE);
+		return ((t_vec3){255, 255, 255});
 	else
 	{
 		ft_putendl(U_COLOR PFCF);

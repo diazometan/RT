@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 18:19:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:28:28 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ double			gd_plane(t_vec3 *p, t_shape *shape)
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(shape->rotation, &orig);
-	d = displacement(p);
+	/*d = displacement(p);
 	if (d > 0)
-		d *= -1.0;
+		d *= -1.0;*/
 	return (fabs((vec3_dot(&shape->unit, &orig))));
 }
 

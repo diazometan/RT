@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 17:45:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:49:05 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ int	init_texture(char *object, t_shape *shape, t_texture **head_textures)
 			free(str);
 		return (0);
 	}
+	return (1);
+}
+
+int	init_texture_map(char *object, t_shape *shape, t_texture **head_textures)
+{
+	char	*start;
+	char	*str;
+
 	if ((start = ft_strstr(object, "normal_mapping")) != NULL)
 	{
 		str = ft_strextract(start + 15, '"', '"');
@@ -90,6 +98,7 @@ int	init_texture(char *object, t_shape *shape, t_texture **head_textures)
 			push_back_texture(head_textures, create_texture(str, shape, 1));
 		else
 			free(str);
+		return (0);
 	}
 	return (1);
 }

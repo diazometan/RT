@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/12 17:40:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/14 13:38:35 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	//light = emission(shape, rt, depth);
 	if (shape->texture != NULL)
 	{
-		if (shape->figure == SPHERE)
+		if (shape->figure == SPHERE || shape->figure == ELIPSIOD)
 			shape->color = sphere_texture(shape->texture, shape);
 		else if (shape->figure == PLANE)
 			shape->color = plane_texture(shape->texture, shape);
@@ -91,9 +91,9 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 		else if (shape->figure == BOX || shape->figure == FRACTAL)
 			shape->color = box_texture(shape->texture, shape);
 	}
-	rgb[0] = (shape->color >> 16 & 0xFF) * light;
-	rgb[1] = (shape->color >> 8 & 0xFF) * light;
-	rgb[2] = (shape->color & 0xFF) * light;
+	rgb[0] = shape->color.x * light;
+	rgb[1] = shape->color.y * light;
+	rgb[2] = shape->color.z * light;
 	color = check_color(rgb);
 	/*if (shape->emission == 0.0)
 		color = emission(shape, rt, depth);

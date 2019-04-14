@@ -2,21 +2,33 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"plane",
+				"shape":"elipsoid",
 				"color":"red",
-				"center":[0,-1,5],
-				"direction":[0,1,0]
+				"sides":[2,1,2],
+				"texture":"brick",
+				"center":[0,0,5],
+				"direction":[0,0,0]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
-				"intensity":0.6,
-				"center":[2,2,0]
+				"intensity":0.8,
+				"center":[0,0,10]
+			},
+			{
+				"type":"point",
+				"intensity":0.3,
+				"center":[0,0,0]
+			},
+			{
+				"type":"point",
+				"intensity":0.3,
+				"center":[0,5,5]
 			},
 			{
 				"type":"ambient",
-				"intensity":0.8
+				"intensity":0.5
 			}
 		],
 		"camera":{

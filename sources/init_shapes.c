@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 17:47:11 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:48:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		new = (t_shape *)malloc(sizeof(*new));
 		new->next = NULL;
 		init_shape_color(object, new);
-		if (new->color == WHITE && new->figure == SPHERE)
+		/*if (new->color == WHITE && new->figure == SPHERE)
 			new->emission = 1.0;
 		else
-			new->emission = 0.0;
+			new->emission = 0.0;*/
 		init_spec_refl(object, new);
 		init_center(object, new);
 		init_direction(object, new);
@@ -71,6 +71,8 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		init_function(new);
 		if (init_texture(object, new, head_textures))
 			new->texture = NULL;
+		if (init_texture_map(object, new, head_textures))
+			new->tex_normal = NULL;
 		s += ft_strlen(object);
 		free(object);
 		push_back_shape(head, new);

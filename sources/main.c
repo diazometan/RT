@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 17:12:29 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/13 16:41:52 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int		main(int args, char **argv)
 			printf("box, ");
 		else if (h_s->figure == 9)
 			printf("capsule, ");
-		printf("color - %x, specular - %.2f, reflection = %.2f, refraction - %.2f, emission - %f, ", h_s->color, h_s->specular, h_s->reflection, h_s->refract, h_s->emission);
+		printf("color - %.0f %.0f %.0f, specular - %.2f, reflection = %.2f, refraction - %.2f, emission - %f, ", h_s->color.x, h_s->color.y, h_s->color.z, h_s->specular, h_s->reflection, h_s->refract, h_s->emission);
 		if (h_s->texture != NULL)
 			printf("texture - %s, ", h_s->texture->name);
 		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK || h_s->figure == CONE || h_s->figure == BOX || h_s->figure == CAPSULE)
@@ -135,13 +135,6 @@ int		main(int args, char **argv)
 			printf("height - %.2f ", h_s->dims.y);
 		printf("\n\tx - %.2f, y - %.2f, z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
 		printf("\n\tx_u - %.2f, y_u - %.2f, z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
-		/*else
-		{
-			printf("\n\tA: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[0].x, h_s->triangle[0].y, h_s->triangle[0].z);
-			printf("\tB: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[1].x, h_s->triangle[1].y, h_s->triangle[1].z);
-			printf("\tC: x - %.2f, y - %.2f, z - %.2f\n", h_s->triangle[2].x, h_s->triangle[2].y, h_s->triangle[2].z);
-			printf("\tx_u - %.2f, y_u - %.2f, z_u - %.2f\n", h_s->unit.x, h_s->unit.y, h_s->unit.z);
-		}*/
 		printf("\n");
 		h_s = h_s->next;
 	}
@@ -172,7 +165,6 @@ int		main(int args, char **argv)
 	if (init_sdl(&sdl))
 		return (1);
 	create_img(&rt, &sdl);
-	//SDL_UpdateWindowSurface(sdl.win);
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_DestroyWindow(sdl.win);
