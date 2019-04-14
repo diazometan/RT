@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 19:05:28 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/14 20:08:58 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,24 @@ static t_vec3		identify_color(char *start, char *end)
 		ft_putendl(U_COLOR PFCF);
 		exit(1);
 	}
+}
+
+void			init_function_texture(t_shape *new)
+{
+	if (new->figure == PLANE)
+		new->map_texture = &plane_texture;
+	else if (new->figure == SPHERE || new->figure == ELIPSIOD)
+		new->map_texture = &sphere_texture;
+	else if (new->figure == CYLINDER)
+		new->map_texture = &cylinder_texture;
+	else if (new->figure == CONE)
+		new->map_texture = &cone_texture;
+	else if (new->figure == TORUS)
+		new->map_texture = &torus_texture;
+	else if (new->figure == BOX || new->figure == FRACTAL)
+		new->map_texture = &box_texture;
+	//else if (new->figure == CAPSULE)
+		//new->map_texture = &gd_capsule;
 }
 
 void			init_function(t_shape *new)
