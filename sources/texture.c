@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 15:30:34 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:18:51 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,34 @@ t_vec3			sphere_texture(t_texture *texture, t_shape *shape)
 	int				y;
 	t_vec3			normal;
 	unsigned char	*pixel;
+	double			u;
+	double			v;
+	double			delta_u;
+	double			delta_v;
 
 	vec3_subtract(&shape->surface_point, &shape->center, &normal);
 	vector_matrix_multiply(shape->rotation, &normal);
 	vec3_normalize(&normal, vec3_length(&normal));
-	x = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI)) * texture->surface->w;
-	y = (0.5 - asin(normal.y) / M_PI) * texture->surface->h;
+	delta_u = 0.0;
+	delta_v = 0.05;
+	u = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI)) + delta_u;
+	v = (0.5 - asin(normal.y) / M_PI) + delta_v;
+	while(u > 1.0)
+		u = u - 1;
+	while(v > 1.0)
+		v = v - 1;
+	u = ((u * 2.0) - 1.0);
+	x = (int)(2 * M_PI * shape->dims.x * PIXELS_BLOCK * fabs(u));
+	y = (int)(M_PI * shape->dims.x * PIXELS_BLOCK * v);
+	x = (int)(texture->surface->w * fabs(u));
+	y = (int)(texture->surface->h * v);
+	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch
+	+ (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	// return (wood(x, y));
+	// return (marble(x, y));
+	// return (noise(x, y));
+	// return (chess_board(x + (u < 0) * 10, y));
 	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
@@ -59,6 +80,9 @@ t_vec3			plane_texture(t_texture *texture, t_shape *shape)
 	x = u * texture->surface->w / 2;
 	y = (2 - v) * texture->surface->h / 2;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	// return (wood(x, y));
+	// return (noise(x, y));
+	//return (chess_board(x, y));
 	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
@@ -87,11 +111,15 @@ t_vec3			cylinder_texture(t_texture *texture, t_shape *shape)
 
 	u = acos(ft_dclamp(r.x, shape->dims.x * 1.0, shape->dims.x * -1.0) / shape->dims.x);
 	v = r.y / shape->dims.y;
-	u = u / M_PI;
+	u = (u / M_PI) * 2.0 - 1.0;
 	v = (v + 1) / 2;
-	x = (1 - u) * texture->surface->w;
-	y = (1 - v) * texture->surface->h;
-	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	x = (int)((1 - fabs(u)) * M_PI * shape->dims.x * PIXELS_BLOCK);
+	y = (int)((1 - v) * 2.0 * shape->dims.y * PIXELS_BLOCK);
+	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch + (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
+	// return (wood(x, y));
+	// return (marble(x, y));
+	// return (noise(x, y));
+	//return (chess_board(x, y));
 	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
@@ -101,13 +129,15 @@ t_vec3			cone_texture(t_texture *texture, t_shape *shape)
 	t_vec3	r;
 	double	u;
 	double	v;
-	//double tmp;
 	int x;
 	int y;
 	unsigned char	*pixel;
 	t_matrix		rotation;
+	t_vec3	unite1;
+	t_vec3	angle;
 
 	unit = (t_vec3) {0, 1, 0};
+	unite1 = (t_vec3) {1, 0, 0};
 
 	rotation = matrix_multiply(z_rotation_matrix(-shape->unit.z),
 							matrix_multiply(y_rotation_matrix(shape->unit.y), x_rotation_matrix(-shape->unit.x)));
@@ -118,21 +148,18 @@ t_vec3			cone_texture(t_texture *texture, t_shape *shape)
 	vec3_subtract(&shape->surface_point, &shape->center, &r);
 	vector_matrix_multiply(shape->rotation, &r);
 
-	//u = acos(ft_dclamp(r.x , shape->dims.x * 1.0, shape->dims.x * -1.0) / (shape->dims.x * (1 - r.y / shape->dims.y)));
-	// v = r.y / shape->dims.y;
-	// //u = u / M_PI;
-	// v = (v + 1) / 2;
-	// u = acos(ft_dclamp(ft_dclamp(r.x , shape->dims.x * 1.0, shape->dims.x * -1.0) / (shape->dims.x * (shape->dims.y - v)), 1.0, -1.0));
-	// u = u / M_PI;
+	angle = (t_vec3){r.x, 0, r.z};
+	vec3_normalize(&angle, vec3_length(&angle));
+	u = acos(vec3_dot(&angle, &unite1)) / M_PI;
 	v = r.y / shape->dims.y;
-	u = acos(ft_dclamp(r.x / (shape->dims.x + (0.0 - shape->dims.x) * v), 1.0, -1.0)) / M_PI;
 	v = (v + 1) / 2;
-	//printf("%f   %f\n", u, v);
-	if (r.z < 0)
-		u = 1 - u;
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	// return (wood(x, y));
+	// return (marble(x, y));
+	// return (noise(x, y));
+	//return (chess_board(x, y));
 	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
@@ -155,10 +182,12 @@ t_vec3			torus_texture(t_texture *texture, t_shape *shape)
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;*/
 	u = 0.5 + atan2(r.y, r.x) / (2 * M_PI);
+	u = 1.0 - 2.0 * u;
 	v = 0.5 + atan2(r.z, sqrt(r.x * r.x + r.y * r.y) - shape->dims.y) / (2 * M_PI);
-	x = (1 - u) * texture->surface->w;
-	y = (1 - v) * texture->surface->h;
+	x = (1.0 - fabs(u)) * (texture->surface->w / 10) * 10;
+	y = (1.0 - v) * texture->surface->h;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	//return (chess_board(x, y));
 	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 

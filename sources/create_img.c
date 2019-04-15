@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 19:02:42 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:09:53 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 		from.z = rt->source_point->z + dist.t * dir->z;
 		while (head != NULL)
 		{
-			dist.d = head->gd_fun(&from, head);
+			dist.d = shape_summ(&from, head);
 			if (dist.d < dist.min_distance)
 			{
 				dist.min_distance = dist.d;
@@ -118,6 +118,7 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 
 void		create_img(t_rt *rt, t_sdl *sdl)
 {
+	printf("create_img\n");
 	int		x;
 	int		y;
 	int		x_limit;

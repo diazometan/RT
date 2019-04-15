@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 18:49:32 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 19:07:34 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ typedef struct		s_shape
 	double			(*gd_fun)();
 	t_vec3			(*map_texture)();
 	struct s_shape	*next;
+	int				id;
+	int				f_is_group;
+	int				f_is_in_group;
+	struct s_shape	*shape1;
+	struct s_shape	*shape2;
 }					t_shape;
 
 void				push_back_shape(t_shape **head, t_shape *new);
@@ -56,5 +61,7 @@ void				init_function(t_shape *new);
 void				init_function_texture(t_shape *new);
 int					init_texture(char *object, t_shape *new, t_texture **head_textures);
 int					init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
+void				init_shape_child(t_shape *new, t_shape *shape1, t_shape *shape2);
+void				init_id(char *s, t_shape *new);
 
 #endif

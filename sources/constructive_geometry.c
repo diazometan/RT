@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructive_geometry.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:36:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/05 18:52:54 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/08 14:05:32 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double			intersect(double dist_a, double dist_b)
 {
-	 return (ft_dmax(dist_a, dist_b));
+	return (ft_dmax(dist_a, dist_b));
 }
 
 double			unite(double dist_a, double dist_b)
@@ -24,7 +24,7 @@ double			unite(double dist_a, double dist_b)
 
 double			difference(double dist_a, double dist_b)
 {
-	return (ft_dmax(-dist_a, dist_b));
+	return (ft_dmax(dist_a, -dist_b));
 }
 
 double			blend(double dist_a, double dist_b)

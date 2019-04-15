@@ -1,0 +1,43 @@
+{
+	"scene":{
+		"objects":[
+			{
+				"id":0,
+				"shape":"sphere",
+				"color":"red",
+				"texture":"brick",
+				"center":[2,0,6],
+				"radius":0.5,
+				"direction":[0,1,0]
+			},
+			{
+				"id":0,
+				"shape":"sphere",
+				"color":"red",
+				"texture":"brick",
+				"center":[-2,0,6],
+				"radius":3.5,
+				"direction":[0,1,0]
+			}
+		],
+		"lighting":[
+			{
+				"type":"point",
+				"intensity":0.6,
+				"center":[0,2,0]
+			},
+			{
+				"type":"ambient",
+				"intensity":0.2
+			}
+		],
+		"camera":{
+			"center":[0,0,0],
+			"direction":[0,0,0]
+		},
+		"physics":{
+			"reflection depth":3,
+			"pixel division":1
+		}
+	}
+}

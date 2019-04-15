@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/15 15:29:08 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/15 19:05:20 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,17 @@ SRC = main.c\
 	  vec3.c\
 	  vec2.c\
 	  constructive_geometry.c\
-	  free_args.c
+	  free_args.c\
+	  init_id.c\
+	  shape_summ.c\
+	  init_shape_child.c\
+	  generateNoise.c\
+	  smooth_noise.c\
+	  turbulence.c\
+	  noise.c\
+	  wood.c\
+	  chess_board.c\
+	  marble.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
