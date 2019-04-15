@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 20:07:20 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 10:33:26 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct		s_rt
 }					t_rt;
 
 int					init_config(char *file, t_rt *rt);
+char				*get_file(int fd);
 void				extract_coord(char *str, t_vec3 *coord);
 void				init_lighting(char *s, t_light **head);
 void				init_shapes(char *s, t_shape **head, t_texture **head_textures);

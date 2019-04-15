@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 19:23:19 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 10:50:37 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 
 # define O_RED "\033[0;31m"
 # define O_NC "\033[0m"
+
+# define M_FILE O_RED "File not found"
+# define E_FILE O_RED "Emty file"
+# define USAGE O_RED "usage: ./RT [configuration_file]"
 
 # define M_SHAPE O_RED "Shape identifier is missing!"
 # define M_COLOR O_RED "Color identifier is missing!"

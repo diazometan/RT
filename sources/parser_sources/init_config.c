@@ -6,11 +6,57 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 20:33:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 12:03:55 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static char	*get_end(char *s, int c_s, int c_e)
+{
+	int		pair;
+	char	c;
+
+	pair = 0;
+	while ((c = *s) != '\0') //&& (c != c_e && pair != 0))
+	{
+		if (c == c_s)
+			++pair;
+		else if (c == c_e)
+		{
+			if (pair == 0)
+				return (s);
+			--pair;
+		}
+		++s;
+	}
+	//printf("str - %s\n", s);
+	//printf("str - %s\n", s);
+	return (NULL);
+}
+
+//static char	*get_end(char *s, int c_s, int c_e, int pair)
+//{
+	//printf("\n\npair - %d\n", pair);
+	//while (s != NULL && *s != '\0' && *s != c_e)
+	//{
+		//printf("cur_char - %c\n", *s);
+		//if (*s == c_s)
+		//{
+			//s = get_end(s + 1, c_s, c_e, pair + 1);
+			//if (s == NULL)
+				//return (NULL);
+		//}
+		//s++;
+	//}
+	//printf("str - %s\n", s);
+	//if (pair != 0)
+		//s = get_end(s + 1, c_s, c_e, pair - 1);
+	//printf("str - %s\n", s);
+	//if (s == NULL || *s == '\0')
+		//return (NULL);
+	//return (s);
+//}
 
 void		extract_coord(char *str, t_vec3 *p)
 {
@@ -64,6 +110,29 @@ int		init_config(char *file, t_rt *rt)
 	char	*lighting;
 	char	*camera;
 	char	*physics;
+
+	char	*end;
+
+	if (*file != '{' || (end = get_end(file + 1, '{', '}')) == NULL || *(end + 1) != '\0')
+		return (1);
+	//printf("start - %c\n", *file);
+	//printf("end - %s\n", get_end(file + 1, '{', '}'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	if ((start = ft_strstr(file, "objects")) == NULL)
 		return (1);

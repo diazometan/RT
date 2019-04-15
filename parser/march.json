@@ -32,8 +32,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":3,
-			"pixel division":1
+			"reflection_depth":3,
+			"pixel_division":1
 		}
 	}
 }

@@ -6,13 +6,15 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/13 13:56:09 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/15 10:31:04 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RT
 
 SRC_DIR = sources
+
+PRS_SRC_DIR = $(SRC_DIR)/parser_sources
 
 OBJ_DIR = objects
 
@@ -25,6 +27,7 @@ FLAGS = -O2 -g -Wall -Wextra #-Werror
 INCLUDES = -I SDL2.framework/Headers -I includes -I libft
 
 SRC = main.c\
+	  read_config_file.c\
 	  event_handler.c\
 	  init_config.c\
 	  init_shapes.c\
@@ -72,7 +75,10 @@ $(OBJ_DIR):
 	@echo "$(GREEN)Objects directory is created!$(NC)"
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h| $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h | $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
+
+$(OBJ_DIR)/%.o: $(PRS_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h | $(OBJ_DIR)
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:

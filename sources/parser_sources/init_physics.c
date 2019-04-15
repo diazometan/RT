@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:26:15 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/04 19:23:42 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 11:23:29 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_reflection_depth(char *s, int *depth)
 	char	*start;
 	char	*str;
 
-	if ((start = ft_strstr(s, "reflection depth")) == NULL)
+	if ((start = ft_strstr(s, "reflection_depth")) == NULL)
 	{
 		ft_putendl(M_DEPTH PFCF);
 		exit(1);
@@ -33,7 +33,7 @@ static void	init_pixel_division(char *s, int *p_division)
 	char	*start;
 	char	*str;
 
-	if ((start = ft_strstr(s, "pixel division")) == NULL)
+	if ((start = ft_strstr(s, "pixel_division")) == NULL)
 	{
 		ft_putendl(M_PDIV PFCF);
 		exit(1);

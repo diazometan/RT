@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 19:35:22 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 10:52:25 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,7 @@ static int		init_sdl(t_sdl *sdl)
 	return (0);
 }
 
-static char	*get_file(int fd)
-{
-	int		error;
-	char	*line;
-	char	*file;
-	char	*tmp;
-
-	file = ft_strnew(1);
-	while ((error = get_next_line(fd, &line)) > 0)
-	{
-		tmp = ft_strjoin(file, ft_strtrim(line));
-		free(file);
-		file = tmp;
-	}
-	if (error == -1)
-	{
-		ft_putendl("gnl error occured");
-		free(file);
-		exit(1);
-	}
-	if (ft_strlen(file) == 0)
-	{
-		ft_putendl("empty file");
-		free(file);
-		exit(1);
-	}
-	return (file);
-}
-
-static void	init_rt(t_rt *rt, char *config_file)
+static int	init_rt(t_rt *rt, char *config_file)
 {
 	int		fd;
 	char	*file;
@@ -72,22 +43,25 @@ static void	init_rt(t_rt *rt, char *config_file)
 	rt->head_shapes = NULL;
 	rt->head_light = NULL;
 	rt->head_textures = NULL;
-	rt->p_division = 1;
-	fd = open(config_file, O_RDONLY);
-	file = get_file(fd);
+	if ((fd = open(config_file, O_RDONLY)) < 0)
+	{
+		ft_putendl(M_FILE);
+		return (1);
+	}
+	if ((file = get_file(fd)) == NULL)
+		return (1);
 	if (init_config(file, rt))
 	{
 		printf("Error in config file...\n");
 		free(file);
 		free_args(rt->head_shapes, rt->head_light, rt->head_textures);
-		exit(1);
+		return (1);
 	}
 	free(file);
 	close(fd);
-	rt->sample = 1;
-	//create_caps(rt);
 	rt->win_width = 600;
 	rt->win_height = 600;
+	return (0);
 }
 
 int		main(int args, char **argv)
@@ -98,10 +72,11 @@ int		main(int args, char **argv)
 	srand48(time(NULL));
 	if (args != 2)
 	{
-		ft_putstr("\033[0;31musage: ./RTv1 [configuration_file]\n");
+		ft_putendl(USAGE);
 		return (1);
 	}
-	init_rt(&rt, argv[1]);
+	if (init_rt(&rt, argv[1]))
+		return (1);
 	//TEMPORARY CHECK FOR CONFIG PARSER
 	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
@@ -166,8 +141,8 @@ int		main(int args, char **argv)
 	//END
 	if (init_sdl(&sdl))
 		return (1);
-	create_img(&rt, &sdl);
-	event_handler(&rt, &sdl);
+	//create_img(&rt, &sdl);
+	//event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_DestroyWindow(sdl.win);
 	SDL_Quit();
