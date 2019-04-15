@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 10:52:25 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 16:20:43 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int		main(int args, char **argv)
 		else if (h_s->figure == 4)
 			printf("cone, ");
 		else if (h_s->figure == 5)
-			printf("disk, ");
+			printf("inf_cylinder, ");
 		else if (h_s->figure == 6)
-			printf("triangle, ");
+			printf("inf_cone, ");
 		else if (h_s->figure == 7)
 			printf("torus, ");
 		else if (h_s->figure == 8)
@@ -104,7 +104,7 @@ int		main(int args, char **argv)
 		printf("color - %.0f %.0f %.0f, specular - %.2f, reflection = %.2f, refraction - %.2f, emission - %f, ", h_s->color.x, h_s->color.y, h_s->color.z, h_s->specular, h_s->reflection, h_s->refract, h_s->emission);
 		if (h_s->texture != NULL)
 			printf("texture - %s, ", h_s->texture->name);
-		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK || h_s->figure == CONE || h_s->figure == BOX || h_s->figure == CAPSULE)
+		if (h_s->figure != BOX && h_s->figure != FRACTAL && h_s->figure != PLANE)
 			printf("radius - %.2f ", h_s->dims.x);
 		if (h_s->figure == CYLINDER || h_s->figure == CONE || h_s->figure == CAPSULE)
 			printf("height - %.2f ", h_s->dims.y);

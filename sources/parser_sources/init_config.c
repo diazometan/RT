@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 12:03:55 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 14:30:26 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static char	*get_end(char *s, int c_s, int c_e)
+char	*get_end(char *s, int c_s, int c_e)
 {
 	int		pair;
 	char	c;
@@ -115,6 +115,21 @@ int		init_config(char *file, t_rt *rt)
 
 	if (*file != '{' || (end = get_end(file + 1, '{', '}')) == NULL || *(end + 1) != '\0')
 		return (1);
+	if ((start = ft_strnstr(file + 1, "\"scene\":", 8)) == NULL)
+		return (1);
+	start += 8;
+	//printf("\n\nstr - %s\n", start);
+	if (*start != '{' || get_end(start + 1, '{', '}') == NULL)
+		return (1);
+
+
+	if ((start = ft_strnstr(start + 1, "\"objects\":", 10)) == NULL)
+		return (1);
+	start += 10;
+	if (*start != '[' || (end = get_end(start + 1, '[', ']')) == NULL || *(end + 1) != ',')
+		return (1);
+	printf("check\n");
+	init_shapes(start + 1, &rt->head_shapes, &rt->head_textures);
 	//printf("start - %c\n", *file);
 	//printf("end - %s\n", get_end(file + 1, '{', '}'));
 
@@ -134,10 +149,10 @@ int		init_config(char *file, t_rt *rt)
 
 
 
-	if ((start = ft_strstr(file, "objects")) == NULL)
-		return (1);
-	shapes = ft_strextract(start, '[', ']');
-	init_shapes(shapes, &rt->head_shapes, &rt->head_textures);
+	//if ((start = ft_strstr(file, "\"objects\"")) == NULL)
+		//return (1);
+	//shapes = ft_strextract(start, '[', ']');
+	//init_shapes(shapes, &rt->head_shapes, &rt->head_textures);
 	if ((start = ft_strstr(file, "lighting")) == NULL)
 		return (1);
 	lighting = ft_strextract(start, '[', ']');

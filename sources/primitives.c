@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 19:05:20 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 16:46:15 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double			gd_sphere(t_vec3 *p, t_shape *shape)
 double			gd_plane(t_vec3 *p, t_shape *shape)
 {
 	t_vec3 orig;
-	double d;
+	//double d;
 
 	vec3_subtract(p, &shape->center, &orig);
 	//vector_matrix_multiply(shape->rotation, &orig);

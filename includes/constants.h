@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 10:50:37 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 15:24:45 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define SPHERE 2
 # define CYLINDER 3
 # define CONE 4
-# define DISK 5
-# define TRIANGLE 6
+# define INF_CYLINDER 5
+# define INF_CONE 6
 # define TORUS 7
 # define BOX 8
 # define CAPSULE 9

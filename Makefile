@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/15 10:31:04 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/15 15:30:50 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC = main.c\
 	  event_handler.c\
 	  init_config.c\
 	  init_shapes.c\
-	  parse_one.c\
+	  shape_parse_one.c\
 	  parse_two.c\
 	  init_dimensions.c\
 	  init_physics.c\

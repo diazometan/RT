@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 10:24:29 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 11:12:06 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 12:18:53 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static size_t	count_letters(char *file)
 	size_t	len;
 
 	len = 0;
-	printf("check\n");
 	while ((c = *file) != '\0')
 	{
 
@@ -26,7 +25,6 @@ static size_t	count_letters(char *file)
 			++len;
 		++file;
 	}
-	printf("check\n");
 	return (len);
 }
 
@@ -82,6 +80,6 @@ char	*get_file(int fd)
 		free(file);
 		return (NULL);
 	}
-	printf("init_file - %s\n", file);
+	//printf("init_file - %s\n", file);
 	return (remove_white_spaces(file));
 }

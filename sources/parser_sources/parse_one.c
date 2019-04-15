@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 20:08:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 15:29:47 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,20 +110,19 @@ void			init_function(t_shape *new)
 		new->gd_fun = &fractal;
 }
 
-void			init_shape_color(char *s, t_shape *new)
+void			init_shape_color(char *s, int len, t_shape *new)
 {
 	char	*start;
 	char	*end;
-	//char	*str;
 
-	if ((start = ft_strstr(s, "shape")) == NULL)
+	if ((start = ft_strnstr(s, "\"shape\":", len)) == NULL)
 	{
 		ft_putendl(M_SHAPE PFCF);
 		exit(1);
 	}
-	end = ft_strchr(start, ',');
+	//end = ft_strchr(start, ',');
 	new->figure = identify_shape(++start, end);
-	if ((start = ft_strstr(s, "color")) == NULL)
+	if ((start = ft_strstr(s, "\"color\":")) == NULL)
 	{
 		ft_putendl(M_COLOR PFCF);
 		exit(1);
