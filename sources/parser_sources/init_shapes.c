@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 17:25:16 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 18:45:21 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	push_back_shape(t_shape **head, t_shape *new)
 void	init_rotation(t_shape *new)
 {
 	new->rotation = matrix_multiply(inverse_x_rotate(new->unit.x),
-							matrix_multiply(inverse_y_rotate(new->unit.y), inverse_z_rotate(new->unit.z)));
+		matrix_multiply(inverse_y_rotate(new->unit.y), inverse_z_rotate(new->unit.z)));
 }
 
 int	ft_strcequ(char const *s1, char const *s2, int c)
@@ -78,6 +78,9 @@ void	init_fun_allocator(char *s, t_shape *new)
 	}
 	printf("identifying shape - %s\n", s + 8);
 	new->figure = identify_shape(s + 8);
+	if (identify_color(s, &new->color))
+		exit (1);
+	printf("color - %f %f %f\n", new->color.x, new->color.y, new->color.z);
 }
 
 int		init_shapes(char *s, t_shape **head, t_texture **head_textures)

@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 16:44:27 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 18:46:23 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct		s_shape
 
 void				push_back_shape(t_shape **head, t_shape *new);
 int					identify_shape(char *start);
+int					identify_color(char *s, t_vec3 *color);
 
 
 

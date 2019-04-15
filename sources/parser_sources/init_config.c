@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 14:30:26 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 18:43:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,46 +35,49 @@ char	*get_end(char *s, int c_s, int c_e)
 	return (NULL);
 }
 
-//static char	*get_end(char *s, int c_s, int c_e, int pair)
-//{
-	//printf("\n\npair - %d\n", pair);
-	//while (s != NULL && *s != '\0' && *s != c_e)
-	//{
-		//printf("cur_char - %c\n", *s);
-		//if (*s == c_s)
-		//{
-			//s = get_end(s + 1, c_s, c_e, pair + 1);
-			//if (s == NULL)
-				//return (NULL);
-		//}
-		//s++;
-	//}
-	//printf("str - %s\n", s);
-	//if (pair != 0)
-		//s = get_end(s + 1, c_s, c_e, pair - 1);
-	//printf("str - %s\n", s);
-	//if (s == NULL || *s == '\0')
-		//return (NULL);
-	//return (s);
-//}
+int			check_number(char *n)
+{
+	int		flag;
+	char	c;
 
-void		extract_coord(char *str, t_vec3 *p)
+	flag = 0;
+	while ((c = *n) != '\0' && c >= '0' && c <= '9')
+	{
+		if (c == '.')
+			++flag;
+		if (flag > 1)
+			return (1);
+		++n;
+	}
+	if (c != '\0')
+		return (1);
+	return (0);
+}
+
+int			extract_coord(char *str, t_vec3 *vec)
 {
 	int		i;
 	char	**array;
 
 	i = 0;
-	array = ft_strsplit(str, ',');
-	while (array[i] != NULL)
-		i++;
-	if (i != 3)
+	if ((array = ft_strsplit(str, ',')) == NULL)
 	{
 		ft_putendl(U_COORD PFCF);
-		exit(1);
+		return (1);
 	}
-	p->x = ft_atof(array[0]);
-	p->y = ft_atof(array[1]);
-	p->z = ft_atof(array[2]);
+	while (array[i] != NULL)
+		i++;
+	if (i != 3 || check_number(array[0]) || check_number(array[1]) || check_number(array[2]))
+	{
+		free_char_array(&array);
+		ft_putendl(U_COORD PFCF);
+		exit (1);
+	}
+	vec->x = ft_atof(array[0]);
+	vec->y = ft_atof(array[1]);
+	vec->z = ft_atof(array[2]);
+	free_char_array(&array);
+	return (0);
 }
 
 void	init_camera(char *s, t_rt *rt)
@@ -106,7 +109,7 @@ void	init_camera(char *s, t_rt *rt)
 int		init_config(char *file, t_rt *rt)
 {
 	char	*start;
-	char	*shapes;
+	//char	*shapes;
 	char	*lighting;
 	char	*camera;
 	char	*physics;
