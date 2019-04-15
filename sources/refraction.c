@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   refraction.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 10:19:27 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/20 11:36:10 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 17:38:01 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	swap_double(double *a, double *b)
+void		swap_double(double *a, double *b)
 {
-	double tmp;
+	double	tmp;
 
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-static void	refract_ray(t_coord *dir, t_shape *shape, t_coord *ref_r)
+static void	refract_ray(t_vec3 *dir, t_shape *shape, t_vec3 *ref_r)
 {
 	int		flag;
 	double	eta;
@@ -48,12 +48,12 @@ static void	refract_ray(t_coord *dir, t_shape *shape, t_coord *ref_r)
 	ref_r->z = dir->z * eta + flag * shape->normal.z * coef_a;
 }
 
-int refraction(t_coord *dir, t_shape *shape, t_rt *rt, int depth)
+int			refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
-	int	trans_color;
-	t_coord ref_r;
+	int		trans_color;
+	t_vec3	ref_r;
 
-	ref_r = (t_coord) {1, 0, 0};
+	ref_r = (t_vec3) {1, 0, 0};
 	refract_ray(dir, shape, &ref_r);
 	rt->source_point = &shape->surface_point;
 	trans_color = trace_ray(&ref_r, rt, depth);

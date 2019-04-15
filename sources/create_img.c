@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/13 15:28:46 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:14:56 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	average_color(int n, int *color)
 {
-	int i;
-	int n_sq;
-	int rgb[3];
+	int		i;
+	int		n_sq;
+	int		rgb[3];
 
 	rgb[0] = 0;
 	rgb[1] = 0;
@@ -50,48 +50,43 @@ static void	init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 	dir->z = 1.0;
 	vec3_normalize(dir, vec3_length(dir));
 	vector_matrix_multiply(rotation, dir);
-	//init source_point
 	rt->source_point = &rt->camera;
 }
 
 int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 {
-	double max_distance;
-	double min_distance;
-	double epsilon;
-	double t;
-	double d;
-	t_shape *head;
-	t_shape	*closest;
+	t_trace		dist;
+	t_shape		*head;
+	t_shape		*closest;
+	t_vec3		from;
 
-	max_distance = 100;
-	epsilon = 10e-6;
-	t = 0.0001;
+	dist.max_distance = 100;
+	dist.epsilon = 10e-6;
+	dist.t = 0.0001;
 	closest = NULL;
-	while (t < max_distance)
+	while (dist.t < dist.max_distance)
 	{
 		head = rt->head_shapes;
-		min_distance = INT_MAX;
-		t_vec3 from;
-		from.x = rt->source_point->x + t * dir->x;
-		from.y = rt->source_point->y + t * dir->y;
-		from.z = rt->source_point->z + t * dir->z;
+		dist.min_distance = INT_MAX;
+		from.x = rt->source_point->x + dist.t * dir->x;
+		from.y = rt->source_point->y + dist.t * dir->y;
+		from.z = rt->source_point->z + dist.t * dir->z;
 		while (head != NULL)
 		{
-			d = head->gd_fun(&from, head);
-			if (d < min_distance)
+			dist.d = head->gd_fun(&from, head);
+			if (dist.d < dist.min_distance)
 			{
-				min_distance = d;
+				dist.min_distance = dist.d;
 				closest = head;
 			}
 			head = head->next;
 		}
-		if (min_distance <= epsilon * t)
+		if (dist.min_distance <= dist.epsilon * dist.t)
 		{
-			rt->t_closest = t;
+			rt->t_closest = dist.t;
 			return (get_color(dir, closest, rt, depth));
 		}
-		t += min_distance;
+		dist.t += dist.min_distance;
 	}
 	return (0);
 }
@@ -117,7 +112,8 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 		}
 		c_y += rt->sample_step;
 	}
-	img_data[x + y * rt->win_width] = average_color(rt->p_division, pixel_color);
+	img_data[x + y * rt->win_width] =
+					average_color(rt->p_division, pixel_color);
 }
 
 void		create_img(t_rt *rt, t_sdl *sdl)

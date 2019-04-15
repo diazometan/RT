@@ -6,29 +6,31 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 10:55:22 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 15:43:20 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 14:01:38 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int TMP = 1;
-
 #include "rt.h"
 
-void		create_texute_normal(t_shape *shape, t_vec3 tangent, t_vec3 bitangent, t_vec3 normal)
+void		create_texute_normal(t_shape *shape, t_vec3 tangent,
+								t_vec3 bitangent, t_vec3 normal)
 {
 	t_vec3 normal_from_map;
 	t_vec3 normal1;
 
-	normal_from_map = cylinder_texture(shape->tex_normal, shape);
+	normal_from_map = cylinder_texture(shape->tex_normal, shape); //исправить выбор фигуры
 
 	vec3_scalar(&normal_from_map, 1.0 / 255.0);
 	normal_from_map.x = 2.0 * normal_from_map.x - 1.0;
 	normal_from_map.y = 2.0 * normal_from_map.y - 1.0;
 	normal_from_map.z = 2.0 * normal_from_map.z - 1.0;
 	vec3_normalize(&normal_from_map, vec3_length(&normal_from_map));
-	normal1.x = normal_from_map.x * tangent.x + normal_from_map.y * bitangent.x + normal_from_map.z * normal.x;
-	normal1.y = normal_from_map.x * tangent.y + normal_from_map.y * bitangent.y + normal_from_map.z * normal.y;
-	normal1.z = normal_from_map.x * tangent.z + normal_from_map.y * bitangent.z + normal_from_map.z * normal.z;
+	normal1.x = normal_from_map.x * tangent.x + normal_from_map.y * bitangent.x
+				+ normal_from_map.z * normal.x;
+	normal1.y = normal_from_map.x * tangent.y + normal_from_map.y * bitangent.y
+				+ normal_from_map.z * normal.y;
+	normal1.z = normal_from_map.x * tangent.z + normal_from_map.y * bitangent.z
+				+ normal_from_map.z * normal.z;
 	shape->normal.x = normal1.x;
 	shape->normal.y = normal1.y;
 	shape->normal.z = normal1.z;
@@ -36,33 +38,24 @@ void		create_texute_normal(t_shape *shape, t_vec3 tangent, t_vec3 bitangent, t_v
 
 void		create_normal_system(t_shape *shape)
 {
-	t_vec3 normal;
 	t_vec3 tangent;
 	t_vec3 bitangent;
-	t_vec3 unit_1 = {1, 0, 0};
-	t_vec3 unit_2 = {0, 1, 0};
-	t_vec3 unit_3 = {0, 0, 1};
+	t_vec3 unit_1;
+	t_vec3 unit_2;
+	t_vec3 unit_3;
 
-	normal = shape->normal;
-	vec3_cross(&normal, &unit_2, &tangent);
+	unit_1 = (t_vec3) {1, 0, 0};
+	unit_2 = (t_vec3) {0, 1, 0};
+	unit_3 = (t_vec3) {0, 0, 1};
+	vec3_cross(&shape->normal, &unit_2, &tangent);
 	if (tangent.x == 0.0 && tangent.y == 0.0 && tangent.z == 0.0)
-		vec3_cross(&normal, &unit_1, &tangent);
+		vec3_cross(&shape->normal, &unit_1, &tangent);
 	else if (tangent.x == 0.0 && tangent.y == 0.0 && tangent.z == 0.0)
 		vec3_cross(&shape->normal, &unit_3, &tangent);
 	vec3_cross(&tangent, &shape->normal, &bitangent);
-
-	// if (TMP)
-	// {
-	// 	printf("SHAPE NORMAL %f   %f   %f\n", shape->normal.x, shape->normal.y, shape->normal.z);
-	// 	printf("NORMAL %f   %f   %f\n", normal.x, normal.y, normal.z);
-	// 	printf("TANGENT %f   %f   %f\n", tangent.x, tangent.y, tangent.z);
-	// 	printf("BITANGENT %f   %f   %f\n", bitangent.x, bitangent.y, bitangent.z);
-	// }
-	// TMP = 0;
-
 	vec3_normalize(&tangent, vec3_length(&tangent));
 	vec3_normalize(&bitangent, vec3_length(&bitangent));
-	create_texute_normal(shape, tangent, bitangent, normal);
+	create_texute_normal(shape, tangent, bitangent, shape->normal);
 }
 
 void		get_normal(t_shape *shape)
@@ -72,17 +65,20 @@ void		get_normal(t_shape *shape)
 	double delta;
 
 	delta = 10e-5;
-	up = (t_vec3) {shape->surface_point.x + delta, shape->surface_point.y, shape->surface_point.z};
-	down = (t_vec3) {shape->surface_point.x - delta, shape->surface_point.y, shape->surface_point.z};
+	up = (t_vec3) {shape->surface_point.x + delta,
+					shape->surface_point.y, shape->surface_point.z};
+	down = (t_vec3) {shape->surface_point.x - delta,
+					shape->surface_point.y, shape->surface_point.z};
 	shape->normal.x = shape->gd_fun(&up, shape) - shape->gd_fun(&down, shape);
-
-	up = (t_vec3) {shape->surface_point.x, shape->surface_point.y + delta, shape->surface_point.z};
-	down = (t_vec3) {shape->surface_point.x, shape->surface_point.y - delta, shape->surface_point.z};
+	up = (t_vec3) {shape->surface_point.x,
+					shape->surface_point.y + delta, shape->surface_point.z};
+	down = (t_vec3) {shape->surface_point.x,
+					shape->surface_point.y - delta, shape->surface_point.z};
 	shape->normal.y = shape->gd_fun(&up, shape) - shape->gd_fun(&down, shape);
-
-	up = (t_vec3) {shape->surface_point.x, shape->surface_point.y, shape->surface_point.z + delta};
-	down = (t_vec3) {shape->surface_point.x, shape->surface_point.y, shape->surface_point.z - delta};
+	up = (t_vec3) {shape->surface_point.x,
+					shape->surface_point.y, shape->surface_point.z + delta};
+	down = (t_vec3) {shape->surface_point.x,
+					shape->surface_point.y, shape->surface_point.z - delta};
 	shape->normal.z = shape->gd_fun(&up, shape) - shape->gd_fun(&down, shape);
-
 	vec3_normalize(&shape->normal, vec3_length(&shape->normal));
 }

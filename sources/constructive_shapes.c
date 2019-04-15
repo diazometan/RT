@@ -6,61 +6,24 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:31:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/11 21:21:05 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 13:39:14 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-/*double			gd_box_two(double x, double y, double z, t_shape *shape, t_vec3 dim)
-{
-	t_vec3 d;
-	t_vec3 orig;
-	t_vec3 len;
-
-	d.x = fabs(x) - dim.x;
-	d.y = fabs(y) - dim.y;
-	d.z = fabs(z) - dim.z;
-	len.x = ft_dmax(d.x, 0.0);
-	len.y = ft_dmax(d.y, 0.0);
-	len.z = ft_dmax(d.z, 0.0);
-	return (vec3_length(&len) - 0 + ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
-}
-
-double	cross(t_vec3 *p, t_shape *shape)
-{
-	double box1;
-	double box2;
-	double box3;
-
-	t_vec3 dim1;
-	t_vec3 dim2;
-	t_vec3 dim3;
-	t_vec3 tmp;
-
-	dim1 = (t_vec3) {INFINITY, 1.0, 1.0};
-	dim2 = (t_vec3) {1.0, INFINITY, 1.0};
-	dim3 = (t_vec3) {1.0, 1.0, INFINITY};
-
-	tmp = (t_vec3) {p->x, p->y, p->z};
-	box1 = gd_box_two(tmp.x, tmp.y, tmp.z, shape, dim1);
-	box2 = gd_box_two(tmp.y, tmp.z, tmp.x, shape, dim2);
-	box3 = gd_box_two(tmp.z, tmp.x, tmp.y, shape, dim3);
-	return (unite(box1, unite(box2, box3)));
-}*/
-
-double	ft_dmod(double a, double b)
+double	ft_dmod(double a, double b) //добавить в либу
 {
 	return (a - b * floor(a/b));
 }
 
-double	fractal(t_vec3 *p, t_shape *shape)
+double	fractal(t_vec3 *p, t_shape *shape) //добавить степень фрактала
 {
 	double d;
 	double c;
 	double s;
 	int i;
-	//t_vec3 dim;
+
 	t_vec3 a;
 	t_vec3 r;
 	t_vec3 tmp;
@@ -71,8 +34,7 @@ double	fractal(t_vec3 *p, t_shape *shape)
 	i = 0;
 	s = 1.0;
 
-	//dim = (t_vec3) {shape->dims.x, shape->dims.y, shape->dims.z};
-	d = gd_box(p, shape);//gd_box_two(tmp.x, tmp.y, tmp.z, shape, dim);
+	d = gd_box(p, shape);
 	while (i < 4)
 	{
 		a.x = ft_dmod(tmp.x * s, 2.0) - 1.0;
@@ -83,7 +45,6 @@ double	fractal(t_vec3 *p, t_shape *shape)
 		r.y = fabs(1.0 - 3.0 * fabs(a.y));
 		r.z = fabs(1.0 - 3.0 * fabs(a.z));
 
-		//c = cross(&r, shape) / s;
 		float da = ft_dmax(r.x, r.y);
 		float db = ft_dmax(r.y, r.z);
 		float dc = ft_dmax(r.z, r.x);

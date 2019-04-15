@@ -2,8 +2,9 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"sphere",
+				"shape":"cone",
 				"color":"red",
+				"height":1,
 				"radius":1,
 				"center":[0,0,5],
 				"direction":[0,0,0]
@@ -12,15 +13,20 @@
 				"shape":"plane",
 				"color":"yellow",
 				"center":[0,-1,5],
+				"reflection":0.5,
 				"direction":[0,-1,0]
 			}
 		],
 		"lighting":[
 			{
-				"type":"spot",
+				"type":"point",
 				"intensity":0.5,
-				"dir":[0,-1,0],
-				"center":[0,10,5]
+				"center":[2,1,0]
+			},
+			{
+				"type":"point",
+				"intensity":0.0,
+				"center":[-2,1,0]
 			},
 			{
 				"type":"ambient",
@@ -32,7 +38,7 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":3,
+			"reflection depth":2,
 			"pixel division":1
 		}
 	}

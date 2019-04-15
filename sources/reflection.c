@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:40:19 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/03 17:20:08 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/15 17:53:44 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int		reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	double	n_dot_r;
-	t_vec3 r_v;
+	t_vec3	r_v;
 
-	vec3_scalar(dir, (-1)); //WHY THIS DOESNT WORK HELP ME
+	vec3_scalar(dir, (-1.0));
 	n_dot_r = vec3_dot(&shape->normal, dir);
 	r_v.x = 2 * shape->normal.x * n_dot_r - dir->x;
 	r_v.y = 2 * shape->normal.y * n_dot_r - dir->y;

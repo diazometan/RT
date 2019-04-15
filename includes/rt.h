@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 20:07:20 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:00:23 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ typedef struct		s_light
 	struct s_light	*next;
 }					t_light;
 
+typedef struct		s_trace
+{
+	double			max_distance;
+	double			min_distance;
+	double			epsilon;
+	double			t;
+	double			d;
+}					t_trace;
+
 typedef struct		s_rt
 {
 	int				win_width;
@@ -71,7 +80,9 @@ int					trace_ray(t_vec3 *dir, t_rt *rt, int depth);
 double				gd_sphere(t_vec3 *p, t_shape *shape);
 double				gd_plane(t_vec3 *p, t_shape *shape);
 double				gd_cylinder(t_vec3 *p, t_shape *shape);
+double				gd_infinity_cylinder(t_vec3 *p, t_shape *shape);
 double				gd_cone(t_vec3 *p, t_shape *shape);
+double				gd_infinity_cone(t_vec3 *p, t_shape *shape);
 double				gd_torus(t_vec3 *p, t_shape *shape);
 double				gd_capsule(t_vec3 *p, t_shape *shape);
 double				gd_box(t_vec3 *p, t_shape *shape);

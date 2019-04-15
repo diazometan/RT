@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/14 20:08:40 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 17:54:42 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	check_color(int rgb[3])
 	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
 }*/
 
-/*static int	reflect_color(int color, int reflected_color, double reflection)
+static int	reflect_color(int color, int reflected_color, double reflection)
 {
 	int		rgb_ref[3];
 
@@ -62,16 +62,15 @@ static int	check_color(int rgb[3])
 	rgb_ref[2] = (color & 0xFF) * (1 - reflection) +
 					(reflected_color & 0xFF) * reflection;
 	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
-}*/
+}
 
 int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	int		rgb[3];
 	double	light = 0.0;
 	double	color;
-	//double	new_color;
+	double	new_color;
 
-	(void)depth;
 	get_intersection_point(rt->source_point, dir, rt->t_closest, &shape->surface_point);
 	get_normal(shape);
 	if (shape->texture != NULL)
@@ -89,13 +88,11 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	else
 		color = 0xFFFFFF;*/
 
-	//ADDING REFLECTION
-	/*if (depth > 0 && shape->reflection)
+	if (depth > 0 && shape->reflection)
 	{
 		new_color = reflection(dir, shape, rt, depth - 1);
 		color = reflect_color(color, new_color, shape->reflection);
-	}*/
-	//END
+	}
 
 	return (color);
 }

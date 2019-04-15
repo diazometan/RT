@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:12:06 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/09 12:36:04 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 17:58:38 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ typedef struct		s_vec2
 typedef struct		s_matrix
 {
 	double			matrix[3][3];
-	//double	xx;
-	//double	xy;
-	//double	xz;
-	//double	yx;
-	//double	yy;
-	//double	yz;
-	//double	zx;
-	//double	zy;
-	//double	zz;
 }					t_matrix;
 
 t_matrix			matrix_multiply(t_matrix a, t_matrix b);

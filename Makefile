@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/13 13:56:09 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/15 15:29:08 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,9 @@ SRC = main.c\
 	  init_texture.c\
 	  init_lighting.c\
 	  create_img.c\
-	  primitives.c\
+	  primitives_simple.c\
+	  primitives_diff.c\
+	  primitives_inf.c\
 	  get_color.c\
 	  texture.c\
 	  normal.c\
