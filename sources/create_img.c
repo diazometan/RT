@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 16:49:31 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:51:00 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 
 void		create_img(t_rt *rt, t_sdl *sdl)
 {
+	printf("create_img\n");
 	int		x;
 	int		y;
 	int		x_limit;

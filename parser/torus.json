@@ -1,0 +1,35 @@
+{
+	"scene":{
+		"objects":[
+			{
+				"id":3,
+				"shape":"torus",
+				"color":"blue",
+				"texture":"brick",
+				"center":[0,0,6],
+				"inner_radius":0.5,
+				"outer_radius":1.0,
+				"direction":[45,45,45]
+			}
+		],
+		"lighting":[
+			{
+				"type":"point",
+				"intensity":0.6,
+				"center":[0,2,0]
+			},
+			{
+				"type":"ambient",
+				"intensity":0.2
+			}
+		],
+		"camera":{
+			"center":[0,0,0],
+			"direction":[0,0,0]
+		},
+		"physics":{
+			"reflection depth":3,
+			"pixel division":1
+		}
+	}
+}

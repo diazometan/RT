@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/12 20:12:45 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:50:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,13 @@ double				shape_summ(t_vec3 *p, t_shape *shape);
 
 # define NOISE_HEIGHT 128
 # define NOISE_WIDTH 128
-# define PIXELS_BLOCK 100
+# define PIXELS_BLOCK 100.0
 double				g_noise[NOISE_HEIGHT][NOISE_WIDTH];
 void				generateNoise();
 double				smooth_noise(double x, double y);
 double				turbulence(double x, double y, double size);
 int					noise(double x, double y);
 int					wood(int x, int y);
+int					chess_board(int x, int y);
 
 #endif

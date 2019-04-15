@@ -1,0 +1,35 @@
+{
+	"scene":{
+		"objects":[
+			{
+				"id":1,
+				"shape":"cone",
+				"color":"blue",
+				"texture":"brick",
+				"center":[0,0,3],
+				"radius":1.0,
+				"height":1.0,
+				"direction":[0,0,0]
+			}
+		],
+		"lighting":[
+			{
+				"type":"point",
+				"intensity":0.6,
+				"center":[0,2,0]
+			},
+			{
+				"type":"ambient",
+				"intensity":0.5
+			}
+		],
+		"camera":{
+			"center":[0,0,0],
+			"direction":[0,0,0]
+		},
+		"physics":{
+			"reflection depth":3,
+			"pixel division":1
+		}
+	}
+}

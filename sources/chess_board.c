@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 18:04:59 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/12 18:05:07 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:15:25 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int			chess_board(int x, int y)
 {
+	// if (x <= 150)
+	// 	return (0xff0000);
 	return (0xffffff * (((y / 10) % 2) == ((x / 10) % 2)));
 }

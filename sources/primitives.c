@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 16:47:55 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:11:12 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ double			gd_torus(t_vec3 *p, t_shape *shape)
 	t_vec3		orig;
 
 	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(rotation, &tmp);
+	vector_matrix_multiply(shape->rotation, &orig);
 	rad = sqrt(orig.x * orig.x + orig.y * orig.y) - shape->dims.y;
 	return (sqrt(rad * rad + orig.z * orig.z) - shape->dims.x);
 }
