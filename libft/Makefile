@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 16:13:15 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/02 14:52:33 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/16 16:59:36 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC = ft_strlen.c\
 	  ft_dmax.c\
 	  ft_dmin.c\
 	  ft_dclamp.c\
+	  ft_dmod.c\
 	  get_next_line.c
 
 OBJ = $(SRC:.c=.o)

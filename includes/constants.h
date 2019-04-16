@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 19:05:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:34:15 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 
 # define O_RED "\033[0;31m"
 # define O_NC "\033[0m"
+
+# define NOISE_HEIGHT 128
+# define NOISE_WIDTH 128
+# define PIXELS_BLOCK 100.0
 
 # define M_SHAPE O_RED "Shape identifier is missing!"
 # define M_COLOR O_RED "Color identifier is missing!"

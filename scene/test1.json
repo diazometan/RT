@@ -2,24 +2,12 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cylinder",
-				"color":"blue",
-				"center":[0,0,4],
-				"radius":1,
-				"height":1,
-				"direction":[0,1,0]
-			},
-			{
-				"shape":"plane",
+				"id":0,
+				"shape":"fractal",
 				"color":"red",
-				"center":[0,-1,0],
-				"direction":[0,1,0]
-			},
-			{
-				"shape":"plane",
-				"color":"yellow",
-				"center":[-2,-1,0],
-				"direction":[1,0,0]
+				"center":[0,0,10],
+				"sides":[1,1,1],
+				"direction":[0,0,0]
 			}
 		],
 		"lighting":[
@@ -27,6 +15,10 @@
 				"type":"point",
 				"intensity":0.6,
 				"center":[2,1,0]
+			},
+			{
+				"type":"ambient",
+				"intensity":0.5
 			}
 		],
 		"camera":{

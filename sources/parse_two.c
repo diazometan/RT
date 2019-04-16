@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:26:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 19:13:42 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 16:33:35 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	init_direction(char *s, t_shape *new)
 	free(str);
 	if (new->figure != PLANE)
 	{
-		new->unit.x = M_PI * new->unit.x/ 180;
-		new->unit.y = M_PI * new->unit.y/ 180;
-		new->unit.z = M_PI * new->unit.z/ 180;
+		new->unit.x = M_PI * new->unit.x / 180;
+		new->unit.y = M_PI * new->unit.y / 180;
+		new->unit.z = M_PI * new->unit.z / 180;
 	}
 	else
 		vec3_normalize(&new->unit, vec3_length(&new->unit));

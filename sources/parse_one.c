@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 10:24:00 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 19:13:33 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 14:13:49 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			init_function(t_shape *new)
 	else if (new->figure == ELIPSIOD)
 		new->gd_fun = &gd_elispoid;
 	else if (new->figure == FRACTAL)
-		new->gd_fun = &fractal;
+		new->gd_fun = &gd_fractal;
 }
 
 void			init_shape_color(char *s, t_shape *new)

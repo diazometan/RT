@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   generateNoise.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 16:27:37 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/12 17:02:42 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:38:12 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	generateNoise()
+void	generateNoise(t_rt *rt)
 {
 	int	x;
 	int	y;
@@ -22,6 +22,6 @@ void	generateNoise()
 	{
 		x = -1;
 		while (++x < NOISE_WIDTH)
-			g_noise[y][x] = (rand() % 32768) / 32768.0;
+			rt->g_noise[y][x] = (rand() % 32768) / 32768.0;
 	}
 }

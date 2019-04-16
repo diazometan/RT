@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 19:11:46 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 16:42:34 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	init_shapes(char *s, t_shape **head, t_texture **head_textures)
 			new->emission = 1.0;
 		else
 			new->emission = 0.0;*/
+		new->emission = 0.0;
 		init_spec_refl(object, new);
 		init_center(object, new);
 		init_direction(object, new);

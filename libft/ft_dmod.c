@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   noise.c                                            :+:      :+:    :+:   */
+/*   ft_dmod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/12 17:00:40 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/15 19:41:51 by lwyl-the         ###   ########.fr       */
+/*   Created: 2019/04/16 16:59:08 by lwyl-the          #+#    #+#             */
+/*   Updated: 2019/04/16 17:02:49 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "libft.h"
 
-int	noise(t_rt *rt, double x, double y)
+double	ft_dmod(double a, double b)
 {
-	int	size;
-
-	size = 64;
-	return ((int)turbulence(rt, x, y, size) * 0x010101);
+	return (a - b * floor(a / b));
 }

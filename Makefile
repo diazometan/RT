@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/15 19:05:20 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/16 17:05:07 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRC = main.c\
 	  shadow.c\
 	  reflection.c\
 	  matrix.c\
-	  constructive_shapes.c\
+	  fractal.c\
 	  matrix_euler.c\
 	  vec3.c\
 	  vec2.c\
@@ -54,6 +54,7 @@ SRC = main.c\
 	  init_id.c\
 	  shape_summ.c\
 	  init_shape_child.c\
+	  disrubtion_effects.c\
 	  generateNoise.c\
 	  smooth_noise.c\
 	  turbulence.c\
@@ -101,22 +102,22 @@ re: fclean all
 
 test: all
 	@echo "$(GREEN)Testing...$(NC)"
-	@./RT parser/test1.json
+	@./RT scene/test1.json
 
 scene: all
 	@echo "$(GREEN)Testing...$(NC)"
-	@./RT parser/scene.json
+	@./RT scene/scene.json
 
 march: all
 	@echo "$(GREEN)Testing...$(NC)"
-	@./RT parser/march.json
+	@./RT scene/march.json
 
 kk: all
 	@echo "$(GREEN)Testing...$(NC)"
-	@./RT parser/kk.json
+	@./RT scene/kk.json
 
 allf: all
 	@echo "$(GREEN)Testing...$(NC)"
-	@./RT parser/all_figures.json
+	@./RT scene/all_figures.json
 
 .PHONY: all clean fclean re test

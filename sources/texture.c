@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 19:18:51 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:51:04 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ t_vec3			sphere_texture(t_texture *texture, t_shape *shape)
 	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch
 	+ (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
 	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	// return (wood(x, y));
-	// return (marble(x, y));
-	// return (noise(x, y));
-	// return (chess_board(x + (u < 0) * 10, y));
+	/*return (wood(x, y));
+	return (marble(x, y));
+	return (noise(x, y));
+	return (chess_board(x + (u < 0) * 10, y));*/
 	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
