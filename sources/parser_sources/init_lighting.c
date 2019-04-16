@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 12:23:08 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 20:24:27 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,59 @@ void			init_lighting(char *s, t_light **head)
 		free(object);
 		s += ft_strlen(object);
 		push_back_light(head, new);
+	}
+}
+
+void	init_fun_allocator(char *s, t_light *new)
+{
+	if (ft_strcequ(s, "\"type\"", ':') == 0)
+	{
+		ft_putendl(M_SHAPE PFCF);
+		exit(1);
+	}
+	if ((new->figure = identify_shape(s + 8)) == -1)
+	{
+		ft_putendl(U_SHAPE PFCF);
+		exit(1);
+	}
+	identify_color(s, &new->color);
+	init_center(s, &new->center);
+	init_direction(s, &new->unit, &new->rotation);
+	init_dimensions(s, new->figure, &new->dims);
+	init_reflection(s, &new->reflection);
+	init_refraction(s, &new->refraction);
+	init_specular(s, &new->specular);
+	init_function(new);
+	init_function_texture(new);
+	init_texture(s, new, head_textures);
+	init_texture_map(s, new, head_textures);
+}
+
+char			*init_lighting(char *s, t_light **head)
+{
+	t_light	*new;
+
+	while (1)
+	{
+		if (*s != '{' || (end = get_end(s + 1, '{', '}')) == NULL)
+			return (NULL);
+		*end = '\0';
+		if ((new = (t_light *)malloc(sizeof(*new))) == NULL)
+		{
+			ft_putendl(MEMORY);
+			exit(1);
+		}
+		new->next = NULL;
+		init_fun_allocator(s + 1, new, head_textures);
+		s = end + 1;
+		push_back_shape(head, new);
+		if (*s == ']')
+			return (s + 1);
+		else if (*s != ',')
+		{
+			ft_putendl(M_COLOR PFCF);
+			exit(1);
+		}
+		++s;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 16:33:32 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 20:08:06 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define MEMORY O_RED "not enough sufficient memory"
 
 # define OBJ O_RED "Objects:\n"
+# define LIGHT O_RED "Lighting:\n"
+
 # define M_SHAPE O_RED "Shape identifier is missing!"
 # define M_COLOR O_RED "Color identifier is missing!"
 # define M_CENTER O_RED "Center coordinates are missing!"
@@ -56,6 +58,7 @@
 # define M_DEPTH O_RED "Reflection depth is missing!"
 # define M_PDIV O_RED "Pixel division is missing!"
 # define M_MATCH O_RED "Matching bracket is missing!"
+# define M_COMMA O_RED "Comma between objects is missing!"
 
 # define U_SHAPE O_RED "Undefined shape!"
 # define U_COLOR O_RED "Color vector has a range form 0 to 255"
@@ -67,6 +70,7 @@
 # define U_SPEC O_RED "Undefined specular!"
 # define U_REFL O_RED "Undefined reflection!"
 # define U_REFR O_RED "Undefined refraction!"
+# define U_TEX O_RED "Cant read texture"
 # define U_LIGHT O_RED "Undefined lightning type!"
 # define U_INTENS O_RED "Light intensity is too big!"
 # define U_DEPTH O_RED "Reflection depth is too big!"

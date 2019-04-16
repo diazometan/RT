@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:31:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/11 21:21:05 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:25:36 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double	ft_dmod(double a, double b)
 	return (a - b * floor(a/b));
 }
 
-double	fractal(t_vec3 *p, t_shape *shape)
+double	gd_fractal(t_vec3 *p, t_shape *shape)
 {
 	double d;
 	double c;

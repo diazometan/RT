@@ -6,30 +6,30 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 13:07:43 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 20:11:03 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			check_number(char *n)
-{
-	int		flag;
-	char	c;
-
-	flag = 0;
-	while ((c = *n) != '\0' && c >= '0' && c <= '9')
-	{
-		if (c == '.')
-			++flag;
-		if (flag > 1)
-			return (1);
-		++n;
-	}
-	if (c != '\0')
-		return (1);
-	return (0);
-}
+//int			check_number(char *n)
+//{
+	//int		flag;
+	//char	c;
+//
+	//flag = 0;
+	//while ((c = *n) != '\0' && c >= '0' && c <= '9')
+	//{
+		//if (c == '.')
+			//++flag;
+		//if (flag > 1)
+			//return (1);
+		//++n;
+	//}
+	//if (c != '\0')
+		//return (1);
+	//return (0);
+//}
 
 void	init_camera(char *s, t_rt *rt)
 {
@@ -76,7 +76,7 @@ int		init_config(char *file, t_rt *rt)
 	if (*start != '{' || get_end(start + 1, '{', '}') == NULL)
 		return (1);
 
-
+	//INIT SHAPES
 	if ((start = ft_strnstr(start + 1, "\"objects\":", 10)) == NULL)
 		return (1);
 	start += 10;
@@ -85,8 +85,23 @@ int		init_config(char *file, t_rt *rt)
 		ft_putendl(OBJ M_MATCH PFCF);
 		return (1);
 	}
-	printf("check\n");
-	init_shapes(start + 1, &rt->head_shapes, &rt->head_textures);
+	//printf("check\n");
+	if ((start = init_shapes(start + 1, &rt->head_shapes, &rt->head_textures)) == NULL || *start != ',')
+		return (1);
+
+
+	//INIT LIGHTING
+	if ((start = ft_strnstr(start + 1, "\"lighting\":", 11)) == NULL)
+		return (1);
+	start += 11;
+	if (*start != '[' || (end = get_end(start + 1, '[', ']')) == NULL || *(end + 1) != ',')
+	{
+		ft_putendl(LIGHT M_MATCH PFCF);
+		return (1);
+	}
+	if ((start = init_lighting(start + 1, &rt->head_light)) == NULL || *start != ',')
+		return (1);
+	//printf("\n\nstart after init_shapes - %s\n", start);
 	//printf("start - %c\n", *file);
 	//printf("end - %s\n", get_end(file + 1, '{', '}'));
 

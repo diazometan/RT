@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/13 15:49:05 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:28:14 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ static t_texture	*create_texture(char *str, t_shape *shape, int normal)
 
 	new = (t_texture *)malloc(sizeof(*new));
 	new->name = str;
-	file_name = ft_memalloc(13 + ft_strlen(new->name));
+	if ((file_name = ft_memalloc(13 + ft_strlen(new->name))) == NULL)
+	{
+		ft_putendl(MEMORY);
+		exit(1);
+	}
 	ft_strcpy(file_name, "textures/");
 	ft_strcat(file_name, new->name);
 	ft_strcat(file_name, ".bmp");
@@ -69,36 +73,52 @@ static t_texture	*create_texture(char *str, t_shape *shape, int normal)
 	return (new);
 }
 
-int	init_texture(char *object, t_shape *shape, t_texture **head_textures)
+void	init_texture(char *s, t_shape *new, t_texture **head_textures)
 {
-	char	*start;
 	char	*str;
 
-	if ((start = ft_strstr(object, "texture")) != NULL)
+	if ((s = ft_strstr(s, "\"texture\"")) != NULL)
 	{
-		str = ft_strextract(start + 8, '"', '"');
-		if (texture_check(str, shape, *head_textures, 0))
-			push_back_texture(head_textures, create_texture(str, shape, 0));
+		if (*(s + 9) != ':')
+		{
+			ft_putendl(U_TEX);
+			exit(1);
+		}
+		if ((str = ft_strextract(s + 8, '"', '"')) == NULL)
+		{
+			ft_putendl(MEMORY);
+			exit(1);
+		}
+		if (texture_check(str, new, *head_textures, 0))
+			push_back_texture(head_textures, create_texture(str, new, 0));
 		else
 			free(str);
-		return (0);
 	}
-	return (1);
+	else
+		new->texture = NULL;
 }
 
-int	init_texture_map(char *object, t_shape *shape, t_texture **head_textures)
+void init_texture_map(char *s, t_shape *new, t_texture **head_textures)
 {
-	char	*start;
 	char	*str;
 
-	if ((start = ft_strstr(object, "normal_mapping")) != NULL)
+	if ((s = ft_strstr(s, "\"normal_mapping\"")) != NULL)
 	{
-		str = ft_strextract(start + 15, '"', '"');
-		if (texture_check(str, shape, *head_textures, 1))
-			push_back_texture(head_textures, create_texture(str, shape, 1));
+		if (*(s + 16) != ':')
+		{
+			ft_putendl(U_TEX);
+			exit(1);
+		}
+		if ((str = ft_strextract(s + 17, '"', '"')) == NULL)
+		{
+			ft_putendl(MEMORY);
+			exit(1);
+		}
+		if (texture_check(str, new, *head_textures, 1))
+			push_back_texture(head_textures, create_texture(str, new, 1));
 		else
 			free(str);
-		return (0);
 	}
-	return (1);
+	else
+		new->tex_normal = NULL;
 }
