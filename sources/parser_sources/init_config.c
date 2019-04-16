@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 11:59:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 13:07:43 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ int		init_config(char *file, t_rt *rt)
 		return (1);
 	start += 10;
 	if (*start != '[' || (end = get_end(start + 1, '[', ']')) == NULL || *(end + 1) != ',')
+	{
+		ft_putendl(OBJ M_MATCH PFCF);
 		return (1);
+	}
 	printf("check\n");
 	init_shapes(start + 1, &rt->head_shapes, &rt->head_textures);
 	//printf("start - %c\n", *file);

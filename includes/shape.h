@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 11:59:16 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 16:49:20 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct		s_shape
 	t_vec3			color;
 	double			specular;
 	double			reflection;
-	double			refract;
+	double			refraction;
 	double			emission;
 	double			u;
 	double			v;
@@ -46,27 +46,29 @@ typedef struct		s_shape
 
 void				push_back_shape(t_shape **head, t_shape *new);
 int					identify_shape(char *start);
-void					identify_color(char *s, t_vec3 *color);
+void				identify_color(char *s, t_vec3 *color);
+void				init_dimensions(char *s, int figure, t_vec3 *dims);
+void				init_center(char *s, t_vec3 *center);
+void				init_direction(char *s, t_vec3 *unit);
+void				init_function(t_shape *new);
+void				init_function_texture(t_shape *new);
 
+void				init_specular(char *s, double *specular);
+void				init_reflection(char *s, double *reflection);
+void				init_refraction(char *s, double *refraction);
 
 //PARSE HELPER
 int					ft_strcequ(char const *s1, char const *s2, int c);
 char				*get_end(char *s, int c_s, int c_e);
+double				get_double(char *s, int c);
 void				get_vector(char *s, t_vec3 *vec);
 //int					extract_coord(char *str, t_vec3 *vec);
 
 
 
 
-void				init_shape_color(char *s, t_shape *new);
-void				init_shape_function_1(t_shape *new);
-void				init_spec_refl(char *s, t_shape *new);
-void				init_direction(char *s, t_shape *new);
-void				init_dimensions(char *s, t_shape *new);
-void				init_center(char *s, t_shape *new);
-void				init_refraction(char *s, t_shape *new);
-void				init_function(t_shape *new);
-void				init_function_texture(t_shape *new);
+//void				init_spec_refl(char *s, t_shape *new);
+//void				init_refraction(char *s, t_shape *new);
 int					init_texture(char *object, t_shape *new, t_texture **head_textures);
 int					init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
 

@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/16 12:22:18 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/16 16:19:05 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC = main.c\
 	  init_shapes.c\
 	  parse_helper.c\
 	  get_vector.c\
-	  shape_parse_one.c\
+	  shape_parse_main.c\
+	  shape_parse_opt.c\
 	  init_dimensions.c\
 	  init_physics.c\
 	  init_texture.c\

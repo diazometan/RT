@@ -6,96 +6,92 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:37:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 12:23:55 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 13:58:47 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	init_radius(char *s, t_shape *new)
+static void	init_radius(char *s, t_vec3 *dims)
 {
-	char	*start;
-	char	*str;
-
-	start = ft_strstr(s, "radius");
-	if (start == NULL)
+	if ((s = ft_strstr(s, "\"radius\"")) == NULL || *(s + 8) != ':')
 	{
 		ft_putendl(M_RADIUS PFCF);
 		exit(1);
 	}
-	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '\0');
-	new->dims.x = ft_atof(str);
-	free(str);
+	if ((dims->x = get_double(s + 9, ',')) < 0)
+	{
+		ft_putendl(U_RADIUS PFCF);
+		exit(1);
+	}
 }
 
-static void	init_radius_torus(char *s, t_shape *new)
+static void	init_radius_torus(char *s, t_vec3 *dims)
 {
-	char	*start;
 	char	*str;
 
-	if ((start = ft_strstr(s, "inner_radius")) == NULL)
+	if ((str = ft_strstr(s, "\"radius_in\"")) == NULL || *(str + 11) != ':')
+	{
+		ft_putendl(M_IRADIUS PFCF);
+		exit(1);
+	}
+	if ((dims->x = get_double(str + 12, ',')) < 0)
+	{
+		ft_putendl(M_IRADIUS PFCF);
+		exit(1);
+	}
+	if ((str = ft_strstr(s, "\"radius_out\"")) == NULL || *(str + 12) != ':')
+	{
+		ft_putendl(M_ORADIUS PFCF);
+		exit(1);
+	}
+	if ((dims->y = get_double(str + 13, ',')) < 0)
+	{
+		ft_putendl(M_ORADIUS PFCF);
+		exit(1);
+	}
+}
+
+static void	init_height(char *s, t_vec3 *dims)
+{
+	if ((s = ft_strstr(s, "\"height\"")) == NULL || *(s + 8) != ':')
 	{
 		ft_putendl(M_HEIGHT PFCF);
 		exit(1);
 	}
-	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '\0');
-	new->dims.x = ft_atof(str);
-	free(str);
-	if ((start = ft_strstr(s, "outer_radius")) == NULL)
+	if ((dims->y = get_double(s + 9, ',')) < 0)
 	{
-		ft_putendl(M_HEIGHT PFCF);
+		ft_putendl(U_HEIGHT PFCF);
 		exit(1);
 	}
-	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '\0');
-	new->dims.y = ft_atof(str);
-	free(str);
 }
 
-static void	init_height(char *s, t_shape *new)
+static void	init_sides(char *s, t_vec3 *dims)
 {
-	char	*start;
-	char	*str;
-
-	if ((start = ft_strstr(s, "height")) == NULL)
-	{
-		ft_putendl(M_HEIGHT PFCF);
-		exit(1);
-	}
-	if ((str = ft_strextract(start, ':', ',')) == NULL)
-		str = ft_strextract(start, ':', '\0');
-	new->dims.y = ft_atof(str);
-	free(str);
-}
-
-static void	init_sides(char *s, t_shape *new)
-{
-	char	*start;
-	char	*str;
-
-	if ((start = ft_strstr(s, "sides")) == NULL)
+	if ((s = ft_strstr(s, "\"sides\"")) == NULL || *(s + 7) != ':')
 	{
 		ft_putendl(M_SIDES PFCF);
 		exit(1);
 	}
-	str = ft_strextract(start, '[', ']');
-	//extract_coord(str, &new->dims);
-	free(str);
+	get_vector(s + 8, dims);
+	if (dims->x < 0 || dims->y < 0 || dims->z < 0 )
+	{
+		ft_putendl(U_SIDES);
+		exit(1);
+	}
 }
 
-void		init_dimensions(char *s, t_shape *new)
+void		init_dimensions(char *s, int figure, t_vec3 *dims)
 {
-	if (new->figure == SPHERE)
-		init_radius(s, new);
-	else if (new->figure == CONE || new->figure == CYLINDER || new->figure == CAPSULE)
+	if (figure == SPHERE)
+		init_radius(s, dims);
+	else if (figure == CONE || figure == CYLINDER || figure == CAPSULE)
 	{
-		init_radius(s, new);
-		init_height(s, new);
+		init_radius(s, dims);
+		init_height(s, dims);
 	}
-	else if (new->figure == BOX || new->figure == ELIPSIOD || new->figure == FRACTAL)
-		init_sides(s, new);
-	else if (new->figure == TORUS)
-		init_radius_torus(s, new);
+	else if (figure == BOX || figure == ELIPSIOD || figure == FRACTAL)
+		init_sides(s, dims);
+	else if (figure == TORUS)
+		init_radius_torus(s, dims);
 }

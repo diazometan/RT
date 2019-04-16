@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 11:44:24 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 16:33:32 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@
 # define AMBIENT 3
 # define SPOT 4
 
-# define RED 0xFF0000
-# define GREEN 0x008000
-# define BLUE 0x0000FF
-# define YELLOW 0xFFFF00
-# define WHITE 0xFFFFFF
-# define PURPLE 0x800080
-
 # define O_RED "\033[0;31m"
 # define O_NC "\033[0m"
 
@@ -46,26 +39,35 @@
 
 # define MEMORY O_RED "not enough sufficient memory"
 
+# define OBJ O_RED "Objects:\n"
 # define M_SHAPE O_RED "Shape identifier is missing!"
 # define M_COLOR O_RED "Color identifier is missing!"
-# define M_SPEC O_RED "Specular field is missing!"
-# define M_REFL O_RED "Reflection field is missing!"
+# define M_CENTER O_RED "Center coordinates are missing!"
+# define M_DIR O_RED "Direction coordinates are missing!"
+# define M_SIDES O_RED "Sides are missing!"
 # define M_RADIUS O_RED "Radius is missing!"
 # define M_IRADIUS O_RED "Inner radius is missing!"
 # define M_ORADIUS O_RED "Outer radius is missing!"
-# define M_ANGLE O_RED "Angle is missing!"
 # define M_HEIGHT O_RED "Height is missing!"
-# define M_CENTER O_RED "Center coordinates are missing!"
-# define M_SIDES O_RED "Box sides are missing!"
-# define M_DIR O_RED "Direction coordinates are missing!"
+# define M_SPEC O_RED "Specular field is missing!"
+# define M_REFL O_RED "Reflection field is missing!"
+# define M_REFR O_RED "Refraction coefficient is missing!"
+//# define M_ANGLE O_RED "Angle is missing!"
 # define M_DEPTH O_RED "Reflection depth is missing!"
 # define M_PDIV O_RED "Pixel division is missing!"
-# define M_VERTEX O_RED "Triangle vertex is missing!"
-# define M_REFRACT O_RED "Refraction coefficient is missing!"
+# define M_MATCH O_RED "Matching bracket is missing!"
 
-# define U_SHAPE O_RED "Undefined shape detected!"
+# define U_SHAPE O_RED "Undefined shape!"
 # define U_COLOR O_RED "Color vector has a range form 0 to 255"
-# define U_LIGHT O_RED "Undefined lightning detected!"
+# define U_SIDES O_RED "Undefined sides!"
+# define U_RADIUS O_RED "Undefined radius!"
+# define U_IRADIUS O_RED "Inner radius is missing!"
+# define U_ORADIUS O_RED "Outer radius is missing!"
+# define U_HEIGHT O_RED "Undefined radius!"
+# define U_SPEC O_RED "Undefined specular!"
+# define U_REFL O_RED "Undefined reflection!"
+# define U_REFR O_RED "Undefined refraction!"
+# define U_LIGHT O_RED "Undefined lightning type!"
 # define U_INTENS O_RED "Light intensity is too big!"
 # define U_DEPTH O_RED "Reflection depth is too big!"
 # define U_PDIV O_RED "Pixel divison is too big!"
@@ -73,7 +75,7 @@
 # define U_NUM O_RED "Undefined number detected!"
 # define U_REFRACT O_RED "Refraction coefficient cant be less than 1!"
 
-# define PFCF  O_NC "\nPlease fix config file"
+# define PFCF O_NC "\nPlease fix config file"
 
 # define TEXTURE_DIR "textures/"
 
