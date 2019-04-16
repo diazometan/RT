@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:11:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 18:50:50 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 12:36:26 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,30 @@
 	//free(str);
 //}
 
-int		ft_strcequ(char const *s1, char const *s2, int c);
-
-int		identify_color(char *s, t_vec3 *color)
+void		identify_color(char *s, t_vec3 *color)
 {
 	char	*str;
 
-	if ((str = ft_strstr(s, "color")) == NULL)
+	if ((str = ft_strstr(s, "\"color\"")) == NULL || *(str + 7) != ':')
 	{
-		ft_putendl(U_COLOR PFCF);
+		ft_putendl(U_VEC PFCF);
 		exit(1);
 	}
-	if ((str = ft_strextract(str, '[', ']')) == NULL)
+	//if ((str = ft_strextract(str, '[', ']')) == NULL)
+	//{
+		//ft_putendl(MEMORY);
+		//exit (1);
+	//}
+	get_vector(str + 8, color);
+	if (color->x < 0 || color->x > 255 || color->y < 0
+		|| color->y > 255 || color->z < 0 || color->z > 255)
 	{
-		ft_putendl(MEMORY);
-		exit (1);
+		ft_putendl(U_COLOR);
+		exit(1);
 	}
-	extract_coord(str, color);
-	free(str);
-	return (0);
+	//extract_coord(str, color);
+	//free(str);
+	//return (0);
 }
 
 int		identify_shape(char *start)
@@ -98,8 +103,5 @@ int		identify_shape(char *start)
 	else if (ft_strcequ(start, "\"fractal\"", ','))
 		return (FRACTAL);
 	else
-	{
-		ft_putendl(U_SHAPE PFCF);
-		exit(1);
-	}
+		return (-1);
 }

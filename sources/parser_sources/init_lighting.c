@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/14 19:37:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 12:23:08 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void		get_coordinates(char *object, t_light *new)
 			exit(1);
 		}
 		str = ft_strextract(start, '[', ']');
-		extract_coord(str, &new->point);
+		//extract_coord(str, &new->point);
 	}
 	else //no more need to store in the same structure as point light sourcem check later!!!
 	{
@@ -90,7 +90,7 @@ static void		get_coordinates(char *object, t_light *new)
 			exit(1);
 		}
 		str = ft_strextract(start, '[', ']');
-		extract_coord(str, &new->ray);
+		//extract_coord(str, &new->ray);
 	}
 	if (new->type == SPOT)
 	{
@@ -100,7 +100,7 @@ static void		get_coordinates(char *object, t_light *new)
 			exit(1);
 		}
 		str = ft_strextract(start, '[', ']');
-		extract_coord(str, &new->dir);
+		//extract_coord(str, &new->dir);
 		vec3_normalize(&new->dir, vec3_length(&new->dir));
 	}
 	free(str);

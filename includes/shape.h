@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 18:46:23 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 11:59:16 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ typedef struct		s_shape
 
 void				push_back_shape(t_shape **head, t_shape *new);
 int					identify_shape(char *start);
-int					identify_color(char *s, t_vec3 *color);
+void					identify_color(char *s, t_vec3 *color);
 
 
-
+//PARSE HELPER
+int					ft_strcequ(char const *s1, char const *s2, int c);
+char				*get_end(char *s, int c_s, int c_e);
+void				get_vector(char *s, t_vec3 *vec);
+//int					extract_coord(char *str, t_vec3 *vec);
 
 
 

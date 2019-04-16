@@ -6,26 +6,26 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 18:45:21 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 12:26:42 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	init_center(char *s, t_shape *new)
-{
-	char	*start;
-	char	*str;
-
-	if ((start = ft_strstr(s, "center")) == NULL)
-	{
-		ft_putendl(M_CENTER PFCF);
-		exit(1);
-	}
-	str = ft_strextract(start, '[', ']');
-	extract_coord(str, &new->center);
-	free(str);
-}
+//void	init_center(char *s, t_shape *new)
+//{
+	//char	*start;
+	//char	*str;
+//
+	//if ((start = ft_strstr(s, "center")) == NULL)
+	//{
+		//ft_putendl(M_CENTER PFCF);
+		//exit(1);
+	//}
+	//str = ft_strextract(start, '[', ']');
+	//extract_coord(str, &new->center);
+	//free(str);
+//}
 
 void	push_back_shape(t_shape **head, t_shape *new)
 {
@@ -48,23 +48,6 @@ void	init_rotation(t_shape *new)
 		matrix_multiply(inverse_y_rotate(new->unit.y), inverse_z_rotate(new->unit.z)));
 }
 
-int	ft_strcequ(char const *s1, char const *s2, int c)
-{
-	char	ch1;
-	char	ch2;
-
-	if (s1 == NULL || s2 == NULL)
-		return (0);
-	while (((ch1 = *s1) != '\0') && ((ch2 = *s2) != '\0') && (c != ch1))
-	{
-		if (ch1 != ch2)
-			return (0);
-		++s1;
-		++s2;
-	}
-	return (1);
-}
-
 void	init_fun_allocator(char *s, t_shape *new)
 {
 	//int	len;
@@ -77,9 +60,13 @@ void	init_fun_allocator(char *s, t_shape *new)
 		exit(1);
 	}
 	printf("identifying shape - %s\n", s + 8);
-	new->figure = identify_shape(s + 8);
-	if (identify_color(s, &new->color))
-		exit (1);
+	if ((new->figure = identify_shape(s + 8)) == -1)
+	{
+		ft_putendl(U_SHAPE PFCF);
+		exit(1);
+	}
+	printf("shape id - %d\n", new->figure);
+	identify_color(s, &new->color);
 	printf("color - %f %f %f\n", new->color.x, new->color.y, new->color.z);
 }
 
@@ -91,6 +78,8 @@ int		init_shapes(char *s, t_shape **head, t_texture **head_textures)
 	//int		len;
 	t_shape	*new;
 
+	(void)head;
+	(void)head_textures;
 	printf("s in init shapes - %s\n", s);
 	//if (*s != '{' || (end = get_end(s + 1, '{', '}')) == NULL)
 		//return (1);
@@ -104,7 +93,6 @@ int		init_shapes(char *s, t_shape **head, t_texture **head_textures)
 		new->next = NULL;
 		init_fun_allocator(s + 1, new);
 		printf("new s - %s\n", s);
-		printf("identified shape - %d\n", new->figure);
 		s = end + 1;
 		if (*s == ']')
 			return (0);

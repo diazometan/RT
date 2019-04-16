@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 18:05:41 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 11:44:24 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,13 @@
 # define M_REFRACT O_RED "Refraction coefficient is missing!"
 
 # define U_SHAPE O_RED "Undefined shape detected!"
-# define U_COLOR O_RED "Undefined color detected!"
+# define U_COLOR O_RED "Color vector has a range form 0 to 255"
 # define U_LIGHT O_RED "Undefined lightning detected!"
 # define U_INTENS O_RED "Light intensity is too big!"
 # define U_DEPTH O_RED "Reflection depth is too big!"
 # define U_PDIV O_RED "Pixel divison is too big!"
-# define U_COORD O_RED "Error in vector notation"
+# define U_VEC O_RED "Error in vector notation"
+# define U_NUM O_RED "Undefined number detected!"
 # define U_REFRACT O_RED "Refraction coefficient cant be less than 1!"
 
 # define PFCF  O_NC "\nPlease fix config file"

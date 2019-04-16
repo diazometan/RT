@@ -6,34 +6,11 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 18:43:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 11:59:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-char	*get_end(char *s, int c_s, int c_e)
-{
-	int		pair;
-	char	c;
-
-	pair = 0;
-	while ((c = *s) != '\0') //&& (c != c_e && pair != 0))
-	{
-		if (c == c_s)
-			++pair;
-		else if (c == c_e)
-		{
-			if (pair == 0)
-				return (s);
-			--pair;
-		}
-		++s;
-	}
-	//printf("str - %s\n", s);
-	//printf("str - %s\n", s);
-	return (NULL);
-}
 
 int			check_number(char *n)
 {
@@ -54,32 +31,6 @@ int			check_number(char *n)
 	return (0);
 }
 
-int			extract_coord(char *str, t_vec3 *vec)
-{
-	int		i;
-	char	**array;
-
-	i = 0;
-	if ((array = ft_strsplit(str, ',')) == NULL)
-	{
-		ft_putendl(U_COORD PFCF);
-		return (1);
-	}
-	while (array[i] != NULL)
-		i++;
-	if (i != 3 || check_number(array[0]) || check_number(array[1]) || check_number(array[2]))
-	{
-		free_char_array(&array);
-		ft_putendl(U_COORD PFCF);
-		exit (1);
-	}
-	vec->x = ft_atof(array[0]);
-	vec->y = ft_atof(array[1]);
-	vec->z = ft_atof(array[2]);
-	free_char_array(&array);
-	return (0);
-}
-
 void	init_camera(char *s, t_rt *rt)
 {
 	char	*str;
@@ -91,7 +42,7 @@ void	init_camera(char *s, t_rt *rt)
 		exit(1);
 	}
 	str = ft_strextract(start, '[', ']');
-	extract_coord(str, &rt->camera);
+	//extract_coord(str, &rt->camera);
 	free(str);
 	if ((start = ft_strstr(s, "direction")) == NULL)
 	{
@@ -99,7 +50,7 @@ void	init_camera(char *s, t_rt *rt)
 		exit(1);
 	}
 	str = ft_strextract(start, '[', ']');
-	extract_coord(str, &rt->angle);
+	//extract_coord(str, &rt->angle);
 	rt->angle.x = M_PI * rt->angle.x / 180;
 	rt->angle.y = M_PI * rt->angle.y / 180;
 	rt->angle.z = M_PI * rt->angle.z / 180;
@@ -110,9 +61,9 @@ int		init_config(char *file, t_rt *rt)
 {
 	char	*start;
 	//char	*shapes;
-	char	*lighting;
-	char	*camera;
-	char	*physics;
+	//char	*lighting;
+	//char	*camera;
+	//char	*physics;
 
 	char	*end;
 
@@ -156,17 +107,17 @@ int		init_config(char *file, t_rt *rt)
 		//return (1);
 	//shapes = ft_strextract(start, '[', ']');
 	//init_shapes(shapes, &rt->head_shapes, &rt->head_textures);
-	if ((start = ft_strstr(file, "lighting")) == NULL)
-		return (1);
-	lighting = ft_strextract(start, '[', ']');
-	init_lighting(lighting, &rt->head_light);
-	if ((start = ft_strstr(file, "camera")) == NULL)
-		return (1);
-	camera = ft_strextract(start, '{', '}');
-	init_camera(camera, rt);
-	if ((start = ft_strstr(file, "physics")) == NULL)
-		return (1);
-	physics = ft_strextract(start, '{', '}');
-	init_physics(physics, rt);
+	//if ((start = ft_strstr(file, "lighting")) == NULL)
+		//return (1);
+	//lighting = ft_strextract(start, '[', ']');
+	//init_lighting(lighting, &rt->head_light);
+	//if ((start = ft_strstr(file, "camera")) == NULL)
+		//return (1);
+	//camera = ft_strextract(start, '{', '}');
+	//init_camera(camera, rt);
+	//if ((start = ft_strstr(file, "physics")) == NULL)
+		//return (1);
+	//physics = ft_strextract(start, '{', '}');
+	//init_physics(physics, rt);
 	return (0);
 }

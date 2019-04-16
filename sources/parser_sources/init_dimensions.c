@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:37:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/11 17:51:12 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 12:23:55 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	init_sides(char *s, t_shape *new)
 		exit(1);
 	}
 	str = ft_strextract(start, '[', ']');
-	extract_coord(str, &new->dims);
+	//extract_coord(str, &new->dims);
 	free(str);
 }
 
