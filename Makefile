@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/16 17:05:07 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/16 19:38:51 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC = main.c\
 	  init_texture.c\
 	  init_lighting.c\
 	  create_img.c\
+	  trace_ray.c\
 	  primitives_simple.c\
 	  primitives_diff.c\
 	  primitives_inf.c\
@@ -55,13 +56,9 @@ SRC = main.c\
 	  shape_summ.c\
 	  init_shape_child.c\
 	  disrubtion_effects.c\
-	  generateNoise.c\
-	  smooth_noise.c\
-	  turbulence.c\
-	  noise.c\
-	  wood.c\
-	  chess_board.c\
-	  marble.c
+	  color_disrubtion.c\
+	  convert_color.c\
+	  noise.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

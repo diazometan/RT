@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 14:18:15 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 20:04:25 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <time.h>
 
 typedef struct		s_sdl
 {
@@ -119,11 +120,20 @@ t_vec3				torus_texture(t_texture *texture, t_shape *shape);
 t_vec3				box_texture(t_texture *texture, t_shape *shape);
 
 double				turbulence(t_rt *rt, double x, double y, double size);
-void				generateNoise(t_rt *rt);
-int					noise(t_rt *rt, double x, double y);
+void				generate_noise(t_rt *rt);
 double				smooth_noise(t_rt *rt, double x, double y);
-int					wood(t_rt *rt, int x, int y);
-int					marble(t_rt *rt, int x, int y);
-int					chess_board(int x, int y);
+t_vec3				noise(t_rt *rt, double x, double y);
+t_vec3				wood(t_rt *rt, int x, int y);
+t_vec3				marble(t_rt *rt, int x, int y);
+t_vec3				chess_board(int x, int y);
+
+void				set_color(t_shape *shape, int rgb_m[3], double light);
+void				set_color_toon_shading(t_shape *shape, int rgb_m[3], double light);
+void				set_color_invers(t_shape *shape, int rgb_m[3], double light);
+void				set_color_grey(t_shape *shape, int rgb_m[3], double light);
+void				set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light);
+
+t_hsv_color			rgb_to_hsv(t_rgb_color rgb);
+t_rgb_color			hsv_to_rgb(t_hsv_color hsv);
 
 #endif

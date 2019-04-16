@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 19:40:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:09:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int		main(int args, char **argv)
 		ft_putstr("\033[0;31musage: ./RTv1 [configuration_file]\n");
 		return (1);
 	}
-	generateNoise(&rt);
+	generate_noise(&rt);
 	init_rt(&rt, argv[1]);
 	//TEMPORARY CHECK FOR CONFIG PARSER
 	t_shape *h_s = rt.head_shapes;

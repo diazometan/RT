@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:40:19 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 17:53:44 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:14:25 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
+int			reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	double	n_dot_r;
 	t_vec3	r_v;

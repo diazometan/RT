@@ -5,20 +5,20 @@
 				"id":0,
 				"shape":"fractal",
 				"color":"red",
-				"center":[0,0,10],
+				"center":[0,0,5],
 				"sides":[1,1,1],
-				"direction":[0,0,0]
+				"direction":[0,45,0]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
-				"intensity":0.6,
+				"intensity":0.4,
 				"center":[2,1,0]
 			},
 			{
 				"type":"ambient",
-				"intensity":0.5
+				"intensity":0.2
 			}
 		],
 		"camera":{

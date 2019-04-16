@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/15 19:07:34 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:33:12 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ typedef struct		s_texture
 	SDL_Surface			*surface;
 	struct s_texture	*next;
 }					t_texture;
+
+typedef struct		s_hsv_color
+{
+	unsigned char	h;
+	unsigned char	s;
+	unsigned char	v;
+}					t_hsv_color;
+
+typedef struct		s_rgb_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}					t_rgb_color;
 
 typedef struct		s_shape
 {
