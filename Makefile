@@ -6,13 +6,15 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/16 19:38:51 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/17 17:36:02 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RT
 
 SRC_DIR = sources
+
+PRS_SRC_DIR = $(SRC_DIR)/parser_sources
 
 OBJ_DIR = objects
 
@@ -25,15 +27,20 @@ FLAGS = -O2 -g -Wall -Wextra #-Werror
 INCLUDES = -I SDL2.framework/Headers -I includes -I libft
 
 SRC = main.c\
+	  read_config_file.c\
 	  event_handler.c\
 	  init_config.c\
+	  parse_helper.c\
+	  get_vector.c\
 	  init_shapes.c\
-	  parse_one.c\
-	  parse_two.c\
+	  init_groups.c\
+	  shape_parse_main.c\
 	  init_dimensions.c\
-	  init_physics.c\
+	  shape_parse_opt.c\
+	  init_function.c\
 	  init_texture.c\
 	  init_lighting.c\
+	  init_physics.c\
 	  create_img.c\
 	  trace_ray.c\
 	  primitives_simple.c\
@@ -82,7 +89,10 @@ $(OBJ_DIR):
 	@echo "$(GREEN)Objects directory is created!$(NC)"
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h| $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h | $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
+
+$(OBJ_DIR)/%.o: $(PRS_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h | $(OBJ_DIR)
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:

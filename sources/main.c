@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 19:09:48 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:40:34 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,7 @@ static int		init_sdl(t_sdl *sdl)
 	return (0);
 }
 
-static char	*get_file(int fd)
-{
-	int		error;
-	char	*line;
-	char	*file;
-	char	*tmp;
-
-	file = ft_strnew(1);
-	while ((error = get_next_line(fd, &line)) > 0)
-	{
-		tmp = ft_strjoin(file, ft_strtrim(line));
-		free(file);
-		file = tmp;
-	}
-	if (error == -1)
-	{
-		ft_putendl("gnl error occured");
-		free(file);
-		exit(1);
-	}
-	if (ft_strlen(file) == 0)
-	{
-		ft_putendl("empty file");
-		free(file);
-		exit(1);
-	}
-	return (file);
-}
-
-static void	init_rt(t_rt *rt, char *config_file)
+static int	init_rt(t_rt *rt, char *config_file)
 {
 	int		fd;
 	char	*file;
@@ -72,22 +43,25 @@ static void	init_rt(t_rt *rt, char *config_file)
 	rt->head_shapes = NULL;
 	rt->head_light = NULL;
 	rt->head_textures = NULL;
-	rt->p_division = 1;
-	fd = open(config_file, O_RDONLY);
-	file = get_file(fd);
+	if ((fd = open(config_file, O_RDONLY)) < 0)
+	{
+		ft_putendl(M_FILE);
+		return (1);
+	}
+	if ((file = get_file(fd)) == NULL)
+		return (1);
 	if (init_config(file, rt))
 	{
 		printf("Error in config file...\n");
 		free(file);
 		free_args(rt->head_shapes, rt->head_light, rt->head_textures);
-		exit(1);
+		return (1);
 	}
 	free(file);
 	close(fd);
-	rt->sample = 1;
-	//create_caps(rt);
 	rt->win_width = 600;
 	rt->win_height = 600;
+	return (0);
 }
 
 int		main(int args, char **argv)
@@ -98,7 +72,7 @@ int		main(int args, char **argv)
 	srand48(time(NULL));
 	if (args != 2)
 	{
-		ft_putstr("\033[0;31musage: ./RTv1 [configuration_file]\n");
+		ft_putendl(USAGE);
 		return (1);
 	}
 	generate_noise(&rt);
@@ -118,24 +92,24 @@ int		main(int args, char **argv)
 		else if (h_s->figure == 4)
 			printf("cone, ");
 		else if (h_s->figure == 5)
-			printf("disk, ");
+			printf("inf_cylinder, ");
 		else if (h_s->figure == 6)
-			printf("triangle, ");
+			printf("inf_cone, ");
 		else if (h_s->figure == 7)
 			printf("torus, ");
 		else if (h_s->figure == 8)
 			printf("box, ");
 		else if (h_s->figure == 9)
 			printf("capsule, ");
-		printf("color - %.0f %.0f %.0f, specular - %.2f, reflection = %.2f, refraction - %.2f, emission - %f, ", h_s->color.x, h_s->color.y, h_s->color.z, h_s->specular, h_s->reflection, h_s->refract, h_s->emission);
+		printf("color - %.0f %.0f %.0f, specular - %.2f, reflection = %.2f, refraction - %.2f, emission - %f, ", h_s->color.x, h_s->color.y, h_s->color.z, h_s->specular, h_s->reflection, h_s->refraction, h_s->emission);
 		if (h_s->texture != NULL)
 			printf("texture - %s, ", h_s->texture->name);
-		if (h_s->figure == SPHERE ||  h_s->figure == CYLINDER || h_s->figure == DISK || h_s->figure == CONE || h_s->figure == BOX || h_s->figure == CAPSULE)
+		if (h_s->figure != BOX && h_s->figure != FRACTAL && h_s->figure != PLANE)
 			printf("radius - %.2f ", h_s->dims.x);
 		if (h_s->figure == CYLINDER || h_s->figure == CONE || h_s->figure == CAPSULE)
 			printf("height - %.2f ", h_s->dims.y);
-		printf("\n\tx - %.2f, y - %.2f, z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
-		printf("\n\tx_u - %.2f, y_u - %.2f, z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+		printf("\n\tcenter -  %.2f, %.2f, %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
+		printf("\n\tunit - %.2f, %.2f, %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
 		printf("\n");
 		h_s = h_s->next;
 	}
@@ -148,27 +122,29 @@ int		main(int args, char **argv)
 			printf("\tdirectional, ");
 		else if (h_l->type == AMBIENT)
 			printf("\tambient, ");
-		printf("intensity - %.2f, ", h_l->intensity);
-		if (h_l->type == POINT)
-			printf("center x - %.2f, y - %.2f, z - %.2f", h_l->point.x, h_l->point.y, h_l->point.z);
-		else if (h_l->type == DIRECTIONAL)
-			printf("direction - x - %.2f, y - %.2f, z - %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
 		else if (h_l->type == SPOT)
-			printf("direction - x - %.2f, y - %.2f, z - %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
+			printf("\tspot, ");
+		printf("intensity - %.2f, ", h_l->intensity);
+		if (h_l->type == POINT || h_l->type == SPOT)
+			printf("center %.2f, %.2f, %.2f, ", h_l->center.x, h_l->center.y, h_l->center.z);
+		if (h_l->type == DIRECTIONAL)
+			printf("direction - %.2f, %.2f, %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
+		if (h_l->type == SPOT)
+			printf("direction - %.2f, %.2f, %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
 		h_l = h_l->next;
 		printf("\n");
 	}
 	printf("\ncamera:\n");
-	printf("\tlocated at x - %.2f, y - %.2f, z - %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
-	printf("\tlooks at x - %.2f, y - %.2f, z - %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
+	printf("\tlocated at %.2f, %.2f, %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
+	printf("\tlooks at %.2f, %.2f, %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
 	printf("\nphysics:\n");
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);
 	//END
 	if (init_sdl(&sdl))
 		return (1);
-	create_img(&rt, &sdl);
-	event_handler(&rt, &sdl);
+	//create_img(&rt, &sdl);
+	//event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_DestroyWindow(sdl.win);
 	SDL_Quit();

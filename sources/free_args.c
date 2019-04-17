@@ -6,11 +6,24 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 20:27:52 by rgyles            #+#    #+#             */
-/*   Updated: 2019/03/25 14:45:12 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/16 12:24:22 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+//void	free_char_array(char ***arg)
+//{
+	//char		**array;
+//
+	//if (*arg == NULL)
+		//return ;
+	//array = *arg;
+	//while (*array != NULL)
+		//free(*array++);
+	//free(*arg);
+	//*arg = NULL;
+//}
 
 void	free_args(t_shape *shape, t_light *light, t_texture *texture)
 {
