@@ -5,6 +5,7 @@
 				"id":0,
 				"shape":"fractal",
 				"color":"red",
+				"texture":"kek",
 				"center":[0,0,5],
 				"sides":[1,1,1],
 				"direction":[0,45,0]

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/16 19:34:00 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 16:07:59 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	reflect_color(int color, int reflected_color, double reflection)
 	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
 }
 
-void	set_color(t_shape *shape, int rgb_m[3], double light)
+void	standart_color(t_shape *shape, int rgb_m[3], double light)
 {
 	rgb_m[0] = shape->color.x * light;
 	rgb_m[1] = shape->color.y * light;
@@ -87,10 +87,7 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 		create_normal_system(shape);
 	light = get_light(dir, shape, rt);
 	//light = emission(shape, rt, depth);
-	/*rgb[0] = shape->color.x * light;
-	rgb[1] = shape->color.y * light;
-	rgb[2] = shape->color.z * light;*/
-	set_color(shape, rgb, light);
+	standart_color(shape, rgb, light);
 	color = check_color(rgb);
 	/*if (shape->emission == 0.0)
 		color = emission(shape, rt, depth);
