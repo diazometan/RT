@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:16:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 11:00:25 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 09:27:53 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_end(char *s, int c_s, int c_e)
 	char	c;
 
 	pair = 0;
-	while ((c = *s) != '\0') //&& (c != c_e && pair != 0))
+	while ((c = *s) != '\1')
 	{
 		if (c == c_s)
 			++pair;
@@ -47,7 +47,5 @@ char	*get_end(char *s, int c_s, int c_e)
 		}
 		++s;
 	}
-	//printf("str - %s\n", s);
-	//printf("str - %s\n", s);
 	return (NULL);
 }

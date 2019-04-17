@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:11:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 19:40:56 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 09:59:56 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ void	init_direction(char *s, t_vec3 *unit, t_matrix *rotation)
 		exit(1);
 	}
 	get_vector(s + 12, unit);
-	vec3_scalar(unit, M_PI / 180.0);
-	*rotation = matrix_multiply(inverse_x_rotate(unit->x),
-	matrix_multiply(inverse_y_rotate(unit->y), inverse_z_rotate(unit->z)));
+	if (rotation != NULL)
+	{
+		vec3_scalar(unit, M_PI / 180.0);
+		*rotation = matrix_multiply(inverse_x_rotate(unit->x),
+			matrix_multiply(inverse_y_rotate(unit->y), inverse_z_rotate(unit->z)));
+	}
 }
 
 void	init_center(char *s, t_vec3 *center)

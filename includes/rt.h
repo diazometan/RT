@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 19:20:40 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 09:53:20 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ typedef struct		s_light
 {
 	int				type;
 	double			intensity;
-	t_vec3			ray;
-	t_vec3			point;
+	t_vec3			center;
 	t_vec3			dir;
+	t_vec3			ray;
 	struct s_light	*next;
 }					t_light;
 
@@ -62,9 +62,9 @@ typedef struct		s_rt
 char				*get_file(int fd);
 int					init_config(char *file, t_rt *rt);
 char				*init_shapes(char *s, t_shape **head, t_texture **head_textures);
-void				init_lighting(char *s, t_light **head);
+char				*init_lighting(char *s, t_light **head);
 void				init_physics(char *s, t_rt *rt);
-void				free_char_array(char ***arg);
+//void				free_char_array(char ***arg);
 void				free_args(t_shape *shape, t_light *light, t_texture *texture);
 
 void				create_img(t_rt *rt, t_sdl *sdl);

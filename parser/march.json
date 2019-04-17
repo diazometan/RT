@@ -19,7 +19,7 @@
 			{
 				"type":"spot",
 				"intensity":0.5,
-				"dir":[0,-1,0],
+				"direction":[0,-1,0],
 				"center":[0,10,5]
 			},
 			{

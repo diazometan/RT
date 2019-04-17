@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 20:08:06 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 09:46:41 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@
 # define M_SPEC O_RED "Specular field is missing!"
 # define M_REFL O_RED "Reflection field is missing!"
 # define M_REFR O_RED "Refraction coefficient is missing!"
+# define M_LIGHT O_RED "Light type is missing!"
+# define M_INT O_RED "Intensity field is missing!"
 //# define M_ANGLE O_RED "Angle is missing!"
 # define M_DEPTH O_RED "Reflection depth is missing!"
 # define M_PDIV O_RED "Pixel division is missing!"
@@ -72,7 +74,7 @@
 # define U_REFR O_RED "Undefined refraction!"
 # define U_TEX O_RED "Cant read texture"
 # define U_LIGHT O_RED "Undefined lightning type!"
-# define U_INTENS O_RED "Light intensity is too big!"
+# define U_INT O_RED "Light intensity is too big!"
 # define U_DEPTH O_RED "Reflection depth is too big!"
 # define U_PDIV O_RED "Pixel divison is too big!"
 # define U_VEC O_RED "Error in vector notation"

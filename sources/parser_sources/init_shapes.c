@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 19:51:47 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 10:00:19 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	push_back_shape(t_shape **head, t_shape *new)
 	//if (new->figure == SPHERE)
 		//printf("radius - %f\n", new->dims.x);
 	//printf("\nobject in fun_allocator - %s\n", s);
-void	init_fun_allocator(char *s, t_shape *new, t_texture **head_textures)
+static void	init_fun_allocator(char *s, t_shape *new, t_texture **head_textures)
 {
 	if (ft_strcequ(s, "\"shape\"", ':') == 0)
 	{
@@ -55,10 +55,13 @@ void	init_fun_allocator(char *s, t_shape *new, t_texture **head_textures)
 	init_function_texture(new);
 	init_texture(s, new, head_textures);
 	init_texture_map(s, new, head_textures);
+	new->emission = 0.0;
+	new->next = NULL;
 }
 
 char		*init_shapes(char *s, t_shape **head, t_texture **head_textures)
 {
+	char	*end;
 	t_shape	*new;
 
 	while (1)
@@ -71,7 +74,6 @@ char		*init_shapes(char *s, t_shape **head, t_texture **head_textures)
 			ft_putendl(MEMORY);
 			exit(1);
 		}
-		new->next = NULL;
 		init_fun_allocator(s + 1, new, head_textures);
 		s = end + 1;
 		push_back_shape(head, new);

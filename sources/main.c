@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 16:39:27 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 10:06:07 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,14 @@ int		main(int args, char **argv)
 			printf("\tdirectional, ");
 		else if (h_l->type == AMBIENT)
 			printf("\tambient, ");
-		printf("intensity - %.2f, ", h_l->intensity);
-		if (h_l->type == POINT)
-			printf("center x - %.2f, y - %.2f, z - %.2f", h_l->point.x, h_l->point.y, h_l->point.z);
-		else if (h_l->type == DIRECTIONAL)
-			printf("direction - x - %.2f, y - %.2f, z - %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
 		else if (h_l->type == SPOT)
+			printf("\tspot, ");
+		printf("intensity - %.2f, ", h_l->intensity);
+		if (h_l->type == POINT || h_l->type == SPOT)
+			printf("center x - %.2f, y - %.2f, z - %.2f, ", h_l->center.x, h_l->center.y, h_l->center.z);
+		if (h_l->type == DIRECTIONAL)
+			printf("direction - x - %.2f, y - %.2f, z - %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
+		if (h_l->type == SPOT)
 			printf("direction - x - %.2f, y - %.2f, z - %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
 		h_l = h_l->next;
 		printf("\n");
