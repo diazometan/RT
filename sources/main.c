@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:57:38 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:10:29 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		main(int args, char **argv)
 	generate_noise(&rt);
 	init_rt(&rt, argv[1]);
 	//TEMPORARY CHECK FOR CONFIG PARSER
-	t_shape *h_s = rt.head_shapes;
+	/*t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
 	printf("shapes:\n");
 	while (h_s != NULL)
@@ -139,7 +139,7 @@ int		main(int args, char **argv)
 	printf("\tlooks at %.2f, %.2f, %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
 	printf("\nphysics:\n");
 	printf("\treflection depth - %d\n", rt.depth);
-	printf("\tpixel division - %d\n", rt.p_division);
+	printf("\tpixel division - %d\n", rt.p_division);*/
 	//END
 	if (init_sdl(&sdl))
 		return (1);

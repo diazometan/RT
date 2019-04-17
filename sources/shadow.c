@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:10:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 15:43:13 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 21:18:56 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ double		shadow(t_vec3 *orig, t_vec3 dir,
 		from.z = orig->z + dist.t * dir.z;
 		while (head != NULL)
 		{
-			dist.d = shape_summ(&from, head);
-			if (dist.d < dist.min_distance)
-				dist.min_distance = dist.d;
-			if (dist.min_distance <= dist.t * dist.epsilon)
-				return (0.0);
+			if (head->child == 0)
+			{
+				dist.d = shape_summ(&from, head);
+				if (dist.d < dist.min_distance)
+					dist.min_distance = dist.d;
+				if (dist.min_distance <= dist.t * dist.epsilon)
+					return (0.0);
+			}
 			head = head->next;
 		}
 		dist.t += dist.min_distance;

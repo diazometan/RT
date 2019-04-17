@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 19:36:59 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/17 19:13:07 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 21:16:19 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ t_shape			*calculation_distance(t_trace *dist, t_rt *rt, t_vec3 *dir)
 	from.z = rt->source_point->z + dist->t * dir->z;
 	while (head != NULL)
 	{
-		dist->d = shape_summ(&from, head);
-		if (dist->d < dist->min_distance)
+		if (head->child == 0)
 		{
-			dist->min_distance = dist->d;
-			closest = head;
+			dist->d = shape_summ(&from, head);
+			if (dist->d < dist->min_distance)
+			{
+				dist->min_distance = dist->d;
+				closest = head;
+			}
 		}
 		head = head->next;
 	}

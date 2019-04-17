@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/17 17:38:55 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 21:16:49 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	get_intersection_point(rt->source_point, dir, rt->t_closest, &shape->surface_point);
 	get_normal(shape);
 
-	if (shape->texture != NULL)
-		shape->color = shape->map_texture(shape->texture, shape);
+	//if (shape->texture != NULL)
+	//	shape->color = shape->map_texture(shape->texture, shape);
 	//if (shape->tex_normal != NULL)
 		//create_normal_system(shape);
 	light = get_light(dir, shape, rt);

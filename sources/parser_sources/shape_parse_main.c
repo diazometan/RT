@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_parse_one.c                                  :+:      :+:    :+:   */
+/*   shape_parse_main.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:11:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:07:25 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 20:08:08 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_center(char *s, t_vec3 *center)
 {
 	if ((s = ft_strstr(s, "\"center\"")) == NULL || *(s + 8) != ':')
 	{
-		ft_putendl(M_COLOR);
+		ft_putendl(M_CENTER);
 		exit(1);
 	}
 	get_vector(s + 9, center);
@@ -61,7 +61,7 @@ static int		identify_operation(char *start)
 		return (UNITE);
 	else if (strcequ(start, "\"intersect\"", ','))
 		return (INTERSECT);
-	else if (strcequ(start, "\"diffrerence\"", ','))
+	else if (strcequ(start, "\"difference\"", ','))
 		return (DIFFERENCE);
 	else if (strcequ(start, "\"blend\"", ','))
 		return (BLEND);

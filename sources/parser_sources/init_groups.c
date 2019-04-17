@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:04:26 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:54:48 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:32:08 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_shape	*find_child(char *s, char *child, t_shape **head_shapes)
 	t_shape	*head;
 
 	head = *head_shapes;
-	if ((s = ft_strstr(s, child)) == NULL || *(s + 3) != ':')
+	if ((s = ft_strstr(s, child)) == NULL || *(s + 11) != ':')
 	{
 		ft_putendl(M_CHILD);
 		exit(1);
 	}
-	else if ((id = get_double(s + 13, ',')) < 0)
+	else if ((id = get_double(s + 12, ',')) < 0)
 	{
 		ft_putendl(U_CHILD);
 		exit(1);

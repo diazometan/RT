@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 18:08:27 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 19:59:58 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char			*init_lighting(char *s, t_light **head)
 			return (s + 1);
 		else if (*s != ',')
 		{
-			ft_putendl(M_COLOR);
+			ft_putendl(M_LIGHT);
 			exit(1);
 		}
 		++s;

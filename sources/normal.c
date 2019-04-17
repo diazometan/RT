@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 10:55:22 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 19:50:45 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 21:20:43 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		create_texute_normal(t_shape *shape, t_vec3 tangent,
 	t_vec3 normal_from_map;
 	t_vec3 normal1;
 
-	normal_from_map = shape->map_texture(shape->tex_normal, shape);
+	//normal_from_map = shape->map_texture(shape->tex_normal, shape);
 	vec3_scalar(&normal_from_map, 1.0 / 255.0);
 	normal_from_map.x = 2.0 * normal_from_map.x - 1.0;
 	normal_from_map.y = 2.0 * normal_from_map.y - 1.0;

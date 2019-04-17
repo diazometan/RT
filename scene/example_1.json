@@ -2,94 +2,82 @@
 	"scene":{
 		"objects":[
 			{
-				"id":0,
 				"shape":"box",
-				"color":"red",
+				"id":0,
+				"color":[255,0,0],
 				"center":[0,0,3],
 				"sides":[0.5,0.5,0.5],
-				"direction":[0,1,0]
+				"direction":[0,0,0]
 			},
 			{
-				"id":1,
 				"shape":"sphere",
-				"color":"red",
+				"id":1,
+				"color":[255,0,0],
 				"center":[0,0,3],
 				"radius":0.65,
-				"direction":[0,1,0]
+				"direction":[0,0,0]
 			},
 			{
-				"id":2,
 				"shape":"intersect",
-				"shape1":0,
-				"shape2":1,
-				"color":"red",
-				"center":[0,0,3],
-				"radius":0.65,
-				"direction":[0,1,0]
+				"id":2,
+				"child_one":0,
+				"child_two":1,
+				"color":[255,0,0]
 			},
 			{
-				"id":3,
 				"shape":"cylinder",
-				"color":"blue",
+				"id":3,
+				"color":[0,0,255],
 				"center":[0,0,3],
 				"radius":0.3,
 				"height":1.0,
 				"direction":[90,0,0]
 			},
 			{
-				"id":4,
 				"shape":"cylinder",
-				"color":"blue",
+				"id":4,
+				"color":[0,0,255],
 				"center":[0,0,3],
 				"radius":0.3,
 				"height":1.0,
 				"direction":[90,0,90]
 			},
 			{
-				"id":5,
 				"shape":"unite",
-				"shape1":3,
-				"shape2":4,
-				"color":"red",
-				"center":[0,0,3],
-				"radius":0.65,
-				"direction":[0,1,0]
+				"id":5,
+				"child_one":3,
+				"child_two":4,
+				"color":[255,0,0]
 			},
 			{
-				"id":6,
 				"shape":"cylinder",
-				"color":"blue",
+				"id":6,
+				"color":[0,0,255],
 				"center":[0,0,3],
 				"radius":0.3,
 				"height":1.0,
 				"direction":[0,0,0]
 			},
 			{
-				"id":7,
 				"shape":"unite",
-				"shape1":6,
-				"shape2":5,
-				"color":"red",
-				"center":[0,0,3],
-				"radius":0.65,
-				"direction":[0,1,0]
+				"id":7,
+				"child_one":6,
+				"child_two":5,
+				"color":[255,0,0]
 			},
 			{
-				"id":5,
 				"shape":"difference",
-				"shape1":2,
-				"shape2":7,
-				"color":"red",
-				"center":[0,0,3],
-				"radius":0.65,
-				"direction":[0,1,0]
+				"id":5,
+				"child_one":2,
+				"child_two":7,
+				"color":[255,0,0]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[1,1,2]
+				"center":[0,0,0]
 			},
 			{
 				"type":"ambient",
@@ -101,8 +89,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":3,
-			"pixel division":1
+			"reflection_depth":3,
+			"pixel_division":1
 		}
 	}
 }

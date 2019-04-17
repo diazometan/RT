@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:42:51 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 21:06:21 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_rgb_color
 typedef struct		s_shape
 {
 	int				id;
+	int				child;
 	int				group;
 	int				figure;
 	double			specular;

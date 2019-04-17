@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:44:28 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:56:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 20:11:14 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	init_reflection_depth(char *s, int *depth)
 
 static void	init_pixel_division(char *s, int *p_division)
 {
-	printf("s - %s\n", s);
 	if ((s = ft_strstr(s, "\"pixel_division\"")) == NULL || *(s + 16) != ':')
 	{
 		ft_putendl(M_PDIV);

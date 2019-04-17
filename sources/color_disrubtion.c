@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:34:27 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/16 19:07:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 19:48:00 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light)
+void			set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light) // еще одна инверсия
 {
 	int			max_rgb;
 	int			min_rgb;
@@ -31,7 +31,7 @@ void			set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light)
 	rgb_m[2] = rgb.b;
 }
 
-void			set_color_grey(t_shape *shape, int rgb_m[3], double light)
+void			set_color_grey(t_shape *shape, int rgb_m[3], double light) //черно-белый фильтр
 {
 	int			color;
 
@@ -44,14 +44,14 @@ void			set_color_grey(t_shape *shape, int rgb_m[3], double light)
 	rgb_m[2] = (color) * light;
 }
 
-void			set_color_invers(t_shape *shape, int rgb_m[3], double light)
+void			set_color_invers(t_shape *shape, int rgb_m[3], double light) //маковская инверсия
 {
 	rgb_m[0] = 0xFF - (shape->color.x) * light;
 	rgb_m[1] = 0xFF - (shape->color.y) * light;
 	rgb_m[2] = 0xFF - (shape->color.z) * light;
 }
 
-void			set_color_toon_shading(t_shape *shape, int rgb_m[3],
+void			set_color_toon_shading(t_shape *shape, int rgb_m[3], // картун эффект
 										double light)
 {
 	if (light < 0.3)

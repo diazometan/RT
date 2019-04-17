@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:26:16 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 18:59:56 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 20:58:17 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,14 @@ void			init_function(t_shape *new)
 		new->gd_fun = &gd_elispoid;
 	else if (new->figure == FRACTAL)
 		new->gd_fun = &gd_fractal;
+	else if (new->figure == INTERSECT)
+		new->gd_fun = &intersect;
+	else if (new->figure == UNITE)
+		new->gd_fun = &unite;
+	else if (new->figure == DIFFERENCE)
+		new->gd_fun = &difference;
+	else if (new->figure == BLEND)
+		new->gd_fun = &blend;
+	else if (new->figure == MIX)
+		new->gd_fun = &mix;
 }
