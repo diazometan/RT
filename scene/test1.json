@@ -3,18 +3,16 @@
 		"objects":[
 			{
 				"id":0,
-				"shape":"fractal",
+				"shape":"plane",
 				"color":"red",
-				"texture":"kek",
-				"center":[0,0,5],
-				"sides":[1,1,1],
-				"direction":[0,45,0]
+				"center":[0,-1,5],
+				"direction":[0,1,-0.2]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
-				"intensity":0.4,
+				"intensity":0.8,
 				"center":[2,1,0]
 			},
 			{
