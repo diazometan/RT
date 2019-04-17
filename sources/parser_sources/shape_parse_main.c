@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:11:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 13:18:03 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 17:07:25 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ void	identify_color(char *s, t_vec3 *color)
 	}
 }
 
+static int		identify_operation(char *start)
+{
+	if (strcequ(start, "\"unite\"", ','))
+		return (UNITE);
+	else if (strcequ(start, "\"intersect\"", ','))
+		return (INTERSECT);
+	else if (strcequ(start, "\"diffrerence\"", ','))
+		return (DIFFERENCE);
+	else if (strcequ(start, "\"blend\"", ','))
+		return (BLEND);
+	else if (strcequ(start, "\"mix\"", ','))
+		return (MIX);
+	else
+		return (-1);
+}
+
 int		identify_shape(char *start)
 {
 	if (strcequ(start, "\"plane\"", ','))
@@ -80,5 +96,5 @@ int		identify_shape(char *start)
 	else if (strcequ(start, "\"fractal\"", ','))
 		return (FRACTAL);
 	else
-		return (-1);
+		return (identify_operation(start));
 }

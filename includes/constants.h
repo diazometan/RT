@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 11:50:47 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 17:06:03 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # define CAPSULE 9
 # define ELIPSIOD 10
 # define FRACTAL 11
+# define UNITE 12
+# define INTERSECT 13
+# define DIFFERENCE 14
+# define BLEND 15
+# define MIX 16
 
 # define POINT 1
 # define DIRECTIONAL 2
@@ -62,6 +67,10 @@
 # define M_PDIV O_RED "pixel_division is missing!"
 # define M_MATCH O_RED "Matching bracket is missing!"
 # define M_COMMA O_RED "Comma between objects is missing!"
+# define M_ID "Id field is missing!"
+# define M_CHILD "Child shape identifier is missing!"
+
+# define V_CHILD "Not a valid child shape identifier"
 
 # define U_SHAPE O_RED "Undefined shape!"
 # define U_COLOR O_RED "Color vector has a range form 0 to 255"
@@ -80,6 +89,8 @@
 # define U_PDIV O_RED "Pixel division is between 0 and 8!"
 # define U_VEC O_RED "Error in vector notation"
 # define U_NUM O_RED "Undefined number detected!"
+# define U_ID O_RED "ID can only be a positive number"
+# define U_CHILD "Child shape identifier can only be a positive number"
 
 # define PFCF O_NC "\nPlease fix config file"
 

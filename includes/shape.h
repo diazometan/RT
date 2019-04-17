@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 13:50:05 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 17:19:26 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ typedef struct		s_texture
 
 typedef struct		s_shape
 {
+	int				id;
+	int				group;
 	int				figure;
 	double			specular;
 	double			reflection;
 	double			refraction;
 	double			emission;
-	double			u;
-	double			v;
 	t_vec3			color;
 	t_vec3			dims;
 	t_vec3			center;
@@ -41,10 +41,14 @@ typedef struct		s_shape
 	t_matrix		rotation;
 	t_texture		*texture;
 	t_texture		*tex_normal;
+	struct s_shape	*child_one;
+	struct s_shape	*child_two;
 	struct s_shape	*next;
 }					t_shape;
 
 int					identify_shape(char *start);
+void				init_id(char *s, int *id);
+t_shape				*find_child(char *s, char *child, t_shape **head_shapes);
 void				identify_color(char *s, t_vec3 *color);
 void				init_center(char *s, t_vec3 *center);
 void				init_direction(char *s, t_vec3 *unit, t_matrix *rotation);
@@ -56,6 +60,7 @@ void				init_function(t_shape *new);
 void				init_function_texture(t_shape *new);
 void				init_texture(char *object, t_shape *new, t_texture **head_textures);
 void				init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
+void				init_groups(char *s, t_shape *new, t_shape **head);
 
 int					strcequ(char const *s1, char const *s2, int c);
 char				*get_end(char *s, int c_s, int c_e);
