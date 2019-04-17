@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 12:45:44 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 13:17:24 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	push_back_shape(t_shape **head, t_shape *new)
 
 static void	init_fun_allocator(char *s, t_shape *new, t_texture **head_textures)
 {
-	if (ft_strcequ(s, "\"shape\"", ':') == 0)
+	if (strcequ(s, "\"shape\"", ':') == 0)
 	{
 		ft_putendl(M_SHAPE);
 		exit(1);

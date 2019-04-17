@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/16 18:35:22 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/17 13:45:53 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,16 +30,16 @@ SRC = main.c\
 	  read_config_file.c\
 	  event_handler.c\
 	  init_config.c\
-	  init_shapes.c\
 	  parse_helper.c\
 	  get_vector.c\
+	  init_shapes.c\
 	  shape_parse_main.c\
-	  shape_parse_opt.c\
 	  init_dimensions.c\
+	  shape_parse_opt.c\
 	  init_function.c\
-	  init_physics.c\
 	  init_texture.c\
 	  init_lighting.c\
+	  init_physics.c\
 	  create_img.c\
 	  primitives.c\
 	  get_color.c\

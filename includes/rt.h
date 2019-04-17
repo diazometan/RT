@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 11:55:18 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 13:52:02 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ char				*get_file(int fd);
 int					init_config(char *file, t_rt *rt);
 char				*init_shapes(char *s, t_shape **head, t_texture **head_textures);
 char				*init_lighting(char *s, t_light **head);
-//void				init_physics(char *s, t_rt *rt);
-//void				free_char_array(char ***arg);
+int					init_physics(char *s, t_rt *rt);
 void				free_args(t_shape *shape, t_light *light, t_texture *texture);
 
 void				create_img(t_rt *rt, t_sdl *sdl);

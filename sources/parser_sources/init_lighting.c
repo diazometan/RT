@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 12:45:16 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 13:19:26 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static void		init_intensity(char *s, double *intensity)
 
 static int		identify_light(char *start)
 {
-	if (ft_strcequ(start, "\"point\"", ','))
+	if (strcequ(start, "\"point\"", ','))
 		return (POINT);
-	else if (ft_strcequ(start, "\"directional\"", ','))
+	else if (strcequ(start, "\"directional\"", ','))
 		return (DIRECTIONAL);
-	else if (ft_strcequ(start, "\"ambient\"", ','))
+	else if (strcequ(start, "\"ambient\"", ','))
 		return (AMBIENT);
-	else if (ft_strcequ(start, "\"spot\"", ','))
+	else if (strcequ(start, "\"spot\"", ','))
 		return (SPOT);
 	else
 		return (-1);
@@ -57,7 +57,7 @@ static int		identify_light(char *start)
 
 static void		init_fun_allocator(char *s, t_light *new)
 {
-	if (ft_strcequ(s, "\"type\"", ':') == 0)
+	if (strcequ(s, "\"type\"", ':') == 0)
 	{
 		ft_putendl(M_LIGHT);
 		exit(1);
