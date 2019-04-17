@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:28:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 19:12:38 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,14 @@ double			gd_sphere(t_vec3 *p, t_shape *shape)
 	return (vec3_length(&orig) - shape->dims.x);
 }
 
-int TMP = 1;
-int KEK = 1;
-
 double			gd_plane(t_vec3 *p, t_shape *shape)
 {
-	t_vec3	orig;
-	double	unit1;
-	double	unit2;
-	t_vec3	tmp;
+	t_vec3 orig;
+	t_vec3 unit = (t_vec3) {0, 1, 0};
 
 	vec3_subtract(p, &shape->center, &orig);
-	//vector_matrix_multiply(shape->rotation, &orig);
-	if (vec3_dot(&shape->unit, &orig) < 0)
-	{
-		tmp = shape->unit;
-		vec3_scalar(&tmp, -1.0);
-		return (vec3_dot(&tmp, &orig));
-	}
-	// unit1 = vec3_dot(&shape->unit, &orig);
-	// tmp = shape->unit;
-	// vec3_scalar(&tmp, -1.0);
-	// unit2 = vec3_dot(&tmp, &orig);
-	//if (vec3_dot(&shape->unit, &orig) != fabs(vec3_dot(&shape->unit, &orig)))
-	//	printf("%f   %f\n", vec3_dot(&shape->unit, &orig), fabs(vec3_dot(&shape->unit, &orig)));
-	//if (fabs(vec3_dot(&shape->unit, &orig)) <= epsilon)
-	//	return (0.0);
-	return (vec3_dot(&shape->unit, &orig));
-	// if (unit1 > -10e-4 && unit1 < 0)
-	// 	return (unit1);
-	// return (ft_dmax(unit1, unit2));
+	vector_matrix_multiply(shape->rotation, &orig);
+	return fabs(vec3_dot(&unit, &orig));
 }
 
 double			gd_cylinder(t_vec3 *p, t_shape *shape)
