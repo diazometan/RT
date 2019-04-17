@@ -6,65 +6,67 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 20:11:03 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 12:43:38 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-//int			check_number(char *n)
-//{
-	//int		flag;
-	//char	c;
-//
-	//flag = 0;
-	//while ((c = *n) != '\0' && c >= '0' && c <= '9')
-	//{
-		//if (c == '.')
-			//++flag;
-		//if (flag > 1)
-			//return (1);
-		//++n;
-	//}
-	//if (c != '\0')
-		//return (1);
-	//return (0);
-//}
-
-void	init_camera(char *s, t_rt *rt)
+static void	init_reflection_depth(char *s, int *depth)
 {
-	char	*str;
-	char	*start;
+	if ((s = ft_strstr(s, "\"reflection_depth\"")) == NULL || *(s + 18) != ':')
+	{
+		ft_putendl(M_DEPTH);
+		exit(1);
+	}
+	else if ((*depth = (int)get_double(s + 19, ',')) < 0 || *depth > 5)
+	{
+		ft_putendl(U_DEPTH);
+		exit(1);
+	}
+}
 
-	if ((start = ft_strstr(s, "center")) == NULL)
+static void	init_pixel_division(char *s, int *p_division)
+{
+	if ((s = ft_strstr(s, "\"pixel_division\"")) == NULL || *(s + 16) != ':')
 	{
-		ft_putendl(M_CENTER PFCF);
+		ft_putendl(M_PDIV);
 		exit(1);
 	}
-	str = ft_strextract(start, '[', ']');
-	//extract_coord(str, &rt->camera);
-	free(str);
-	if ((start = ft_strstr(s, "direction")) == NULL)
+	else if ((*p_division = (int)get_double(s + 17, ',')) < 0 || *p_division > 5)
 	{
-		ft_putendl(M_DIR PFCF);
+		ft_putendl(U_PDIV);
 		exit(1);
 	}
-	str = ft_strextract(start, '[', ']');
-	//extract_coord(str, &rt->angle);
-	rt->angle.x = M_PI * rt->angle.x / 180;
-	rt->angle.y = M_PI * rt->angle.y / 180;
-	rt->angle.z = M_PI * rt->angle.z / 180;
-	free(str);
+}
+
+static void	init_physics(char *s, t_rt *rt)
+{
+	char	*end;
+
+	end = get_end(s + 1, '{', '}');
+	*end = '\0';
+	init_pixel_division(s, &rt->p_division);
+	init_reflection_depth(s, &rt->depth);
+	rt->sample_step = 1.0 / rt->p_division;
+	rt->sample_center = rt->sample_step / 2.0;
+}
+
+static char	*init_camera(char *s, t_vec3 *camera, t_vec3 *angle)
+{
+	char	*end;
+
+	end = get_end(s + 1, '{', '}');
+	*end = '\0';
+	init_center(s, camera);
+	init_direction(s, angle, NULL);
+	vec3_scalar(angle, M_PI / 180.0);
+	return (end + 1);
 }
 
 int		init_config(char *file, t_rt *rt)
 {
 	char	*start;
-	//char	*shapes;
-	//char	*lighting;
-	//char	*camera;
-	//char	*physics;
-
 	char	*end;
 
 	if (*file != '{' || (end = get_end(file + 1, '{', '}')) == NULL || *(end + 1) != '\0')
@@ -72,70 +74,46 @@ int		init_config(char *file, t_rt *rt)
 	if ((start = ft_strnstr(file + 1, "\"scene\":", 8)) == NULL)
 		return (1);
 	start += 8;
-	//printf("\n\nstr - %s\n", start);
 	if (*start != '{' || get_end(start + 1, '{', '}') == NULL)
 		return (1);
-
-	//INIT SHAPES
 	if ((start = ft_strnstr(start + 1, "\"objects\":", 10)) == NULL)
 		return (1);
 	start += 10;
 	if (*start != '[' || (end = get_end(start + 1, '[', ']')) == NULL || *(end + 1) != ',')
 	{
-		ft_putendl(OBJ M_MATCH PFCF);
+		ft_putendl(M_MATCH);
 		return (1);
 	}
-	//printf("check\n");
 	if ((start = init_shapes(start + 1, &rt->head_shapes, &rt->head_textures)) == NULL || *start != ',')
 		return (1);
-
-
-	//INIT LIGHTING
 	if ((start = ft_strnstr(start + 1, "\"lighting\":", 11)) == NULL)
 		return (1);
 	start += 11;
 	if (*start != '[' || (end = get_end(start + 1, '[', ']')) == NULL || *(end + 1) != ',')
 	{
-		ft_putendl(LIGHT M_MATCH PFCF);
+		ft_putendl(M_MATCH);
 		return (1);
 	}
 	if ((start = init_lighting(start + 1, &rt->head_light)) == NULL || *start != ',')
 		return (1);
-	//printf("\n\nstart after init_shapes - %s\n", start);
-	//printf("start - %c\n", *file);
-	//printf("end - %s\n", get_end(file + 1, '{', '}'));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//if ((start = ft_strstr(file, "\"objects\"")) == NULL)
-		//return (1);
-	//shapes = ft_strextract(start, '[', ']');
-	//init_shapes(shapes, &rt->head_shapes, &rt->head_textures);
-	//if ((start = ft_strstr(file, "lighting")) == NULL)
-		//return (1);
-	//lighting = ft_strextract(start, '[', ']');
-	//init_lighting(lighting, &rt->head_light);
-	//if ((start = ft_strstr(file, "camera")) == NULL)
-		//return (1);
-	//camera = ft_strextract(start, '{', '}');
-	//init_camera(camera, rt);
-	//if ((start = ft_strstr(file, "physics")) == NULL)
-		//return (1);
-	//physics = ft_strextract(start, '{', '}');
-	//init_physics(physics, rt);
+	if ((start = ft_strnstr(start + 1, "\"camera\":", 9)) == NULL)
+		return (1);
+	start += 9;
+	if (*start != '{' || (end = get_end(start + 1, '{', '}')) == NULL || *(end + 1) != ',')
+	{
+		ft_putendl(M_MATCH);
+		return (1);
+	}
+	if ((start = init_camera(start + 1, &rt->camera, &rt->angle)) == NULL || *start != ',')
+		return (1);
+	if ((start = ft_strnstr(start + 1, "\"physics\":", 10)) == NULL)
+		return (1);
+	start += 10;
+	if (*start != '{' || (end = get_end(start + 1, '{', '}')) == NULL || *(end + 1) != '}')
+	{
+		ft_putendl(M_MATCH);
+		return (1);
+	}
+	init_physics(start + 1, rt);
 	return (0);
 }

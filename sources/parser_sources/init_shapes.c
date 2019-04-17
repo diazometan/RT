@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 10:00:19 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 12:45:44 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	push_back_shape(t_shape **head, t_shape *new)
+static void	push_back_shape(t_shape **head, t_shape *new)
 {
 	t_shape	*tmp;
 
@@ -27,21 +27,16 @@ void	push_back_shape(t_shape **head, t_shape *new)
 	}
 }
 
-	//printf("identifying shape - %s\n", s + 8);
-	//printf("dir - %.2f %.2f %.2f\n", new->center.x, new->center.y, new->center.z);
-	//if (new->figure == SPHERE)
-		//printf("radius - %f\n", new->dims.x);
-	//printf("\nobject in fun_allocator - %s\n", s);
 static void	init_fun_allocator(char *s, t_shape *new, t_texture **head_textures)
 {
 	if (ft_strcequ(s, "\"shape\"", ':') == 0)
 	{
-		ft_putendl(M_SHAPE PFCF);
+		ft_putendl(M_SHAPE);
 		exit(1);
 	}
 	if ((new->figure = identify_shape(s + 8)) == -1)
 	{
-		ft_putendl(U_SHAPE PFCF);
+		ft_putendl(U_SHAPE);
 		exit(1);
 	}
 	identify_color(s, &new->color);
@@ -81,7 +76,7 @@ char		*init_shapes(char *s, t_shape **head, t_texture **head_textures)
 			return (s + 1);
 		else if (*s != ',')
 		{
-			ft_putendl(M_COLOR PFCF);
+			ft_putendl(M_COLOR);
 			exit(1);
 		}
 		++s;

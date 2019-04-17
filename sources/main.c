@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 10:06:07 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 11:03:29 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ int		main(int args, char **argv)
 			printf("radius - %.2f ", h_s->dims.x);
 		if (h_s->figure == CYLINDER || h_s->figure == CONE || h_s->figure == CAPSULE)
 			printf("height - %.2f ", h_s->dims.y);
-		printf("\n\tx - %.2f, y - %.2f, z - %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
-		printf("\n\tx_u - %.2f, y_u - %.2f, z_u - %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+		printf("\n\tcenter -  %.2f, %.2f, %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
+		printf("\n\tunit - %.2f, %.2f, %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
 		printf("\n");
 		h_s = h_s->next;
 	}
@@ -126,17 +126,17 @@ int		main(int args, char **argv)
 			printf("\tspot, ");
 		printf("intensity - %.2f, ", h_l->intensity);
 		if (h_l->type == POINT || h_l->type == SPOT)
-			printf("center x - %.2f, y - %.2f, z - %.2f, ", h_l->center.x, h_l->center.y, h_l->center.z);
+			printf("center %.2f, %.2f, %.2f, ", h_l->center.x, h_l->center.y, h_l->center.z);
 		if (h_l->type == DIRECTIONAL)
-			printf("direction - x - %.2f, y - %.2f, z - %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
+			printf("direction - %.2f, %.2f, %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
 		if (h_l->type == SPOT)
-			printf("direction - x - %.2f, y - %.2f, z - %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
+			printf("direction - %.2f, %.2f, %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
 		h_l = h_l->next;
 		printf("\n");
 	}
 	printf("\ncamera:\n");
-	printf("\tlocated at x - %.2f, y - %.2f, z - %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
-	printf("\tlooks at x - %.2f, y - %.2f, z - %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
+	printf("\tlocated at %.2f, %.2f, %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
+	printf("\tlooks at %.2f, %.2f, %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
 	printf("\nphysics:\n");
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);

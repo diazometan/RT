@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 19:28:14 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 12:29:49 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		push_back_texture(t_texture **head, t_texture *new)
+static void			push_back_texture(t_texture **head, t_texture *new)
 {
 	t_texture	*tmp;
 
@@ -27,7 +27,8 @@ static void		push_back_texture(t_texture **head, t_texture *new)
 	}
 }
 
-static int	texture_check(char *name, t_shape *new, t_texture *head, int normal)
+static int			texture_check(char *name, t_shape *new,
+									t_texture *head, int normal)
 {
 	while (head != NULL)
 	{
@@ -73,7 +74,8 @@ static t_texture	*create_texture(char *str, t_shape *shape, int normal)
 	return (new);
 }
 
-void	init_texture(char *s, t_shape *new, t_texture **head_textures)
+void				init_texture(char *s, t_shape *new,
+									t_texture **head_textures)
 {
 	char	*str;
 
@@ -98,7 +100,8 @@ void	init_texture(char *s, t_shape *new, t_texture **head_textures)
 		new->texture = NULL;
 }
 
-void init_texture_map(char *s, t_shape *new, t_texture **head_textures)
+void				init_texture_map(char *s, t_shape *new,
+										t_texture **head_textures)
 {
 	char	*str;
 

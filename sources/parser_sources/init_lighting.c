@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 10:01:35 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 12:45:16 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static void		push_back_light(t_light **head, t_light *new)
 	}
 }
 
-static void	init_intensity(char *s, double *intensity)
+static void		init_intensity(char *s, double *intensity)
 {
 	if ((s = ft_strstr(s, "\"intensity\"")) == NULL || *(s + 11) != ':')
 	{
-		ft_putendl(LIGHT M_INT PFCF);
+		ft_putendl(M_INT);
 		exit(1);
 	}
 	else if ((*intensity = get_double(s + 12, ',')) < 0)
 	{
-		ft_putendl(LIGHT U_INT PFCF);
+		ft_putendl(U_INT);
 		exit(1);
 	}
 }
@@ -55,19 +55,18 @@ static int		identify_light(char *start)
 		return (-1);
 }
 
-static void	init_fun_allocator(char *s, t_light *new)
+static void		init_fun_allocator(char *s, t_light *new)
 {
 	if (ft_strcequ(s, "\"type\"", ':') == 0)
 	{
-		ft_putendl(M_LIGHT PFCF);
+		ft_putendl(M_LIGHT);
 		exit(1);
 	}
 	if ((new->type = identify_light(s + 7)) == -1)
 	{
-		ft_putendl(U_LIGHT PFCF);
+		ft_putendl(U_LIGHT);
 		exit(1);
 	}
-	printf("type - %d\n", new->type);
 	if (new->type != DIRECTIONAL && new->type != AMBIENT)
 		init_center(s, &new->center);
 	if (new->type != POINT && new->type != AMBIENT && new->type != DIRECTIONAL)
@@ -100,7 +99,7 @@ char			*init_lighting(char *s, t_light **head)
 			return (s + 1);
 		else if (*s != ',')
 		{
-			ft_putendl(M_COLOR PFCF);
+			ft_putendl(M_COLOR);
 			exit(1);
 		}
 		++s;

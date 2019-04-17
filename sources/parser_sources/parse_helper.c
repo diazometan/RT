@@ -6,25 +6,27 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:16:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 09:27:53 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 12:33:14 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int	ft_strcequ(char const *s1, char const *s2, int c)
+int		strcequ(char const *s1, char const *s2, int c)
 {
 	char	ch1;
 	char	ch2;
 
 	if (s1 == NULL || s2 == NULL)
 		return (0);
-	while (((ch1 = *s1) != '\0') && ((ch2 = *s2) != '\0') && (c != ch1))
+	ch1 = *s1++;
+	ch2 = *s2++;
+	while (ch1 != '\0' && ch2 != '\0' && c != ch1)
 	{
 		if (ch1 != ch2)
 			return (0);
-		++s1;
-		++s2;
+		ch1 = *s1++;
+		ch2 = *s2++;
 	}
 	return (1);
 }
