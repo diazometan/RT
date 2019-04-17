@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:04:26 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:18:38 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 17:27:50 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ t_shape	*find_child(char *s, char *child, t_shape **head_shapes)
 
 void	init_id(char *s, int *id)
 {
-	if ((s = ft_strstr(s, "\"id\"")) == NULL || *(s + 3) != ':')
+	if ((s = ft_strstr(s, "\"id\"")) == NULL || *(s + 4) != ':')
 	{
 		ft_putendl(M_ID);
 		exit(1);
 	}
-	else if ((*id = get_double(s + 13, ',')) < 0)
+	else if ((*id = get_double(s + 5, ',')) < 0)
 	{
 		ft_putendl(U_ID);
 		exit(1);

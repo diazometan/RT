@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:21:49 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 17:29:02 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	init_fun_allocator(char *s, t_shape *new, t_shape **head, t_texture 
 		ft_putendl(M_SHAPE);
 		exit(1);
 	}
-	new->child_two->group = 0;
+	new->group = 0;
 	init_id(s, &new->id);
 	if (new->figure > 0 || new->figure < 12)
 		form_shape(s, new, head_textures);
