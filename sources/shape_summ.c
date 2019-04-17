@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape_summ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:30:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/12 14:30:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:48:50 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 double	shape_summ(t_vec3 *p, t_shape *shape)
 {
-	if(!shape->f_is_group)
-		return (shape->gd_fun(p, shape));
+	if(shape->group & 2)
+		return (shape->gd_fun(p, shape->child_one, shape->child_two));
 	else
-		return (shape->gd_fun(p, shape->shape1, shape->shape2));
+		return (shape->gd_fun(p, shape));
 }

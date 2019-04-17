@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:37:54 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:42:51 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,6 @@ typedef struct		s_shape
 	struct s_shape	*child_one;
 	struct s_shape	*child_two;
 	struct s_shape	*next;
-	int				id;
-	int				f_is_group;
-	int				f_is_in_group;
-	struct s_shape	*shape1;
-	struct s_shape	*shape2;
 }					t_shape;
 
 int					identify_shape(char *start);

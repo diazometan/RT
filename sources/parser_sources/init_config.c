@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 11:26:38 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 13:55:59 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 17:55:54 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static char	*init_camera(char *s, t_vec3 *camera, t_vec3 *angle)
 {
 	char	*end;
 
-	printf("s - %s\n", s);
 	if ((s = ft_strnstr(s, "\"camera\":", 9)) == NULL)
 		return (NULL);
-	printf("check\n");
 	s += 9;
 	if (*s != '{' || (end = get_end(s++ + 1, '{', '}')) == NULL ||
 													*(end + 1) != ',')

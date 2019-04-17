@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_groups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:04:26 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:27:50 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 17:54:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_shape	*find_child(char *s, char *child, t_shape **head_shapes)
 	}
 	ft_putendl(V_CHILD);
 	exit(1);
-	//return (NULL);
 }
 
 void	init_id(char *s, int *id)

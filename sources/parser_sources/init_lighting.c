@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 13:19:26 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 18:08:27 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		init_intensity(char *s, double *intensity)
 		ft_putendl(M_INT);
 		exit(1);
 	}
-	else if ((*intensity = get_double(s + 12, ',')) < 0)
+	if ((*intensity = get_double(s + 12, ',')) < 0)
 	{
 		ft_putendl(U_INT);
 		exit(1);

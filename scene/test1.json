@@ -2,9 +2,10 @@
 	"scene":{
 		"objects":[
 			{
+				"shape":"sphere",
 				"id":0,
-				"shape":"plane",
-				"color":"red",
+				"radius":1,
+				"color":[255,0,0],
 				"center":[0,-1,5],
 				"direction":[0,1,-0.2]
 			}
@@ -25,8 +26,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":2,
-			"pixel division":1
+			"reflection_depth":2,
+			"pixel_division":1
 		}
 	}
 }

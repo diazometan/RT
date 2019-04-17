@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_vector.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:59:17 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 12:40:25 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/17 18:09:21 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static double	power(int num, int p)
 {
 	double	result;
 
-	result = 1;
+	result = 1.0;
 	while (p-- > 0)
 		result *= num;
 	return (result);
@@ -30,8 +30,11 @@ static double	get_fractional_part(const char *str, int c)
 
 	i = 1;
 	f = 0.0;
-	while ((ch = *str) != '\0' && ch != c && ch >= '0' && ch <= '9')
-		f += (*str++ - 48) / power(10.0, i++);
+	while ((ch = *str++) != '\0' && ch != c && ch >= '0' && ch <= '9')
+	{
+		printf("num - %c\n", ch);
+		f += (ch - 48) / power(10.0, i++);
+	}
 	if (ch != c && ch != '\0')
 	{
 		ft_putendl(U_NUM);
@@ -56,7 +59,7 @@ double			get_double(char *s, int c)
 									ch >= '0' && ch <= '9')
 		f = f * 10 + (ch - 48);
 	if (ch == '.')
-		f += get_fractional_part(++s, c);
+		f += get_fractional_part(s, c);
 	else if (ch != c && ch != '\0')
 	{
 		ft_putendl(U_NUM);
