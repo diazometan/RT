@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   refraction.c                                       :+:      :+:    :+:   */
+/*   transperency.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/20 10:19:27 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 19:25:05 by lwyl-the         ###   ########.fr       */
+/*   Created: 2019/04/18 18:55:18 by lwyl-the          #+#    #+#             */
+/*   Updated: 2019/04/18 21:08:44 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	refract_ray(t_vec3 *dir, t_shape *shape, t_vec3 *ref_r)
+int			trans_color(int color, int trans_color, double transperency)
+{
+	int		rgb_ref[3];
+
+	rgb_ref[0] = ((color >> 16) & 0xFF) * (1.0 - transperency) +
+					((trans_color >> 16) & 0xFF) * transperency;
+	rgb_ref[1] = ((color >> 8) & 0xFF) * (1.0 - transperency) +
+					((trans_color >> 8) & 0xFF) * transperency;
+	rgb_ref[2] = (color & 0xFF) * (1.0 - transperency) +
+					(trans_color & 0xFF) * transperency;
+
+	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
+}
+
+static void	transperency_ray(t_vec3 *dir, t_shape *shape, t_vec3 *ref_r)
 {
 	int		flag;
 	double	eta;
@@ -40,15 +54,15 @@ static void	refract_ray(t_vec3 *dir, t_shape *shape, t_vec3 *ref_r)
 }
 
 
-int			refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
+int			transperency(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
-	int		refract_color;
-	t_vec3	ref_r;
+	int		trans_color;
+	t_vec3	trans_r;
 
-	ref_r = (t_vec3) {0, 0, 0};
-	refract_ray(dir, shape, &ref_r);
+	trans_r = (t_vec3) {0, 0, 0};
+	transperency_ray(dir, shape, &trans_r);
 	rt->source_point = &shape->surface_point;
-	vec3_normalize(&ref_r, vec3_length(&ref_r));
-	refract_color = trace_ray(&ref_r, rt, depth);
-	return (refract_color);
+	vec3_normalize(&trans_r, vec3_length(&trans_r));
+	trans_color = trace_ray(&trans_r, rt, depth);
+	return (trans_color);
 }

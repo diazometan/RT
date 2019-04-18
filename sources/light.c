@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:39:59 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 21:11:17 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static double	get_point_light(t_vec3 *dir, t_shape *shape,
 		if (shadow(&shape->surface_point,
 				light->ray, head_shape, l_length) == 0)
 			return (0);
-		light_sum = light->intensity * (light_t_norm / l_length);
+		light_sum = light->intensity * light_t_norm / (l_length);
 		if (shape->specular > 0)
 			light_sum += get_specular(shape, light, dir, light_t_norm);
 	}

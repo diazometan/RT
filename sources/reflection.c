@@ -6,11 +6,24 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:40:19 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 16:17:51 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 19:24:33 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+int			reflect_color(int color, int reflected_color, double reflection)
+{
+	int		rgb_ref[3];
+
+	rgb_ref[0] = (color >> 16 & 0xFF) * (1.0 - reflection) +
+					(reflected_color >> 16 & 0xFF) * reflection;
+	rgb_ref[1] = (color >> 8 & 0xFF) * (1.0 - reflection) +
+					(reflected_color >> 8 & 0xFF) * reflection;
+	rgb_ref[2] = (color & 0xFF) * (1.0 - reflection) +
+					(reflected_color & 0xFF) * reflection;
+	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
+}
 
 int			reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {

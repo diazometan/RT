@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/18 18:22:59 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 21:19:04 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,6 @@ static int	check_color(int rgb[3])
 // 	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
 // }
 
-static int	reflect_color(int color, int reflected_color, double reflection)
-{
-	int		rgb_ref[3];
-
-	rgb_ref[0] = (color >> 16 & 0xFF) * (1 - reflection) +
-					(reflected_color >> 16 & 0xFF) * reflection;
-	rgb_ref[1] = (color >> 8 & 0xFF) * (1 - reflection) +
-					(reflected_color >> 8 & 0xFF) * reflection;
-	rgb_ref[2] = (color & 0xFF) * (1 - reflection) +
-					(reflected_color & 0xFF) * reflection;
-	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
-}
-
 void	standart_color(t_shape *shape, int rgb_m[3], double light)
 {
 	rgb_m[0] = shape->color.x * light;
@@ -83,19 +70,6 @@ void	choose_color(t_rt *rt, t_shape *shape, int rgb[3], double light)
 		set_color_grey(shape, rgb, light);
 	else if (rt->color_scheme == CARTOON)
 		set_color_cartoon(shape, rgb, light);
-}
-
-static int	trans_color(int color, int trans_color, double reflection)
-{
-	int		rgb_ref[3];
-
-	rgb_ref[0] = (color >> 16 & 0xFF) * (1 - reflection) +
-					(trans_color >> 16 & 0xFF) * reflection;
-	rgb_ref[1] = (color >> 8 & 0xFF) * (1 - reflection) +
-					(trans_color >> 8 & 0xFF) * reflection;
-	rgb_ref[2] = (color & 0xFF) * (1 - reflection) +
-					(trans_color & 0xFF) * reflection;
-	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
 }
 
 int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
@@ -130,11 +104,10 @@ int		get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	//if (depth > 0 && shape->refraction)
 	//	color = refraction(dir, shape, rt, depth - 1);
 
-	// if (depth > 0 && shape->refraction)
-	// {
-	// 	new_color = refraction(dir, shape, rt, depth - 1);
-	// 	color = trans_color(color, new_color, 0.5);
-	// }
-
+	if (depth > 0 && shape->refraction)
+	{
+		new_color = transperency(dir, shape, rt, depth - 1);
+		color = trans_color(color, new_color, 0.5);
+	}
 	return (color);
 }

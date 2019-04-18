@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/18 13:36:09 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/18 21:08:34 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC = main.c\
 	  shadow.c\
 	  reflection.c\
 	  refraction.c\
+	  transperency.c\
 	  matrix.c\
 	  fractal.c\
 	  matrix_euler.c\

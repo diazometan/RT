@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 13:34:34 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 21:08:57 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void				get_normal(t_shape *shape);
 double				shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
 int					reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 int					refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
+int					transperency(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 
 int					emission(t_shape *shape, t_rt *rt, int depth);
 
@@ -141,6 +142,8 @@ void				set_color_cartoon(t_shape *shape, int rgb_m[3], double light);
 void				set_color_invers(t_shape *shape, int rgb_m[3], double light);
 void				set_color_grey(t_shape *shape, int rgb_m[3], double light);
 void				set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light);
+int					reflect_color(int color, int reflected_color, double reflection);
+int					trans_color(int color, int reflected_color, double reflection);
 
 t_hsv_color			rgb_to_hsv(t_rgb_color rgb);
 t_rgb_color			hsv_to_rgb(t_hsv_color hsv);
