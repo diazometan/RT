@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 12:29:49 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/18 16:04:24 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void				init_texture(char *s, t_shape *new,
 			ft_putendl(U_TEX);
 			exit(1);
 		}
-		if ((str = ft_strextract(s + 8, '"', '"')) == NULL)
+		if ((str = ft_strextract(s + 9, '"', '"')) == NULL)
 		{
 			ft_putendl(MEMORY);
 			exit(1);

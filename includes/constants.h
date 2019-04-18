@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:43:33 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 16:21:38 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 
 # define NOISE_HEIGHT 128
 # define NOISE_WIDTH 128
-# define PIXELS_BLOCK 100.0
+# define PIXELS_BLOCK 1000.0
 
 # define M_FILE O_RED "File not found"
 # define E_FILE O_RED "Emty file"

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
+#    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/17 17:49:19 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/18 15:27:32 by rrhaenys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,13 @@ SRC = main.c\
 	  color_disrubtion.c\
 	  convert_color.c\
 	  shape_summ.c\
-	  noise.c
+	  noise.c\
+	  sphere_texture.c\
+	  plane_texture.c\
+	  cylinder_texture.c\
+	  cone_texture.c\
+	  torus_texture.c\
+	  box_texture.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
