@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 21:07:10 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 13:02:12 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	form_group(char *s, t_shape *new, t_shape **head)
 	init_function(new);
 }
 
-static void	init_fun_allocator(char *s, t_shape *new, t_shape **head, t_texture **head_textures)
+static void	init_fun_allocator(char *s, t_shape *new, t_shape **head,
+								t_texture **head_textures)
 {
 	if (strcequ(s, "\"shape\"", ':') == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 20:10:29 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 17:30:41 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	init_rt(t_rt *rt, char *config_file)
 	rt->head_shapes = NULL;
 	rt->head_light = NULL;
 	rt->head_textures = NULL;
+	rt->color_scheme = STANDART;
 	if ((fd = open(config_file, O_RDONLY)) < 0)
 	{
 		ft_putendl(M_FILE);
@@ -139,8 +140,8 @@ int		main(int args, char **argv)
 	printf("\tlooks at %.2f, %.2f, %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
 	printf("\nphysics:\n");
 	printf("\treflection depth - %d\n", rt.depth);
-	printf("\tpixel division - %d\n", rt.p_division);*/
-	//END
+	printf("\tpixel division - %d\n", rt.p_division);
+	//END*/
 	if (init_sdl(&sdl))
 		return (1);
 	create_img(&rt, &sdl);

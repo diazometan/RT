@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructive_geometry.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:36:45 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/08 14:05:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/18 13:06:50 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,18 @@ double			difference(double dist_a, double dist_b)
 
 double			blend(double dist_a, double dist_b)
 {
-	//убрать константу
-	double res;
-	double k = 5;
+	double		res;
+	double		k;
 
+	k = 5.0;
 	res = exp(-k * dist_a) + exp(-k * dist_b);
 	return (-log(ft_dmax(0.0001f, res)) / k);
 }
 
 double			mix(double dist_a, double dist_b)
 {
-	//убрать константу
-	double t = 0.5;
+	double		t;
+
+	t = 0.5;
 	return (dist_a * (1 - t) + dist_b * t);
 }

@@ -2,19 +2,37 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"plane",
-				"id":0,
-				"radius":1,
+				"shape":"cylinder",
+				"id":1,
 				"color":[255,0,0],
-				"center":[0,-1,5],
-				"direction":[0,0,-45]
+				"center":[0,0,3],
+				"refraction":1.0,
+				"height":1.0,
+				"radius":1.0,
+				"texture":"brick",
+				"normal_mapping":"nm_brick",
+				"direction":[0,0,0]
+			},
+			{
+				"shape":"plane",
+				"id":1,
+				"color":[255,255,0],
+				"center":[0,0,10],
+				"direction":[90,0,0]
+			},
+			{
+				"shape":"plane",
+				"id":1,
+				"color":[0,255,0],
+				"center":[0,-1,0],
+				"direction":[0,1,0]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
 				"intensity":0.8,
-				"center":[2,1,0]
+				"center":[0,0,0]
 			},
 			{
 				"type":"ambient",

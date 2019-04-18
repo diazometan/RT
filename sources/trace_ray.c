@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 19:36:59 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/17 21:16:19 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 17:31:56 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_shape			*calculation_distance(t_trace *dist, t_rt *rt, t_vec3 *dir)
 	{
 		if (head->child == 0)
 		{
-			dist->d = shape_summ(&from, head);
+			dist->d = fabs(shape_summ(&from, head));
 			if (dist->d < dist->min_distance)
 			{
 				dist->min_distance = dist->d;
@@ -51,7 +51,7 @@ int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 	while (dist.t < dist.max_distance)
 	{
 		closest = calculation_distance(&dist, rt, dir);
-		if (dist.min_distance <= dist.epsilon * dist.t)
+		if (dist.min_distance <= dist.epsilon * dist.t && closest != NULL)
 		{
 			rt->t_closest = dist.t;
 			return (get_color(dir, closest, rt, depth));

@@ -89,7 +89,7 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection_depth":3,
+			"reflection_depth":1,
 			"pixel_division":1
 		}
 	}

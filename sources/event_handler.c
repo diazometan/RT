@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 15:54:50 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 13:15:43 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,34 @@ static void	camera_position_key(int key, t_rt *rt)
 		rt->camera.y += 0.5;
 	else if (key == SDLK_LCTRL)
 		rt->camera.y -= 0.5;
+	else if (key == SDLK_r)
+	{
+		rt->angle = (t_vec3){0, 0, 0};
+		rt->camera = (t_vec3){0, 0, 0};
+	}
+}
+
+static void	color_scheme_key(int key, t_rt *rt)
+{
+	if (key == SDLK_1)
+		rt->color_scheme = STANDART;
+	else if (key == SDLK_2)
+		rt->color_scheme = INVERSE_ONE;
+	else if (key == SDLK_3)
+		rt->color_scheme = INVERSE_TWO;
+	else if (key == SDLK_4)
+		rt->color_scheme = GREY;
+	else if (key == SDLK_5)
+		rt->color_scheme = CARTOON;
+}
+
+static void	key_event(int key, t_rt *rt)
+{
+	if (key == SDLK_ESCAPE)
+		return ;
+	camera_direction_key(key, rt);
+	camera_position_key(key, rt);
+	color_scheme_key(key, rt);
 }
 
 static void	window_resized(t_rt *rt, t_sdl *sdl, SDL_Event *event)
@@ -72,16 +100,7 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 				key = event.key.keysym.sym;
 				if (key == SDLK_ESCAPE)
 					return ;
-				else if (key == SDLK_LEFT || key == SDLK_RIGHT || key == SDLK_UP || key == SDLK_DOWN)
-					camera_direction_key(key, rt);
-				else if (key == SDLK_w || key == SDLK_s || key == SDLK_d ||
-							key == SDLK_a || key == SDLK_SPACE || key == SDLK_LCTRL)
-					camera_position_key(key, rt);
-				else if (key == SDLK_r)
-				{
-					rt->angle = (t_vec3){0, 0, 0};
-					rt->camera = (t_vec3){0, 0, 0};
-				}
+				key_event(key, rt);
 				create_img(rt, sdl);
 			}
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED)

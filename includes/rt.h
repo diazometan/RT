@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 17:36:53 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 13:34:34 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ typedef struct		s_trace
 	double			d;
 }					t_trace;
 
+typedef enum
+{
+	STANDART,
+	INVERSE_ONE,
+	INVERSE_TWO,
+	GREY,
+	CARTOON
+}					t_color_scheme;
+
 typedef struct		s_rt
 {
 	int				win_width;
@@ -67,6 +76,7 @@ typedef struct		s_rt
 	t_shape			*head_shapes;
 	t_light			*head_light;
 	t_texture		*head_textures;
+	t_color_scheme	color_scheme;
 }					t_rt;
 
 char				*get_file(int fd);
@@ -103,10 +113,9 @@ double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
 void				get_normal(t_shape *shape);
 double				shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
 int					reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
+int					refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 
 int					emission(t_shape *shape, t_rt *rt, int depth);
-
-//int				refraction(t_coord *dir, t_shape *shape, t_rt *rt, int depth);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
 
@@ -128,7 +137,7 @@ t_vec3				marble(t_rt *rt, int x, int y);
 t_vec3				chess_board(int x, int y);
 
 void				set_color(t_shape *shape, int rgb_m[3], double light);
-void				set_color_toon_shading(t_shape *shape, int rgb_m[3], double light);
+void				set_color_cartoon(t_shape *shape, int rgb_m[3], double light);
 void				set_color_invers(t_shape *shape, int rgb_m[3], double light);
 void				set_color_grey(t_shape *shape, int rgb_m[3], double light);
 void				set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light);

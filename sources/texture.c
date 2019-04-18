@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 20:22:57 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 16:31:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ t_vec3			sphere_texture(t_texture *texture, t_shape *shape)
 	u = ((u * 2.0) - 1.0);
 	x = (int)(2 * M_PI * shape->dims.x * PIXELS_BLOCK * fabs(u));
 	y = (int)(M_PI * shape->dims.x * PIXELS_BLOCK * v);
-	x = (int)(texture->surface->w * fabs(u));
-	y = (int)(texture->surface->h * v);
+	//x = (int)(texture->surface->w * fabs(u));
+	//y = (int)(texture->surface->h * v);
 	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch
 	+ (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
-	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	//pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
 	// return (wood(x, y));
 	// return (marble(x, y));
 	// return (noise(x, y));

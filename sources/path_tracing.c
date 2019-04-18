@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_tracing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:48:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/11 16:48:02 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/18 11:35:23 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ t_shape				*trace_ray_emmision(t_vec3 *dir, t_rt *rt)
 		from.z = rt->source_point->z + t * dir->z;
 		while (head != NULL)
 		{
-			// d = head->gd_fun(&from, head);
 			d = shape_summ(&from, head);
 			if (d < min_distance)
 			{

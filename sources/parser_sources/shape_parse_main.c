@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:11:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 20:08:08 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 13:05:15 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	init_direction(char *s, t_vec3 *unit, t_matrix *rotation)
+void		init_direction(char *s, t_vec3 *unit, t_matrix *rotation)
 {
 	if ((s = ft_strstr(s, "\"direction\"")) == NULL || *(s + 11) != ':')
 	{
@@ -29,7 +29,7 @@ void	init_direction(char *s, t_vec3 *unit, t_matrix *rotation)
 	}
 }
 
-void	init_center(char *s, t_vec3 *center)
+void		init_center(char *s, t_vec3 *center)
 {
 	if ((s = ft_strstr(s, "\"center\"")) == NULL || *(s + 8) != ':')
 	{
@@ -39,7 +39,7 @@ void	init_center(char *s, t_vec3 *center)
 	get_vector(s + 9, center);
 }
 
-void	identify_color(char *s, t_vec3 *color)
+void		identify_color(char *s, t_vec3 *color)
 {
 	if ((s = ft_strstr(s, "\"color\"")) == NULL || *(s + 7) != ':')
 	{
@@ -55,7 +55,7 @@ void	identify_color(char *s, t_vec3 *color)
 	}
 }
 
-static int		identify_operation(char *start)
+static int	identify_operation(char *start)
 {
 	if (strcequ(start, "\"unite\"", ','))
 		return (UNITE);
@@ -71,7 +71,7 @@ static int		identify_operation(char *start)
 		return (-1);
 }
 
-int		identify_shape(char *start)
+int			identify_shape(char *start)
 {
 	if (strcequ(start, "\"plane\"", ','))
 		return (PLANE);
