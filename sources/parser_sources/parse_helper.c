@@ -6,13 +6,13 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:16:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 12:33:14 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/18 19:24:56 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		strcequ(char const *s1, char const *s2, int c)
+int		strcequ(char *s1, char *s2, int c)
 {
 	char	ch1;
 	char	ch2;
@@ -50,4 +50,16 @@ char	*get_end(char *s, int c_s, int c_e)
 		++s;
 	}
 	return (NULL);
+}
+
+char		*str_extract(char *s, int c_s, int c_e)
+{
+	char	*end;
+	size_t	len;
+
+	if (*s != c_s)
+		return (NULL);
+	end = get_end(s, c_s, c_e);
+	len = end - s;
+	return (ft_strsub(s, 0, len));
 }

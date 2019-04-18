@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 16:42:35 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 19:22:43 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void				init_texture(char *s, t_shape *new,
 
 	if ((s = ft_strstr(s, "\"texture\"")) != NULL)
 	{
-		if (*(s + 9) != ':')
+		if (*(s + 9) != ':' || *s)
 		{
 			ft_putendl(U_TEX);
 			exit(1);
 		}
-		if ((str = ft_strextract(s + 9, '"', '"')) == NULL)
+		if ((str = str_extract(s + 9, '"', '"')) == NULL)
 		{
 			ft_putendl(MEMORY);
 			exit(1);
@@ -96,8 +96,6 @@ void				init_texture(char *s, t_shape *new,
 		else
 			free(str);
 	}
-	else
-		new->texture = NULL;
 }
 
 void				init_texture_map(char *s, t_shape *new,
@@ -112,7 +110,7 @@ void				init_texture_map(char *s, t_shape *new,
 			ft_putendl(U_TEX);
 			exit(1);
 		}
-		if ((str = ft_strextract(s + 17, '"', '"')) == NULL)
+		if ((str = str_extract(s + 17, '"', '"')) == NULL)
 		{
 			ft_putendl(MEMORY);
 			exit(1);
@@ -122,6 +120,4 @@ void				init_texture_map(char *s, t_shape *new,
 		else
 			free(str);
 	}
-	else
-		new->tex_normal = NULL;
 }

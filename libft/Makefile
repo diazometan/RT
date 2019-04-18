@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 16:13:15 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/17 17:38:05 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/18 19:17:35 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ SRC = ft_strlen.c\
 	  ft_strmapi.c\
 	  ft_strequ.c\
 	  ft_strnequ.c\
-	  ft_strextract.c\
 	  ft_strsub.c\
 	  ft_strjoin.c\
 	  ft_strtrim.c\

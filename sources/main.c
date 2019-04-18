@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 17:30:41 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 19:41:19 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		main(int args, char **argv)
 	generate_noise(&rt);
 	init_rt(&rt, argv[1]);
 	//TEMPORARY CHECK FOR CONFIG PARSER
-	/*t_shape *h_s = rt.head_shapes;
+	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
 	printf("shapes:\n");
 	while (h_s != NULL)
@@ -102,7 +102,7 @@ int		main(int args, char **argv)
 			printf("box, ");
 		else if (h_s->figure == 9)
 			printf("capsule, ");
-		printf("color - %.0f %.0f %.0f, specular - %.2f, reflection = %.2f, refraction - %.2f, emission - %f, ", h_s->color.x, h_s->color.y, h_s->color.z, h_s->specular, h_s->reflection, h_s->refraction, h_s->emission);
+		printf("color - %.0f %.0f %.0f, specular - %.2f, reflection = %.2f, refraction - %.2f, ", h_s->color.x, h_s->color.y, h_s->color.z, h_s->specular, h_s->reflection, h_s->refraction);
 		if (h_s->texture != NULL)
 			printf("texture - %s, ", h_s->texture->name);
 		if (h_s->figure != BOX && h_s->figure != FRACTAL && h_s->figure != PLANE)
@@ -141,7 +141,7 @@ int		main(int args, char **argv)
 	printf("\nphysics:\n");
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);
-	//END*/
+	//END
 	if (init_sdl(&sdl))
 		return (1);
 	create_img(&rt, &sdl);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 12:10:49 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 19:21:11 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct		s_shape
 	double			specular;
 	double			reflection;
 	double			refraction;
-	double			emission;
 	t_vec3			color;
 	t_vec3			dims;
 	t_vec3			center;
@@ -77,7 +76,8 @@ void				init_texture(char *object, t_shape *new, t_texture **head_textures);
 void				init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
 void				init_groups(char *s, t_shape *new, t_shape **head);
 
-int					strcequ(char const *s1, char const *s2, int c);
+int					strcequ(char *s1, char *s2, int c);
+char				*str_extract(char *s, int c_s, int c_e);
 char				*get_end(char *s, int c_s, int c_e);
 double				get_double(char *s, int c);
 void				get_vector(char *s, t_vec3 *vec);

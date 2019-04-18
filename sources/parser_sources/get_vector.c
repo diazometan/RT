@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:59:17 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 19:54:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/18 19:34:58 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,34 @@ static double	get_fractional_part(const char *str, int c)
 	return (f);
 }
 
+static int		check_sign(char **s)
+{
+	char	sign;
+
+	sign = **s;
+	if (sign == '+')
+		*s += 1;
+	else if (sign == '-')
+	{
+		*s += 1;
+		return (1);
+	}
+	return (0);
+}
+
 double			get_double(char *s, int c)
 {
 	int			sign;
 	char		ch;
 	long double	f;
 
-	sign = 0;
 	f = 0.0;
-	if (*s == '-')
-		sign++;
-	if (*s == '+' || *s == '-')
-		++s;
+	if (*s < '0' || *s > '9')
+	{
+		ft_putendl(U_NUM);
+		exit(1);
+	}
+	sign = check_sign(&s);
 	while ((ch = *s++) != c && ch != '\0' && ch != '.' &&
 									ch >= '0' && ch <= '9')
 		f = f * 10 + (ch - 48);
