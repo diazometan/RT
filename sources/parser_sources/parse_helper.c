@@ -6,13 +6,13 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:16:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 12:33:14 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/19 11:22:22 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		strcequ(char const *s1, char const *s2, int c)
+int		strcequ(char *s1, char *s2, int c)
 {
 	char	ch1;
 	char	ch2;
@@ -50,4 +50,45 @@ char	*get_end(char *s, int c_s, int c_e)
 		++s;
 	}
 	return (NULL);
+}
+
+char		*str_extract(char *s, int c_s, int c_e)
+{
+	char	*end;
+	size_t	len;
+
+	if (*s != c_s)
+		return (NULL);
+	end = get_end(s, c_s, c_e);
+	len = end - s;
+	return (ft_strsub(s, 0, len));
+}
+
+
+void	init_box_radius(char *s, double *b_radius)
+{
+	if ((s = ft_strstr(s, "\"radius\"")) == NULL || *(s + 8) != ':')
+	{
+		ft_putendl(M_BRADIUS);
+		exit(1);
+	}
+	if ((*b_radius = get_double(s + 9, ',')) < 0)
+	{
+		ft_putendl(U_BRADIUS);
+		exit(1);
+	}
+}
+
+void	init_view_angle(char *s, double *angle)
+{
+	if ((s = ft_strstr(s, "\"view_angle\"")) == NULL || *(s + 12) != ':')
+	{
+		ft_putendl(M_VANGLE);
+		exit(1);
+	}
+	if ((*angle = get_double(s + 13, ',')) < 0 || *angle > 90)
+	{
+		ft_putendl(U_VANGLE);
+		exit(1);
+	}
 }

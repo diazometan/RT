@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   primitives_two.c                                   :+:      :+:    :+:   */
+/*   primitives_diff.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:59:25 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/15 15:28:29 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 12:41:07 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ double			gd_capsule(t_vec3 *p, t_shape *shape)
 
 	vec3_subtract(p, &shape->center, &orig);
 	vector_matrix_multiply(shape->rotation, &orig);
-	orig.y -= ft_dclamp(orig.y, shape->dims.y, 0.0);
+	orig.y -= ft_dclamp(orig.y, shape->dims.z, 0.0);
 	return (vec3_length(&orig) - shape->dims.x);
 }
 
-double			gd_box(t_vec3 *p, t_shape *shape) //подумать над радиусом
+double			gd_box(t_vec3 *p, t_shape *shape)
 {
 	t_vec3 d;
 	t_vec3 orig;
@@ -47,7 +47,7 @@ double			gd_box(t_vec3 *p, t_shape *shape) //подумать над радиу�
 	len.x = ft_dmax(d.x, 0.0);
 	len.y = ft_dmax(d.y, 0.0);
 	len.z = ft_dmax(d.z, 0.0);
-	return (vec3_length(&len) - 0 +
+	return (vec3_length(&len) - shape->b_radius +
 			ft_dmin(ft_dmax(d.x, ft_dmax(d.y, d.z)), 0.0));
 }
 

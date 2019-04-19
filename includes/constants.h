@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 18:32:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:15:01 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@
 # define M_RADIUS O_RED "Radius is missing!"
 # define M_IRADIUS O_RED "Inner radius is missing!"
 # define M_ORADIUS O_RED "Outer radius is missing!"
+# define M_BRADIUS O_RED "Box radius is missing!"
 # define M_HEIGHT O_RED "Height is missing!"
 # define M_SPEC O_RED "Specular field is missing!"
 # define M_REFL O_RED "Reflection field is missing!"
 # define M_REFR O_RED "Refraction coefficient is missing!"
+# define M_TRANS O_RED "Transparency field is missing!"
 # define M_LIGHT O_RED "Light type is missing!"
 # define M_INT O_RED "Intensity field is missing!"
+# define M_VANGLE O_RED "View angle is missing!"
 # define M_DEPTH O_RED "reflection_depth is missing!"
 # define M_PDIV O_RED "pixel_division is missing!"
 # define M_MATCH O_RED "Matching bracket is missing!"
@@ -78,17 +81,20 @@
 
 # define U_SHAPE O_RED "Undefined shape!"
 # define U_COLOR O_RED "Color vector has a range form 0 to 255"
-# define U_SIDES O_RED "Undefined sides!"
-# define U_RADIUS O_RED "Undefined radius!"
-# define U_IRADIUS O_RED "Inner radius is missing!"
-# define U_ORADIUS O_RED "Outer radius is missing!"
-# define U_HEIGHT O_RED "Undefined radius!"
-# define U_SPEC O_RED "Undefined specular!"
-# define U_REFL O_RED "Undefined reflection!"
-# define U_REFR O_RED "Undefined refraction!"
+# define U_SIDES O_RED "Sides cant be negative!"
+# define U_RADIUS O_RED "Radius cant be negative!"
+# define U_IRADIUS O_RED "Inner radius cant be negative!"
+# define U_ORADIUS O_RED "Outer radius cant be negative!"
+# define U_BRADIUS O_RED "Box radius cant be negative!"
+# define U_HEIGHT O_RED "Height cant be negative!"
+# define U_SPEC O_RED "Specular catnt be negative!"
+# define U_REFL O_RED "Reflection cant be negative!"
+# define U_REFR O_RED "Refraction cant be negative!"
+# define U_TRANS O_RED "Transparency field is between 0.0 and 1.0!"
 # define U_TEX O_RED "Cant read texture"
 # define U_LIGHT O_RED "Undefined lightning type!"
 # define U_INT O_RED "Light intensity is too big!"
+# define U_VANGLE O_RED "View angle is between 0 and 90 degrees!"
 # define U_DEPTH O_RED "Reflection depth is between 0 and 4!"
 # define U_PDIV O_RED "Pixel division is between 0 and 8!"
 # define U_VEC O_RED "Error in vector notation"

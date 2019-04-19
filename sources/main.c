@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 17:30:41 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:22:46 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		main(int args, char **argv)
 	generate_noise(&rt);
 	init_rt(&rt, argv[1]);
 	//TEMPORARY CHECK FOR CONFIG PARSER
-	/*t_shape *h_s = rt.head_shapes;
+	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
 	printf("shapes:\n");
 	while (h_s != NULL)
@@ -102,15 +102,46 @@ int		main(int args, char **argv)
 			printf("box, ");
 		else if (h_s->figure == 9)
 			printf("capsule, ");
-		printf("color - %.0f %.0f %.0f, specular - %.2f, reflection = %.2f, refraction - %.2f, emission - %f, ", h_s->color.x, h_s->color.y, h_s->color.z, h_s->specular, h_s->reflection, h_s->refraction, h_s->emission);
+		else if (h_s->figure == 10)
+			printf("elipsoid, ");
+		else if (h_s->figure == 11)
+			printf("fractal, ");
+		else if (h_s->figure == 12)
+			printf("unite, ");
+		else if (h_s->figure == 13)
+			printf("intersect, ");
+		else if (h_s->figure == 14)
+			printf("difference, ");
+		else if (h_s->figure == 15)
+			printf("blend, ");
+		else if (h_s->figure == 16)
+			printf("mix, ");
+		printf("is in group - ");
+		if (h_s->group & 1)
+			printf("no\n");
+		else
+			printf("yes\n");
+		printf("\tid - %d, color - %.0f %.0f %.0f\n, ", h_s->id, h_s->color.x, h_s->color.y, h_s->color.z);
+		printf("\tspecular - %.2f, reflection = %.2f, refraction - %.2f, transperency - %.2f\n", h_s->specular, h_s->reflection, h_s->refraction, h_s->transparency);
 		if (h_s->texture != NULL)
-			printf("texture - %s, ", h_s->texture->name);
-		if (h_s->figure != BOX && h_s->figure != FRACTAL && h_s->figure != PLANE)
-			printf("radius - %.2f ", h_s->dims.x);
-		if (h_s->figure == CYLINDER || h_s->figure == CONE || h_s->figure == CAPSULE)
-			printf("height - %.2f ", h_s->dims.y);
-		printf("\n\tcenter -  %.2f, %.2f, %.2f ", h_s->center.x, h_s->center.y, h_s->center.z);
-		printf("\n\tunit - %.2f, %.2f, %.2f ", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+		{
+						printf("check\n");
+			printf("\ttexture - %s\n", h_s->texture->name);
+		}
+		if (h_s->figure < 12)
+		{
+			printf("\tcenter -  %.2f, %.2f, %.2f\n", h_s->center.x, h_s->center.y, h_s->center.z);
+			printf("\tunit - %.2f, %.2f, %.2f\n", h_s->unit.x, h_s->unit.y, h_s->unit.z);
+			if (h_s->figure == SPHERE || h_s->figure == BOX || h_s->figure == CYLINDER || h_s->figure == CAPSULE)
+				printf("radius - %.2f\n", h_s->dims.x);
+			if (h_s->figure == CONE || h_s->figure == TORUS)
+			{
+				printf("\tradius_in - %.2f\n", h_s->dims.x);
+				printf("\tradius_out - %.2f\n", h_s->dims.y);
+			}
+			if (h_s->figure == CYLINDER || h_s->figure == CONE || h_s->figure == CAPSULE)
+				printf("\theight - %.2f\n", h_s->dims.z);
+		}
 		printf("\n");
 		h_s = h_s->next;
 	}
@@ -141,7 +172,7 @@ int		main(int args, char **argv)
 	printf("\nphysics:\n");
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);
-	//END*/
+	//END
 	if (init_sdl(&sdl))
 		return (1);
 	create_img(&rt, &sdl);

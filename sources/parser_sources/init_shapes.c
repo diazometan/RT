@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 13:02:12 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:24:58 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,8 @@ static void	form_shape(char *s, t_shape *new, t_texture **head_textures)
 	init_center(s, &new->center);
 	init_direction(s, &new->unit, &new->rotation);
 	init_dimensions(s, new->figure, &new->dims);
-	init_reflection(s, &new->reflection);
-	init_refraction(s, &new->refraction);
-	init_specular(s, &new->specular);
-	init_function(new);
-	init_function_texture(new);
 	init_texture(s, new, head_textures);
 	init_texture_map(s, new, head_textures);
-	init_id(s, &new->id);
 }
 
 static void	form_group(char *s, t_shape *new, t_shape **head)
@@ -49,13 +43,14 @@ static void	form_group(char *s, t_shape *new, t_shape **head)
 	new->child_one->child = 1;
 	new->child_two->child = 1;
 	new->group = 1;
-	init_function(new);
+	new->texture = NULL;
+	new->tex_normal = NULL;
 }
 
 static void	init_fun_allocator(char *s, t_shape *new, t_shape **head,
 								t_texture **head_textures)
 {
-	if (strcequ(s, "\"shape\"", ':') == 0)
+	if ((s = strstr(s, "\"shape\"")) == NULL || *(s + 7) != ':')
 	{
 		ft_putendl(M_SHAPE);
 		exit(1);
@@ -67,13 +62,19 @@ static void	init_fun_allocator(char *s, t_shape *new, t_shape **head,
 	}
 	new->group = 0;
 	new->child = 0;
+	new->depth = 2;
 	init_id(s, &new->id);
 	identify_color(s, &new->color);
+	init_reflection(s, &new->reflection);
+	init_refraction(s, &new->refraction);
+	init_transparency(s, &new->transparency);
+	init_specular(s, &new->specular);
+	init_function(new);
+	init_function_texture(new);
 	if (new->figure > 0 && new->figure < 12)
 		form_shape(s, new, head_textures);
 	else
 		form_group(s, new, head);
-	new->emission = 0.0;
 	new->next = NULL;
 	push_back_shape(head, new);
 }

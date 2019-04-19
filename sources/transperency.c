@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 18:55:18 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/19 12:32:23 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:41:16 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static void	transperency_ray(t_vec3 *dir, t_shape *shape, t_vec3 *ref_r)
 	{
 		cos_alpha *= (-1.0);
 		flag = -1;
-		eta = shape->refraction / 1.0;
+		eta = 1.0;
 	}
 	else
-		eta = 1.0 / shape->refraction;
+		eta = 1.0;
 	if ((k = 1.0 - eta * eta * (1.0 - cos_alpha * cos_alpha)) < 0)
 		return ;
 	coef_a = eta * cos_alpha - sqrt(k);

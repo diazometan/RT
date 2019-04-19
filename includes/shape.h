@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 12:10:49 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:24:43 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ typedef struct		s_shape
 	int				child;
 	int				group;
 	int				figure;
+	int				depth;
 	double			specular;
 	double			reflection;
 	double			refraction;
-	double			emission;
+	double			transparency;
+	double			b_radius;
 	t_vec3			color;
 	t_vec3			dims;
 	t_vec3			center;
@@ -70,6 +72,7 @@ void				init_direction(char *s, t_vec3 *unit, t_matrix *rotation);
 void				init_dimensions(char *s, int figure, t_vec3 *dims);
 void				init_reflection(char *s, double *reflection);
 void				init_refraction(char *s, double *refraction);
+void				init_transparency(char *s, double *transparency);
 void				init_specular(char *s, double *specular);
 void				init_function(t_shape *new);
 void				init_function_texture(t_shape *new);
@@ -77,9 +80,12 @@ void				init_texture(char *object, t_shape *new, t_texture **head_textures);
 void				init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
 void				init_groups(char *s, t_shape *new, t_shape **head);
 
-int					strcequ(char const *s1, char const *s2, int c);
+int					strcequ(char *s1, char *s2, int c);
+char				*str_extract(char *s, int c_s, int c_e);
 char				*get_end(char *s, int c_s, int c_e);
 double				get_double(char *s, int c);
 void				get_vector(char *s, t_vec3 *vec);
+void				init_box_radius(char *s, double *b_radius);
+void				init_view_angle(char *s, double *angle);
 
 #endif

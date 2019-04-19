@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:10:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 12:34:51 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:18:53 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ double		shadow(t_vec3 *orig, t_vec3 dir,
 					dist.min_distance = dist.d;
 				if (dist.min_distance <= dist.t * dist.epsilon)
 				{
-					if (head->refraction)
-						return (1.0);
+					if (head->transparency)
+						return (head->transparency);
 					return (0.0);
 				}
 			}
