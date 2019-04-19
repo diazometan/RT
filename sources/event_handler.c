@@ -105,6 +105,8 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 			}
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 				window_resized(rt, sdl, &event);
+			if (key == SDLK_m)
+					ui_main(rt, sdl);
 		}
 	}
 }

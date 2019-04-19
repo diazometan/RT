@@ -16,8 +16,12 @@
 # include "libft.h"
 # include "vector.h"
 # include "constants.h"
-# include "SDL.h"
+# include <SDL2/SDL.h>
+# include <SDL_image.h>
+# include <SDL_ttf.h>
+# include "kiss_sdl.h"
 # include "shape.h"
+# include "ui.h"
 # include <math.h>
 # include <limits.h>
 # include <fcntl.h>
@@ -150,5 +154,13 @@ int					trans_color(int color, int reflected_color, double reflection);
 
 t_hsv_color			rgb_to_hsv(t_rgb_color rgb);
 t_rgb_color			hsv_to_rgb(t_hsv_color hsv);
+
+int					ui_main(t_rt *rt, t_sdl *sdl);
+void				dirent_read(t_rtui *ui);
+int					init_rt(t_rt *rt, char *config_file);
+int					kiss_error(char *mes);
+void				ui_init(t_rtui *ui);
+int					kiss_light(t_rt *rt);
+void				button_events_main(t_rtui *ui, t_rt *rt, t_sdl *sdl);
 
 #endif
