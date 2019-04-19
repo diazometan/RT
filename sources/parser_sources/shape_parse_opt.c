@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 15:50:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 19:47:22 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/19 11:22:48 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,22 @@ void	init_specular(char *s, double *specular)
 	else if ((*specular = get_double(s + 11, ',')) < 0)
 	{
 		ft_putendl(U_SPEC);
+		exit(1);
+	}
+}
+
+void	init_transparency(char *s, double *transparency)
+{
+	if ((s = ft_strstr(s, "\"transparency\"")) == NULL)
+		*transparency = 0.0;
+	else if (*(s + 14) != ':')
+	{
+		ft_putendl(M_TRANS);
+		exit(1);
+	}
+	else if ((*transparency = get_double(s + 15, ',')) < 0)
+	{
+		ft_putendl(U_TRANS);
 		exit(1);
 	}
 }

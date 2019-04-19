@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 13:34:34 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 10:46:25 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_light
 {
 	int				type;
 	double			intensity;
+	double			angle;
 	t_vec3			center;
 	t_vec3			dir;
 	t_vec3			ray;

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 19:21:11 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/19 11:24:33 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct		s_shape
 	double			specular;
 	double			reflection;
 	double			refraction;
+	double			transparency;
+	double			b_radius;
 	t_vec3			color;
 	t_vec3			dims;
 	t_vec3			center;
@@ -81,5 +83,7 @@ char				*str_extract(char *s, int c_s, int c_e);
 char				*get_end(char *s, int c_s, int c_e);
 double				get_double(char *s, int c);
 void				get_vector(char *s, t_vec3 *vec);
+void				init_box_radius(char *s, double *b_radius);
+void				init_view_angle(char *s, double *angle);
 
 #endif

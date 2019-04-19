@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:37:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 12:41:50 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/19 10:15:42 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_radius(char *s, t_vec3 *dims)
 	}
 }
 
-static void	init_radius_torus(char *s, t_vec3 *dims)
+static void	init_radius_two(char *s, t_vec3 *dims)
 {
 	char	*str;
 
@@ -59,7 +59,7 @@ static void	init_height(char *s, t_vec3 *dims)
 		ft_putendl(M_HEIGHT);
 		exit(1);
 	}
-	if ((dims->y = get_double(s + 9, ',')) < 0)
+	if ((dims->z = get_double(s + 9, ',')) < 0)
 	{
 		ft_putendl(U_HEIGHT);
 		exit(1);
@@ -85,13 +85,15 @@ void		init_dimensions(char *s, int figure, t_vec3 *dims)
 {
 	if (figure == SPHERE)
 		init_radius(s, dims);
-	else if (figure == CONE || figure == CYLINDER || figure == CAPSULE)
+	else if (figure == CYLINDER || figure == CAPSULE)
 	{
 		init_radius(s, dims);
 		init_height(s, dims);
 	}
+	else if (figure == CONE)
+		init_height(s, dims);
 	else if (figure == BOX || figure == ELIPSIOD || figure == FRACTAL)
 		init_sides(s, dims);
-	else if (figure == TORUS)
-		init_radius_torus(s, dims);
+	if (figure == TORUS || figure == CONE)
+		init_radius_two(s, dims);
 }
