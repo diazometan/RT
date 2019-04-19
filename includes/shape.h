@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 13:24:43 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 14:05:04 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_shape
 	double			b_radius;
 	t_vec3			color;
 	t_vec3			dims;
+	t_vec3			t_dims;
 	t_vec3			center;
 	t_vec3			surface_point;
 	t_vec3			unit;
@@ -87,5 +88,7 @@ double				get_double(char *s, int c);
 void				get_vector(char *s, t_vec3 *vec);
 void				init_box_radius(char *s, double *b_radius);
 void				init_view_angle(char *s, double *angle);
+void				init_texture_displace(char *s, t_vec3 *t_dims);
+void				init_texture_division(char *s, double *texture_div);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 14:56:55 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:47:19 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,7 @@ int		main(int args, char **argv)
 		printf("\tid - %d, color - %.0f %.0f %.0f\n, ", h_s->id, h_s->color.x, h_s->color.y, h_s->color.z);
 		printf("\tspecular - %.2f, reflection = %.2f, refraction - %.2f, transperency - %.2f\n", h_s->specular, h_s->reflection, h_s->refraction, h_s->transparency);
 		if (h_s->texture != NULL)
-		{
-						printf("check\n");
-			printf("\ttexture - %s\n", h_s->texture->name);
-		}
+			printf("\ttexture - %s, dx - %.2f dy - %.2f div - %f\n", h_s->texture->name, h_s->t_dims.x, h_s->t_dims.y, h_s->t_dims.z);
 		if (h_s->figure < 12)
 		{
 			printf("\tcenter -  %.2f, %.2f, %.2f\n", h_s->center.x, h_s->center.y, h_s->center.z);
