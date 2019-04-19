@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 21:11:17 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 11:26:28 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static double	get_point_light(t_vec3 *dir, t_shape *shape,
 	double	l_length;
 	double	light_sum;
 	double	light_t_norm;
+	double	tmp = 0.0;
 
 	light_sum = 0.0;
 	vec3_subtract(&light->center, &shape->surface_point, &light->ray);
@@ -80,14 +81,14 @@ static double	get_point_light(t_vec3 *dir, t_shape *shape,
 	if ((light_t_norm) > 0)
 	{
 		l_length = vec3_length(&light->ray);
-		if (shadow(&shape->surface_point,
-				light->ray, head_shape, l_length) == 0)
+		if ((tmp = shadow(&shape->surface_point,
+				light->ray, head_shape, l_length)) == 0)
 			return (0);
 		light_sum = light->intensity * light_t_norm / (l_length);
 		if (shape->specular > 0)
 			light_sum += get_specular(shape, light, dir, light_t_norm);
 	}
-	return (light_sum);
+	return (light_sum * tmp);
 }
 
 static double	get_dir_light(t_vec3 *dir, t_shape *shape,
