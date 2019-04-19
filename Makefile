@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/19 15:50:33 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/19 19:04:34 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME = RT
 SRC_DIR = sources
 
 PRS_SRC_DIR = $(SRC_DIR)/parser_sources
+
+UI_SRC_DIR = $(SRC_DIR)/ui_sources
 
 OBJ_DIR = objects
 
@@ -26,17 +28,17 @@ KISS_SDL = $(KISS_DIR)/kisssdl.a
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-FLAGS = #-O2 -g -Wall -Wextra -Werror
+FLAGS = -O2 -g -Wall -Wextra #-Werror
 
 SDL =  -F ./includes/frameworks/ -framework SDL2 \
--framework SDL2_image \
--framework SDL2_ttf \
--framework SDL2_mixer
+								-framework SDL2_image \
+								-framework SDL2_ttf \
+								-framework SDL2_mixer
 
 INCLUDES = -I includes -I libft -I kiss_sdl -I includes/frameworks/SDL2.framework/Headers \
--I includes/frameworks/SDL2_image.framework/Versions/A/Headers \
--I includes/frameworks/SDL2_ttf.framework/Versions/A/Headers \
--I includes/frameworks/SDL2_mixer.framework/Versions/A/Headers 
+			-I includes/frameworks/SDL2_image.framework/Versions/A/Headers \
+			-I includes/frameworks/SDL2_ttf.framework/Versions/A/Headers \
+			-I includes/frameworks/SDL2_mixer.framework/Versions/A/Headers
 
 SRC = main.c\
 	  read_config_file.c\
@@ -102,13 +104,6 @@ NC=\033[0m
 
 all: $(NAME)
 
-FLAGS_LINUX =  -I ./includes/ ./kiss_sdl/libkisssdl.a -I ./includes/frameworks/SDL2_ttf.framework/Versions/A/Headers \
- 	-I ./includes/frameworks/SDL2_image.framework/Versions/A/Headers \
-	 -I ./kiss_sdl -I ./libft -lm -lpthread -lSDL2main -lSDL2  -lSDL2_ttf -lSDL2_image
-
-linux:
-	sudo gcc $(FLAGS) $(SRC_LIN) $(LIBFT) $(FLAGS_LINUX) -o $(NAME)
-
 $(NAME): $(LIBFT) $(KISS_SDL) $(OBJ)
 	@echo "$(BLUE)Compiling RT...$(NC)"
 	@gcc $(FLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT) $(KISS_SDL) $(SDL)
@@ -130,6 +125,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
 
 $(OBJ_DIR)/%.o: $(PRS_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
+
+$(OBJ_DIR)/%.o: $(UI_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
 
 clean:

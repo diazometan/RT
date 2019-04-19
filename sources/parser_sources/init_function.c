@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:26:16 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 13:32:01 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:31:37 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void			init_function_texture(t_shape *new)
 		new->map_texture = &torus_texture;
 	else if (new->figure == BOX || new->figure == FRACTAL)
 		new->map_texture = &box_texture;
-	//else if (new->figure == CAPSULE)
-	//	new->map_texture = &gd_capsule;
 }
 
 void			init_operation(t_shape *new)

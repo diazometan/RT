@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 12:41:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:32:46 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ double			gd_cone(t_vec3 *p, t_shape *shape)
 	vector_matrix_multiply(shape->rotation, &orig);
 	dim.x = sqrt(orig.x * orig.x + orig.z * orig.z);
 	dim.y = -orig.y;
-	//k1.x = r2 - r1;
 	k1.x = shape->dims.y - shape->dims.x;
 	k1.y = 2.0 * shape->dims.z;
-	//k1.y = 2.0 * shape->dims.z;
 	coef = ft_dclamp(((shape->dims.y - dim.x) * k1.x +
 				(shape->dims.z - dim.y) * k1.y) / vec2_dot(&k1, &k1), 1.0, 0.0);
 	k2.x = dim.x - shape->dims.y + k1.x * coef;

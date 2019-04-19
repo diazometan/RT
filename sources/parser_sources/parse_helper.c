@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:16:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 16:16:14 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:32:04 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ char	*get_end(char *s, int c_s, int c_e)
 	char	c;
 
 	pair = 0;
-	//printf("get_end - %s\n", s);
 	while ((c = *s) != '\0')
 	{
-		//printf("c - %c\n", c);
 		if (c == c_s && c_s != '"')
 			++pair;
 		else if (c == c_e)
@@ -59,11 +57,9 @@ char		*str_extract(char *s, int c_s, int c_e)
 	char	*end;
 	size_t	len;
 
-	//printf("s - %s\n", s);
 	if (*s != c_s)
 		return (NULL);
 	end = get_end(s + 1, c_s, c_e);
-	//printf("end - %s\n", end);
 	len = end - s - 1;
 	return (ft_strsub(s, 1, len));
 }
