@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"rt.h": "c",
-		"constants.h": "c"
+		"constants.h": "c",
+		"sdl_image.h": "c"
 	}
 }
