@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:25:00 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/19 17:47:17 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:34:27 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static t_vec3	copy_texture(t_texture *texture, t_shape *shape, double uv[2])
 	double			pixel_block;
 
 	pixel_block = shape->t_dims.z;
-	x = (int)(0.25 * M_PI * shape->dims.x * pixel_block * fabs(uv[0]));
-	y = (int)(M_PI * shape->dims.x * pixel_block * uv[1] / 4.0);
+	x = (int)(0.5 * M_PI * shape->dims.x * pixel_block * fabs(uv[0]));
+	y = (int)(2.0 * M_PI * shape->dims.x * pixel_block * uv[1] / 4.0);
 	return (get_texture_color(texture, (int[2]){x % texture->surface->w, y % texture->surface->h}, uv));
 }
 
@@ -44,7 +44,7 @@ t_vec3			sphere_texture(t_texture *texture, t_shape *shape)
 	vec3_subtract(&shape->surface_point, &shape->center, &normal);
 	vector_matrix_multiply(shape->rotation, &normal);
 	vec3_normalize(&normal, vec3_length(&normal));
-	u = (0.5 + atan2(normal.z, normal.x) / (2 * M_PI));
+	u = (0.5 + atan2(normal.z, normal.x) / (2.0 * M_PI));
 	v = (0.5 - asin(normal.y) / M_PI);
 	move_texture(&u, &v, (double[2]){shape->t_dims.x, shape->t_dims.y});
 	u = ((u * 2.0) - 1.0);
