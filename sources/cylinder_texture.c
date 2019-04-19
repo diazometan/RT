@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:26:05 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/19 18:34:02 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/19 20:14:31 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static t_vec3	copy_texture(t_texture *texture, t_shape *shape, double uv[2])
 	double			pixel_block;
 
 	pixel_block = shape->t_dims.z;
-	x = (int)((1 - fabs(uv[0])) * M_PI * shape->dims.x * pixel_block / 8.0);
-	y = (int)((1 - uv[1]) * shape->dims.z * pixel_block / 2.0);
+	x = (int)((fabs(uv[0])) * M_PI * shape->dims.x * pixel_block);
+	y = (int)((uv[1]) * shape->dims.z * pixel_block);
 	return (get_texture_color(texture, (int[2]){x % texture->surface->w, y % texture->surface->h}, uv));
 }
 
@@ -53,9 +53,10 @@ t_vec3			cylinder_texture(t_texture *texture, t_shape *shape)
 	vec3_subtract(&shape->surface_point, &shape->center, &r);
 	vector_matrix_multiply(shape->rotation, &r);
 
-	u = acos(ft_dclamp(r.x, shape->dims.x * 1.0, shape->dims.x * -1.0) / shape->dims.x);
-	v = r.y / shape->dims.z;
-	u = (u / M_PI) * 2.0 - 1.0;
+	u = (acos(ft_dclamp(r.x, shape->dims.x * 1.0, shape->dims.x * -1.0) / shape->dims.x) / M_PI);
+	if (r.z < 0)
+		u = 1.0 - u;
+	v = -r.y / shape->dims.z;
 	v = (v + 1) / 2;
 	move_texture(&u, &v, (double[2]){shape->t_dims.x, shape->t_dims.y});
 	if (shape->t_dims.z != 0)

@@ -11,7 +11,7 @@
 				"texture_div":600,
 				"center":[-1.5,0,6],
 				"radius":1.5,
-				"direction":[0,0,0]
+				"direction":[0,90,0]
 			}
 		],
 		"lighting":[

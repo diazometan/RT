@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:25:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/19 17:31:16 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/19 20:35:25 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static t_vec3	texture_stretching(t_texture *texture, t_shape *shape, double uv[2
 	int				x;
 	int				y;
 
-	x = uv[0] * texture->surface->w / 2;
-	y = (2 - uv[1]) * texture->surface->h / 2;
+	x = uv[0] * texture->surface->w;
+	y = (1 - uv[1]) * texture->surface->h;
 	return (get_texture_color(texture, (int[2]){x, y}, uv));
 }
 
@@ -44,8 +44,8 @@ t_vec3			plane_texture(t_texture *texture, t_shape *shape)
 
 	vec3_subtract(&shape->surface_point, &shape->center, &r);
 	vector_matrix_multiply(shape->rotation, &r);
-	u = r.x;
-	v = r.z;
+	u = r.x / 2.0;
+	v = r.z / 2.0;
 	move_texture(&u, &v, (double[2]){shape->t_dims.x, shape->t_dims.y});
 	if (shape->t_dims.z != 0)
 		uv_correct(&u, &v, (double)texture->surface->w / shape->t_dims.z,

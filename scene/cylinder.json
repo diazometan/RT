@@ -5,14 +5,14 @@
 				"shape":"cylinder",
 				"id":1,
 				"color":[0,0,255],
-				"texture":"brick",
+				"texture":"can",
 				"x_displace":0,
 				"y_displace":0,
-				"texture_div":0,
+				"texture_div":600,
 				"center":[0,0,5],
 				"radius":1,
 				"height":1,
-				"direction":[0,1,0]
+				"direction":[0,0,0]
 			}
 		],
 		"lighting":[

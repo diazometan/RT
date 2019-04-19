@@ -5,13 +5,26 @@
 				"shape":"plane",
 				"id":0,
 				"color":[255,0,0],
-				"texture":"brick",
+				"texture":"can",
 				"x_displace":0.0,
 				"y_displace":0.0,
-				"texture_div":400,
-				"center":[0,-1,5],
+				"texture_div":600,
+				"center":[1,-1,5],
 				"direction":[0,0,0]
-			}
+			},
+			{
+                "shape":"box",
+                "id":1,
+                "color":[168,53,186],
+                "texture":"can",
+                "x_displace":0,
+                "y_displace":0,
+                "texture_div":600,
+                "sides":[1,1,1],
+                "radius":0,
+                "center":[0,0,6],
+                "direction":[0,0,0]
+            }
 		],
 		"lighting":[
 			{
