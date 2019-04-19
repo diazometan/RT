@@ -2,20 +2,26 @@
 	"scene":{
 		"objects":[
 			{
-				"id":1,
 				"shape":"cylinder",
-				"color":"blue",
+				"id":1,
+				"color":[0,0,255],
 				"texture":"brick",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
 				"center":[-2,0,6],
 				"radius":3.5,
 				"height":3.5,
 				"direction":[0,1,0]
 			},
 			{
-				"id":1,
 				"shape":"cylinder",
-				"color":"blue",
+				"id":1,
+				"color":[0,0,255],
 				"texture":"brick",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
 				"center":[2,0.25,6],
 				"radius":0.5,
 				"height":0.5,
@@ -38,8 +44,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":3,
-			"pixel division":1
+			"reflection_depth":3,
+			"pixel_division":1
 		}
 	}
 }

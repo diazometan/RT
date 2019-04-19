@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/19 14:05:38 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/19 15:50:33 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,13 @@ SRC = main.c\
 	  color_disrubtion.c\
 	  convert_color.c\
 	  shape_summ.c\
-	  noise.c
+	  noise.c\
+	  sphere_texture.c\
+	  plane_texture.c\
+	  cylinder_texture.c\
+	  cone_texture.c\
+	  torus_texture.c\
+	  box_texture.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

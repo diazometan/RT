@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 14:03:34 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/19 16:14:33 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,17 @@ void				init_texture(char *s, t_shape *new,
 
 	if ((s = ft_strstr(s, "\"texture\"")) != NULL)
 	{
-		if (*(s + 9) != ':' || *s)
+		if (*(s + 9) != ':')
 		{
 			ft_putendl(U_TEX);
 			exit(1);
 		}
-		if ((str = str_extract(s + 9, '"', '"')) == NULL)
+		if ((str = str_extract(s + 10, '"', '"')) == NULL)
 		{
 			ft_putendl(MEMORY);
 			exit(1);
 		}
+		printf("str - %s\n", str);
 		if (texture_check(str, new, *head_textures, 0))
 			push_back_texture(head_textures, create_texture(str, new, 0));
 		else
