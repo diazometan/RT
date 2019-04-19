@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 14:05:04 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/19 17:46:11 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct		s_shape
 	int				child;
 	int				group;
 	int				figure;
-	int				depth;
+	int				depth_ref;
+	int				depth_trans;
 	double			specular;
 	double			reflection;
 	double			refraction;

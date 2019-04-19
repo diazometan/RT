@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 15:47:19 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:44:54 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,10 @@ int		main(int args, char **argv)
 		if (h_l->type == DIRECTIONAL)
 			printf("direction - %.2f, %.2f, %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
 		if (h_l->type == SPOT)
-			printf("direction - %.2f, %.2f, %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
+		{
+			printf("direction - %.2f, %.2f, %.2f\n", h_l->dir.x, h_l->dir.y, h_l->dir.z);
+			printf("angle - %.2f\n", h_l->angle);
+		}
 		h_l = h_l->next;
 		printf("\n");
 	}

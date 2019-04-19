@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 14:58:00 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:47:43 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static double	get_spot_light(t_vec3 *dir, t_shape *shape,
 	vec3_normalize(&light->ray, vec3_length(&light->ray));
 	cosi = vec3_dot(&light->ray, &light->dir);
 	sini = sqrt(1 - cosi * cosi);
-	if (!(cosi > 0.9 && cosi < 1.0 && sini > 0 && sini < 0.5))
+	if (!(cosi > cos(light->angle * M_PI / 180)))
 		return (light_sum);
 	vec3_subtract(&light->center, &shape->surface_point, &light->ray);
 	light_t_norm = vec3_dot(&light->ray, &shape->normal);
@@ -59,8 +59,8 @@ static double	get_spot_light(t_vec3 *dir, t_shape *shape,
 		if (shadow(&shape->surface_point,
 				light->ray, head_shape, l_length) == 0)
 			return (0);
-		cosi = (cosi - 0.9) / 0.1; //мапинг
-		light_sum = ((cosi - 0.9) / 0.1) * light->intensity * (light_t_norm / l_length);
+		cosi = (cosi - cos(light->angle * M_PI / 180)) / (1.0 - cos(light->angle * M_PI / 180));
+		light_sum = cosi * light->intensity * (light_t_norm / l_length);
 		if (shape->specular > 0)
 			light_sum += get_specular(shape, light, dir, light_t_norm);
 	}

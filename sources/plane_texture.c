@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:25:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/18 15:25:43 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:03:51 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,12 @@ t_vec3			plane_texture(t_texture *texture, t_shape *shape)
 	double			u;
 	double			v;
 	unsigned char	*pixel;
+	t_vec3			r;
 
-	u = shape->surface_point.z;
-	v = shape->surface_point.y;
-	if (fabs(shape->unit.z) >= fabs(shape->unit.y) && fabs(shape->unit.z) >= fabs(shape->unit.x))
-	{
-		u = shape->surface_point.x;
-		v = shape->surface_point.y;
-	}
-	else if (fabs(shape->unit.y) >= fabs(shape->unit.x) && fabs(shape->unit.y) >= fabs(shape->unit.z))
-	{
-		u = shape->surface_point.x;
-		v = shape->surface_point.z;
-	}
+	vec3_subtract(&shape->surface_point, &shape->center, &r);
+	vector_matrix_multiply(shape->rotation, &r);
+	u = r.x;
+	v = r.z;
 	while (u > 2)
 		u -= 2;
 	while (u < 0)
