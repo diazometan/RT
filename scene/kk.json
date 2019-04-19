@@ -2,7 +2,6 @@
 	"scene":{
 		"objects":[
 			{
-				"id":0,
 				"shape":"elipsoid",
 				"color":"blue",
 				"specular":500,
@@ -12,19 +11,17 @@
 				"direction":[0,0,0]
 			},
 			{
-				"id":0,
-				"shape":"cylinder",
+				"shape":"cone",
 				"color":"green",
-				"center":[-1,1,4],
+				"texture":"brick",
+				"center":[-2,1,4],
 				"radius":1,
 				"height":2,
 				"direction":[0,0,0]
 			},
 			{
-				"id":0,
 				"shape":"plane",
 				"color":"yellow",
-				"texture":"checkboard",
 				"reflection":0.5,
 				"specular":1000,
 				"center":[0,-1,0],
@@ -38,18 +35,13 @@
 				"center":[2,1,0]
 			},
 			{
-				"type":"point",
-				"intensity":0.6,
-				"center":[-2,1,0]
-			},
-			{
 				"type":"directional",
 				"intensity":0.2,
 				"direction":[1,4,4]
 			},
 			{
 				"type":"ambient",
-				"intensity":0.0
+				"intensity":0.2
 			}
 		],
 		"camera":{

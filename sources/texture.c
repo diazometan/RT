@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 12:39:35 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:18:51 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ t_vec3			sphere_texture(t_texture *texture, t_shape *shape)
 	u = ((u * 2.0) - 1.0);
 	x = (int)(2 * M_PI * shape->dims.x * PIXELS_BLOCK * fabs(u));
 	y = (int)(M_PI * shape->dims.x * PIXELS_BLOCK * v);
-	//x = (int)(texture->surface->w * fabs(u));
-	//y = (int)(texture->surface->h * v);
+	x = (int)(texture->surface->w * fabs(u));
+	y = (int)(texture->surface->h * v);
 	pixel = texture->pixel + (y % texture->surface->h) * texture->surface->pitch
 	+ (x % texture->surface->w) * texture->surface->format->BytesPerPixel;
-	//pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
+	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
 	// return (wood(x, y));
 	// return (marble(x, y));
 	// return (noise(x, y));
-	//return (chess_board(x + (u < 0) * 10, y));
+	// return (chess_board(x + (u < 0) * 10, y));
 	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 }
 
@@ -110,7 +110,7 @@ t_vec3			cylinder_texture(t_texture *texture, t_shape *shape)
 	vector_matrix_multiply(shape->rotation, &r);
 
 	u = acos(ft_dclamp(r.x, shape->dims.x * 1.0, shape->dims.x * -1.0) / shape->dims.x);
-	v = r.y / shape->dims.z;
+	v = r.y / shape->dims.y;
 	u = (u / M_PI) * 2.0 - 1.0;
 	v = (v + 1) / 2;
 	x = (int)((1 - fabs(u)) * M_PI * shape->dims.x * PIXELS_BLOCK);
@@ -133,11 +133,11 @@ t_vec3			cone_texture(t_texture *texture, t_shape *shape)
 	int y;
 	unsigned char	*pixel;
 	t_matrix		rotation;
-	t_vec3	unit1;
+	t_vec3	unite1;
 	t_vec3	angle;
 
 	unit = (t_vec3) {0, 1, 0};
-	unit1 = (t_vec3) {1, 0, 0};
+	unite1 = (t_vec3) {1, 0, 0};
 
 	rotation = matrix_multiply(z_rotation_matrix(-shape->unit.z),
 							matrix_multiply(y_rotation_matrix(shape->unit.y), x_rotation_matrix(-shape->unit.x)));
@@ -150,8 +150,8 @@ t_vec3			cone_texture(t_texture *texture, t_shape *shape)
 
 	angle = (t_vec3){r.x, 0, r.z};
 	vec3_normalize(&angle, vec3_length(&angle));
-	u = acos(vec3_dot(&angle, &unit1)) / M_PI;
-	v = r.y / shape->dims.z;
+	u = acos(vec3_dot(&angle, &unite1)) / M_PI;
+	v = r.y / shape->dims.y;
 	v = (v + 1) / 2;
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;

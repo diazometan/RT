@@ -1,0 +1,53 @@
+{
+	"scene":{
+		"objects":[
+			{
+				"shape":"sphere",
+				"color":"green",
+				"specular":500,
+				"radius": 1,
+				"center":[0,0,5],
+				"direction":[0,0,-4]
+			},
+			{
+				"shape":"plane",
+				"color":"yellow",
+				"texture":"brick",
+				"specular":1000,
+				"center":[0,-1,0],
+				"direction":[0,-1,0]
+			},
+			{
+				"shape":"plane",
+				"color":"blue",
+				"specular":1000,
+				"center":[0,0,15],
+				"direction":[0,0,1]
+			}
+		],
+		"lighting":[
+			{
+				"type":"point",
+				"intensity":0.6,
+				"center":[2,1,0]
+			},
+			{
+				"type":"directional",
+				"intensity":0.2,
+				"direction":[1,4,4]
+			},
+			{
+				"type":"ambient",
+				"intensity":0.2
+			}
+		],
+		"camera":{
+			"center":[0,0,0],
+			"direction":[0,0,0]
+		},
+		"physics":{
+			"reflection depth":1,
+			"pixel division":1
+		}
+	}
+}

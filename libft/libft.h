@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 16:12:31 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/16 17:01:55 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/02 14:50:52 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <math.h>
 
 typedef struct	s_list
 {
@@ -97,6 +96,5 @@ int				get_next_line(const int fd, char **line);
 double			ft_dmax(double a, double b);
 double			ft_dmin(double a, double b);
 double			ft_dclamp(double x, double higher, double lower);
-double			ft_dmod(double a, double b);
 
 #endif
