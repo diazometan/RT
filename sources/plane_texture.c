@@ -6,45 +6,51 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:25:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/18 15:25:43 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:31:16 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vec3			plane_texture(t_texture *texture, t_shape *shape)
+static void		uv_correct(double *u, double *v, double max_x, double max_y)
+{
+	while ((*u) > max_x)
+		(*u) = (*u) - max_x;
+	while ((*u) < 0)
+		(*u) = (*u) + max_x;
+	while ((*v) > max_y)
+		(*v) = (*v) - max_y;
+	while ((*v) < 0)
+		(*v) = (*v) + max_y;
+	(*u) = (*u) / max_x;
+	(*v) = (*v) / max_y;
+}
+
+static t_vec3	texture_stretching(t_texture *texture, t_shape *shape, double uv[2])
 {
 	int				x;
 	int				y;
+
+	x = uv[0] * texture->surface->w / 2;
+	y = (2 - uv[1]) * texture->surface->h / 2;
+	return (get_texture_color(texture, (int[2]){x, y}, uv));
+}
+
+t_vec3			plane_texture(t_texture *texture, t_shape *shape)
+{
 	double			u;
 	double			v;
-	unsigned char	*pixel;
+	t_vec3			r;
 
-	u = shape->surface_point.z;
-	v = shape->surface_point.y;
-	if (fabs(shape->unit.z) >= fabs(shape->unit.y) && fabs(shape->unit.z) >= fabs(shape->unit.x))
-	{
-		u = shape->surface_point.x;
-		v = shape->surface_point.y;
-	}
-	else if (fabs(shape->unit.y) >= fabs(shape->unit.x) && fabs(shape->unit.y) >= fabs(shape->unit.z))
-	{
-		u = shape->surface_point.x;
-		v = shape->surface_point.z;
-	}
-	while (u > 2)
-		u -= 2;
-	while (u < 0)
-		u += 2;
-	while (v > 2)
-		v -= 2;
-	while (v < 0)
-		v += 2;
-	x = u * texture->surface->w / 2;
-	y = (2 - v) * texture->surface->h / 2;
-	pixel = texture->pixel + y * texture->surface->pitch + x * texture->surface->format->BytesPerPixel;
-	// return (wood(x, y));
-	// return (noise(x, y));
-	//return (chess_board(x, y));
-	return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
+	vec3_subtract(&shape->surface_point, &shape->center, &r);
+	vector_matrix_multiply(shape->rotation, &r);
+	u = r.x;
+	v = r.z;
+	move_texture(&u, &v, (double[2]){shape->t_dims.x, shape->t_dims.y});
+	if (shape->t_dims.z != 0)
+		uv_correct(&u, &v, (double)texture->surface->w / shape->t_dims.z,
+							(double)texture->surface->h / shape->t_dims.z);
+	else
+		uv_correct(&u, &v, 1, 1);
+	return (texture_stretching(texture, shape, (double[2]){u, v}));
 }

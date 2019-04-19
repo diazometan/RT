@@ -6,8 +6,23 @@
 				"id":0,
 				"color":[255,0,0],
 				"texture":"brick",
-				"center":[0,0,3],
-				"radius":0.65,
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
+				"center":[-1.5,0,6],
+				"radius":1.5,
+				"direction":[0,0,0]
+			},
+			{
+				"shape":"sphere",
+				"id":0,
+				"color":[255,0,0],
+				"texture":"brick",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
+				"center":[1.5,0,6],
+				"radius":0.9,
 				"direction":[0,0,0]
 			}
 		],

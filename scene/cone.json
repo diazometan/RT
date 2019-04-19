@@ -2,14 +2,20 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"box",
-				"id":1,
-				"color":[168,53,186],
-				"sides":[1,1,1],
-				"radius":0,
-				"center":[0,0,5],
-				"direction":[45,45,45]
-			}
+                "shape":"cone",
+                "id":1,
+                "color":[0,0,255],
+                "texture":"brick",
+                "normal_mapping":"nm_brick",
+                "x_displace":0,
+                "y_displace":0,
+                "texture_div":400,
+                "center":[0,0,6],
+                "radius_in":0.5,
+                "radius_out":1.5,
+                "height":1.5,
+                "direction":[0,0,0]
+            }
 		],
 		"lighting":[
 			{
