@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 15:02:33 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 16:07:51 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_shape
 	int				child;
 	int				group;
 	int				figure;
+	int				effect_type;
 	double			specular;
 	double			reflection;
 	double			refraction;
@@ -77,6 +78,7 @@ void				init_specular(char *s, double *specular);
 void				init_function(t_shape *new);
 void				init_function_texture(t_shape *new);
 void				init_texture(char *object, t_shape *new, t_texture **head_textures);
+int					effect_check(char *s);
 void				init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
 void				init_groups(char *s, t_shape *new, t_shape **head);
 

@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/20 13:52:19 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/20 14:41:31 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC = main.c\
 	  shape_parse_opt.c\
 	  init_function.c\
 	  init_texture.c\
+	  effect_check.c\
 	  init_texture_dimensions.c\
 	  init_lighting.c\
 	  init_physics.c\

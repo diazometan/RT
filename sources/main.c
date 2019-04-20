@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 14:56:07 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 16:08:31 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		main(int args, char **argv)
 		return (0);
 
 	if (init_sdl(&sdl))
-	return (1);
+		return (1);
 	//rt.win_width = 0;
 	//ui_main(&rt, &sdl);
 	//TEMPORARY CHECK FOR CONFIG PARSER

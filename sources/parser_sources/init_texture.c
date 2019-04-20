@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 16:14:33 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 14:41:08 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ void				init_texture(char *s, t_shape *new,
 			ft_putendl(MEMORY);
 			exit(1);
 		}
-		printf("str - %s\n", str);
-		if (texture_check(str, new, *head_textures, 0))
+		if ((new->effect_type = effect_check(str)))
+			;
+		else if (texture_check(str, new, *head_textures, 0))
 			push_back_texture(head_textures, create_texture(str, new, 0));
-		else
-			free(str);
+		free(str);
 		init_texture_displace(s, &new->t_dims);
 		init_texture_division(s, &new->t_dims.z);
 	}
