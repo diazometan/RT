@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 15:51:01 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 20:03:51 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct		s_sdl
 {
 	SDL_Window		*win;
 	SDL_Surface		*surf;
+	//SDL_Surface		*progress;
+	int				*pro_data;
 	int				*img_data;
 }					t_sdl;
 
@@ -83,6 +85,8 @@ typedef struct		s_rt
 	t_texture		*head_textures;
 	t_color_scheme	color_scheme;
 }					t_rt;
+
+void				progress_bar(double progress, t_rt *rt, t_sdl *sdl);
 
 char				*get_file(int fd);
 int					init_config(char *file, t_rt *rt);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 16:08:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 20:42:53 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,21 @@ static int		init_sdl(t_sdl *sdl)
 		return (1);
 	}
 	sdl->surf = SDL_GetWindowSurface(sdl->win);
+	//sdl->progress = SDL_GetWindowSurface(sdl->win);
 	if (sdl->surf == NULL)
 	{
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	wall = SDL_LoadBMP("textures/brick.bmp");
-	SDL_BlitScaled(wall, NULL, sdl->surf, NULL);
-	SDL_FreeSurface(wall);
+	//wall = SDL_LoadBMP("textures/brick.bmp");
+	//SDL_BlitScaled(wall, NULL, sdl->surf, NULL);
+	ft_bzero(sdl->surf->pixels, 600 * 600 * 4);
+	sdl->img_data = (int *)malloc(sizeof(int) * 600 * 600);
+	//sdl->pro_data = (int *)malloc(sizeof(int) * 600 * 600);
+	//SDL_FreeSurface(wall);
 	SDL_UpdateWindowSurface(sdl->win);
-	sdl->img_data = (int *)sdl->surf->pixels;
+	//sdl->img_data = (int *)sdl->surf->pixels;
+	sdl->pro_data = (int *)sdl->surf->pixels;
 	return (0);
 }
 
@@ -185,7 +190,14 @@ int		main(int args, char **argv)
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);
 	//END
+	//sdl.surf->pixels = (char *)sdl.pro_data;
+	//SDL_LockSurface(sdl.surf);
+	//sdl.surf->pixels = NULL;
+	//sdl.surf->userdata = NULL;
+	progress_bar(0, &rt, &sdl);
 	create_img(&rt, &sdl);
+	//progress_bar(rt.win_width, rt.win_height, &sdl);
+	//progress_bar(900 / 1000.0, &rt, &sdl);
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_DestroyWindow(sdl.win);

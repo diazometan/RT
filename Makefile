@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/20 14:41:31 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/20 16:40:05 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ INCLUDES = -I includes -I libft -I kiss_sdl -I includes/frameworks/SDL2.framewor
 			-I includes/frameworks/SDL2_mixer.framework/Versions/A/Headers
 
 SRC = main.c\
+	  progress_bar.c\
 	  read_config_file.c\
 	  event_handler.c\
 	  init_config.c\
