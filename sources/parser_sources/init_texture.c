@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 14:41:08 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 16:11:50 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_texture	*create_texture(char *str, t_shape *shape, int normal)
 
 	new = (t_texture *)malloc(sizeof(*new));
 	new->name = str;
-	if ((file_name = ft_memalloc(13 + ft_strlen(new->name))) == NULL)
+	if ((file_name = ft_memalloc(14 + ft_strlen(new->name))) == NULL)
 	{
 		ft_putendl(MEMORY);
 		exit(1);

@@ -5,15 +5,50 @@
 				"shape":"torus",
 				"id":1,
 				"color":[0,0,255],
-				"texture":"brick",
-				"normal_mapping":"nm_brick",
+				"texture":"can",
 				"x_displace":0,
 				"y_displace":0,
+				"texture_div":300,
+				"center":[0,-0.5,8],
+				"radius":1,
+				"height":1,
+				"direction":[0,90,0]
+			},
+			{
+				"shape":"cylinder",
+				"id":1,
+				"color":[0,0,255],
+				"texture":"can",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":300,
+				"center":[2.1,-0.5,8],
+				"radius":1,
+				"height":1,
+				"direction":[0,105,0]
+			},
+			{
+				"shape":"cylinder",
+				"id":1,
+				"color":[0,0,255],
+				"texture":"can",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":300,
+				"center":[-2.1,-0.5,8],
+				"radius":1,
+				"height":1,
+				"direction":[0,130,0]
+			},
+			{
+				"shape":"plane",
+				"id":0,
+				"color":[255,0,0],
+				"texture":"brick",
+				"x_displace":0.0,
+				"y_displace":0.0,
 				"texture_div":0,
-				"center":[0,0,6],
-				"radius_in":1.0,
-				"radius_out":1.5,
-				"height":1.5,
+				"center":[0,-1.5,5],
 				"direction":[0,0,0]
 			}
 		],
@@ -21,7 +56,7 @@
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[0,0,0]
+				"center":[3,3,3]
 			},
 			{
 				"type":"ambient",

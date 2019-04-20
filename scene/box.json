@@ -2,17 +2,16 @@
 	"scene":{
 		"objects":[
 			{
-                "shape":"torus",
+                "shape":"box",
                 "id":1,
-                "color":[0,0,255],
+                "color":[168,53,186],
                 "texture":"can",
                 "x_displace":0,
                 "y_displace":0,
                 "texture_div":600,
+                "sides":[1,1,1],
+                "radius":0,
                 "center":[0,0,6],
-                "radius_in":1.0,
-                "radius_out":1.5,
-                "height":1.5,
                 "direction":[0,0,0]
             }
 		],
@@ -20,12 +19,7 @@
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[2,1,0]
-			},
-			{
-				"type":"directional",
-				"intensity":0.2,
-				"direction":[1,4,4]
+				"center":[0,0,0]
 			},
 			{
 				"type":"ambient",
@@ -37,7 +31,7 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection_depth":1,
+			"reflection_depth":3,
 			"pixel_division":1
 		}
 	}
