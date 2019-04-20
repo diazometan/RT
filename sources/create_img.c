@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 19:13:25 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/20 19:20:51 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ t_rt		ft_rt_copy(t_rt *rt)
 	t_rt	new_rt;
 
 	new_rt = *rt;
-	// new_rt.source_point = (t_vec3 *)malloc(sizeof(t_vec3));
-	// *(new_rt.source_point) = *(rt->source_point);
+	new_rt.source_point = (t_vec3 *)malloc(sizeof(t_vec3));
+	*(new_rt.source_point) = *(rt->source_point);
 	// new_rt.head_shapes = (t_shape *)malloc(sizeof(t_shape));
 	// *(new_rt.head_shapes) = *(rt->head_shapes);
 
