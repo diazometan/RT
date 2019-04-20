@@ -59,8 +59,7 @@ static void	button_light_ambient(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 	}
 	if (kiss_button_event(&ui->button_save, &ui->e, &ui->draw))
 	{
-//there will be png saving function
-		kiss_error("png was created");
+		kiss_saving(rt, sdl);
 	}
 }
 
