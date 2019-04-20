@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui_files.c                                         :+:      :+:    :+:   */
+/*   ui_buttons.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfrankly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 19:05:19 by jfrankly          #+#    #+#             */
-/*   Updated: 2019/04/18 19:05:19 by jfrankly         ###   ########.fr       */
+/*   Updated: 2019/04/20 17:36:39 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	button_event_exit(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 		ui->quit = 1;
 		if (rt->win_width)
 			free_args(rt->head_shapes, rt->head_light, rt->head_textures);
+		SDL_FreeSurface(sdl->surf);
 		SDL_DestroyWindow(sdl->win);
 		SDL_Quit();
 		exit(1);
@@ -43,6 +44,8 @@ static void	button_light_event(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 
 static void	button_ok1_event(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 {
+	SDL_Surface *tmp;
+
 	if (kiss_button_event(&ui->button_ok1, &ui->e, &ui->draw))
 	{
 		if (!(ft_strstr(ui->label_sel.text, ".json")))
@@ -54,6 +57,11 @@ static void	button_ok1_event(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 			free_args(rt->head_shapes, rt->head_light, rt->head_textures);
 		init_rt(rt, ui->file_path);
 		create_img(rt, sdl);
+		tmp = SDL_ConvertSurfaceFormat(sdl->surf, SDL_PIXELFORMAT_RGB24, 0);
+		system("cd ../ && mkdir -p saved_images");
+		if ((SDL_SaveBMP(tmp, "../saved_images/lol.png")) != 0)
+			ft_putendl("Error save file");
+		SDL_FreeSurface(tmp);
 	}
 }
 

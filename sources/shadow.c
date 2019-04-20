@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:10:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 15:23:57 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 18:42:01 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ double		shadow(t_vec3 *orig, t_vec3 dir,
 	t_trace	dist;
 	t_vec3	from;
 	t_shape	*head;
+	double	tmp;
 
 	dist.t = 0.0001;
+	tmp = 1.0;
 	dist.epsilon = 10e-9;
 	vec3_normalize(&dir, max_distance);
 	while (dist.t < max_distance)
@@ -37,7 +39,11 @@ double		shadow(t_vec3 *orig, t_vec3 dir,
 				if (dist.min_distance <= dist.t * dist.epsilon)
 				{
 					if (head->transparency)
-						return (head->transparency);
+					{
+						tmp *= head->transparency;
+						dist.min_distance += dist.t * dist.epsilonr;
+						break;
+					}
 					return (0.0);
 				}
 			}
@@ -45,5 +51,5 @@ double		shadow(t_vec3 *orig, t_vec3 dir,
 		}
 		dist.t += dist.min_distance;
 	}
-	return (1.0);
+	return (1.0 * tmp);
 }
