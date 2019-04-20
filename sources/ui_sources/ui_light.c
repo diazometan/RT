@@ -12,30 +12,25 @@
 
 #include "rt.h"
 
-static	int		light_params_read(t_rtui_min *win_lt, t_light *new)
-{
-	new->center.x = get_double(win_lt->en_x.text, '.');
-	new->center.y = get_double(win_lt->en_y.text, '.');
-	new->center.z = get_double(win_lt->en_z.text, '.');
-	new->intensity = get_double(win_lt->en_intens.text, '.');
-	new->type = POINT;
-	new->next = NULL;
-	return (0);
-}
-
 static	int		light_adding(t_rtui_min *win_lt, t_rt *rt, t_sdl *sdl)
 {
 	t_light	*new;
 
 	if ((new = (t_light *)malloc(sizeof(*new))) == NULL)
 	{
-			ft_putendl(MEMORY);
-			exit(1);
+		ft_putendl(MEMORY);
+		exit(1);
 	}
-	light_params_read(win_lt, new);
+	new->center.x = get_double(win_lt->en_x.text, '.');
+	new->center.y = get_double(win_lt->en_y.text, '.');
+	new->center.z = get_double(win_lt->en_z.text, '.');
+	new->intensity = get_double(win_lt->en_intens.text, '.');
+	if (new->intensity > 1)
+		new->intensity = 1;
+	new->type = POINT;
+	new->next = NULL;
 	push_back_light(&rt->head_light, new);
 	create_img(rt, sdl);
-	//here we will read entry.text
 	return (0);
 }
 

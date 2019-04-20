@@ -29,7 +29,7 @@ static void	button_event_exit(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 			free_args(rt->head_shapes, rt->head_light, rt->head_textures);
 		SDL_DestroyWindow(sdl->win);
 		SDL_Quit();
-		exit(1); 
+		exit(1);
 	}
 }
 
@@ -52,9 +52,6 @@ static void	button_ok1_event(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 		}
 		if (rt->win_width)
 			free_args(rt->head_shapes, rt->head_light, rt->head_textures);
-/* 		SDL_FreeSurface(sdl->surf); //DOESNT WORK??? NO LEAKS??? WTF
-		sdl->surf = SDL_GetWindowSurface(sdl->win);
-		sdl->img_data = (int *)sdl->surf->pixels; */
 		init_rt(rt, ui->file_path);
 		create_img(rt, sdl);
 	}
