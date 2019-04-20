@@ -29,7 +29,7 @@ static void	button_event_exit(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 			free_args(rt->head_shapes, rt->head_light, rt->head_textures);
 		SDL_DestroyWindow(sdl->win);
 		SDL_Quit();
-		exit(1);
+		exit(1); 
 	}
 }
 
