@@ -32,7 +32,7 @@ void	ui_min_init(t_rtui_min *min)
 		min->window.rect.w / 2 - strlen(min->message) * \
 		kiss_textfont.advance / 2, \
 		min->window.rect.h / 2 - (kiss_textfont.fontheight\
-		+ 2 * kiss_normal.h) / 2);
+		+ 2 * kiss_normal.h) / 2); 
 	min->label.textcolor.r = 255;
 	kiss_button_new(&min->button, &min->window, "OK",
 			min->window.rect.w / 2 - kiss_normal.w / 2, \

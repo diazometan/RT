@@ -42,8 +42,8 @@ void		dirent_read(t_rtui *ui)
 	dir = kiss_opendir(".");
 	while ((ent = kiss_readdir(dir)))
 	{
-		if (!ent->d_name)
-			continue ;
+		//if (!ent->d_name)
+		//	continue ;
 		kiss_getstat(ent->d_name, &s);
 		if (kiss_isdir(s))
 			kiss_array_appendstring(ui->textbox1.array, 0, ent->d_name, "/");

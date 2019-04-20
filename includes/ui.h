@@ -30,6 +30,7 @@ typedef struct		s_rtui_min
 	kiss_label		label_z;
 	kiss_label		label_intens;
 	t_vec3			pos_light;
+	double			intens;
 	char			message[KISS_MAX_LENGTH];
 	int				draw;
 	int				quit;

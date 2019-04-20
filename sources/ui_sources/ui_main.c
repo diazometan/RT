@@ -76,7 +76,6 @@ int			ui_main(t_rt *rt, t_sdl *sdl)
 	ui_init(&ui);
 	while (!ui.quit)
 	{
-		SDL_Delay(10);
 		while (SDL_PollEvent(&ui.e))
 		{
 			if (ui.e.type == SDL_QUIT)
@@ -88,7 +87,7 @@ int			ui_main(t_rt *rt, t_sdl *sdl)
 		}
 		vscrollbar1_event(&ui.vscrollbar1, NULL, &ui.textbox1, &ui.draw);
 		if (!ui.draw)
-			continue;
+			continue ;
 		ui_drawing(&ui, rt);
 	}
 	kiss_clean(&ui.objects);
