@@ -3,40 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/20 14:51:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 18:49:03 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int	check_color(int rgb[3])
+int	check_color(int rgb[3])
 {
 	int		i;
 	int		j;
 	int		f;
 	int		tmp;
 
-	f = 1;
-	while (f)
-	{
-		i = -1;
-		f = 0;
-		while (++i < 3)
-			if (rgb[i] > 255)
-			{
-				f = 1;
-				tmp = rgb[i] - 255;
-				rgb[i] = 255;
-				j = -1;
-				while (++j < 3)
-					if (j != i)
-						rgb[j] += tmp / 2;
-				break ;
-			}
-	}
+	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
+		return (0xffffff);
+	else
+		return (0xff0000);
+	// f = 1;
+	// while (f)
+	// {
+	// 	i = -1;
+	// 	f = 0;
+	// 	while (++i < 3)
+	// 		if (rgb[i] > 255)
+	// 		{
+	// 			f = 1;
+	// 			tmp = rgb[i] - 255;
+	// 			rgb[i] = 255;
+	// 			j = -1;
+	// 			while (++j < 3)
+	// 				if (j != i)
+	// 					rgb[j] += tmp / 2;
+	// 			break ;
+	// 		}
+	// }
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
