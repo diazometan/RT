@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 13:42:45 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 13:51:32 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 static int		init_sdl(t_sdl *sdl)
 {
+	SDL_Surface *wall;
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		printf("SDL_Init Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	sdl->win = SDL_CreateWindow("RT", 100, 100, 600, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	sdl->win = SDL_CreateWindow("RT", 1050, 400, 600, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (sdl->win == NULL)
 	{
 		printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
@@ -31,11 +33,15 @@ static int		init_sdl(t_sdl *sdl)
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
+	wall = SDL_LoadBMP("textures/brick.bmp");
+	SDL_BlitScaled(wall, NULL, sdl->surf, NULL);
+	SDL_FreeSurface(wall);
+	SDL_UpdateWindowSurface(sdl->win);
 	sdl->img_data = (int *)sdl->surf->pixels;
 	return (0);
 }
 
-static int	init_rt(t_rt *rt, char *config_file)
+int	init_rt(t_rt *rt, char *config_file)
 {
 	int		fd;
 	char	*file;
@@ -71,14 +77,19 @@ int		main(int args, char **argv)
 	t_sdl	sdl;
 
 	srand48(time(NULL));
-	if (args != 2)
+	if (args != 1)
 	{
-		ft_putendl(USAGE);
+		ft_putendl("usage: ./RT");
 		return (1);
 	}
 	generate_noise(&rt);
-	if (init_rt(&rt, argv[1]))
-		return (0);
+	//if (init_rt(&rt, argv[1]))
+	//	return (0);
+
+	if (init_sdl(&sdl))
+	return (1);
+	rt.win_width = 0;
+	ui_main(&rt, &sdl);
 	//TEMPORARY CHECK FOR CONFIG PARSER
 	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
@@ -160,7 +171,10 @@ int		main(int args, char **argv)
 		if (h_l->type == DIRECTIONAL)
 			printf("direction - %.2f, %.2f, %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
 		if (h_l->type == SPOT)
-			printf("direction - %.2f, %.2f, %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
+		{
+			printf("direction - %.2f, %.2f, %.2f\n", h_l->dir.x, h_l->dir.y, h_l->dir.z);
+			printf("angle - %.2f\n", h_l->angle);
+		}
 		h_l = h_l->next;
 		printf("\n");
 	}
@@ -171,9 +185,7 @@ int		main(int args, char **argv)
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);
 	//END
-	if (init_sdl(&sdl))
-		return (1);
-	create_img(&rt, &sdl);
+	//create_img(&rt, &sdl);
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_DestroyWindow(sdl.win);

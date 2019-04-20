@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"rt.h": "c"
+		"rt.h": "c",
+		"constants.h": "c",
+		"sdl_image.h": "c"
 	}
 }

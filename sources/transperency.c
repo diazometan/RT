@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 18:55:18 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/19 13:41:16 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:30:33 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	transperency_ray(t_vec3 *dir, t_shape *shape, t_vec3 *ref_r)
 	ref_r->y = dir->y * eta + flag * shape->normal.y * coef_a;
 	ref_r->z = dir->z * eta + flag * shape->normal.z * coef_a;
 }
-
 
 int			transperency(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {

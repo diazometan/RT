@@ -1,0 +1,36 @@
+{
+	"scene":{
+		"objects":[
+			{
+				"shape":"plane",
+				"id":1,
+				"color":[255,255,0],
+				"texture":"brick",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
+				"center":[-1,-1.0,4],
+				"direction":[90,0,90]
+			}
+		],
+		"lighting":[
+		{
+				"type":"point",
+				"intensity":0.8,
+				"center":[2,1,0]
+		},
+		{
+				"type":"ambient",
+				"intensity":0.0
+			}
+		],
+		"camera":{
+			"center":[0,0,0],
+			"direction":[0,0,0]
+		},
+		"physics":{
+			"reflection_depth":1,
+			"pixel_division":1
+		}
+	}
+}

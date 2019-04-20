@@ -20,9 +20,9 @@
 			{
 				"shape":"intersect",
 				"id":2,
+				"color":[255,0,0],
 				"child_one":0,
-				"child_two":1,
-				"color":[255,0,0]
+				"child_two":1
 			},
 			{
 				"shape":"cylinder",
@@ -45,9 +45,9 @@
 			{
 				"shape":"unite",
 				"id":5,
+				"color":[255,0,0],
 				"child_one":3,
-				"child_two":4,
-				"color":[255,0,0]
+				"child_two":4
 			},
 			{
 				"shape":"cylinder",
@@ -61,16 +61,16 @@
 			{
 				"shape":"unite",
 				"id":7,
+				"color":[255,0,0],
 				"child_one":6,
-				"child_two":5,
-				"color":[255,0,0]
+				"child_two":5
 			},
 			{
 				"shape":"difference",
 				"id":5,
+				"color":[255,0,0],
 				"child_one":2,
-				"child_two":7,
-				"color":[255,0,0]
+				"child_two":7
 			}
 		],
 		"lighting":[

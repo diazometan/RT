@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/20 13:19:23 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/20 13:52:19 by rgyles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,29 @@ SRC_DIR = sources
 
 PRS_SRC_DIR = $(SRC_DIR)/parser_sources
 
+UI_SRC_DIR = $(SRC_DIR)/ui_sources
+
 OBJ_DIR = objects
 
 LIBFT_DIR = libft
+
+KISS_DIR = kiss_sdl
+
+KISS_SDL = $(KISS_DIR)/kisssdl.a
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
 FLAGS = -O2 -g -Wall -Wextra #-Werror
 
-INCLUDES = -I SDL2.framework/Headers -I includes -I libft
+SDL =  -F ./includes/frameworks/ -framework SDL2 \
+								-framework SDL2_image \
+								-framework SDL2_ttf \
+								-framework SDL2_mixer
+
+INCLUDES = -I includes -I libft -I kiss_sdl -I includes/frameworks/SDL2.framework/Headers \
+			-I includes/frameworks/SDL2_image.framework/Versions/A/Headers \
+			-I includes/frameworks/SDL2_ttf.framework/Versions/A/Headers \
+			-I includes/frameworks/SDL2_mixer.framework/Versions/A/Headers
 
 SRC = main.c\
 	  read_config_file.c\
@@ -67,9 +81,22 @@ SRC = main.c\
 	  color_disrubtion.c\
 	  convert_color.c\
 	  shape_summ.c\
-	  noise.c
+	  noise.c\
+	  sphere_texture.c\
+	  plane_texture.c\
+	  cylinder_texture.c\
+	  cone_texture.c\
+	  torus_texture.c\
+	  box_texture.c\
+	  ui_main.c\
+	  ui_error.c\
+	  ui_dirread.c\
+	  ui_init.c\
+	  ui_light.c\
+	  ui_buttons.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+SRC_LIN = $(addprefix $(SRC_DIR)/, $(SRC))
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -78,24 +105,31 @@ NC=\033[0m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(LIBFT) $(KISS_SDL) $(OBJ)
 	@echo "$(BLUE)Compiling RT...$(NC)"
-	@gcc $(FLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT) -F . -framework SDL2
+	@gcc $(FLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBFT) $(KISS_SDL) $(SDL)
 	@echo "$(GREEN)RT is ready!$(NC)"
 
 $(LIBFT):
 	@echo "$(BLUE)Compiling libft...$(NC)"
 	@make -C $(LIBFT_DIR)
 
+$(KISS_SDL):
+	@echo "$(BLUE)Compiling kiss_sdl...$(NC)"
+	@make -C $(KISS_DIR)
+
 $(OBJ_DIR):
 	@echo "$(GREEN)Objects directory is created!$(NC)"
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h | $(OBJ_DIR)
-	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
 
-$(OBJ_DIR)/%.o: $(PRS_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h | $(OBJ_DIR)
-	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
+$(OBJ_DIR)/%.o: $(PRS_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
+
+$(OBJ_DIR)/%.o: $(UI_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
 
 clean:
 	@echo "$(RED)Deleting object files...$(NC)"
@@ -106,6 +140,7 @@ fclean: clean
 	@echo "$(RED)Deleting libraries and binary...$(NC)"
 	@/bin/rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
+	@make -C $(KISS_DIR) fclean
 
 re: fclean all
 

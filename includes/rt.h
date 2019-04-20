@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 13:05:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:51:01 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include "libft.h"
 # include "vector.h"
 # include "constants.h"
-# include "SDL.h"
+# include <SDL2/SDL.h>
+# include <SDL_image.h>
+# include <SDL_ttf.h>
+# include "kiss_sdl.h"
 # include "shape.h"
+# include "ui.h"
 # include <math.h>
 # include <limits.h>
 # include <fcntl.h>
@@ -123,6 +127,8 @@ void				event_handler(t_rt *rt, t_sdl *sdl);
 
 void				create_normal_system(t_shape *shape);
 
+t_vec3				get_texture_color(t_texture *texture, int xy[2], double uv[2]);
+void				move_texture(double *u, double *v, double delta_uv[2]);
 t_vec3				sphere_texture(t_texture *texture, t_shape *shape);
 t_vec3				plane_texture(t_texture *texture, t_shape *shape);
 t_vec3				cylinder_texture(t_texture *texture, t_shape *shape);
@@ -148,5 +154,13 @@ int					trans_color(int color, int reflected_color, double reflection);
 
 t_hsv_color			rgb_to_hsv(t_rgb_color rgb);
 t_rgb_color			hsv_to_rgb(t_hsv_color hsv);
+
+int					ui_main(t_rt *rt, t_sdl *sdl);
+void				dirent_read(t_rtui *ui);
+int					init_rt(t_rt *rt, char *config_file);
+int					kiss_error(char *mes);
+void				ui_init(t_rtui *ui);
+int					kiss_light(t_rt *rt);
+void				button_events_main(t_rtui *ui, t_rt *rt, t_sdl *sdl);
 
 #endif
