@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 14:23:42 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 15:11:48 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 15:16:01 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	effect_check(char *s)
 {
-	if (ft_strequ(s, "turbulence"))
+	if (ft_strequ(s, "noise"))
 		return (TURBULENCE);
 	else if (ft_strequ(s, "chess_board"))
 		return (CHESS_BOARD);

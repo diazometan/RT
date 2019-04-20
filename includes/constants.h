@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 15:06:59 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 15:16:08 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define AMBIENT 3
 # define SPOT 4
 
-# define TURBULENCE 1
+# define NOISE 1
 # define CHESS_BOARD 2
 # define MARBLE 3
 # define WOOD 4
