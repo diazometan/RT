@@ -23,7 +23,7 @@ void	ui_min_init(t_rtui_min *min)
 	min->quit = 0;
 	min->draw = 1;
 	kiss_array_new(&min->objects);
-	min->renderer = kiss_init("ERROR", &min->objects, 320, 120);
+	min->renderer = kiss_init("INFO", &min->objects, 320, 120);
 	if (!min->renderer)
 		return ;
 	kiss_window_new(&min->window, NULL, 0, 0, 0, kiss_screen_width,
