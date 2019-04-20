@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 14:57:36 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 13:42:45 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ int		main(int args, char **argv)
 		else if (h_s->figure == 16)
 			printf("mix, ");
 		printf("is in group - ");
-		if (h_s->group & 1)
-			printf("no\n");
-		else
+		if (h_s->child)
 			printf("yes\n");
-		printf("\tid - %d, color - %.0f %.0f %.0f\n, ", h_s->id, h_s->color.x, h_s->color.y, h_s->color.z);
+		else
+			printf("no\n");
+		printf("\tid - %d, color - %.0f %.0f %.0f\n", h_s->id, h_s->color.x, h_s->color.y, h_s->color.z);
 		printf("\tspecular - %.2f, reflection = %.2f, refraction - %.2f, transperency - %.2f\n", h_s->specular, h_s->reflection, h_s->refraction, h_s->transparency);
 		if (h_s->texture != NULL)
 			printf("\ttexture - %s, dx - %.2f dy - %.2f div - %f\n", h_s->texture->name, h_s->t_dims.x, h_s->t_dims.y, h_s->t_dims.z);

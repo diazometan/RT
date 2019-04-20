@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:16:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 11:22:22 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 13:44:59 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_end(char *s, int c_s, int c_e)
 	return (NULL);
 }
 
-char		*str_extract(char *s, int c_s, int c_e)
+char	*str_extract(char *s, int c_s, int c_e)
 {
 	char	*end;
 	size_t	len;
@@ -63,7 +63,6 @@ char		*str_extract(char *s, int c_s, int c_e)
 	len = end - s;
 	return (ft_strsub(s, 0, len));
 }
-
 
 void	init_box_radius(char *s, double *b_radius)
 {

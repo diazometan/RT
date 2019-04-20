@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 15:00:50 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 13:41:53 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,11 @@ static void	form_group(char *s, t_shape *new, t_shape **head)
 static void	init_fun_allocator(char *s, t_shape *new, t_shape **head,
 								t_texture **head_textures)
 {
-	if ((s = strstr(s, "\"shape\"")) == NULL || *(s + 7) != ':')
-	{
-		ft_putendl(M_SHAPE);
-		exit(1);
-	}
-	if ((new->figure = identify_shape(s + 8)) == -1)
-	{
-		ft_putendl(U_SHAPE);
-		exit(1);
-	}
 	new->group = 0;
 	new->child = 0;
 	new->depth = 2;
 	init_id(s, &new->id);
+	identify_object(s, &new->figure);
 	identify_color(s, &new->color);
 	init_reflection(s, &new->reflection);
 	init_refraction(s, &new->refraction);

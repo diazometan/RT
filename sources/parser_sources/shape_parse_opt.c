@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 15:50:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 13:25:40 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 13:45:24 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	init_transparency(char *s, double *transparency)
 		ft_putendl(M_TRANS);
 		exit(1);
 	}
-	else if ((*transparency = get_double(s + 15, ',')) < 0.0 || *transparency > 1.0)
+	else if ((*transparency = get_double(s + 15, ',')) < 0.0 ||
+											*transparency > 1.0)
 	{
 		ft_putendl(U_TRANS);
 		exit(1);

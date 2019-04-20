@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 14:05:04 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 13:41:43 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct		s_shape
 	struct s_shape	*next;
 }					t_shape;
 
-int					identify_shape(char *start);
+void				identify_object(char *s, int *figure);
 void				init_id(char *s, int *id);
 t_shape				*find_child(char *s, char *child, t_shape **head_shapes);
 void				identify_color(char *s, t_vec3 *color);

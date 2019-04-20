@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:11:45 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 13:05:15 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 13:15:18 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,48 +53,4 @@ void		identify_color(char *s, t_vec3 *color)
 		ft_putendl(U_COLOR);
 		exit(1);
 	}
-}
-
-static int	identify_operation(char *start)
-{
-	if (strcequ(start, "\"unite\"", ','))
-		return (UNITE);
-	else if (strcequ(start, "\"intersect\"", ','))
-		return (INTERSECT);
-	else if (strcequ(start, "\"difference\"", ','))
-		return (DIFFERENCE);
-	else if (strcequ(start, "\"blend\"", ','))
-		return (BLEND);
-	else if (strcequ(start, "\"mix\"", ','))
-		return (MIX);
-	else
-		return (-1);
-}
-
-int			identify_shape(char *start)
-{
-	if (strcequ(start, "\"plane\"", ','))
-		return (PLANE);
-	else if (strcequ(start, "\"sphere\"", ','))
-		return (SPHERE);
-	else if (strcequ(start, "\"cylinder\"", ','))
-		return (CYLINDER);
-	else if (strcequ(start, "\"infinite_cylinder\"", ','))
-		return (INF_CYLINDER);
-	else if (strcequ(start, "\"cone\"", ','))
-		return (CONE);
-	else if (strcequ(start, "\"infinite_cone\"", ','))
-		return (CONE);
-	else if (strcequ(start, "\"torus\"", ','))
-		return (TORUS);
-	else if (strcequ(start, "\"capsule\"", ','))
-		return (CAPSULE);
-	else if (strcequ(start, "\"box\"", ','))
-		return (BOX);
-	else if (strcequ(start, "\"elipsoid\"", ','))
-		return (ELIPSIOD);
-	else if (strcequ(start, "\"fractal\"", ','))
-		return (FRACTAL);
-	else
-		return (identify_operation(start));
 }
