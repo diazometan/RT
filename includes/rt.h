@@ -164,6 +164,6 @@ void				ui_init(t_rtui *ui);
 int					kiss_light(t_rt *rt, t_sdl *sdl);
 void				button_events_main(t_rtui *ui, t_rt *rt, t_sdl *sdl);
 int					kiss_ambient(t_rt *rt, t_sdl *sdl);
-int					kiss_saving(t_rt *rt, t_sdl *sdl);
+int					kiss_saving(t_sdl *sdl);
 
 #endif

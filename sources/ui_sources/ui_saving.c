@@ -12,16 +12,25 @@
 
 #include "rt.h"
 
-static	void	button_event_qlt(t_rtui_min *win_amb, t_rt *rt, t_sdl *sdl)
+static void		button_event_qlt(t_rtui_min *win_amb, t_sdl *sdl)
 {
+	SDL_Surface	*tmp;
+
 	if (kiss_button_event(&win_amb->button, &win_amb->e, &win_amb->draw))
 	{
-		/*png adding function*/
 		win_amb->quit = 1;
+		ft_strcpy(win_amb->message, "../saved_images/");
+		ft_strcat(win_amb->message, win_amb->en_intens.text);
+		ft_strcat(win_amb->message, ".png");
+		tmp = SDL_ConvertSurfaceFormat(sdl->surf, SDL_PIXELFORMAT_RGB24, 0);
+		system("cd ../ && mkdir -p saved_images");
+		if ((SDL_SaveBMP(tmp, win_amb->message)) != 0)
+			ft_putendl("Error save file");
+		SDL_FreeSurface(tmp);
 	}
 }
 
-static	void	ui_win_lt_init(t_rtui_min *win_amb)
+static void		ui_win_lt_init(t_rtui_min *win_amb)
 {
 	win_amb->quit = 0;
 	win_amb->draw = 1;
@@ -31,7 +40,7 @@ static	void	ui_win_lt_init(t_rtui_min *win_amb)
 		return ;
 	kiss_window_new(&win_amb->window, NULL, 0, 0, 0, kiss_screen_width,
 					kiss_screen_height);
-	kiss_label_new(&win_amb->label_intens, &win_amb->window, \
+	kiss_label_new(&win_amb->label_intens, &win_amb->window,
 					"enter name of file", 8, 30);
 	kiss_entry_new(&win_amb->en_intens, &win_amb->window, 1, "", 10, 65, 280);
 	kiss_button_new(&win_amb->button, &win_amb->window, "OK",
@@ -39,7 +48,7 @@ static	void	ui_win_lt_init(t_rtui_min *win_amb)
 	win_amb->window.visible = 1;
 }
 
-static	void	kiss_light_draw(t_rtui_min *win_amb)
+static void		kiss_light_draw(t_rtui_min *win_amb)
 {
 	SDL_RenderClear(win_amb->renderer);
 	kiss_window_draw(&win_amb->window, win_amb->renderer);
@@ -51,7 +60,7 @@ static	void	kiss_light_draw(t_rtui_min *win_amb)
 	win_amb->draw = 0;
 }
 
-int				kiss_saving(t_rt *rt, t_sdl *sdl)
+int				kiss_saving(t_sdl *sdl)
 {
 	t_rtui_min win_amb;
 
@@ -65,10 +74,10 @@ int				kiss_saving(t_rt *rt, t_sdl *sdl)
 				win_amb.quit = 1;
 			kiss_window_event(&win_amb.window, &win_amb.e, &win_amb.draw);
 			kiss_entry_event(&win_amb.en_intens, &win_amb.e, &win_amb.draw);
-			button_event_qlt(&win_amb, rt, sdl);
+			button_event_qlt(&win_amb, sdl);
 		}
 		if (!win_amb.draw)
-			continue ;
+			continue;
 		kiss_light_draw(&win_amb);
 	}
 	kiss_clean(&win_amb.objects);

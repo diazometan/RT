@@ -59,7 +59,7 @@ static void	button_light_ambient(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 	}
 	if (kiss_button_event(&ui->button_save, &ui->e, &ui->draw))
 	{
-		kiss_saving(rt, sdl);
+		kiss_saving(sdl);
 	}
 }
 
