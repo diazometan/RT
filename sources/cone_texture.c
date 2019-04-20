@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:26:29 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/19 20:53:08 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/20 15:10:20 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_vec3			cone_texture(t_texture *texture, t_shape *shape)
 
 	angle = (t_vec3){r.x, 0, r.z};
 	vec3_normalize(&angle, vec3_length(&angle));
-	u = acos(vec3_dot(&angle, &unit1)) / M_PI;
+	u = acos(vec3_dot(&angle, &unit1)) / (2.0 * M_PI);
 	if (r.z < 0)
 		u = 1.0 - u;
 	v = -(r.y / shape->dims.z);

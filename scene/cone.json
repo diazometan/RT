@@ -13,7 +13,7 @@
                 "radius_in":0.5,
                 "radius_out":1.5,
                 "height":1.5,
-                "direction":[-90,0,0]
+                "direction":[-45,0,0]
             }
 		],
 		"lighting":[

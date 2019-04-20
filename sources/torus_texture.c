@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:26:57 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/19 20:29:10 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/20 15:07:36 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ t_vec3			torus_texture(t_texture *texture, t_shape *shape)
 	//printf("%f   %f\n", v, u);
 	x = (1 - u) * texture->surface->w;
 	y = (1 - v) * texture->surface->h;*/
-	u = 0.5 + atan2(r.y, r.x) / (2 * M_PI);
-	u = 1.0 - 2.0 * u;
+	u = 1.0 - (0.5 + atan2(r.y, r.x) / (2.0 * M_PI));
 	v = 1.0 - (0.5 + atan2(r.z, sqrt(r.x * r.x + r.y * r.y) - shape->dims.y) / (2 * M_PI));
 	move_texture(&u, &v, (double[2]){shape->t_dims.x, shape->t_dims.y});
 	if (shape->t_dims.z != 0)

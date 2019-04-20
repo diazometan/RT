@@ -8,12 +8,12 @@
                 "texture":"can",
                 "x_displace":0,
                 "y_displace":0,
-                "texture_div":700,
+                "texture_div":600,
                 "center":[0,0,6],
                 "radius_in":1.0,
                 "radius_out":1.5,
                 "height":1.5,
-                "direction":[180,0,0]
+                "direction":[0,0,0]
             }
 		],
 		"lighting":[

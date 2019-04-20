@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:26:05 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/19 20:14:31 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/20 14:59:14 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_vec3			cylinder_texture(t_texture *texture, t_shape *shape)
 	vec3_subtract(&shape->surface_point, &shape->center, &r);
 	vector_matrix_multiply(shape->rotation, &r);
 
-	u = (acos(ft_dclamp(r.x, shape->dims.x * 1.0, shape->dims.x * -1.0) / shape->dims.x) / M_PI);
+	u = (acos(ft_dclamp(r.x, shape->dims.x * 1.0, shape->dims.x * -1.0) / shape->dims.x) / (2.0 * M_PI));
 	if (r.z < 0)
 		u = 1.0 - u;
 	v = -r.y / shape->dims.z;

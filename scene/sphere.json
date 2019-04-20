@@ -8,10 +8,10 @@
 				"texture":"can",
 				"x_displace":0,
 				"y_displace":0,
-				"texture_div":600,
-				"center":[-1.5,0,6],
+				"texture_div":300,
+				"center":[0,0,5],
 				"radius":1.5,
-				"direction":[0,90,0]
+				"direction":[0,0,0]
 			}
 		],
 		"lighting":[

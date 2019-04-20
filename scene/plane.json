@@ -8,7 +8,7 @@
 				"texture":"can",
 				"x_displace":0.0,
 				"y_displace":0.0,
-				"texture_div":600,
+				"texture_div":300,
 				"center":[1,-1,5],
 				"direction":[0,0,0]
 			},
