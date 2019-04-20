@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 16:18:29 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 15:06:59 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@
 # define AMBIENT 3
 # define SPOT 4
 
+# define TURBULENCE 1
+# define CHESS_BOARD 2
+# define MARBLE 3
+# define WOOD 4
+
 # define O_RED "\033[0;31m"
 # define O_NC "\033[0m"
 
 # define NOISE_HEIGHT 128
 # define NOISE_WIDTH 128
-# define PIXELS_BLOCK 100.0
 
 # define M_FILE O_RED "File not found"
 # define E_FILE O_RED "Emty file"
@@ -48,10 +52,10 @@
 
 # define MEMORY O_RED "not enough sufficient memory"
 
-# define OBJ O_RED "Objects:\n"
-# define LIGHT O_RED "Lighting:\n"
-# define CAMERA O_RED "Camera:\n"
-# define PHYSICS O_RED "Camera:\n"
+//# define OBJ O_RED "Objects:\n"
+//# define LIGHT O_RED "Lighting:\n"
+//# define CAMERA O_RED "Camera:\n"
+//# define PHYSICS O_RED "Camera:\n"
 
 # define M_SHAPE O_RED "Shape identifier is missing!"
 # define M_COLOR O_RED "Color identifier is missing!"

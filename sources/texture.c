@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 15:52:19 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 14:45:01 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ t_vec3		get_texture_color(t_texture *texture, int xy[2], double uv[2])
 	pixel = texture->pixel + xy[1] * texture->surface->pitch + xy[0] * texture->surface->format->BytesPerPixel;
 	if (type == 0)
 		return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
-	// else if (type == 1)
-	// 	return (wood(rt, xy[0], xy[1]));
-	// else if (type == 2)
-	// 	return (marble(rt, xy[0], xy[1]));
 	// else if (type == 3)
 	// 	return (noise(rt, xy[0], xy[1]));
-	else if (type == 4)
+	// else if (type == MARBLE)
+	// 	return (marble(rt, xy[0], xy[1]));
+	else if (type == CHESS_BOARD)
 		return (chess_board(xy[0] + (uv[0] < 0) * 10, xy[1]));
+	// else if (type == WOOD)
+	// 	return (wood(rt, xy[0], xy[1]));
 	else
 		return ((t_vec3){0, 0, 0});
 }
