@@ -61,6 +61,7 @@ typedef struct		s_rtui
 	kiss_button		button_hide;
 	kiss_button		button_light;
 	kiss_button		button_light_ok;
+	kiss_button		button_ambient;
 	kiss_button		button_ex;
 	kiss_button		button_ok1;
 	kiss_button		button_ok2;

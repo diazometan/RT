@@ -44,7 +44,7 @@ static	void	button_event_qlt(t_rtui_min *win_lt, t_rt *rt, t_sdl *sdl)
 	}
 }
 
-void			ui_win_lt_init(t_rtui_min *win_lt)
+static	void	ui_win_lt_init(t_rtui_min *win_lt)
 {
 	win_lt->quit = 0;
 	win_lt->draw = 1;
