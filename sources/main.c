@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 17:54:12 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 18:43:52 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int		init_sdl(t_sdl *sdl)
 {
-	SDL_Surface *wall;
-
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		printf("SDL_Init Error: %s\n", SDL_GetError());
@@ -33,10 +31,6 @@ static int		init_sdl(t_sdl *sdl)
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	// wall = SDL_LoadBMP("textures/brick.bmp");
-	// SDL_BlitScaled(wall, NULL, sdl->surf, NULL);
-	// SDL_FreeSurface(wall);
-	// SDL_UpdateWindowSurface(sdl->win);
 	sdl->img_data = (int *)sdl->surf->pixels;
 	return (0);
 }

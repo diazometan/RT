@@ -59,6 +59,7 @@ typedef struct		s_rtui
 	kiss_label		label_sel;
 	kiss_label		label_res;
 	kiss_button		button_hide;
+	kiss_button		button_save;
 	kiss_button		button_light;
 	kiss_button		button_light_ok;
 	kiss_button		button_ambient;
