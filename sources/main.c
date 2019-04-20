@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 13:51:32 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 14:56:07 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,19 @@ int		main(int args, char **argv)
 	t_sdl	sdl;
 
 	srand48(time(NULL));
-	if (args != 1)
-	{
-		ft_putendl("usage: ./RT");
-		return (1);
-	}
+	// if (args != 1)
+	// {
+	// 	ft_putendl("usage: ./RT");
+	// 	return (1);
+	// }
 	generate_noise(&rt);
-	//if (init_rt(&rt, argv[1]))
-	//	return (0);
+	if (init_rt(&rt, argv[1]))
+		return (0);
 
 	if (init_sdl(&sdl))
 	return (1);
-	rt.win_width = 0;
-	ui_main(&rt, &sdl);
+	//rt.win_width = 0;
+	//ui_main(&rt, &sdl);
 	//TEMPORARY CHECK FOR CONFIG PARSER
 	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
@@ -185,7 +185,7 @@ int		main(int args, char **argv)
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);
 	//END
-	//create_img(&rt, &sdl);
+	create_img(&rt, &sdl);
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_DestroyWindow(sdl.win);

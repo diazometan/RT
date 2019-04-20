@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 19:36:59 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/19 13:53:18 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 15:23:16 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ t_shape			*calculation_distance(t_trace *dist, t_rt *rt, t_vec3 *dir)
 	head = rt->head_shapes;
 	dist->min_distance = INT_MAX;
 	closest = NULL;
-	from.x = rt->source_point->x + dist->t * dir->x;
-	from.y = rt->source_point->y + dist->t * dir->y;
-	from.z = rt->source_point->z + dist->t * dir->z;
+	get_intersection_point(rt->source_point, dir, dist->t, &from);
 	while (head != NULL)
 	{
 		if (head->child == 0)

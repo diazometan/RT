@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/19 17:51:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 14:51:03 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ int			get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 		new_color = reflection(dir, shape, rt, depth - 1);
 		color = reflect_color(color, new_color, shape->reflection);
 	}
-	if (shape->depth_ref > 0 && shape->refraction)
-		color = refraction(dir, shape, rt, shape->depth_ref - 1);
-	if (shape->depth_trans > 0 && shape->transparency)
+	if (shape->refraction)
+		color = refraction(dir, shape, rt, depth);
+	if (shape->transparency)
 	{
-		new_color = transperency(dir, shape, rt, shape->depth_trans - 1);
+		new_color = transperency(dir, shape, rt, depth);
 		color = trans_color(color, new_color, shape->transparency);
 	}
 	return (color);

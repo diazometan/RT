@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 10:16:14 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 13:50:35 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/20 15:08:46 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ void	init_view_angle(char *s, double *angle)
 		ft_putendl(U_VANGLE);
 		exit(1);
 	}
+	*angle *= M_PI / 180;
 }
