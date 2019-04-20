@@ -51,6 +51,14 @@ static void	textbox1_event(kiss_textbox *textbox1, SDL_Event *e, t_rtui *ui)
 	}
 }
 
+static void	button_light_ambient(t_rtui *ui, t_rt *rt, t_sdl *sdl)
+{
+	if (kiss_button_event(&ui->button_ambient, &ui->e, &ui->draw))
+	{
+		kiss_ambient(rt, sdl);
+	}
+}
+
 static void	ui_drawing(t_rtui *ui, t_rt *rt)
 {
 	SDL_RenderClear(ui->renderer);
@@ -62,6 +70,7 @@ static void	ui_drawing(t_rtui *ui, t_rt *rt)
 	{
 		kiss_button_draw(&ui->button_hide, ui->renderer);
 		kiss_button_draw(&ui->button_light, ui->renderer);
+		kiss_button_draw(&ui->button_ambient, ui->renderer);
 	}
 	kiss_button_draw(&ui->button_ex, ui->renderer);
 	kiss_button_draw(&ui->button_ok1, ui->renderer);
@@ -76,7 +85,6 @@ int			ui_main(t_rt *rt, t_sdl *sdl)
 	ui_init(&ui);
 	while (!ui.quit)
 	{
-		SDL_Delay(10);
 		while (SDL_PollEvent(&ui.e))
 		{
 			if (ui.e.type == SDL_QUIT)
@@ -84,11 +92,12 @@ int			ui_main(t_rt *rt, t_sdl *sdl)
 			kiss_window_event(&ui.window1, &ui.e, &ui.draw);
 			vscrollbar1_event(&ui.vscrollbar1, &ui.e, &ui.textbox1, &ui.draw);
 			textbox1_event(&ui.textbox1, &ui.e, &ui);
+			button_light_ambient(&ui, rt, sdl);
 			button_events_main(&ui, rt, sdl);
 		}
 		vscrollbar1_event(&ui.vscrollbar1, NULL, &ui.textbox1, &ui.draw);
 		if (!ui.draw)
-			continue;
+			continue ;
 		ui_drawing(&ui, rt);
 	}
 	kiss_clean(&ui.objects);

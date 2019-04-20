@@ -23,7 +23,9 @@ void	ui_init_2(t_rtui *ui)
 	kiss_button_new(&ui->button_hide, &ui->window1, "hide",
 					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 20, 460);
 	kiss_button_new(&ui->button_light, &ui->window1, "light",
-					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 20, 490);
+					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 90, 490);
+	kiss_button_new(&ui->button_ambient, &ui->window1, "ambient",
+					ui->window1.rect.w / 2 - kiss_normal.w / 2 + 50, 490);
 	kiss_button_new(&ui->button_ok1, &ui->window1, "render",
 					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 20, 520);
 	kiss_button_new(&ui->button_ex, &ui->window1, "exit",

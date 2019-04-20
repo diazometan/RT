@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static void		push_back_light(t_light **head, t_light *new)
+void		push_back_light(t_light **head, t_light *new)
 {
 	t_light	*tmp;
 

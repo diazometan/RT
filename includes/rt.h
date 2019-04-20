@@ -155,12 +155,14 @@ int					trans_color(int color, int reflected_color, double reflection);
 t_hsv_color			rgb_to_hsv(t_rgb_color rgb);
 t_rgb_color			hsv_to_rgb(t_hsv_color hsv);
 
+void				push_back_light(t_light **head, t_light *new);
 int					ui_main(t_rt *rt, t_sdl *sdl);
 void				dirent_read(t_rtui *ui);
 int					init_rt(t_rt *rt, char *config_file);
 int					kiss_error(char *mes);
 void				ui_init(t_rtui *ui);
-int					kiss_light(t_rt *rt);
+int					kiss_light(t_rt *rt, t_sdl *sdl);
 void				button_events_main(t_rtui *ui, t_rt *rt, t_sdl *sdl);
+int					kiss_ambient(t_rt *rt, t_sdl *sdl);
 
 #endif

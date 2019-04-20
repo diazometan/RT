@@ -30,6 +30,7 @@ typedef struct		s_rtui_min
 	kiss_label		label_z;
 	kiss_label		label_intens;
 	t_vec3			pos_light;
+	double			intens;
 	char			message[KISS_MAX_LENGTH];
 	int				draw;
 	int				quit;
@@ -60,6 +61,7 @@ typedef struct		s_rtui
 	kiss_button		button_hide;
 	kiss_button		button_light;
 	kiss_button		button_light_ok;
+	kiss_button		button_ambient;
 	kiss_button		button_ex;
 	kiss_button		button_ok1;
 	kiss_button		button_ok2;
