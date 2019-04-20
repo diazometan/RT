@@ -12,7 +12,7 @@
                 "sides":[1,1,1],
                 "radius":0,
                 "center":[0,0,6],
-                "direction":[0,0,0]
+                "direction":[-45,45,0]
             }
 		],
 		"lighting":[

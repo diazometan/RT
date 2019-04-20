@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 16:46:11 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 18:07:36 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int		average_color(int n, int *color)
+int		average_color(int n, int *color)
 {
 	int			i;
 	int			n_sq;
@@ -37,7 +37,7 @@ static int		average_color(int n, int *color)
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-static void		init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
+void		init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 {
 	t_matrix	rotation;
 
@@ -53,7 +53,7 @@ static void		init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 	rt->source_point = &rt->camera;
 }
 
-static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
+void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 {
 	int			i;
 	int			pixel_color[rt->p_division * rt->p_division];
@@ -78,21 +78,91 @@ static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 					average_color(rt->p_division, pixel_color);
 }
 
-void			create_img(t_rt *rt, t_sdl *sdl)
+#include <pthread.h>
+
+typedef struct		s_pthread
+{
+	t_rt			*rt;
+	t_sdl			*sdl;
+	int				x[2];
+	int				y[2];
+}					t_pthread;
+
+void			*create_img_pthread(void *data)
 {
 	int			x;
 	int			y;
 	int			x_limit;
 	int			y_limit;
+	t_pthread	*obj;
 
-	y = -1;
-	x_limit = rt->win_width;
-	y_limit = rt->win_height;
+	obj = (t_pthread *)data;
+	x_limit = obj->x[1];
+	y_limit = obj->y[1];
+	y = obj->y[0] - 1;
 	while (++y < y_limit)
 	{
-		x = -1;
+		x = obj->x[0] - 1;
 		while (++x < x_limit)
-			get_pixel(x, y, rt, sdl->img_data);
+		{
+			// printf("x(%d %d) y(%d %d) x=%d y=%d\n", obj->x[0], x_limit, obj->y[0], y_limit, x, y);
+			get_pixel(x, y, obj->rt, obj->sdl->img_data);
+		}
 	}
+	return (NULL);
+}
+
+t_pthread	init_t_pthread(t_rt *rt, t_sdl *sdl, int x[2], int y[2])
+{
+	t_pthread	obj;
+
+	obj.rt = rt;
+	obj.sdl = sdl;
+	obj.x[0] = x[0];
+	obj.x[1] = x[1];
+	obj.y[0] = y[0];
+	obj.y[1] = y[1];
+	return (obj);
+}
+
+void		ft_fun(t_rt *rt, t_sdl *sdl)
+{
+	int					size;
+	int					index;
+	pthread_t			*tid;
+	t_pthread			*blocks;
+	int					start;
+	int					finish;
+
+	size = 2;
+	tid = (pthread_t *)malloc(sizeof(pthread_t) * size);
+	blocks = (t_pthread *)malloc(sizeof(t_pthread) * size);
+	index = -1;
+	while (++index < size)
+	{
+		start = ((index) / (double)size) * rt->win_width;
+		finish = ((index + 1) / (double)size) * rt->win_width;
+		printf("x=%d y=%d\n", start, finish);
+		blocks[index] = init_t_pthread(rt, sdl,
+		(int[2]){start, finish},
+		(int[2]){0, rt->win_height});
+		(void)pthread_create(&tid[index], NULL, create_img_pthread, &blocks[index]);
+	}
+	index = -1;
+	while (++index < size)
+		pthread_join(tid[index], NULL);
+	free(tid);
+	free(blocks);
+}
+
+void			create_img(t_rt *rt, t_sdl *sdl)
+{
+	// t_pthread	obj;
+
+	// ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
+	// obj = init_t_pthread(rt, sdl, (int[2]){0, rt->win_width}, (int[2]){0, rt->win_height});
+	// create_img_pthread(&obj);
+	ft_fun(rt, sdl);
 	SDL_UpdateWindowSurface(sdl->win);
+	exit(0);
 }

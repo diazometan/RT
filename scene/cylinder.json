@@ -2,7 +2,7 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"torus",
+				"shape":"cylinder",
 				"id":1,
 				"color":[0,0,255],
 				"texture":"can",
@@ -12,33 +12,7 @@
 				"center":[0,-0.5,8],
 				"radius":1,
 				"height":1,
-				"direction":[0,90,0]
-			},
-			{
-				"shape":"cylinder",
-				"id":1,
-				"color":[0,0,255],
-				"texture":"can",
-				"x_displace":0,
-				"y_displace":0,
-				"texture_div":300,
-				"center":[2.1,-0.5,8],
-				"radius":1,
-				"height":1,
 				"direction":[0,105,0]
-			},
-			{
-				"shape":"cylinder",
-				"id":1,
-				"color":[0,0,255],
-				"texture":"can",
-				"x_displace":0,
-				"y_displace":0,
-				"texture_div":300,
-				"center":[-2.1,-0.5,8],
-				"radius":1,
-				"height":1,
-				"direction":[0,130,0]
 			},
 			{
 				"shape":"plane",

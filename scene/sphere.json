@@ -2,7 +2,7 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"plane",
+				"shape":"sphere",
 				"id":0,
 				"color":[255,0,0],
 				"texture":"can",
@@ -16,15 +16,13 @@
 		],
 		"lighting":[
 			{
-				"type":"spot",
+				"type":"point",
 				"intensity":0.6,
-				"center":[0,15,3],
-				"direction":[0,-1,0],
-				"view_angle":10
+				"center":[0,0,0]
 			},
 			{
 				"type":"ambient",
-				"intensity":0.5
+				"intensity":0.2
 			}
 		],
 		"camera":{

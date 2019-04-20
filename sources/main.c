@@ -14,7 +14,7 @@
 
 static int		init_sdl(t_sdl *sdl)
 {
-	SDL_Surface *wall;
+	// SDL_Surface *wall;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
@@ -33,10 +33,10 @@ static int		init_sdl(t_sdl *sdl)
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	wall = SDL_LoadBMP("textures/brick.bmp");
-	SDL_BlitScaled(wall, NULL, sdl->surf, NULL);
-	SDL_FreeSurface(wall);
-	SDL_UpdateWindowSurface(sdl->win);
+	// wall = SDL_LoadBMP("textures/brick.bmp");
+	// SDL_BlitScaled(wall, NULL, sdl->surf, NULL);
+	// SDL_FreeSurface(wall);
+	// SDL_UpdateWindowSurface(sdl->win);
 	sdl->img_data = (int *)sdl->surf->pixels;
 	return (0);
 }

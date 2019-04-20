@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 16:11:50 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 17:55:08 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,11 @@ void				init_texture(char *s, t_shape *new,
 			exit(1);
 		}
 		if ((new->effect_type = effect_check(str)))
-			;
+			free(str);
 		else if (texture_check(str, new, *head_textures, 0))
 			push_back_texture(head_textures, create_texture(str, new, 0));
-		free(str);
+		else
+			free(str);
 		init_texture_displace(s, &new->t_dims);
 		init_texture_division(s, &new->t_dims.z);
 	}
