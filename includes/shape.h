@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 14:40:45 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 20:42:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ void				init_transparency(char *s, double *transparency);
 void				init_specular(char *s, double *specular);
 void				init_function(t_shape *new);
 void				init_function_texture(t_shape *new);
-void				init_texture(char *object, t_shape *new, t_texture **head_textures);
+void				init_texture(char *object, t_shape *new,
+									t_texture **head_textures);
 int					effect_check(char *s);
-void				init_texture_map(char *object, t_shape *shape, t_texture **head_textures);
+void				init_texture_map(char *object, t_shape *shape,
+									t_texture **head_textures);
 void				init_groups(char *s, t_shape *new, t_shape **head);
 
 int					strcequ(char *s1, char *s2, int c);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 15:10:21 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/21 20:41:52 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,6 @@
 # define USAGE O_RED "usage: ./RT [configuration_file]"
 
 # define MEMORY O_RED "not enough sufficient memory"
-
-//# define OBJ O_RED "Objects:\n"
-//# define LIGHT O_RED "Lighting:\n"
-//# define CAMERA O_RED "Camera:\n"
-//# define PHYSICS O_RED "Camera:\n"
-
 # define M_SHAPE O_RED "Shape identifier is missing!"
 # define M_COLOR O_RED "Color identifier is missing!"
 # define M_CENTER O_RED "Center coordinates are missing!"

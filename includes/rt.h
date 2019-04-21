@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 19:13:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 20:41:21 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ typedef struct		s_trace
 	double			d;
 }					t_trace;
 
-typedef enum
+typedef	enum
 {
 	STANDART,
 	INVERSE_ONE,
 	INVERSE_TWO,
 	GREY,
 	CARTOON
-}					t_color_scheme;
+}	t_color_scheme;
 
 typedef struct		s_rt
 {
@@ -114,10 +114,12 @@ void				progress_bar(double progress, t_rt *rt, t_sdl *sdl);
 
 char				*get_file(int fd);
 int					init_config(char *file, t_rt *rt);
-char				*init_shapes(char *s, t_shape **head, t_texture **head_textures);
+char				*init_shapes(char *s, t_shape **head,
+									t_texture **head_textures);
 char				*init_lighting(char *s, t_light **head);
 int					init_physics(char *s, t_rt *rt);
-void				free_args(t_shape *shape, t_light *light, t_texture *texture);
+void				free_args(t_shape *shape, t_light *light,
+									t_texture *texture);
 
 void				create_img(t_rt *rt, t_sdl *sdl);
 int					trace_ray(t_vec3 *dir, t_rt *rt, int depth);
@@ -144,9 +146,12 @@ double				shape_summ(t_vec3 *p, t_shape *shape);
 
 int					get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
-void				get_normal(t_vec3 *surface_point, t_vec3 *normal, t_shape *shape);
-double				shadow(t_vec3 orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
-int					refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
+void				get_normal(t_vec3 *surface_point,
+								t_vec3 *normal, t_shape *shape);
+double				shadow(t_vec3 orig, t_vec3 dir,
+								t_shape *head_shapes, double max_distance);
+int					refraction(t_vec3 *dir, t_shape *shape,
+								t_rt *rt, int depth);
 int					reflection(t_vec3 *dir, t_rt *rt, int depth);
 int					transperency(t_vec3 *dir, t_rt *rt, int depth);
 
@@ -156,13 +161,16 @@ void				event_handler(t_rt *rt, t_sdl *sdl);
 
 void				create_normal_system(t_rt *rt, t_shape *shape);
 
-t_vec3				get_texture_color(t_shape *shape, int xy[2], double uv[2], t_rt *rt);
+t_vec3				get_texture_color(t_shape *shape, int xy[2],
+								double uv[2], t_rt *rt);
 void				move_texture(double *u, double *v, double delta_uv[2]);
-t_vec3				sphere_texture(t_texture *texture, t_shape *shape, t_rt *rt);
+t_vec3				sphere_texture(t_texture *texture,
+								t_shape *shape, t_rt *rt);
 t_vec3				plane_texture(t_texture *texture, t_shape *shape, t_rt *rt);
-t_vec3				cylinder_texture(t_texture *texture, t_shape *shape, t_rt *rt);
+t_vec3				cylinder_texture(t_texture *texture,
+								t_shape *shape, t_rt *rt);
 t_vec3				cone_texture(t_texture *texture, t_shape *shape, t_rt *rt);
-t_vec3				torus_texture(t_texture *texture, t_shape *shape,t_rt *rt);
+t_vec3				torus_texture(t_texture *texture, t_shape *shape, t_rt *rt);
 t_vec3				box_texture(t_texture *texture, t_shape *shape, t_rt *rt);
 
 double				turbulence(t_rt *rt, double x, double y, double size);
@@ -178,8 +186,10 @@ void				set_color_cartoon(t_rt *rt, int rgb_m[3], double light);
 void				set_color_invers(t_rt *rt, int rgb_m[3], double light);
 void				set_color_grey(t_rt *rt, int rgb_m[3], double light);
 void				set_color_invers_hsv(t_rt *rt, int rgb_m[3], double light);
-int					reflect_color(int color, int reflected_color, double reflection);
-int					trans_color(int color, int reflected_color, double reflection);
+int					reflect_color(int color, int reflected_color,
+									double reflection);
+int					trans_color(int color, int reflected_color,
+									double reflection);
 
 t_hsv_color			rgb_to_hsv(t_rgb_color rgb);
 t_rgb_color			hsv_to_rgb(t_hsv_color hsv);
