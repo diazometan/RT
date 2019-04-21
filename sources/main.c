@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 15:12:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 17:48:10 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		main(int args, char **argv)
 	// }
 	generate_noise(&rt);
  	 if (init_rt(&rt, argv[1]))
-		return (0); 
+		return (0);
 
 	if (init_sdl(&sdl))
 		return (1);
@@ -171,7 +171,7 @@ int		main(int args, char **argv)
 		if (h_l->type == POINT || h_l->type == SPOT)
 			printf("center %.2f, %.2f, %.2f, ", h_l->center.x, h_l->center.y, h_l->center.z);
 		if (h_l->type == DIRECTIONAL)
-			printf("direction - %.2f, %.2f, %.2f", h_l->ray.x, h_l->ray.y, h_l->ray.z);
+			printf("direction - %.2f, %.2f, %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
 		if (h_l->type == SPOT)
 		{
 			printf("direction - %.2f, %.2f, %.2f\n", h_l->dir.x, h_l->dir.y, h_l->dir.z);

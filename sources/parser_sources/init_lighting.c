@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 11:24:53 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/21 17:46:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		init_fun_allocator(char *s, t_light *new)
 		init_view_angle(s, &new->angle);
 	}
 	else if (new->type == DIRECTIONAL)
-		init_direction(s, &new->ray, NULL);
+		init_direction(s, &new->dir, NULL);
 	init_intensity(s, &new->intensity);
 	new->next = NULL;
 }

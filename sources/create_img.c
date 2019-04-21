@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 15:48:57 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 17:55:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,6 @@ void		get_pixel(int x, int y, t_rt *rt, int *img_data)
 					average_color(rt->p_division, pixel_color);
 }
 
-#include <pthread.h>
-
-typedef struct		s_pthread
-{
-	t_rt			*rt;
-	t_sdl			*sdl;
-	int				x[2];
-	int				y[2];
-}					t_pthread;
-
 void			*create_img_pthread(void *data)
 {
 	int			x;
@@ -125,34 +115,6 @@ t_pthread	init_t_pthread(t_rt *rt, t_sdl *sdl, int x[2], int y[2])
 	return (obj);
 }
 
-t_rt		ft_rt_copy(t_rt *rt)
-{
-	t_rt	new_rt;
-
-	new_rt = *rt;
-	new_rt.head_shapes = (t_shape *)malloc(sizeof(t_shape));
-	*(new_rt.head_shapes) = *(rt->head_shapes);
-	new_rt.head_light = (t_light *)malloc(sizeof(t_light));
-	*(new_rt.head_light) = *(rt->head_light);
-	if (rt->head_textures != NULL)
-	{
-		new_rt.head_textures = (t_texture *)malloc(sizeof(t_texture));
-		*(new_rt.head_textures) = *(rt->head_textures);
-	}
-	else
-		new_rt.head_textures = NULL;
-
-	return (new_rt);
-}
-
-void		ft_free_rt(t_rt rt)
-{
-	// free(rt.head_shapes);
-	// free(rt.head_light);
-	// if (rt.head_textures != NULL)
-	// 	free(rt.head_textures);
-}
-
 void		ft_fun(t_rt *rt, t_sdl *sdl)
 {
 	int					size;
@@ -172,10 +134,8 @@ void		ft_fun(t_rt *rt, t_sdl *sdl)
 	{
 		start = ((index) / (double)size) * rt->win_width;
 		finish = ((index + 1) / (double)size) * rt->win_width;
-		printf("x=%d y=%d\n", start, finish);
-		new_rts[index] = ft_rt_copy(rt);
+		new_rts[index] = *rt;
 		blocks[index] = init_t_pthread(&(new_rts[index]), sdl,
-		// blocks[index] = init_t_pthread(&(new_rts[index]), sdl,
 		(int[2]){start, finish},
 		(int[2]){0, rt->win_height});
 		(void)pthread_create(&tid[index], NULL, create_img_pthread, &blocks[index]);
@@ -184,11 +144,9 @@ void		ft_fun(t_rt *rt, t_sdl *sdl)
 	while (++index < size)
 		pthread_join(tid[index], NULL);
 	index = -1;
-	while (++index < size)
-		ft_free_rt(new_rts[index]);
-	// free(tid);
-	// free(blocks);
-	// free(new_rts);
+	free(tid);
+	free(blocks);
+	free(new_rts);
 }
 
 void			create_img(t_rt *rt, t_sdl *sdl)

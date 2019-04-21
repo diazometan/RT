@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 15:04:45 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 17:47:54 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <time.h>
+# include <pthread.h>
 
 typedef struct		s_sdl
 {
@@ -42,7 +43,6 @@ typedef struct		s_light
 	double			angle;
 	t_vec3			center;
 	t_vec3			dir;
-	t_vec3			ray;
 	struct s_light	*next;
 }					t_light;
 
@@ -80,11 +80,20 @@ typedef struct		s_rt
 	t_vec3			source_point;
 	t_vec3			normal;
 	t_vec3			color;
+	t_vec3			light_ray;
 	t_shape			*head_shapes;
 	t_light			*head_light;
 	t_texture		*head_textures;
 	t_color_scheme	color_scheme;
 }					t_rt;
+
+typedef struct		s_pthread
+{
+	t_rt			*rt;
+	t_sdl			*sdl;
+	int				x[2];
+	int				y[2];
+}					t_pthread;
 
 char				*get_file(int fd);
 int					init_config(char *file, t_rt *rt);
@@ -118,7 +127,7 @@ double				shape_summ(t_vec3 *p, t_shape *shape);
 int					get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
 void				get_normal(t_vec3 *surface_point, t_vec3 *normal, t_shape *shape);
-double				shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
+double				shadow(t_vec3 orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
 int					refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 int					reflection(t_vec3 *dir, t_rt *rt, int depth);
 int					transperency(t_vec3 *dir, t_rt *rt, int depth);

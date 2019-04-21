@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 15:56:13 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 17:23:04 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int	check_color(int rgb[3])
+int			check_color(int rgb[3])
 {
 	int		i;
 	int		j;

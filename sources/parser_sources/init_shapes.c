@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 16:08:05 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 16:40:29 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	init_fun_allocator(char *s, t_shape *new, t_shape **head,
 {
 	new->group = 0;
 	new->child = 0;
+	new->effect_type = 0;
 	init_id(s, &new->id);
 	identify_object(s, &new->figure);
 	identify_color(s, &new->color);

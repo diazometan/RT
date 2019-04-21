@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:10:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 16:30:11 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 17:33:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ double		calculation_shadow(t_vec3 *from, t_shape *head, t_trace *dist)
 	return (tmp);
 }
 
-double		shadow(t_vec3 *orig, t_vec3 dir,
+double		shadow(t_vec3 orig, t_vec3 dir,
 			t_shape *head_shape, double max_distance)
 {
 	t_trace	dist;
@@ -56,7 +56,7 @@ double		shadow(t_vec3 *orig, t_vec3 dir,
 	{
 		head = head_shape;
 		dist.min_distance = INT_MAX;
-		get_intersection_point(orig, &dir, dist.t, &from);
+		get_intersection_point(&orig, &dir, dist.t, &from);
 		if ((tmp *= calculation_shadow(&from, head, &dist)) == 0)
 			return (0);
 		dist.t += dist.min_distance;
