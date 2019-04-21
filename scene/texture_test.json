@@ -2,27 +2,17 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"sphere",
-				"color":"green",
-				"specular":500,
-				"radius": 1,
-				"center":[0,0,5],
-				"direction":[0,0,-4]
-			},
-			{
 				"shape":"plane",
-				"color":"yellow",
-				"texture":"brick",
-				"specular":1000,
-				"center":[0,-1,0],
-				"direction":[0,-1,0]
-			},
-			{
-				"shape":"plane",
-				"color":"blue",
-				"specular":1000,
-				"center":[0,0,15],
-				"direction":[0,0,1]
+				"id":1,
+				"color":[0,0,255],
+				"texture":"can",
+                "x_displace":0,
+                "y_displace":0,
+                "texture_div":300,
+				"specular":0,
+				"reflection":0,
+				"center":[0,0,10],
+				"direction":[90,0,0]
 			}
 		],
 		"lighting":[
@@ -46,8 +36,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":1,
-			"pixel division":1
+			"reflection_depth":1,
+			"pixel_division":1
 		}
 	}
 }
