@@ -5,11 +5,11 @@
 				"shape":"cylinder",
 				"id":0,
 				"color":[0,0,255],
-				"texture":"noise",
+				"texture":"brick",
 				"x_displace":0,
 				"y_displace":0,
-				"texture_div":0,
-				"center":[-2,-0.5,8],
+				"texture_div":300,
+				"center":[0,-0.5,8],
 				"radius":1,
 				"height":1,
 				"direction":[0,105,0]
@@ -18,12 +18,12 @@
 		"lighting":[
 			{
 				"type":"point",
-				"intensity":0.6,
-				"center":[3,3,3]
+				"intensity":0.8,
+				"center":[0,0,0]
 			},
 			{
 				"type":"ambient",
-				"intensity":0.2
+				"intensity":0.0
 			}
 		],
 		"camera":{
@@ -32,7 +32,8 @@
 		},
 		"physics":{
 			"reflection_depth":3,
-			"pixel_division":1
+			"pixel_division":1,
+			"threads":8
 		}
 	}
 }

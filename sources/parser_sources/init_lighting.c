@@ -6,13 +6,13 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:55:04 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 17:46:22 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:44:19 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		push_back_light(t_light **head, t_light *new)
+void			push_back_light(t_light **head, t_light *new)
 {
 	t_light	*tmp;
 

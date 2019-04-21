@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 18:18:07 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 19:13:03 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,5 +197,6 @@ int					kiss_saving(t_sdl *sdl);
 
 void				create_pthread(t_rt *rt, t_sdl *sdl);
 void				*create_img_pthread(void *data);
+t_pthread			init_t_pthread(t_rt *rt, t_sdl *sdl, int x[2], int y[2]);
 
 #endif

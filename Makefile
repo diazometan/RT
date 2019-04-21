@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/21 18:13:50 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/21 18:29:22 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,12 @@ PRS_SRC_DIR = $(SRC_DIR)/parser_sources
 UI_SRC_DIR = $(SRC_DIR)/ui_sources
 
 TEXTURE_SRC_DIR = $(SRC_DIR)/texture_sources
+
+GEOMETRY_SRC_DIR = $(SRC_DIR)/geometry
+
+EFFECTS_SRC_DIR = $(SRC_DIR)/effects
+
+FIGURE_SRC_DIR = $(SRC_DIR)/figure
 
 OBJ_DIR = objects
 
@@ -77,7 +83,8 @@ SRC = main.c\
 	  matrix.c\
 	  fractal.c\
 	  matrix_euler.c\
-	  vec3.c\
+	  vec3_1.c\
+	  vec3_2.c\
 	  vec2.c\
 	  constructive_geometry.c\
 	  free_args.c\
@@ -139,6 +146,15 @@ $(OBJ_DIR)/%.o: $(UI_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/consta
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
 
 $(OBJ_DIR)/%.o: $(TEXTURE_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
+
+$(OBJ_DIR)/%.o: $(GEOMETRY_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
+
+$(OBJ_DIR)/%.o: $(EFFECTS_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
+
+$(OBJ_DIR)/%.o: $(FIGURE_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
 
 clean:

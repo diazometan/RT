@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 19:36:59 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 16:58:39 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:43:23 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ t_shape			*calculation_distance(t_trace *dist, t_rt *rt, t_vec3 *dir)
 	{
 		if (head->child == 0)
 		{
-			dist->d = fabs(shape_summ(&from, head));
+			dist->d = shape_summ(&from, head);
+			if (head->transparency > 0)
+				dist->d = fabs(dist->d);
 			if (dist->d < dist->min_distance)
 			{
 				dist->min_distance = dist->d;
