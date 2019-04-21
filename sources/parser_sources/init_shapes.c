@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 16:40:29 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 19:02:11 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static void	form_shape(char *s, t_shape *new, t_texture **head_textures)
 	init_dimensions(s, new->figure, &new->dims);
 	init_texture(s, new, head_textures);
 	init_texture_map(s, new, head_textures);
+	if (new->tex_normal != NULL || new->texture != NULL)
+	{
+		init_texture_displace(s, &new->t_dims);
+		init_texture_division(s, &new->t_dims.z);
+	}
 	if (new->figure == BOX || new->figure == FRACTAL)
 		init_box_radius(s, &new->b_radius);
 }

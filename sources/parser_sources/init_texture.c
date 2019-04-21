@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 16:39:47 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 19:01:40 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void				init_texture(char *s, t_shape *new,
 			push_back_texture(head_textures, create_texture(str, new, 0));
 		else
 			free(str);
-		init_texture_displace(s, &new->t_dims);
-		init_texture_division(s, &new->t_dims.z);
 	}
 }
 

@@ -38,7 +38,8 @@
 		},
 		"physics":{
 			"reflection_depth":1,
-			"pixel_division":1
+			"pixel_division":1,
+			"threads":8
 		}
 	}
 }

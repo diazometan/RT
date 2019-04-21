@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 10:19:27 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 12:35:36 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:40:25 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	refract_ray(t_vec3 *dir, t_rt *rt, t_vec3 *ref_r, double refraction)
 	ref_r->z = dir->z * eta + flag * rt->normal.z * coef_a;
 }
 
-
 int			refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 {
 	int		refract_color;
@@ -47,7 +46,6 @@ int			refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 
 	ref_r = (t_vec3) {0, 0, 0};
 	refract_ray(dir, rt, &ref_r, shape->refraction);
-	//rt->source_point = &shape->surface_point;
 	vec3_normalize(&ref_r, vec3_length(&ref_r));
 	refract_color = trace_ray(&ref_r, rt, depth);
 	return (refract_color);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 11:42:47 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/21 18:35:10 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ static void	camera_direction_key(int key, t_rt *rt)
 		rt->angle.x += (M_PI * 5.0 / 180);
 	else if (key == SDLK_DOWN)
 		rt->angle.x -= (M_PI * 5.0 / 180);
-	// ADD BUTTONS FOR Z ROTATION
-	//else if (key == SDLK_UP)
-		//rt->angle.x += (M_PI * 5.0 / 180);
-	//else if (key == SDLK_DOWN)
-		//rt->angle.x -= (M_PI * 5.0 / 180);
 }
 
 static void	camera_position_key(int key, t_rt *rt)
@@ -81,7 +76,6 @@ static void	window_resized(t_rt *rt, t_sdl *sdl, SDL_Event *event)
 	sdl->surf = SDL_GetWindowSurface(sdl->win);
 	rt->win_width = event->window.data1;
 	rt->win_height = event->window.data2;
-	//rt->win_height = event->window.data1;
 	sdl->img_data = (int *)sdl->surf->pixels;
 	create_img(rt, sdl);
 }

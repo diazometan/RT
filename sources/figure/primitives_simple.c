@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 18:17:22 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:41:05 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ double			gd_plane(t_vec3 *p, t_shape *shape)
 	unit = (t_vec3) {0, 1, 0};
 	vec3_subtract(p, &shape->center, &orig);
 	vector_matrix_multiply(shape->rotation, &orig);
-	return fabs(vec3_dot(&unit, &orig));
+	return (fabs(vec3_dot(&unit, &orig)));
 }
 
 double			gd_cylinder(t_vec3 *p, t_shape *shape)

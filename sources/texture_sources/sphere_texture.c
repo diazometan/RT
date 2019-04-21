@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:25:00 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/21 15:46:08 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 19:14:47 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static t_vec3	copy_texture(t_texture *texture, t_shape *shape, double uv[2], t_r
 		w = NOISE_WIDTH;
 		h = NOISE_HEIGHT;
 	}
-
 	pixel_block = shape->t_dims.z;
 	x = (int)(0.5 * M_PI * shape->dims.x * pixel_block * fabs(uv[0]));
 	y = (int)(2.0 * M_PI * shape->dims.x * pixel_block * uv[1] / 4.0);

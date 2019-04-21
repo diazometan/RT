@@ -6,13 +6,17 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/04/21 18:33:54 by rgyles           ###   ########.fr       */
+=======
+/*   Updated: 2019/04/21 19:12:08 by lwyl-the         ###   ########.fr       */
+>>>>>>> f82271f87eea397a7f1032d5c700a88e71a9e304
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		average_color(int n, int *color)
+int				average_color(int n, int *color)
 {
 	int			i;
 	int			n_sq;
@@ -37,7 +41,7 @@ int		average_color(int n, int *color)
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-void		init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
+void			init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 {
 	t_matrix	rotation;
 
@@ -53,7 +57,7 @@ void		init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 	rt->source_point = rt->camera;
 }
 
-void		get_pixel(int x, int y, t_rt *rt, int *img_data)
+void			get_pixel(int x, int y, t_rt *rt, int *img_data)
 {
 	int			i;
 	int			pixel_color[rt->p_division * rt->p_division];
@@ -102,10 +106,20 @@ void			*create_img_pthread(void *data)
 
 void			create_img(t_rt *rt, t_sdl *sdl)
 {
+<<<<<<< HEAD
 	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
 	draw_borders(rt, sdl);
 	//sleep(1);
 	create_pthread(rt, sdl);
 	ft_memcpy(sdl->surf->pixels, (void *)sdl->img_data, rt->win_width * rt->win_height * 4);
+=======
+	t_pthread	obj;
+
+	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
+	obj = init_t_pthread(rt, sdl, (int[2]){0, rt->win_width}, (int[2]){0, rt->win_height});
+	create_img_pthread(&obj);
+	// create_pthread(rt, sdl);
+>>>>>>> f82271f87eea397a7f1032d5c700a88e71a9e304
 	SDL_UpdateWindowSurface(sdl->win);
+	// exit(0);
 }

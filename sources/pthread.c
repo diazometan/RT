@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:12:31 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 18:15:29 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:38:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@ t_pthread	init_t_pthread(t_rt *rt, t_sdl *sdl, int x[2], int y[2])
 
 void		body_pthread(t_rt *rt, t_sdl *sdl, t_body_pthread body_pthread)
 {
+<<<<<<< HEAD
 	int					index;
 	int					start;
 	int					finish;
+=======
+	int		index;
+	int		start;
+	int		finish;
+>>>>>>> f82271f87eea397a7f1032d5c700a88e71a9e304
 
 	index = -1;
 	while (++index < body_pthread.size)
