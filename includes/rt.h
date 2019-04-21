@@ -77,6 +77,7 @@ typedef struct		s_rt
 	int				depth;
 	int				sample;
 	int				threads;
+	int				count;
 	double			sample_step;
 	double			sample_center;
 	double			t_closest;

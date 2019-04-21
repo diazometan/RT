@@ -27,26 +27,35 @@ t_pthread	init_t_pthread(t_rt *rt, t_sdl *sdl, int x[2], int y[2])
 
 void		body_pthread(t_rt *rt, t_sdl *sdl, t_body_pthread body_pthread)
 {
-	int		index;
-	int		start;
-	int		finish;
+	int					summ;
+	int					index;
+	int					start;
+	int					finish;
 
 	index = -1;
+	summ = 0;
 	while (++index < body_pthread.size)
 	{
 		start = ((index) / (double)body_pthread.size) * rt->win_width;
 		finish = ((index + 1) / (double)body_pthread.size) * rt->win_width;
 		body_pthread.new_rts[index] = *rt;
+		body_pthread.new_rts[index].count = 0;
 		body_pthread.blocks[index] =
-		init_t_pthread(&(body_pthread.new_rts[index]), sdl,
-		(int[2]){start, finish},
-		(int[2]){0, rt->win_height});
+			init_t_pthread(&(body_pthread.new_rts[index]), sdl,
+			(int[2]){start, finish},
+			(int[2]){0, rt->win_height});
 		(void)pthread_create(&body_pthread.tid[index], NULL,
-		create_img_pthread, &body_pthread.blocks[index]);
+			create_img_pthread, &body_pthread.blocks[index]);
 	}
-	index = -1;
-	while (++index < body_pthread.size)
-		pthread_join(body_pthread.tid[index], NULL);
+	while (summ != (rt->win_height * rt->win_width))
+	{
+		summ = 0;
+		index = -1;
+		while (++index < body_pthread.size)
+			summ = summ + body_pthread.new_rts[index].count;
+		progress_bar(summ / (double)(rt->win_height * rt->win_width), rt, sdl);
+	}
+	progress_bar(1, rt, sdl);
 }
 
 void		create_pthread(t_rt *rt, t_sdl *sdl)
