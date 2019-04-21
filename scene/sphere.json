@@ -9,8 +9,16 @@
 				"x_displace":0,
 				"y_displace":0,
 				"texture_div":300,
-				"center":[0,0,5],
+				"center":[0,-1,5],
 				"radius":1.5,
+				"direction":[0,0,0]
+			},
+			{
+				"shape":"sphere",
+				"id":0,
+				"color":[0,255,0],
+				"center":[0,0,5],
+				"radius":1.0,
 				"direction":[0,0,0]
 			}
 		],
@@ -18,13 +26,13 @@
 			{
 				"type":"spot",
 				"intensity":0.6,
-				"center":[0,15,3],
+				"center":[0,5,5],
 				"direction":[0,-1,0],
-				"view_angle":10
+				"view_angle":30
 			},
 			{
 				"type":"ambient",
-				"intensity":0.5
+				"intensity":0.0
 			}
 		],
 		"camera":{

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 10:55:22 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 13:42:44 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:26:20 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		create_normal_system(t_rt *rt, t_shape *shape)
 	unit_3 = (t_vec3) {0, 0, 1};
 	vec3_cross(&unit_2, &rt->normal, &tangent);
 	if (tangent.x == 0.0 && tangent.y == 0.0 && tangent.z == 0.0)
-		vec3_cross(&shape->normal, &unit_1, &tangent);
+		vec3_cross(&rt->normal, &unit_1, &tangent);
 	else if (tangent.x == 0.0 && tangent.y == 0.0 && tangent.z == 0.0)
 		vec3_cross(&rt->normal, &unit_3, &tangent);
 	vec3_cross(&tangent, &rt->normal, &bitangent);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 13:41:21 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:36:54 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct		s_rt
 	t_vec3			camera;
 	t_vec3			source_point;
 	t_vec3			normal;
+	t_vec3			color;
 	t_shape			*head_shapes;
 	t_light			*head_light;
 	t_texture		*head_textures;
@@ -118,9 +119,9 @@ int					get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
 void				get_normal(t_vec3 *surface_point, t_vec3 *normal, t_shape *shape);
 double				shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
-int					reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 int					refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
-int					transperency(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
+int					reflection(t_vec3 *dir, t_rt *rt, int depth);
+int					transperency(t_vec3 *dir, t_rt *rt, int depth);
 
 int					emission(t_shape *shape, t_rt *rt, int depth);
 
@@ -145,11 +146,11 @@ t_vec3				wood(t_rt *rt, int x, int y);
 t_vec3				marble(t_rt *rt, int x, int y);
 t_vec3				chess_board(int x, int y);
 
-void				set_color(t_shape *shape, int rgb_m[3], double light);
-void				set_color_cartoon(t_shape *shape, int rgb_m[3], double light);
-void				set_color_invers(t_shape *shape, int rgb_m[3], double light);
-void				set_color_grey(t_shape *shape, int rgb_m[3], double light);
-void				set_color_invers_hsv(t_shape *shape, int rgb_m[3], double light);
+void				set_color(t_rt *rt, int rgb_m[3], double light);
+void				set_color_cartoon(t_rt *rt, int rgb_m[3], double light);
+void				set_color_invers(t_rt *rt, int rgb_m[3], double light);
+void				set_color_grey(t_rt *rt, int rgb_m[3], double light);
+void				set_color_invers_hsv(t_rt *rt, int rgb_m[3], double light);
 int					reflect_color(int color, int reflected_color, double reflection);
 int					trans_color(int color, int reflected_color, double reflection);
 

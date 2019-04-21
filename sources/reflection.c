@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 17:40:19 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 14:01:12 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:17:27 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			reflect_color(int color, int reflected_color, double reflection)
 	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
 }
 
-int			reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
+int			reflection(t_vec3 *dir, t_rt *rt, int depth)
 {
 	double	n_dot_r;
 	t_vec3	r_v;
@@ -35,6 +35,5 @@ int			reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 	r_v.x = 2 * rt->normal.x * n_dot_r - dir->x;
 	r_v.y = 2 * rt->normal.y * n_dot_r - dir->y;
 	r_v.z = 2 * rt->normal.z * n_dot_r - dir->z;
-	//rt->source_point = &shape->surface_point;
 	return (trace_ray(&r_v, rt, depth));
 }

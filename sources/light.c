@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:03:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 13:57:39 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:23:16 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,30 @@ static double	get_spot_light(t_vec3 *dir, t_rt *rt,
 						t_light *light, double specular)
 {
 	double	l_length;
-	double	light_sum;
 	double	light_t_norm;
-	double	cosi;
-	double	tmp;
+	double	dims[3];
 
-	light_sum = 0.0;
-	tmp = 0.0;
+	dims[0] = 0.0;
+	dims[2] = 0.0;
 	vec3_subtract(&rt->source_point, &light->center, &light->ray);
 	vec3_normalize(&light->ray, vec3_length(&light->ray));
-	cosi = vec3_dot(&light->ray, &light->dir);
-	if (!(cosi > cos(light->angle)))
-		return (light_sum);
+	dims[1] = vec3_dot(&light->ray, &light->dir);
+	if (!(dims[1] > cos(light->angle)))
+		return (dims[2]);
 	vec3_subtract(&light->center, &rt->source_point, &light->ray);
 	light_t_norm = vec3_dot(&light->ray, &rt->normal);
 	if ((light_t_norm) > 0)
 	{
 		l_length = vec3_length(&light->ray);
-		if ((tmp = shadow(&rt->source_point,
+		if ((dims[0] = shadow(&rt->source_point,
 				light->ray, rt->head_shapes, l_length)) == 0)
 			return (0);
-		cosi = (cosi - cos(light->angle)) / (1.0 - cos(light->angle));
-		light_sum = cosi * light->intensity * (light_t_norm / l_length);
-		// if (specular > 0)
-		// 	light_sum += get_specular(rt, light, dir, specular);
+		dims[1] = (dims[1] - cos(light->angle)) / (1.0 - cos(light->angle));
+		dims[2] = dims[1] * light->intensity * (light_t_norm / l_length);
+		if (specular > 0)
+			dims[2] += get_specular(rt, light, dir, specular);
 	}
-	return (light_sum * tmp);
+	return (dims[2] * dims[0]);
 }
 
 static double	get_point_light(t_vec3 *dir, t_rt *rt,
@@ -88,8 +86,8 @@ static double	get_point_light(t_vec3 *dir, t_rt *rt,
 				light->ray, rt->head_shapes, l_length)) == 0)
 			return (0);
 		light_sum = light->intensity * light_t_norm / (l_length);
-		// if (specular > 0)
-		// 	light_sum += get_specular(rt, light, dir, specular);
+		if (specular > 0)
+			light_sum += get_specular(rt, light, dir, specular);
 	}
 	return (light_sum * tmp);
 }
@@ -112,8 +110,8 @@ static double	get_dir_light(t_vec3 *dir, t_rt *rt,
 				light->ray, rt->head_shapes, l_length)) == 0)
 			return (0);
 		light_sum = light->intensity * (light_t_norm / l_length);
-		// if (specular > 0)
-		// 	light_sum += get_specular(rt, light, dir, specular);
+		if (specular > 0)
+			light_sum += get_specular(rt, light, dir, specular);
 	}
 	return (light_sum * tmp);
 }
