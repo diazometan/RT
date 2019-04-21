@@ -41,7 +41,7 @@ static int	identify_shape(char *start)
 	else if (strcequ(start, "\"cone\"", ','))
 		return (CONE);
 	else if (strcequ(start, "\"infinite_cone\"", ','))
-		return (CONE);
+		return (INF_CONE);
 	else if (strcequ(start, "\"torus\"", ','))
 		return (TORUS);
 	else if (strcequ(start, "\"capsule\"", ','))

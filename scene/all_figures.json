@@ -3,50 +3,67 @@
 		"objects":[
 			{
 				"shape":"sphere",
-				"color":"red",
+				"id":1,
+				"color":[255,0,0],
 				"center":[-2,0,4],
+				"reflection":0,
+				"specular":0,
 				"radius":0.5,
-				"direction":[0,1,0]
+				"direction":[0,0,0]
 			},
 			{
 				"shape":"cylinder",
-				"color":"blue",
+				"id":1,
+				"color":[0,0,255],
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":300,
 				"center":[-1,0,4],
 				"radius":0.5,
 				"height":0.5,
-				"direction":[0,1,0]
+				"direction":[0,0,0]
 			},
 			{
-				"shape":"torus",
-				"color":"blue",
-				"center":[2,0,6],
-				"inner_radius":0.5,
-				"outer_radius":1.0,
-				"direction":[0,0,1]
+                "shape":"torus",
+                "id":1,
+                "color":[0,0,255],
+                "texture":"can",
+                "x_displace":0,
+                "y_displace":0,
+                "texture_div":600,
+                "center":[2,0,6],
+                "radius_in":0.5,
+                "radius_out":1.0,
+                "height":1.5,
+                "direction":[0,0,0]
 			},
 			{
-				"shape":"box",
-				"color":"red",
-				"center":[0,-0.5,2],
-				"sides":[0.5,0.5,0.5],
-				"direction":[0,1,0]
-			},
-			{
-				"shape":"capsule",
-				"color":"purple",
-				"center":[0,1,6],
-				"height":1,
-				"radius":0.5,
-				"direction":[0,1,0]
+                "shape":"box",
+                "id":1,
+                "color":[255,255,0],
+                "x_displace":0,
+                "y_displace":0,
+                "texture_div":600,
+                "sides":[0.3,0.3,0.3],
+                "radius":0,
+                "center":[0,0,2],
+                "direction":[0,45,0]
 			},
 			{
 				"shape":"plane",
-				"color":"green",
-				"center":[0,-1,0],
-				"direction":[0,1,0]
+				"id":1,
+				"color":[0,255,255],
+				"specular":0,
+				"reflection":0,
+				"center":[0,-1,10],
+				"direction":[90,0,0]
 			}
 		],
 		"lighting":[
+			{
+				"type":"ambient",
+				"intensity":0.3
+			},
 			{
 				"type":"point",
 				"intensity":0.8,
@@ -58,8 +75,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":1,
-			"pixel division":1
+			"reflection_depth":2,
+			"pixel_division":1
 		}
 	}
 }

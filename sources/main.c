@@ -77,13 +77,12 @@ int		main(int args, char **argv)
 	// 	return (1);
 	// }
 	generate_noise(&rt);
-	if (init_rt(&rt, argv[1]))
-		return (0);
+ 	/* if (init_rt(&rt, argv[1]))
+		return (0); */
 
 	if (init_sdl(&sdl))
 		return (1);
-	//rt.win_width = 0;
-	//ui_main(&rt, &sdl);
+	ui_main(&rt, &sdl);
 	//TEMPORARY CHECK FOR CONFIG PARSER
 	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;
@@ -179,7 +178,7 @@ int		main(int args, char **argv)
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);
 	//END
-	create_img(&rt, &sdl);
+	//create_img(&rt, &sdl);
 	event_handler(&rt, &sdl);
 	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
 	SDL_FreeSurface(sdl.surf);

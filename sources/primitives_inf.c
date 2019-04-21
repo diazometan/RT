@@ -32,9 +32,9 @@ double			gd_infinity_cone(t_vec3 *p, t_shape *shape)
 	vec3_subtract(p, &shape->center, &orig);
 	vector_matrix_multiply(shape->rotation, &orig);
 	distance[0] = sqrt(orig.x * orig.x + orig.z * orig.z);
-	dimension = (t_vec3) {shape->dims.x, shape->dims.y, 0};
-	tmp = (t_vec3) {distance[0], orig.y, 0};
-	tmp_1 = (t_vec3) {distance[0], -orig.y, 0};
+	dimension = (t_vec3) {1.0 / shape->dims.x, 1.0, 0.0};
+	tmp = (t_vec3) {distance[0], orig.y, 0.0};
+	tmp_1 = (t_vec3) {distance[0], -orig.y, 0.0};
 	vec3_normalize(&dimension, vec3_length(&dimension));
 	distance[1] = vec3_dot(&dimension, &tmp);
 	distance[2] = vec3_dot(&dimension, &tmp_1);

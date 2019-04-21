@@ -63,14 +63,14 @@ static void	button_light_ambient(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 	}
 }
 
-static void	ui_drawing(t_rtui *ui, t_rt *rt)
+static void	ui_drawing(t_rtui *ui)
 {
 	SDL_RenderClear(ui->renderer);
 	kiss_window_draw(&ui->window1, ui->renderer);
 	kiss_textbox_draw(&ui->textbox1, ui->renderer);
 	kiss_vscrollbar_draw(&ui->vscrollbar1, ui->renderer);
 	kiss_label_draw(&ui->label_sel, ui->renderer);
-	if (rt->win_width)
+	if (ui->f)
 	{
 		kiss_button_draw(&ui->button_hide, ui->renderer);
 		kiss_button_draw(&ui->button_light, ui->renderer);
@@ -101,7 +101,7 @@ int			ui_main(t_rt *rt, t_sdl *sdl)
 		vscrollbar1_event(&ui.vscrollbar1, NULL, &ui.textbox1, &ui.draw);
 		if (!ui.draw)
 			continue ;
-		ui_drawing(&ui, rt);
+		ui_drawing(&ui);
 	}
 	kiss_clean(&ui.objects);
 	return (0);

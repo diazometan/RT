@@ -41,7 +41,7 @@ double		shadow(t_vec3 *orig, t_vec3 dir,
 					if (head->transparency)
 					{
 						tmp *= head->transparency;
-						dist.min_distance += dist.t * dist.epsilonr;
+						dist.min_distance += dist.t * dist.epsilon;
 						break;
 					}
 					return (0.0);
