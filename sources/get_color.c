@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 14:35:52 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:39:39 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,18 @@ void		standart_color(t_rt *rt, int rgb_m[3], double light)
 	rgb_m[2] = rt->color.z * light;
 }
 
-void		choose_color(t_rt *rt, t_shape *shape, int rgb[3], double light)
+void		choose_color(t_rt *rt, int rgb[3], double light)
 {
 	if (rt->color_scheme == STANDART)
-		standart_color(shape, rgb, light);
+		standart_color(rt, rgb, light);
 	else if (rt->color_scheme == INVERSE_ONE)
-		set_color_invers(shape, rgb, light);
+		set_color_invers(rt, rgb, light);
 	else if (rt->color_scheme == INVERSE_TWO)
-		set_color_invers_hsv(shape, rgb, light);
+		set_color_invers_hsv(rt, rgb, light);
 	else if (rt->color_scheme == GREY)
-		set_color_grey(shape, rgb, light);
+		set_color_grey(rt, rgb, light);
 	else if (rt->color_scheme == CARTOON)
-		set_color_cartoon(shape, rgb, light);
+		set_color_cartoon(rt, rgb, light);
 }
 
 void		point_and_normal(t_vec3 *dir, t_shape *shape, t_rt *rt)
@@ -83,7 +83,7 @@ int			get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
 
 	point_and_normal(dir, shape, rt);
 	light = get_light(dir, shape, rt);
-	choose_color(rt, shape, rgb, light);
+	choose_color(rt, rgb, light);
 	color = check_color(rgb);
 	if (depth > 0 && shape->reflection)
 	{
