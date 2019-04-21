@@ -6,11 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2019/04/21 18:33:54 by rgyles           ###   ########.fr       */
-=======
-/*   Updated: 2019/04/21 19:12:08 by lwyl-the         ###   ########.fr       */
->>>>>>> f82271f87eea397a7f1032d5c700a88e71a9e304
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +94,10 @@ void			*create_img_pthread(void *data)
 	{
 		x = obj->x[0] - 1;
 		while (++x < x_limit)
+		{
 			get_pixel(x, y, obj->rt, obj->sdl->img_data);
+			++obj->rt->count;
+		}
 	}
 	//ft_memcpy(obj->sdl->surf->pixels, (void *)obj->sdl->img_data, obj->rt->win_width * obj->rt->win_height * 4);
 	return (NULL);
@@ -106,20 +105,17 @@ void			*create_img_pthread(void *data)
 
 void			create_img(t_rt *rt, t_sdl *sdl)
 {
-<<<<<<< HEAD
-	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
-	draw_borders(rt, sdl);
-	//sleep(1);
-	create_pthread(rt, sdl);
-	ft_memcpy(sdl->surf->pixels, (void *)sdl->img_data, rt->win_width * rt->win_height * 4);
-=======
-	t_pthread	obj;
+	// t_pthread	obj;
+
+	// ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
+	// obj = init_t_pthread(rt, sdl, (int[2]){0, rt->win_width}, (int[2]){0, rt->win_height});
+	// create_img_pthread(&obj);
 
 	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
-	obj = init_t_pthread(rt, sdl, (int[2]){0, rt->win_width}, (int[2]){0, rt->win_height});
-	create_img_pthread(&obj);
-	// create_pthread(rt, sdl);
->>>>>>> f82271f87eea397a7f1032d5c700a88e71a9e304
+	draw_borders(rt, sdl);
+	sleep(1);
+	create_pthread(rt, sdl);
+	ft_memcpy(sdl->surf->pixels, (void *)sdl->img_data, rt->win_width * rt->win_height * 4);
 	SDL_UpdateWindowSurface(sdl->win);
 	// exit(0);
 }
