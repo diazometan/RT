@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:26:29 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/21 20:34:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 21:19:43 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_vec3	texture_stretching(t_texture *texture, t_rt *rt,
 	}
 	x = fabs(uv[0]) * w;
 	y = uv[1] * h;
-	return (get_texture_color(shape, (int[2]){x, y}, uv, rt));
+	return (get_texture_color(texture, (int[2]){x, y}, uv, rt));
 }
 
 static t_vec3	ft_sphere_texture(t_texture *texture, t_shape *shape,

@@ -2,16 +2,16 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"box",
+				"shape":"sphere",
 				"id":1,
 				"color":[168,53,186],
-				"texture":"brick",
+				"texture":"noise",
 				"normal_mapping":"nm_brick",
 				"x_displace":0,
 				"y_displace":0,
-				"texture_div":600,
+				"texture_div":0,
 				"sides":[1,1,1],
-				"radius":0,
+				"radius":1,
 				"center":[0,0,5],
 				"direction":[0,0,0]
 			}

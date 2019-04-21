@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 19:04:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 21:59:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ void		point_and_normal(t_vec3 *dir, t_shape *shape, t_rt *rt)
 							rt->t_closest, &rt->source_point);
 	get_normal(&rt->source_point, &rt->normal, shape);
 	rt->color = shape->color;
+	rt->effect_type = shape->effect_type;
 	if (shape->texture != NULL || shape->effect_type != 0)
 		rt->color = shape->map_texture(shape->texture, shape, rt);
-	if (shape->tex_normal != NULL)
+	if (shape->tex_normal != NULL && shape->effect_type == 0)
 		create_normal_system(rt, shape);
 }
 

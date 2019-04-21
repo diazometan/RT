@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:26:05 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/21 20:37:05 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 21:20:05 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_vec3	copy_texture(t_texture *texture, t_shape *shape,
 	pixel_block = shape->t_dims.z;
 	x = (int)((fabs(uv[0])) * M_PI * shape->dims.x * pixel_block);
 	y = (int)((uv[1]) * shape->dims.z * pixel_block);
-	return (get_texture_color(shape, (int[2]){x % w, y % h}, uv, rt));
+	return (get_texture_color(texture, (int[2]){x % w, y % h}, uv, rt));
 }
 
 static t_vec3	texture_stretching(t_texture *texture, t_rt *rt,
@@ -57,7 +57,7 @@ static t_vec3	texture_stretching(t_texture *texture, t_rt *rt,
 	}
 	x = (int)(w * fabs(uv[0]));
 	y = (int)(h * uv[1]);
-	return (get_texture_color(shape, (int[2]){x, y}, uv, rt));
+	return (get_texture_color(texture, (int[2]){x, y}, uv, rt));
 }
 
 t_vec3			cylinder_texture(t_texture *texture, t_shape *shape, t_rt *rt)

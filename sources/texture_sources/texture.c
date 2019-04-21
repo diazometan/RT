@@ -6,22 +6,23 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 20:22:15 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 21:58:16 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vec3		get_texture_color(t_shape *shape, int xy[2], double uv[2], t_rt *rt)
+t_vec3		get_texture_color(t_texture *texture, int xy[2],
+								double uv[2], t_rt *rt)
 {
 	unsigned char	*pixel;
 	int				type;
 
-	type = shape->effect_type;
+	type = rt->effect_type;
 	if (type == 0)
 	{
-		pixel = shape->texture->pixel + xy[1] * shape->texture->surface->pitch +
-				xy[0] * shape->texture->surface->format->BytesPerPixel;
+		pixel = texture->pixel + xy[1] * texture->surface->pitch +
+				xy[0] * texture->surface->format->BytesPerPixel;
 		return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 	}
 	else if (type == NOISE)
