@@ -6,11 +6,39 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:10:02 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 18:42:01 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 12:17:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+double		calculation_shadow(t_vec3 *from, t_shape *head, t_trace *dist)
+{
+	double	tmp;
+
+	tmp = 1.0;
+	while (head != NULL)
+	{
+		if (head->child == 0)
+		{
+			dist->d = shape_summ(from, head);
+			if (dist->d < dist->min_distance)
+				dist->min_distance = dist->d;
+			if (dist->min_distance <= dist->t * dist->epsilon)
+			{
+				if (head->transparency)
+				{
+					tmp = head->transparency;
+					dist->min_distance += dist->t * dist->epsilon;
+					return (tmp);
+				}
+				return (0.0);
+			}
+		}
+		head = head->next;
+	}
+	return (tmp);
+}
 
 double		shadow(t_vec3 *orig, t_vec3 dir,
 			t_shape *head_shape, double max_distance)
@@ -29,26 +57,8 @@ double		shadow(t_vec3 *orig, t_vec3 dir,
 		head = head_shape;
 		dist.min_distance = INT_MAX;
 		get_intersection_point(orig, &dir, dist.t, &from);
-		while (head != NULL)
-		{
-			if (head->child == 0)
-			{
-				dist.d = shape_summ(&from, head);
-				if (dist.d < dist.min_distance)
-					dist.min_distance = dist.d;
-				if (dist.min_distance <= dist.t * dist.epsilon)
-				{
-					if (head->transparency)
-					{
-						tmp *= head->transparency;
-						dist.min_distance += dist.t * dist.epsilonr;
-						break;
-					}
-					return (0.0);
-				}
-			}
-			head = head->next;
-		}
+		if ((tmp *= calculation_shadow(&from, head, &dist)) == 0)
+			return (0);
 		dist.t += dist.min_distance;
 	}
 	return (1.0 * tmp);

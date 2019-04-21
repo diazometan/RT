@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:28:25 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/15 15:29:36 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 13:12:18 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double			gd_infinity_cone(t_vec3 *p, t_shape *shape)
 	vec3_subtract(p, &shape->center, &orig);
 	vector_matrix_multiply(shape->rotation, &orig);
 	distance[0] = sqrt(orig.x * orig.x + orig.z * orig.z);
-	dimension = (t_vec3) {shape->dims.x, shape->dims.y, 0};
+	dimension = (t_vec3) {shape->dims.x, shape->dims.z, 0};
 	tmp = (t_vec3) {distance[0], orig.y, 0};
 	tmp_1 = (t_vec3) {distance[0], -orig.y, 0};
 	vec3_normalize(&dimension, vec3_length(&dimension));

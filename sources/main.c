@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 18:43:52 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 11:51:15 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		init_sdl(t_sdl *sdl)
 		printf("SDL_Init Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	sdl->win = SDL_CreateWindow("RT", 1050, 400, 600, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	sdl->win = SDL_CreateWindow("RT", 1050, 400, 600, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALWAYS_ON_TOP);
 	if (sdl->win == NULL)
 	{
 		printf("SDL_CreateWindow Error: %s\n", SDL_GetError());

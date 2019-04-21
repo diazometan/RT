@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:26:29 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/20 15:10:20 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 13:07:43 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		uv_correct(double *u, double *v, double max_x, double max_y)
 		*v = *v - 1.0;
 }
 
-static t_vec3	texture_stretching(t_texture *texture, t_shape *shape, double uv[2])
+static t_vec3	texture_stretching(t_texture *texture, double uv[2])
 {
 	int				x;
 	int				y;
@@ -32,7 +32,7 @@ static t_vec3	texture_stretching(t_texture *texture, t_shape *shape, double uv[2
 	return (get_texture_color(texture, (int[2]){x, y}, uv));
 }
 
-static t_vec3	ft_sphere_texture(t_texture *texture, t_shape *shape, int down)
+static t_vec3	ft_sphere_texture(t_texture *texture, t_shape *shape, int down, t_rt *rt)
 {
 	double	temp;
 	t_vec3	answer;
@@ -40,12 +40,12 @@ static t_vec3	ft_sphere_texture(t_texture *texture, t_shape *shape, int down)
 	temp = shape->dims.x;
 	if (!down)
 		shape->dims.x = shape->dims.y;
-	answer = sphere_texture(texture, shape);
+	answer = sphere_texture(texture, shape, rt);
 	shape->dims.x = temp;
 	return (answer);
 }
 
-t_vec3			cone_texture(t_texture *texture, t_shape *shape)
+t_vec3			cone_texture(t_texture *texture, t_shape *shape, t_rt *rt)
 {
 	t_vec3	unit;
 	t_vec3	r;
@@ -62,11 +62,11 @@ t_vec3			cone_texture(t_texture *texture, t_shape *shape)
 							matrix_multiply(y_rotation_matrix(shape->unit.y), x_rotation_matrix(-shape->unit.x)));
 
 	vector_matrix_multiply(rotation, &unit);
-	if (vec3_dot(&unit, &shape->normal) >= 1.0 - 1e-10)
-		return (ft_sphere_texture(texture, shape, 1));
-	if (vec3_dot(&unit, &shape->normal) <= -1.0 + 1e-10)
-		return (ft_sphere_texture(texture, shape, 0));
-	vec3_subtract(&shape->surface_point, &shape->center, &r);
+	if (vec3_dot(&unit, &rt->normal) >= 1.0 - 1e-10)
+		return (ft_sphere_texture(texture, shape, 1, rt));
+	if (vec3_dot(&unit, &rt->normal) <= -1.0 + 1e-10)
+		return (ft_sphere_texture(texture, shape, 0, rt));
+	vec3_subtract(&rt->source_point, &shape->center, &r);
 	vector_matrix_multiply(shape->rotation, &r);
 
 	angle = (t_vec3){r.x, 0, r.z};
@@ -82,5 +82,5 @@ t_vec3			cone_texture(t_texture *texture, t_shape *shape)
 							(double)texture->surface->h / shape->t_dims.z);
 	else
 		uv_correct(&u, &v, 1, 1);
-	return (texture_stretching(texture, shape, (double[2]){u, v}));
+	return (texture_stretching(texture, (double[2]){u, v}));
 }

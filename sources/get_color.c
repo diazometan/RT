@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/20 14:51:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 13:41:04 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void		choose_color(t_rt *rt, t_shape *shape, int rgb[3], double light)
 
 void		point_and_normal(t_vec3 *dir, t_shape *shape, t_rt *rt)
 {
-	get_intersection_point(rt->source_point, dir,
-							rt->t_closest, &shape->surface_point);
-	get_normal(shape);
+	get_intersection_point(&rt->source_point, dir,
+							rt->t_closest, &rt->source_point);
+	get_normal(&rt->source_point, &rt->normal, shape);
 	if (shape->texture != NULL)
-		shape->color = shape->map_texture(shape->texture, shape);
+		shape->color = shape->map_texture(shape->texture, shape, rt);
 	if (shape->tex_normal != NULL)
-		create_normal_system(shape);
+		create_normal_system(rt, shape);
 }
 
 int			get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)

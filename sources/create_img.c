@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 16:46:11 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 12:20:14 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 	dir->z = 1.0;
 	vec3_normalize(dir, vec3_length(dir));
 	vector_matrix_multiply(rotation, dir);
-	rt->source_point = &rt->camera;
+	rt->source_point = rt->camera;
 }
 
 static void		get_pixel(int x, int y, t_rt *rt, int *img_data)
