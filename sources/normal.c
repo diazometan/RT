@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 10:55:22 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 19:19:03 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 20:11:04 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void		create_texute_normal(t_shape *shape, t_rt *rt, t_vec3 tangent,
 								t_vec3 bitangent)
 {
-	t_vec3 normal_from_map;
-	t_vec3 normal1;
+	t_vec3		normal_from_map;
+	t_vec3		normal1;
 	t_texture	*temp;
 
 	temp = shape->texture;
@@ -41,11 +41,11 @@ void		create_texute_normal(t_shape *shape, t_rt *rt, t_vec3 tangent,
 
 void		create_normal_system(t_rt *rt, t_shape *shape)
 {
-	t_vec3 tangent;
-	t_vec3 bitangent;
-	t_vec3 unit_1;
-	t_vec3 unit_2;
-	t_vec3 unit_3;
+	t_vec3	tangent;
+	t_vec3	bitangent;
+	t_vec3	unit_1;
+	t_vec3	unit_2;
+	t_vec3	unit_3;
 
 	unit_1 = (t_vec3) {1, 0, 0};
 	unit_2 = (t_vec3) {0, -1, 0};
@@ -55,7 +55,7 @@ void		create_normal_system(t_rt *rt, t_shape *shape)
 		vec3_cross(&rt->normal, &unit_1, &tangent);
 	else if (tangent.x == 0.0 && tangent.y == 0.0 && tangent.z == 0.0)
 		vec3_cross(&rt->normal, &unit_3, &tangent);
-	vec3_cross(&tangent, &rt->normal, &bitangent);
+	vec3_cross(&rt->normal, &tangent, &bitangent);
 	vec3_normalize(&tangent, vec3_length(&tangent));
 	vec3_normalize(&bitangent, vec3_length(&bitangent));
 	create_texute_normal(shape, rt, tangent, bitangent);
@@ -63,9 +63,9 @@ void		create_normal_system(t_rt *rt, t_shape *shape)
 
 void		get_normal(t_vec3 *surface_point, t_vec3 *normal, t_shape *shape)
 {
-	t_vec3 up;
-	t_vec3 down;
-	double delta;
+	t_vec3	up;
+	t_vec3	down;
+	double	delta;
 
 	delta = 10e-5;
 	up = (t_vec3) {surface_point->x + delta,

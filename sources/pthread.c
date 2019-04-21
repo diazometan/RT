@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:12:31 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 18:38:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 20:44:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,21 @@ void		create_pthread(t_rt *rt, t_sdl *sdl)
 	t_rt				*new_rts;
 
 	size = rt->threads;
-	tid = (pthread_t *)malloc(sizeof(pthread_t) * size);
-	blocks = (t_pthread *)malloc(sizeof(t_pthread) * size);
-	new_rts = (t_rt *)malloc(sizeof(t_rt) * size);
+	if (!(tid = (pthread_t *)malloc(sizeof(pthread_t) * size)))
+	{
+		ft_putendl(MEMORY);
+		exit(1);
+	}
+	if (!(blocks = (t_pthread *)malloc(sizeof(t_pthread) * size)))
+	{
+		ft_putendl(MEMORY);
+		exit(1);
+	}
+	if (!(new_rts = (t_rt *)malloc(sizeof(t_rt) * size)))
+	{
+		ft_putendl(MEMORY);
+		exit(1);
+	}
 	body_pthread(rt, sdl, (t_body_pthread){size, tid, blocks, new_rts});
 	free(tid);
 	free(blocks);

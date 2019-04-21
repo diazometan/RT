@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 19:12:08 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 20:49:19 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,7 @@ void			*create_img_pthread(void *data)
 
 void			create_img(t_rt *rt, t_sdl *sdl)
 {
-	t_pthread	obj;
-
 	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
-	obj = init_t_pthread(rt, sdl, (int[2]){0, rt->win_width}, (int[2]){0, rt->win_height});
-	create_img_pthread(&obj);
-	// create_pthread(rt, sdl);
+	create_pthread(rt, sdl);
 	SDL_UpdateWindowSurface(sdl->win);
-	// exit(0);
 }

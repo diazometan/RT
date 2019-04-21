@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:25:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/21 15:41:22 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 20:21:28 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void		uv_correct(double *u, double *v, double max_x, double max_y)
 	(*v) = (*v) / max_y;
 }
 
-static t_vec3	texture_stretching(t_texture *texture, t_rt *rt, t_shape *shape, double uv[2])
+static t_vec3	texture_stretching(t_texture *texture, t_rt *rt,
+									t_shape *shape, double uv[2])
 {
 	int				x;
 	int				y;

@@ -6,13 +6,14 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:25:00 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/21 19:14:47 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 20:21:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static t_vec3	copy_texture(t_texture *texture, t_shape *shape, double uv[2], t_rt *rt)
+static t_vec3	copy_texture(t_texture *texture, t_shape *shape,
+											double uv[2], t_rt *rt)
 {
 	int				x;
 	int				y;
@@ -36,7 +37,8 @@ static t_vec3	copy_texture(t_texture *texture, t_shape *shape, double uv[2], t_r
 	return (get_texture_color(shape, (int[2]){x % w, y % h}, uv, rt));
 }
 
-static t_vec3	texture_stretching(t_texture *texture, t_rt *rt, t_shape *shape, double uv[2])
+static t_vec3	texture_stretching(t_texture *texture, t_rt *rt,
+										t_shape *shape, double uv[2])
 {
 	int				x;
 	int				y;
@@ -53,7 +55,6 @@ static t_vec3	texture_stretching(t_texture *texture, t_rt *rt, t_shape *shape, d
 		w = NOISE_WIDTH;
 		h = NOISE_HEIGHT;
 	}
-
 	x = (int)(w * fabs(uv[0]));
 	y = (int)(h * uv[1]);
 	return (get_texture_color(shape, (int[2]){x, y}, uv, rt));

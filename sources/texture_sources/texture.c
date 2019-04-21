@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 10:40:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 19:15:13 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 20:22:15 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_vec3		get_texture_color(t_shape *shape, int xy[2], double uv[2], t_rt *rt)
 	type = shape->effect_type;
 	if (type == 0)
 	{
-		pixel = shape->texture->pixel + xy[1] *  shape->texture->surface->pitch +
-				xy[0] *  shape->texture->surface->format->BytesPerPixel;
+		pixel = shape->texture->pixel + xy[1] * shape->texture->surface->pitch +
+				xy[0] * shape->texture->surface->format->BytesPerPixel;
 		return ((t_vec3){*(pixel + 2), *(pixel + 1), *pixel});
 	}
 	else if (type == NOISE)
@@ -40,8 +40,8 @@ void		move_texture(double *u, double *v, double delta_uv[2])
 {
 	*u = *u + delta_uv[0];
 	*v = *v + delta_uv[1];
-	while(*u > 1.0)
+	while (*u > 1.0)
 		*u = *u - 1.0;
-	while(*v > 1.0)
+	while (*v > 1.0)
 		*v = *v - 1.0;
 }
