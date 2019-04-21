@@ -6,11 +6,22 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:28:25 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 16:30:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:17:51 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+double			gd_half_space(t_vec3 *p, t_shape *shape)
+{
+	t_vec3		orig;
+	t_vec3		unit;
+
+	unit = (t_vec3) {0, 1, 0};
+	vec3_subtract(p, &shape->center, &orig);
+	vector_matrix_multiply(shape->rotation, &orig);
+	return (vec3_dot(&unit, &orig));
+}
 
 double			gd_infinity_cylinder(t_vec3 *p, t_shape *shape)
 {

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 18:04:30 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:18:07 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,14 @@ typedef struct		s_pthread
 	int				y[2];
 }					t_pthread;
 
+typedef struct		s_body_pthread
+{
+	int				size;
+	pthread_t		*tid;
+	t_pthread		*blocks;
+	t_rt			*new_rts;
+}					t_body_pthread;
+
 void				draw_borders(t_rt *rt, t_sdl *sdl);
 void				progress_bar(double progress, t_rt *rt, t_sdl *sdl);
 
@@ -125,6 +133,7 @@ double				gd_capsule(t_vec3 *p, t_shape *shape);
 double				gd_box(t_vec3 *p, t_shape *shape);
 double				gd_elispoid(t_vec3 *p, t_shape *shape);
 double				gd_fractal(t_vec3 *p, t_shape *shape);
+double				gd_half_space(t_vec3 *p, t_shape *shape);
 
 double				intersect(double dist_a, double dist_b);
 double				unite(double dist_a, double dist_b);
@@ -185,5 +194,8 @@ int					kiss_light(t_rt *rt, t_sdl *sdl);
 void				button_events_main(t_rtui *ui, t_rt *rt, t_sdl *sdl);
 int					kiss_ambient(t_rt *rt, t_sdl *sdl);
 int					kiss_saving(t_sdl *sdl);
+
+void				create_pthread(t_rt *rt, t_sdl *sdl);
+void				*create_img_pthread(void *data);
 
 #endif

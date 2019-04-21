@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 18:05:55 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:19:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,56 +99,10 @@ void			*create_img_pthread(void *data)
 	return (NULL);
 }
 
-t_pthread	init_t_pthread(t_rt *rt, t_sdl *sdl, int x[2], int y[2])
-{
-	t_pthread	obj;
-
-	obj.rt = rt;
-	obj.sdl = sdl;
-	obj.x[0] = x[0];
-	obj.x[1] = x[1];
-	obj.y[0] = y[0];
-	obj.y[1] = y[1];
-	return (obj);
-}
-
-void		ft_fun(t_rt *rt, t_sdl *sdl)
-{
-	int					size;
-	int					index;
-	pthread_t			*tid;
-	t_pthread			*blocks;
-	int					start;
-	int					finish;
-	t_rt				*new_rts;
-
-	size = 8;
-	tid = (pthread_t *)malloc(sizeof(pthread_t) * size);
-	blocks = (t_pthread *)malloc(sizeof(t_pthread) * size);
-	new_rts = (t_rt *)malloc(sizeof(t_rt) * size);
-	index = -1;
-	while (++index < size)
-	{
-		start = ((index) / (double)size) * rt->win_width;
-		finish = ((index + 1) / (double)size) * rt->win_width;
-		new_rts[index] = *rt;
-		blocks[index] = init_t_pthread(&(new_rts[index]), sdl,
-		(int[2]){start, finish},
-		(int[2]){0, rt->win_height});
-		(void)pthread_create(&tid[index], NULL, create_img_pthread, &blocks[index]);
-	}
-	index = -1;
-	while (++index < size)
-		pthread_join(tid[index], NULL);
-	free(tid);
-	free(blocks);
-	free(new_rts);
-}
-
 void			create_img(t_rt *rt, t_sdl *sdl)
 {
 
 	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
-	ft_fun(rt, sdl);
+	create_pthread(rt, sdl);
 	SDL_UpdateWindowSurface(sdl->win);
 }

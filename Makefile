@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/21 14:21:17 by rgyles           ###   ########.fr        #
+#    Updated: 2019/04/21 18:13:50 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ SRC_DIR = sources
 PRS_SRC_DIR = $(SRC_DIR)/parser_sources
 
 UI_SRC_DIR = $(SRC_DIR)/ui_sources
+
+TEXTURE_SRC_DIR = $(SRC_DIR)/texture_sources
 
 OBJ_DIR = objects
 
@@ -90,6 +92,7 @@ SRC = main.c\
 	  cone_texture.c\
 	  torus_texture.c\
 	  box_texture.c\
+	  pthread.c\
 	  ui_main.c\
 	  ui_error.c\
 	  ui_dirread.c\
@@ -133,6 +136,9 @@ $(OBJ_DIR)/%.o: $(PRS_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/const
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
 
 $(OBJ_DIR)/%.o: $(UI_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
+	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
+
+$(OBJ_DIR)/%.o: $(TEXTURE_SRC_DIR)/%.c includes/rt.h includes/shape.h includes/constants.h includes/vector.h includes/ui.h| $(OBJ_DIR)
 	@gcc $(FLAGS) $(INCLUDES) -o $@ -c $< -F includes/frameworks/
 
 clean:

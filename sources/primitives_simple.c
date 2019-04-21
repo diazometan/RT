@@ -6,19 +6,11 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:49:53 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 15:31:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:17:22 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-double			displacement(t_vec3 *p)
-{
-	double		d;
-
-	d = cos(p->x) + cos(p->y) + cos(p->z);
-	return (d);
-}
 
 double			gd_sphere(t_vec3 *p, t_shape *shape)
 {

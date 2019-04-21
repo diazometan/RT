@@ -32,7 +32,7 @@
 			},
 			{
 				"type":"ambient",
-				"intensity":0.0
+				"intensity":0.5
 			}
 		],
 		"camera":{
@@ -41,7 +41,8 @@
 		},
 		"physics":{
 			"reflection_depth":3,
-			"pixel_division":1
+			"pixel_division":1,
+			"threads":8
 		}
 	}
 }
