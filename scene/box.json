@@ -2,18 +2,19 @@
 	"scene":{
 		"objects":[
 			{
-                "shape":"box",
-                "id":1,
-                "color":[168,53,186],
-                "texture":"can",
-                "x_displace":0,
-                "y_displace":0,
-                "texture_div":600,
-                "sides":[1,1,1],
-                "radius":0,
-                "center":[0,0,6],
-                "direction":[-45,45,0]
-            }
+				"shape":"box",
+				"id":1,
+				"color":[168,53,186],
+				"texture":"brick",
+				"normal_mapping":"nm_brick",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":600,
+				"sides":[1,1,1],
+				"radius":0,
+				"center":[0,0,6],
+				"direction":[0,0,0]
+			}
 		],
 		"lighting":[
 			{

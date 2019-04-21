@@ -4,33 +4,40 @@
 			{
 				"shape":"plane",
 				"id":0,
-				"color":[255,0,0],
-				"texture":"can",
-				"x_displace":0.0,
-				"y_displace":0.0,
-				"texture_div":300,
+				"color":[255,255,0],
 				"center":[1,-1,5],
 				"direction":[0,0,0]
 			},
 			{
-                "shape":"box",
-                "id":1,
-                "color":[168,53,186],
-                "texture":"can",
-                "x_displace":0,
-                "y_displace":0,
-                "texture_div":600,
-                "sides":[1,1,1],
-                "radius":0,
-                "center":[0,0,6],
-                "direction":[0,0,0]
-            }
+				"shape":"plane",
+				"id":1,
+				"color":[168,53,186],
+				"transparency":0.7,
+				"center":[0,0,6],
+				"direction":[90,0,0]
+			},
+			{
+				"shape":"plane",
+				"id":1,
+				"color":[0,0,255],
+				"transparency":0.7,
+				"center":[0,0,4],
+				"direction":[90,0,0]
+			},
+			{
+				"shape":"sphere",
+				"id":0,
+				"color":[0,255,0],
+				"center":[0,0,9],
+				"radius":1.5,
+				"direction":[0,0,0]
+			}
 		],
 		"lighting":[
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[0,0,0]
+				"center":[2,1,0]
 			},
 			{
 				"type":"ambient",

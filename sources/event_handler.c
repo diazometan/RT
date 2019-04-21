@@ -64,10 +64,12 @@ static void	color_scheme_key(int key, t_rt *rt)
 		rt->color_scheme = CARTOON;
 }
 
-static void	key_event(int key, t_rt *rt)
+static void	key_event(int key, t_rt *rt, t_sdl *sdl)
 {
 	if (key == SDLK_ESCAPE)
 		return ;
+	if (key == SDLK_m)
+		ui_main(rt, sdl);
 	camera_direction_key(key, rt);
 	camera_position_key(key, rt);
 	color_scheme_key(key, rt);
@@ -100,13 +102,11 @@ void	event_handler(t_rt *rt, t_sdl *sdl)
 				key = event.key.keysym.sym;
 				if (key == SDLK_ESCAPE)
 					return ;
-				key_event(key, rt);
+				key_event(key, rt, sdl);
 				create_img(rt, sdl);
 			}
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 				window_resized(rt, sdl, &event);
-			if (key == SDLK_m)
-					ui_main(rt, sdl);
 		}
 	}
 }

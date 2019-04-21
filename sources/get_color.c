@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/20 18:49:03 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:33:55 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ int	check_color(int rgb[3])
 	int		j;
 	int		f;
 	int		tmp;
+	int		index;
 
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
 		return (0xffffff);
-	else
-		return (0xff0000);
 	// f = 1;
 	// while (f)
 	// {
@@ -36,11 +35,16 @@ int	check_color(int rgb[3])
 	// 			rgb[i] = 255;
 	// 			j = -1;
 	// 			while (++j < 3)
+	// 			{
+	// 				index++;
 	// 				if (j != i)
 	// 					rgb[j] += tmp / 2;
+	// 			}
 	// 			break ;
 	// 		}
 	// }
+	if (index > 0)
+		printf("%d\n", index);
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
@@ -67,13 +71,18 @@ void		choose_color(t_rt *rt, t_shape *shape, int rgb[3], double light)
 
 void		point_and_normal(t_vec3 *dir, t_shape *shape, t_rt *rt)
 {
-	get_intersection_point(rt->source_point, dir,
-							rt->t_closest, &shape->surface_point);
-	get_normal(shape);
+	get_intersection_point(&rt->source_point, dir,
+							rt->t_closest, &rt->source_point);
+	get_normal(&rt->source_point, &rt->normal, shape);
 	if (shape->texture != NULL)
-		shape->color = shape->map_texture(shape->texture, shape);
+	{
+		rt->color = shape->map_texture(shape->texture, shape, rt);
+		shape->color = rt->color;
+	}
+	else 
+		rt->color = shape->color;
 	if (shape->tex_normal != NULL)
-		create_normal_system(shape);
+		create_normal_system(rt, shape);
 }
 
 int			get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)

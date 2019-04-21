@@ -20,12 +20,16 @@ void	ui_init_2(t_rtui *ui)
 	kiss_label_new(&ui->label_sel, &ui->window1, "Choose file", \
 					ui->textbox1.rect.x + kiss_edge, ui->textbox1.rect.y +
 					ui->textbox_height + kiss_normal.h);
-	kiss_button_new(&ui->button_hide, &ui->window1, "hide",
-					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 20, 460);
-	kiss_button_new(&ui->button_light, &ui->window1, "light",
-					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 20, 490);
 	kiss_button_new(&ui->button_ok1, &ui->window1, "render",
 					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 20, 520);
+	kiss_button_new(&ui->button_hide, &ui->window1, "hide",
+					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 90, 460);
+	kiss_button_new(&ui->button_save, &ui->window1, "save",
+					ui->window1.rect.w / 2 - kiss_normal.w / 2 + 50, 460);
+	kiss_button_new(&ui->button_light, &ui->window1, "light",
+					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 90, 490);
+	kiss_button_new(&ui->button_ambient, &ui->window1, "ambient",
+					ui->window1.rect.w / 2 - kiss_normal.w / 2 + 50, 490);
 	kiss_button_new(&ui->button_ex, &ui->window1, "exit",
 					ui->window1.rect.w / 2 - kiss_normal.w / 2 - 20, 550);
 	dirent_read(ui);

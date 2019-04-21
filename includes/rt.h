@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 15:51:01 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:31:50 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ typedef struct		s_rt
 	double			g_noise[NOISE_HEIGHT][NOISE_WIDTH];
 	t_vec3			angle;
 	t_vec3			camera;
-	t_vec3			*source_point;
+	t_vec3			source_point;
+	t_vec3			normal;
+	t_vec3			color;
 	t_shape			*head_shapes;
 	t_light			*head_light;
 	t_texture		*head_textures;
@@ -115,7 +117,7 @@ double				shape_summ(t_vec3 *p, t_shape *shape);
 
 int					get_color(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 double				get_light(t_vec3 *dir, t_shape *shape, t_rt *rt);
-void				get_normal(t_shape *shape);
+void				get_normal(t_vec3 *surface_point, t_vec3 *normal, t_shape *shape);
 double				shadow(t_vec3 *orig, t_vec3 dir, t_shape *head_shapes, double max_distance);
 int					reflection(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
 int					refraction(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth);
@@ -125,16 +127,16 @@ int					emission(t_shape *shape, t_rt *rt, int depth);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
 
-void				create_normal_system(t_shape *shape);
+void				create_normal_system(t_rt *rt, t_shape *shape);
 
 t_vec3				get_texture_color(t_texture *texture, int xy[2], double uv[2]);
 void				move_texture(double *u, double *v, double delta_uv[2]);
-t_vec3				sphere_texture(t_texture *texture, t_shape *shape);
-t_vec3				plane_texture(t_texture *texture, t_shape *shape);
-t_vec3				cylinder_texture(t_texture *texture, t_shape *shape);
-t_vec3				cone_texture(t_texture *texture, t_shape *shape);
-t_vec3				torus_texture(t_texture *texture, t_shape *shape);
-t_vec3				box_texture(t_texture *texture, t_shape *shape);
+t_vec3				sphere_texture(t_texture *texture, t_shape *shape, t_rt *rt);
+t_vec3				plane_texture(t_texture *texture, t_shape *shape, t_rt *rt);
+t_vec3				cylinder_texture(t_texture *texture, t_shape *shape, t_rt *rt);
+t_vec3				cone_texture(t_texture *texture, t_shape *shape, t_rt *rt);
+t_vec3				torus_texture(t_texture *texture, t_shape *shape,t_rt *rt);
+t_vec3				box_texture(t_texture *texture, t_shape *shape, t_rt *rt);
 
 double				turbulence(t_rt *rt, double x, double y, double size);
 void				generate_noise(t_rt *rt);
@@ -155,12 +157,15 @@ int					trans_color(int color, int reflected_color, double reflection);
 t_hsv_color			rgb_to_hsv(t_rgb_color rgb);
 t_rgb_color			hsv_to_rgb(t_hsv_color hsv);
 
+void				push_back_light(t_light **head, t_light *new);
 int					ui_main(t_rt *rt, t_sdl *sdl);
 void				dirent_read(t_rtui *ui);
 int					init_rt(t_rt *rt, char *config_file);
 int					kiss_error(char *mes);
 void				ui_init(t_rtui *ui);
-int					kiss_light(t_rt *rt);
+int					kiss_light(t_rt *rt, t_sdl *sdl);
 void				button_events_main(t_rtui *ui, t_rt *rt, t_sdl *sdl);
+int					kiss_ambient(t_rt *rt, t_sdl *sdl);
+int					kiss_saving(t_sdl *sdl);
 
 #endif

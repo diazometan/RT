@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 18:42:32 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 16:07:51 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:29:10 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ typedef struct		s_shape
 	t_vec3			dims;
 	t_vec3			t_dims;
 	t_vec3			center;
-	t_vec3			surface_point;
 	t_vec3			unit;
-	t_vec3			normal;
 	double			(*gd_fun)();
 	t_vec3			(*map_texture)();
 	t_matrix		rotation;

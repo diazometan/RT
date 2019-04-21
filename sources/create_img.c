@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 19:20:51 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:25:22 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 	dir->z = 1.0;
 	vec3_normalize(dir, vec3_length(dir));
 	vector_matrix_multiply(rotation, dir);
-	rt->source_point = &rt->camera;
+	rt->source_point = rt->camera;
 }
 
 void		get_pixel(int x, int y, t_rt *rt, int *img_data)
@@ -130,28 +130,18 @@ t_rt		ft_rt_copy(t_rt *rt)
 	t_rt	new_rt;
 
 	new_rt = *rt;
-	new_rt.source_point = (t_vec3 *)malloc(sizeof(t_vec3));
-	*(new_rt.source_point) = *(rt->source_point);
-	// new_rt.head_shapes = (t_shape *)malloc(sizeof(t_shape));
-	// *(new_rt.head_shapes) = *(rt->head_shapes);
-
+	new_rt.head_shapes = (t_shape *)malloc(sizeof(t_shape));
+	*(new_rt.head_shapes) = *(rt->head_shapes);
 	// new_rt.head_light = (t_light *)malloc(sizeof(t_light));
 	// *(new_rt.head_light) = *(rt->head_light);
 	// new_rt.head_textures = (t_texture *)malloc(sizeof(t_texture));
-	// new_rt.head_textures->name = ft_strdup(rt->head_textures->name);
-	// new_rt.head_textures->pixel = (unsigned char *)malloc(sizeof(unsigned char));
-	// *(new_rt.head_textures->pixel) = *(rt->head_textures->pixel);
-	// new_rt.head_textures->surface = (SDL_Surface *)malloc(sizeof(SDL_Surface));
-	// *(new_rt.head_textures->surface) = *(rt->head_textures->surface);
-	// new_rt.head_textures->next = (t_texture *)malloc(sizeof(t_texture));
-	// *(new_rt.head_textures->next) = *(rt->head_textures->next);
+	// *(new_rt.head_textures) = *(rt->head_textures);
 	return (new_rt);
 }
 
 void		ft_free_rt(t_rt rt)
 {
-	// free(rt.head_light);
-	// free(rt.head_textures);
+	// free(rt.head_shapes);
 }
 
 void		ft_fun(t_rt *rt, t_sdl *sdl)
@@ -164,7 +154,7 @@ void		ft_fun(t_rt *rt, t_sdl *sdl)
 	int					finish;
 	t_rt				*new_rts;
 
-	size = 2;
+	size = 8;
 	tid = (pthread_t *)malloc(sizeof(pthread_t) * size);
 	blocks = (t_pthread *)malloc(sizeof(t_pthread) * size);
 	new_rts = (t_rt *)malloc(sizeof(t_rt) * size);
@@ -196,7 +186,7 @@ void			create_img(t_rt *rt, t_sdl *sdl)
 {
 	// t_pthread	obj;
 
-	// ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
+	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
 	// obj = init_t_pthread(rt, sdl, (int[2]){0, rt->win_width}, (int[2]){0, rt->win_height});
 	// create_img_pthread(&obj);
 	ft_fun(rt, sdl);

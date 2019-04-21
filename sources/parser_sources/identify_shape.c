@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   identify_shape.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 13:11:24 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 13:43:47 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/21 13:04:09 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	identify_shape(char *start)
 	else if (strcequ(start, "\"cone\"", ','))
 		return (CONE);
 	else if (strcequ(start, "\"infinite_cone\"", ','))
-		return (CONE);
+		return (INF_CONE);
 	else if (strcequ(start, "\"torus\"", ','))
 		return (TORUS);
 	else if (strcequ(start, "\"capsule\"", ','))

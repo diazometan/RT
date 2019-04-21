@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 20:27:52 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/19 11:23:30 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/20 16:26:39 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void			free_args(t_shape *shape, t_light *light, t_texture *texture)
 	}
 	while (texture != NULL)
 	{
+		SDL_FreeSurface(texture->surface);
 		tmp_texture = texture;
 		texture = texture->next;
 		free(tmp_texture);
