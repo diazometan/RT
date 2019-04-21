@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:35:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 14:06:44 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:30:12 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void				init_texture(char *s, t_shape *new,
 {
 	char	*str;
 
+	new->texture = NULL;
 	if ((s = ft_strstr(s, "\"texture\"")) != NULL)
 	{
 		if (*(s + 9) != ':')
@@ -100,8 +101,6 @@ void				init_texture(char *s, t_shape *new,
 		init_texture_displace(s, &new->t_dims);
 		init_texture_division(s, &new->t_dims.z);
 	}
-	else
-		new->texture = NULL;
 }
 
 void				init_texture_map(char *s, t_shape *new,
@@ -109,6 +108,7 @@ void				init_texture_map(char *s, t_shape *new,
 {
 	char	*str;
 
+	new->tex_normal = NULL;
 	if ((s = ft_strstr(s, "\"normal_mapping\"")) != NULL)
 	{
 		if (*(s + 16) != ':')
@@ -126,6 +126,4 @@ void				init_texture_map(char *s, t_shape *new,
 		else
 			free(str);
 	}
-	else
-		new->tex_normal = NULL;
 }

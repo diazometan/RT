@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:26:29 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/21 13:07:43 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:39:34 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,27 @@ static void		uv_correct(double *u, double *v, double max_x, double max_y)
 		*v = *v - 1.0;
 }
 
-static t_vec3	texture_stretching(t_texture *texture, double uv[2])
+static t_vec3	texture_stretching(t_texture *texture,t_rt *rt, t_shape *shape, double uv[2])
 {
 	int				x;
 	int				y;
+	int				w;
+	int				h;
 
-	x = fabs(uv[0]) * texture->surface->w;
-	y = uv[1] * texture->surface->h;
-	return (get_texture_color(texture, (int[2]){x, y}, uv));
+	if (shape->effect_type == 0)
+	{
+		w = texture->surface->w;
+		h = texture->surface->h;
+	}
+	else
+	{
+		w = NOISE_WIDTH;
+		h = NOISE_HEIGHT;
+	}
+
+	x = fabs(uv[0]) * w;
+	y = uv[1] * h;
+	return (get_texture_color(shape, (int[2]){x, y}, uv, rt));
 }
 
 static t_vec3	ft_sphere_texture(t_texture *texture, t_shape *shape, int down, t_rt *rt)
@@ -78,9 +91,15 @@ t_vec3			cone_texture(t_texture *texture, t_shape *shape, t_rt *rt)
 	v = (v + 1) / 2;
 	move_texture(&u, &v, (double[2]){shape->t_dims.x, shape->t_dims.y});
 	if (shape->t_dims.z != 0)
-		uv_correct(&u, &v, (double)texture->surface->w / shape->t_dims.z,
-							(double)texture->surface->h / shape->t_dims.z);
+	{
+		if (shape->effect_type == 0)
+			uv_correct(&u, &v, (double)texture->surface->w / shape->t_dims.z,
+								(double)texture->surface->h / shape->t_dims.z);
+		else
+			uv_correct(&u, &v, (double)NOISE_WIDTH / shape->t_dims.z,
+								(double)NOISE_HEIGHT / shape->t_dims.z);
+	}
 	else
 		uv_correct(&u, &v, 1, 1);
-	return (texture_stretching(texture, (double[2]){u, v}));
+	return (texture_stretching(texture, rt, shape, (double[2]){u, v}));
 }

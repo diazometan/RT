@@ -2,46 +2,77 @@
 	"scene":{
 		"objects":[
 			{
+				"id":0,
 				"shape":"sphere",
-				"color":"red",
+				"color":[0,0,255],
 				"center":[-2,0,4],
+				"texture":"noise",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
 				"radius":0.5,
 				"direction":[0,1,0]
 			},
 			{
+				"id":0,
 				"shape":"cylinder",
-				"color":"blue",
+				"color":[0,0,255],
 				"center":[-1,0,4],
+				"texture":"noise",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
 				"radius":0.5,
 				"height":0.5,
-				"direction":[0,1,0]
+				"direction":[0,60,0]
 			},
 			{
+				"id":0,
 				"shape":"torus",
-				"color":"blue",
+				"color":[0,0,255],
 				"center":[2,0,6],
-				"inner_radius":0.5,
-				"outer_radius":1.0,
+				"texture":"noise",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":15,
+				"radius_in":0.5,
+				"radius_out":1.0,
 				"direction":[0,0,1]
 			},
 			{
+				"id":0,
 				"shape":"box",
-				"color":"red",
+				"color":[255,255,255],
+				"texture":"noise",
+				"radius":0,
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
 				"center":[0,-0.5,2],
 				"sides":[0.5,0.5,0.5],
 				"direction":[0,1,0]
 			},
 			{
+				"id":0,
 				"shape":"capsule",
-				"color":"purple",
+				"color":[0,0,255],
 				"center":[0,1,6],
+				"texture":"marble",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
 				"height":1,
 				"radius":0.5,
 				"direction":[0,1,0]
 			},
 			{
+				"id":0,
 				"shape":"plane",
-				"color":"green",
+				"color":[0,0,255],
+				"texture":"noise",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":200,
 				"center":[0,-1,0],
 				"direction":[0,1,0]
 			}
@@ -58,8 +89,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":1,
-			"pixel division":1
+			"reflection_depth":1,
+			"pixel_division":1
 		}
 	}
 }

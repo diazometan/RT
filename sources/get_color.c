@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:29:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 14:40:59 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:56:13 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,27 @@ int	check_color(int rgb[3])
 	int		j;
 	int		f;
 	int		tmp;
-	int		index;
 
-	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
-		return (0xffffff);
-	// f = 1;
-	// while (f)
-	// {
-	// 	i = -1;
-	// 	f = 0;
-	// 	while (++i < 3)
-	// 		if (rgb[i] > 255)
-	// 		{
-	// 			f = 1;
-	// 			tmp = rgb[i] - 255;
-	// 			rgb[i] = 255;
-	// 			j = -1;
-	// 			while (++j < 3)
-	// 			{
-	// 				index++;
-	// 				if (j != i)
-	// 					rgb[j] += tmp / 2;
-	// 			}
-	// 			break ;
-	// 		}
-	// }
-	if (index > 0)
-		printf("%d\n", index);
+	f = 1;
+	while (f)
+	{
+		i = -1;
+		f = 0;
+		while (++i < 3)
+			if (rgb[i] > 255)
+			{
+				f = 1;
+				tmp = rgb[i] - 255;
+				rgb[i] = 255;
+				j = -1;
+				while (++j < 3)
+				{
+					if (j != i)
+						rgb[j] += tmp / 2;
+				}
+				break ;
+			}
+	}
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
@@ -74,10 +68,9 @@ void		point_and_normal(t_vec3 *dir, t_shape *shape, t_rt *rt)
 	get_intersection_point(&rt->source_point, dir,
 							rt->t_closest, &rt->source_point);
 	get_normal(&rt->source_point, &rt->normal, shape);
-	if (shape->texture != NULL)
+	rt->color = shape->color;
+	if (shape->texture != NULL || shape->effect_type != 0)
 		rt->color = shape->map_texture(shape->texture, shape, rt);
-	else
-		rt->color = shape->color;
 	if (shape->tex_normal != NULL)
 		create_normal_system(rt, shape);
 }

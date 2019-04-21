@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 17:00:40 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/04/19 18:53:17 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:57:08 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_vec3		noise(t_rt *rt, double x, double y)
 	int		color;
 
 	size = 64;
-	color = ((int)turbulence(rt, x, y, size) * 0x010101);
-	return ((t_vec3) {(color >> 16) & 0xFF,
-			(color >> 8) & 0xFF, (color) & 0xFF});
+	color = ((int)turbulence(rt, x, y, size));
+	return ((t_vec3) {color / 255.0 * rt->color.x,
+			color / 255.0 * rt->color.y, color / 255.0 * rt->color.z});
 }
 
 double		smooth_noise(t_rt *rt, double x, double y)

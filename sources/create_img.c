@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 14:25:22 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:48:57 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,16 +132,25 @@ t_rt		ft_rt_copy(t_rt *rt)
 	new_rt = *rt;
 	new_rt.head_shapes = (t_shape *)malloc(sizeof(t_shape));
 	*(new_rt.head_shapes) = *(rt->head_shapes);
-	// new_rt.head_light = (t_light *)malloc(sizeof(t_light));
-	// *(new_rt.head_light) = *(rt->head_light);
-	// new_rt.head_textures = (t_texture *)malloc(sizeof(t_texture));
-	// *(new_rt.head_textures) = *(rt->head_textures);
+	new_rt.head_light = (t_light *)malloc(sizeof(t_light));
+	*(new_rt.head_light) = *(rt->head_light);
+	if (rt->head_textures != NULL)
+	{
+		new_rt.head_textures = (t_texture *)malloc(sizeof(t_texture));
+		*(new_rt.head_textures) = *(rt->head_textures);
+	}
+	else
+		new_rt.head_textures = NULL;
+
 	return (new_rt);
 }
 
 void		ft_free_rt(t_rt rt)
 {
 	// free(rt.head_shapes);
+	// free(rt.head_light);
+	// if (rt.head_textures != NULL)
+	// 	free(rt.head_textures);
 }
 
 void		ft_fun(t_rt *rt, t_sdl *sdl)
@@ -177,9 +186,9 @@ void		ft_fun(t_rt *rt, t_sdl *sdl)
 	index = -1;
 	while (++index < size)
 		ft_free_rt(new_rts[index]);
-	free(tid);
-	free(blocks);
-	free(new_rts);
+	// free(tid);
+	// free(blocks);
+	// free(new_rts);
 }
 
 void			create_img(t_rt *rt, t_sdl *sdl)

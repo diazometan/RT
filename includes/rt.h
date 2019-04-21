@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 14:40:37 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:04:45 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void				event_handler(t_rt *rt, t_sdl *sdl);
 
 void				create_normal_system(t_rt *rt, t_shape *shape);
 
-t_vec3				get_texture_color(t_texture *texture, int xy[2], double uv[2]);
+t_vec3				get_texture_color(t_shape *shape, int xy[2], double uv[2], t_rt *rt);
 void				move_texture(double *u, double *v, double delta_uv[2]);
 t_vec3				sphere_texture(t_texture *texture, t_shape *shape, t_rt *rt);
 t_vec3				plane_texture(t_texture *texture, t_shape *shape, t_rt *rt);

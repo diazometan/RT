@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 14:41:04 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:12:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int		init_sdl(t_sdl *sdl)
 	// SDL_BlitScaled(wall, NULL, sdl->surf, NULL);
 	// SDL_FreeSurface(wall);
 	// SDL_UpdateWindowSurface(sdl->win);
-	
+
 	sdl->img_data = (int *)sdl->surf->pixels;
 	return (0);
 }
@@ -139,6 +139,7 @@ int		main(int args, char **argv)
 		printf("\tspecular - %.2f, reflection = %.2f, refraction - %.2f, transperency - %.2f\n", h_s->specular, h_s->reflection, h_s->refraction, h_s->transparency);
 		if (h_s->texture != NULL)
 			printf("\ttexture - %s, dx - %.2f dy - %.2f div - %f\n", h_s->texture->name, h_s->t_dims.x, h_s->t_dims.y, h_s->t_dims.z);
+		printf("\ttype - %d\n", h_s->effect_type);
 		if (h_s->figure < 12)
 		{
 			printf("\tcenter -  %.2f, %.2f, %.2f\n", h_s->center.x, h_s->center.y, h_s->center.z);

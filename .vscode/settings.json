@@ -11,6 +11,15 @@
 		"string": "c",
 		"string_view": "c",
 		"utility": "c",
-		"vector": "c"
+		"vector": "c",
+		"__functional_base": "c",
+		"__functional_base_03": "c",
+		"__tuple": "c",
+		"chrono": "c",
+		"functional": "c",
+		"limits": "c",
+		"ratio": "c",
+		"tuple": "c",
+		"type_traits": "c"
 	}
 }
