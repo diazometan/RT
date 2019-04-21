@@ -11,7 +11,7 @@
 				"y_displace":0,
 				"texture_div":0,
 				"radius":0.5,
-				"direction":[0,1,0]
+				"direction":[0,0,0]
 			},
 			{
 				"id":0,
@@ -78,6 +78,10 @@
 			}
 		],
 		"lighting":[
+			{
+				"type":"ambient",
+				"intensity":0.3
+			},
 			{
 				"type":"point",
 				"intensity":0.8,

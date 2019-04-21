@@ -83,7 +83,7 @@ static void	init_sides(char *s, t_vec3 *dims)
 
 void		init_dimensions(char *s, int figure, t_vec3 *dims)
 {
-	if (figure == SPHERE)
+	if (figure == SPHERE || figure == INF_CONE || figure == INF_CYLINDER)
 		init_radius(s, dims);
 	else if (figure == CYLINDER || figure == CAPSULE)
 	{

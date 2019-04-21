@@ -3,7 +3,8 @@
 		"objects":[
 			{
 				"shape":"plane",
-				"color":"blue",
+				"id":1,
+				"color":[0,0,255],
 				"specular":0,
 				"reflection":0,
 				"center":[0,0,14],
@@ -11,7 +12,8 @@
 			},
 			{
 				"shape":"plane",
-				"color":"yellow",
+				"id":1,
+				"color":[0,126,126],
 				"specular":0,
 				"reflection":0,
 				"center":[0,-1,0],
@@ -19,9 +21,11 @@
 			},
 			{
 				"shape":"cone",
-				"color":"red",
+				"id":0,
+				"color":[0,0,255],
 				"specular":500,
-				"radius":1,
+                "radius_in":0.5,
+                "radius_out":1.5,
 				"height":1,
 				"angle":30,
 				"reflection":0.0,
@@ -30,7 +34,8 @@
 			},
 			{
 				"shape":"plane",
-				"color":"yellow",
+				"id":1,
+				"color":[255,255,255],
 				"specular":0,
 				"reflection":0,
 				"center":[0,-1,0],
@@ -58,8 +63,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":1,
-			"pixel division":1
+			"reflection_depth":2,
+			"pixel_division":1
 		}
 	}
 }

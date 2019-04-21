@@ -52,10 +52,11 @@ static void	button_ok1_event(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 			kiss_error("should be \".json\"");
 			return ;
 		}
-		if (rt->win_width)
+		if (ui->f)
 			free_args(rt->head_shapes, rt->head_light, rt->head_textures);
 		init_rt(rt, ui->file_path);
 		create_img(rt, sdl);
+		ui->f = 1;
 	}
 }
 

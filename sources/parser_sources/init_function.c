@@ -52,6 +52,10 @@ void			init_function(t_shape *new)
 		new->gd_fun = &gd_cylinder;
 	else if (new->figure == CONE)
 		new->gd_fun = &gd_cone;
+	else if (new->figure == INF_CONE)
+		new->gd_fun = &gd_infinity_cone;
+	else if (new->figure == INF_CYLINDER)
+		new->gd_fun = &gd_infinity_cylinder;
 	else if (new->figure == TORUS)
 		new->gd_fun = &gd_torus;
 	else if (new->figure == BOX)

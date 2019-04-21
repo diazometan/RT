@@ -85,12 +85,11 @@ int		main(int args, char **argv)
 	// 	return (1);
 	// }
 	generate_noise(&rt);
-	if (init_rt(&rt, argv[1]))
-		return (0);
+ 	 if (init_rt(&rt, argv[1]))
+		return (0); 
 
 	if (init_sdl(&sdl))
 		return (1);
-	//rt.win_width = 0;
 	//ui_main(&rt, &sdl);
 	//TEMPORARY CHECK FOR CONFIG PARSER
 	t_shape *h_s = rt.head_shapes;

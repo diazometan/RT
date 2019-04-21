@@ -47,6 +47,7 @@ typedef struct		s_rtui
 	char			buffer[KISS_MAX_LABEL];
 	char			slash[KISS_MAX_LABEL];
 	char			file_path[KISS_MAX_LABEL];
+	int				f;
 	int				draw;
 	int				quit;
 	int				textbox_width;

@@ -42,6 +42,7 @@ void	ui_init(t_rtui *ui)
 	ui->textbox_height = 300;
 	ui->window2_width = 200;
 	ui->window2_height = 168;
+	ui->f = 0;
 	ui->quit = 0;
 	ui->draw = 1;
 	ui->renderer = kiss_init("RT", &ui->objects, 400, 600);
