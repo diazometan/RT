@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 18:55:18 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 12:36:23 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 14:19:03 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int			trans_color(int color, int trans_color, double transperency)
 					((trans_color >> 8) & 0xFF) * transperency;
 	rgb_ref[2] = (color & 0xFF) * (1.0 - transperency) +
 					(trans_color & 0xFF) * transperency;
-
 	return ((rgb_ref[0] << 16) | (rgb_ref[1] << 8) | rgb_ref[2]);
 }
 
@@ -53,14 +52,13 @@ static void	transperency_ray(t_vec3 *dir, t_rt *rt, t_vec3 *ref_r)
 	ref_r->z = dir->z * eta + flag * rt->normal.z * coef_a;
 }
 
-int			transperency(t_vec3 *dir, t_shape *shape, t_rt *rt, int depth)
+int			transperency(t_vec3 *dir, t_rt *rt, int depth)
 {
 	int		trans_color;
 	t_vec3	trans_r;
 
 	trans_r = (t_vec3) {0, 0, 0};
 	transperency_ray(dir, rt, &trans_r);
-	//rt->source_point = &shape->surface_point;
 	vec3_normalize(&trans_r, vec3_length(&trans_r));
 	trans_color = trace_ray(&trans_r, rt, depth);
 	return (trans_color);
