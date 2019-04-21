@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 17:47:54 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:04:30 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_sdl
 {
 	SDL_Window		*win;
 	SDL_Surface		*surf;
+	int				*pro_data;
 	int				*img_data;
 }					t_sdl;
 
@@ -68,9 +69,14 @@ typedef struct		s_rt
 {
 	int				win_width;
 	int				win_height;
+	int				x_s_bar;
+	int				x_length_bar;
+	int				y_s_bar;
+	int				y_e_bar;
 	int				p_division;
 	int				depth;
 	int				sample;
+	int				threads;
 	double			sample_step;
 	double			sample_center;
 	double			t_closest;
@@ -94,6 +100,9 @@ typedef struct		s_pthread
 	int				x[2];
 	int				y[2];
 }					t_pthread;
+
+void				draw_borders(t_rt *rt, t_sdl *sdl);
+void				progress_bar(double progress, t_rt *rt, t_sdl *sdl);
 
 char				*get_file(int fd);
 int					init_config(char *file, t_rt *rt);

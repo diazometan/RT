@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 17:48:10 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:07:25 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,32 @@ static int		init_sdl(t_sdl *sdl)
 		return (1);
 	}
 	sdl->surf = SDL_GetWindowSurface(sdl->win);
+	//sdl->progress = SDL_GetWindowSurface(sdl->win);
 	if (sdl->surf == NULL)
 	{
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-
-	// wall = SDL_LoadBMP("textures/brick.bmp");
-	// SDL_BlitScaled(wall, NULL, sdl->surf, NULL);
-	// SDL_FreeSurface(wall);
-	// SDL_UpdateWindowSurface(sdl->win);
-
 	sdl->img_data = (int *)sdl->surf->pixels;
+
+	// sdl->img_data = (int *)malloc(sizeof(int) * 600 * 600);
+
+	// sdl->pro_data = (int *)sdl->surf->pixels;
 	return (0);
+}
+
+void	init_rt_fields(t_rt *rt)
+{
+	rt->head_shapes = NULL;
+	rt->head_light = NULL;
+	rt->head_textures = NULL;
+	rt->color_scheme = STANDART;
+	rt->win_width = 600;
+	rt->win_height = 600;
+	rt->x_s_bar = rt->win_width / 5 * 2;
+	rt->x_length_bar = rt->win_width / 5 * 3 - rt->x_s_bar;
+	rt->y_s_bar = rt->win_height / 2;
+	rt->y_e_bar = rt->y_s_bar + rt->win_height * 0.066;
 }
 
 int	init_rt(t_rt *rt, char *config_file)
@@ -48,17 +61,14 @@ int	init_rt(t_rt *rt, char *config_file)
 	int		fd;
 	char	*file;
 
-	rt->head_shapes = NULL;
-	rt->head_light = NULL;
-	rt->head_textures = NULL;
-	rt->color_scheme = STANDART;
+	init_rt_fields(rt);
 	if ((fd = open(config_file, O_RDONLY)) < 0)
 	{
 		ft_putendl(M_FILE);
 		return (1);
 	}
 	if ((file = get_file(fd)) == NULL)
-		return (1);
+		exit (1);
 	if (init_config(file, rt))
 	{
 		printf("Error in config file...\n");
@@ -68,8 +78,6 @@ int	init_rt(t_rt *rt, char *config_file)
 	}
 	free(file);
 	close(fd);
-	rt->win_width = 600;
-	rt->win_height = 600;
 	return (0);
 }
 
@@ -186,6 +194,7 @@ int		main(int args, char **argv)
 	printf("\nphysics:\n");
 	printf("\treflection depth - %d\n", rt.depth);
 	printf("\tpixel division - %d\n", rt.p_division);
+	printf("\tthreads - %d\n", rt.threads);
 	//END
 	create_img(&rt, &sdl);
 	event_handler(&rt, &sdl);

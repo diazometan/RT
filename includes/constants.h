@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 15:16:08 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/21 15:10:21 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@
 # define M_PDIV O_RED "pixel_division is missing!"
 # define M_MATCH O_RED "Matching bracket is missing!"
 # define M_COMMA O_RED "Comma between objects is missing!"
-# define M_ID O_RED "Id field is missing!"
+# define M_ID O_RED "id field is missing!"
 # define M_CHILD O_RED "Child shape identifier is missing!"
+# define M_THREADS O_RED "threads field is missing"
 
 # define V_CHILD "Not a valid child shape identifier"
 
@@ -111,6 +112,7 @@
 # define U_NUM O_RED "Undefined number detected!"
 # define U_ID O_RED "ID can only be a positive number"
 # define U_CHILD O_RED "Child shape identifier can only be a positive number"
+# define U_THREADS O_RED "threads can be between 1 and 8"
 
 # define PFCF O_NC "\nPlease fix config file"
 

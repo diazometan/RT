@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 17:55:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:05:55 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,7 @@ void			*create_img_pthread(void *data)
 	{
 		x = obj->x[0] - 1;
 		while (++x < x_limit)
-		{
-			// printf("x(%d %d) y(%d %d) x=%d y=%d\n", obj->x[0], x_limit, obj->y[0], y_limit, x, y);
 			get_pixel(x, y, obj->rt, obj->sdl->img_data);
-		}
 	}
 	return (NULL);
 }
@@ -143,7 +140,6 @@ void		ft_fun(t_rt *rt, t_sdl *sdl)
 	index = -1;
 	while (++index < size)
 		pthread_join(tid[index], NULL);
-	index = -1;
 	free(tid);
 	free(blocks);
 	free(new_rts);
@@ -151,12 +147,8 @@ void		ft_fun(t_rt *rt, t_sdl *sdl)
 
 void			create_img(t_rt *rt, t_sdl *sdl)
 {
-	// t_pthread	obj;
 
 	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
-	// obj = init_t_pthread(rt, sdl, (int[2]){0, rt->win_width}, (int[2]){0, rt->win_height});
-	// create_img_pthread(&obj);
 	ft_fun(rt, sdl);
 	SDL_UpdateWindowSurface(sdl->win);
-	// exit(0);
 }

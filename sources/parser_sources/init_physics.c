@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:44:28 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 20:11:14 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:09:20 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ static void	init_pixel_division(char *s, int *p_division)
 	}
 }
 
+static void	init_threads(char *s, int *threads)
+{
+	if ((s = ft_strstr(s, "\"threads\"")) == NULL || *(s + 9) != ':')
+	{
+		ft_putendl(M_THREADS);
+		exit(1);
+	}
+	else if ((*threads = (int)get_double(s + 10, ',')) < 0 ||
+													*threads > 8)
+	{
+		ft_putendl(U_THREADS);
+		exit(1);
+	}
+}
+
 int			init_physics(char *s, t_rt *rt)
 {
 	char	*end;
@@ -57,6 +72,7 @@ int			init_physics(char *s, t_rt *rt)
 	*end = '\0';
 	init_pixel_division(s, &rt->p_division);
 	init_reflection_depth(s, &rt->depth);
+	init_threads(s, &rt->threads);
 	rt->sample_step = 1.0 / rt->p_division;
 	rt->sample_center = rt->sample_step / 2.0;
 	return (0);
