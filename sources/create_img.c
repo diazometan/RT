@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/20 20:43:34 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/21 14:49:59 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ void			create_img(t_rt *rt, t_sdl *sdl)
 	y = -1;
 	x_limit = rt->win_width;
 	y_limit = rt->win_height;
+	draw_borders(rt, sdl);
+	sleep(1);
 	while (++y < y_limit)
 	{
-		//progress_bar(y / y_limit, rt, sdl);
 		progress_bar(y / (double)y_limit, rt, sdl);
 		x = -1;
 		while (++x < x_limit)
 			get_pixel(x, y, rt, sdl->img_data);
 	}
-	//sdl->surf->pixels = (char *)sdl->img_data;
 	ft_memcpy(sdl->surf->pixels, (void *)sdl->img_data, rt->win_width * rt->win_height * 4);
 	SDL_UpdateWindowSurface(sdl->win);
 }

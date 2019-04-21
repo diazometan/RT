@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 18:39:58 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/18 13:15:43 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 11:42:47 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static void	window_resized(t_rt *rt, t_sdl *sdl, SDL_Event *event)
 	sdl->surf = SDL_GetWindowSurface(sdl->win);
 	rt->win_width = event->window.data1;
 	rt->win_height = event->window.data2;
+	//rt->win_height = event->window.data1;
 	sdl->img_data = (int *)sdl->surf->pixels;
 	create_img(rt, sdl);
 }
