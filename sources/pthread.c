@@ -30,6 +30,7 @@ void		body_pthread(t_rt *rt, t_sdl *sdl, t_body_pthread body_pthread)
 	int					index;
 	int					start;
 	int					finish;
+
 	index = -1;
 	while (++index < body_pthread.size)
 	{
@@ -37,15 +38,19 @@ void		body_pthread(t_rt *rt, t_sdl *sdl, t_body_pthread body_pthread)
 		finish = ((index + 1) / (double)body_pthread.size) * rt->win_width;
 		body_pthread.new_rts[index] = *rt;
 		body_pthread.blocks[index] =
-		init_t_pthread(&(body_pthread.new_rts[index]), sdl,
-		(int[2]){start, finish},
-		(int[2]){0, rt->win_height});
+			init_t_pthread(&(body_pthread.new_rts[index]), sdl,
+			(int[2]){start, finish},
+			(int[2]){0, rt->win_height});
 		(void)pthread_create(&body_pthread.tid[index], NULL,
-		create_img_pthread, &body_pthread.blocks[index]);
+			create_img_pthread, &body_pthread.blocks[index]);
 	}
 	index = -1;
 	while (++index < body_pthread.size)
+	{
+		progress_bar(index / (double)body_pthread.size, rt, sdl);
 		pthread_join(body_pthread.tid[index], NULL);
+	}
+	progress_bar(1, rt, sdl);
 }
 
 void		create_pthread(t_rt *rt, t_sdl *sdl)
@@ -54,7 +59,6 @@ void		create_pthread(t_rt *rt, t_sdl *sdl)
 	pthread_t			*tid;
 	t_pthread			*blocks;
 	t_rt				*new_rts;
-
 
 	size = rt->threads;
 	tid = (pthread_t *)malloc(sizeof(pthread_t) * size);

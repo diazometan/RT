@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 18:07:25 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/21 18:29:18 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ static int		init_sdl(t_sdl *sdl)
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	sdl->img_data = (int *)sdl->surf->pixels;
-
-	// sdl->img_data = (int *)malloc(sizeof(int) * 600 * 600);
-
-	// sdl->pro_data = (int *)sdl->surf->pixels;
+	//sdl->img_data = (int *)sdl->surf->pixels;
+	sdl->img_data = (int *)malloc(sizeof(int) * 600 * 600);
+	sdl->pro_data = (int *)sdl->surf->pixels;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 16:23:13 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 14:49:54 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/21 18:26:39 by rgyles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,21 @@ void		draw_borders(t_rt *rt, t_sdl *sdl)
 
 void		progress_bar(double progress, t_rt *rt, t_sdl *sdl)
 {
-	int	x;
+	int	x_s;
+	int	x_e;
 	int	y_s;
 	int	y_e;
 
-	y_s = rt->y_s_bar;
 	y_e = rt->y_e_bar;
-	x = rt->x_s_bar + rt->x_length_bar * progress;
-	while (++y_s < y_e)
-		sdl->pro_data[x + y_s * 600] = 0x00AA00;
-	SDL_UpdateWindowSurface(sdl->win);
+	x_s = rt->x_s_bar;
+	x_e = rt->x_s_bar + rt->x_length_bar * progress;
+	while (++x_s <= x_e)
+	{
+		//sdl->pro_data[x + y_s * 600] = 0x00AA00;
+		draw_vertical_line(y_s, y_e, x_s, sdl);
+		y_s = rt->y_s_bar;
+		while (++y_s < y_e)
+			sdl->pro_data[x_s + y_s * 600] = 0x00AA00;
+		SDL_UpdateWindowSurface(sdl->win);
+	}
 }
