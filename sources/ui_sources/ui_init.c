@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfrankly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 19:05:24 by jfrankly          #+#    #+#             */
-/*   Updated: 2019/04/18 19:05:25 by jfrankly         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:16:13 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ui_init(t_rtui *ui)
 	ui->textbox_height = 300;
 	ui->window2_width = 200;
 	ui->window2_height = 168;
-	ui->f = 0;
 	ui->quit = 0;
 	ui->draw = 1;
 	ui->renderer = kiss_init("RT", &ui->objects, 400, 600);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_config_file.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 10:24:29 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/17 12:30:23 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/22 19:58:49 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char			*get_file(int fd)
 			free(file);
 			return (NULL);
 		}
+		free(line);
 		free(file);
 		file = tmp;
 	}

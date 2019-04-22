@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/22 19:33:09 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:22:21 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				init_rt(t_rt *rt, char *config_file)
 		return (1);
 	}
 	if ((file = get_file(fd)) == NULL)
-		exit (1);
+		exit(1);
 	if (init_config(file, rt))
 	{
 		printf("Error in config file...\n");
@@ -74,14 +74,19 @@ int				init_rt(t_rt *rt, char *config_file)
 	return (0);
 }
 
-void			*check_memory(void *new)
+void			window_resized(t_rt *rt, t_sdl *sdl, SDL_Event *event)
 {
-	if (new == NULL)
-	{
-		ft_putendl(MEMORY);
-		exit(1);
-	}
-	return (new);
+	SDL_FreeSurface(sdl->surf);
+	free(sdl->img_data);
+	sdl->surf = SDL_GetWindowSurface(sdl->win);
+	rt->win_width = event->window.data1;
+	rt->win_height = event->window.data2;
+	rt->total_pixels = rt->win_height * rt->win_width;
+	sdl->img_data = (int *)check_memory(malloc(sizeof(int) *
+						rt->win_width * rt->win_height));
+	sdl->pro_data = (int *)sdl->surf->pixels;
+	ft_bzero(sdl->surf->pixels, rt->win_width * rt->win_height * 4);
+	create_img(rt, sdl);
 }
 
 int				main(int args, char **argv)
@@ -89,119 +94,25 @@ int				main(int args, char **argv)
 	t_rt		rt;
 	t_sdl		sdl;
 
+	if (args > 2)
+	{
+		ft_putendl(USAGE);
+		return (1);
+	}
 	srand48(time(NULL));
 	generate_noise(&rt);
-
 	if (init_sdl(&sdl))
 		return (1);
 	if (args == 1)
 		ui_main(&rt, &sdl);
-
-	if (init_rt(&rt, argv[1]))
-		return (1);
-
-	//TEMPORARY CHECK FOR CONFIG PARSER
-	t_shape *h_s = rt.head_shapes;
-	t_light *h_l = rt.head_light;
-	printf("shapes:\n");
-	while (h_s != NULL)
+	else
 	{
-		if (h_s->figure == 1)
-			printf("plane, ");
-		else if (h_s->figure == 2)
-			printf("sphere, ");
-		else if (h_s->figure == 3)
-			printf("cylinder, ");
-		else if (h_s->figure == 4)
-			printf("cone, ");
-		else if (h_s->figure == 5)
-			printf("inf_cylinder, ");
-		else if (h_s->figure == 6)
-			printf("inf_cone, ");
-		else if (h_s->figure == 7)
-			printf("torus, ");
-		else if (h_s->figure == 8)
-			printf("box, ");
-		else if (h_s->figure == 9)
-			printf("capsule, ");
-		else if (h_s->figure == 10)
-			printf("elipsoid, ");
-		else if (h_s->figure == 11)
-			printf("fractal, ");
-		else if (h_s->figure == 12)
-			printf("unite, ");
-		else if (h_s->figure == 13)
-			printf("intersect, ");
-		else if (h_s->figure == 14)
-			printf("difference, ");
-		else if (h_s->figure == 15)
-			printf("blend, ");
-		else if (h_s->figure == 16)
-			printf("mix, ");
-		printf("is in group - ");
-		if (h_s->child)
-			printf("yes\n");
-		else
-			printf("no\n");
-		printf("\tid - %d, color - %.0f %.0f %.0f\n", h_s->id, h_s->color.x, h_s->color.y, h_s->color.z);
-		printf("\tspecular - %.2f, reflection = %.2f, refraction - %.2f, transperency - %.2f\n", h_s->specular, h_s->reflection, h_s->refraction, h_s->transparency);
-		if (h_s->texture != NULL)
-			printf("\ttexture - %s, dx - %.2f dy - %.2f div - %f\n", h_s->texture->name, h_s->t_dims.x, h_s->t_dims.y, h_s->t_dims.z);
-		printf("\ttype - %d\n", h_s->effect_type);
-		if (h_s->figure < 12)
-		{
-			printf("\tcenter -  %.2f, %.2f, %.2f\n", h_s->center.x, h_s->center.y, h_s->center.z);
-			printf("\tunit - %.2f, %.2f, %.2f\n", h_s->unit.x, h_s->unit.y, h_s->unit.z);
-			if (h_s->figure == SPHERE || h_s->figure == BOX || h_s->figure == CYLINDER || h_s->figure == CAPSULE)
-				printf("radius - %.2f\n", h_s->dims.x);
-			if (h_s->figure == CONE || h_s->figure == TORUS)
-			{
-				printf("\tradius_in - %.2f\n", h_s->dims.x);
-				printf("\tradius_out - %.2f\n", h_s->dims.y);
-			}
-			if (h_s->figure == CYLINDER || h_s->figure == CONE || h_s->figure == CAPSULE)
-				printf("\theight - %.2f\n", h_s->dims.z);
-		}
-		printf("\n");
-		h_s = h_s->next;
+		if (init_rt(&rt, argv[1]))
+			return (1);
+		create_img(&rt, &sdl);
 	}
-	printf("\nlight sources:\n");
-	while (h_l != NULL)
-	{
-		if (h_l->type == POINT)
-			printf("\tpoint, ");
-		else if (h_l->type == DIRECTIONAL)
-			printf("\tdirectional, ");
-		else if (h_l->type == AMBIENT)
-			printf("\tambient, ");
-		else if (h_l->type == SPOT)
-			printf("\tspot, ");
-		printf("intensity - %.2f, ", h_l->intensity);
-		if (h_l->type == POINT || h_l->type == SPOT)
-			printf("center %.2f, %.2f, %.2f, ", h_l->center.x, h_l->center.y, h_l->center.z);
-		if (h_l->type == DIRECTIONAL)
-			printf("direction - %.2f, %.2f, %.2f", h_l->dir.x, h_l->dir.y, h_l->dir.z);
-		if (h_l->type == SPOT)
-		{
-			printf("direction - %.2f, %.2f, %.2f\n", h_l->dir.x, h_l->dir.y, h_l->dir.z);
-			printf("angle - %.2f\n", h_l->angle);
-		}
-		h_l = h_l->next;
-		printf("\n");
-	}
-	printf("\ncamera:\n");
-	printf("\tlocated at %.2f, %.2f, %.2f\n", rt.camera.x, rt.camera.y, rt.camera.z);
-	printf("\tlooks at %.2f, %.2f, %.2f\n", rt.angle.x, rt.angle.y, rt.angle.z);
-	printf("\nphysics:\n");
-	printf("\treflection depth - %d\n", rt.depth);
-	printf("\tpixel division - %d\n", rt.p_division);
-	printf("\tthreads - %d\n", rt.threads);
-	//END
-	create_img(&rt, &sdl);
 	event_handler(&rt, &sdl);
-	free_args(rt.head_shapes, rt.head_light, rt.head_textures);
-	SDL_FreeSurface(sdl.surf);
-	SDL_DestroyWindow(sdl.win);
+	exit_programm(&rt, &sdl);
 	SDL_Quit();
 	return (0);
 }

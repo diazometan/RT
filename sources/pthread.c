@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:12:31 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/22 17:34:36 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:11:19 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,30 @@ t_pthread	init_t_pthread(t_rt *rt, t_sdl *sdl, int xy[2], int si[2])
 	return (obj);
 }
 
+void		pthread_waiting(t_rt *rt, t_sdl *sdl, t_body_pthread body_pthread)
+{
+	int		summ;
+	int		index;
+
+	summ = 0;
+	while (summ != (rt->win_height * rt->win_width))
+	{
+		summ = 0;
+		index = -1;
+		while (++index < body_pthread.size)
+			summ = summ + body_pthread.new_rts[index].count;
+		progress_bar(summ / (double)(rt->win_height * rt->win_width), rt, sdl);
+	}
+	progress_bar(1, rt, sdl);
+}
+
 void		body_pthread(t_rt *rt, t_sdl *sdl, t_body_pthread body_pthread)
 {
-	int					summ;
 	int					index;
 	int					start;
 	int					finish;
 
 	index = -1;
-	summ = 0;
 	while (++index < body_pthread.size)
 	{
 		start = ((index) / (double)body_pthread.size) * rt->win_width;
@@ -47,15 +62,7 @@ void		body_pthread(t_rt *rt, t_sdl *sdl, t_body_pthread body_pthread)
 		(void)pthread_create(&body_pthread.tid[index], NULL,
 			create_img_pthread, &body_pthread.blocks[index]);
 	}
-	while (summ != (rt->win_height * rt->win_width))
-	{
-		summ = 0;
-		index = -1;
-		while (++index < body_pthread.size)
-			summ = summ + body_pthread.new_rts[index].count;
-		progress_bar(summ / (double)(rt->win_height * rt->win_width), rt, sdl);
-	}
-	progress_bar(1, rt, sdl);
+	pthread_waiting(rt, sdl, body_pthread);
 }
 
 void		create_pthread(t_rt *rt, t_sdl *sdl)

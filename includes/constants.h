@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/22 17:47:45 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:19:42 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 
 # define M_FILE O_RED "File not found"
 # define E_FILE O_RED "Emty file"
-# define USAGE O_RED "usage: ./RT [configuration_file]"
+# define USAGE O_RED "usage: ./RT | ./RT [configuration_file]"
 
 # define MEMORY O_RED "not enough sufficient memory"
 # define M_SHAPE O_RED "Shape identifier is missing!"

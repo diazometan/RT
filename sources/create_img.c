@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/22 19:32:43 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:10:28 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void			init_camera_ray(double x, double y, t_vec3 *dir, t_rt *rt)
 
 	rotation = matrix_multiply(x_rotation_matrix(rt->angle.x),
 								y_rotation_matrix(rt->angle.y));
-	dir->x = (double)((-rt->win_width / 2) + x) /
-					rt->win_width + rt->camera.x / rt->win_width;
-	dir->y = (double)(rt->win_height / 2 - y) /
-					rt->win_height + rt->camera.y / rt->win_height;
+	dir->x = ((double)((-rt->win_width / (2.0)) + x) /
+					rt->win_width) * (rt->win_width /
+						(double)rt->win_height) + rt->camera.x;
+	dir->y = (double)(rt->win_height / (2.0) - y) /
+					rt->win_height + rt->camera.y;
 	dir->z = 1.0;
 	vec3_normalize(dir, vec3_length(dir));
 	vector_matrix_multiply(rotation, dir);
@@ -107,7 +108,6 @@ void			*create_img_pthread(void *data)
 
 void			create_img(t_rt *rt, t_sdl *sdl)
 {
-	sleep(1);
 	create_pthread(rt, sdl);
 	ft_memcpy(sdl->surf->pixels, (void *)sdl->img_data,
 				rt->win_width * rt->win_height * 4);

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/22 17:32:59 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:29:37 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ typedef struct		s_trace
 	double			t;
 	double			d;
 }					t_trace;
+
+typedef struct		s_cone_texture
+{
+	t_vec3			angle;
+	t_vec3			unit1;
+	t_vec3			r;
+}					t_cone_texture;
 
 typedef	enum
 {
@@ -120,6 +127,7 @@ char				*init_lighting(char *s, t_light **head);
 int					init_physics(char *s, t_rt *rt);
 void				free_args(t_shape *shape, t_light *light,
 									t_texture *texture);
+void				exit_programm(t_rt *rt, t_sdl *sdl);
 void				*check_memory(void *new);
 
 void				create_img(t_rt *rt, t_sdl *sdl);
@@ -159,6 +167,7 @@ int					transperency(t_vec3 *dir, t_rt *rt, int depth);
 int					emission(t_shape *shape, t_rt *rt, int depth);
 
 void				event_handler(t_rt *rt, t_sdl *sdl);
+void				window_resized(t_rt *rt, t_sdl *sdl, SDL_Event *event);
 
 void				create_normal_system(t_rt *rt, t_shape *shape);
 

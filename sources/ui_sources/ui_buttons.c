@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 19:05:19 by jfrankly          #+#    #+#             */
-/*   Updated: 2019/04/21 11:23:54 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:16:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	button_event_exit(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 		if (rt->win_width)
 			free_args(rt->head_shapes, rt->head_light, rt->head_textures);
 		SDL_FreeSurface(sdl->surf);
+		free(sdl->img_data);
 		kiss_clean(&ui->objects);
 		SDL_DestroyWindow(sdl->win);
 		SDL_Quit();
@@ -52,11 +53,10 @@ static void	button_ok1_event(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 			kiss_error("should be \".json\"");
 			return ;
 		}
-		if (ui->f)
+		if (rt->win_width)
 			free_args(rt->head_shapes, rt->head_light, rt->head_textures);
 		init_rt(rt, ui->file_path);
 		create_img(rt, sdl);
-		ui->f = 1;
 	}
 }
 

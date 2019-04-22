@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dmin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:47:48 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/02 14:48:10 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/22 20:31:33 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double ft_dmin(double a, double b)
+double	ft_dmin(double a, double b)
 {
 	if (a < b)
 		return (a);

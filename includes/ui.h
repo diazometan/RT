@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfrankly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 16:00:45 by jfrankly          #+#    #+#             */
-/*   Updated: 2019/04/19 16:00:46 by jfrankly         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:16:24 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct		s_rtui
 	char			buffer[KISS_MAX_LABEL];
 	char			slash[KISS_MAX_LABEL];
 	char			file_path[KISS_MAX_LABEL];
-	int				f;
 	int				draw;
 	int				quit;
 	int				textbox_width;

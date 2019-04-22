@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui_files.c                                         :+:      :+:    :+:   */
+/*   ui_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfrankly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 19:05:19 by jfrankly          #+#    #+#             */
-/*   Updated: 2019/04/18 19:05:19 by jfrankly         ###   ########.fr       */
+/*   Updated: 2019/04/22 20:22:53 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ static void	button_light_ambient(t_rtui *ui, t_rt *rt, t_sdl *sdl)
 	}
 }
 
-static void	ui_drawing(t_rtui *ui)
+static void	ui_drawing(t_rtui *ui, t_rt *rt)
 {
 	SDL_RenderClear(ui->renderer);
 	kiss_window_draw(&ui->window1, ui->renderer);
 	kiss_textbox_draw(&ui->textbox1, ui->renderer);
 	kiss_vscrollbar_draw(&ui->vscrollbar1, ui->renderer);
 	kiss_label_draw(&ui->label_sel, ui->renderer);
-	if (ui->f)
+	if (rt->win_width)
 	{
 		kiss_button_draw(&ui->button_hide, ui->renderer);
 		kiss_button_draw(&ui->button_light, ui->renderer);
@@ -101,7 +101,7 @@ int			ui_main(t_rt *rt, t_sdl *sdl)
 		vscrollbar1_event(&ui.vscrollbar1, NULL, &ui.textbox1, &ui.draw);
 		if (!ui.draw)
 			continue ;
-		ui_drawing(&ui);
+		ui_drawing(&ui, rt);
 	}
 	kiss_clean(&ui.objects);
 	return (0);
