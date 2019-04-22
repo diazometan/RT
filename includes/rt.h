@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 20:41:21 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 15:34:26 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,10 @@ typedef struct		s_pthread
 {
 	t_rt			*rt;
 	t_sdl			*sdl;
-	int				x[2];
-	int				y[2];
+	int				x;
+	int				y;
+	int				size;
+	int				index;
 }					t_pthread;
 
 typedef struct		s_body_pthread

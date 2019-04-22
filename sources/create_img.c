@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 20:52:55 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 15:33:21 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,19 @@ void			*create_img_pthread(void *data)
 	t_pthread	*obj;
 
 	obj = (t_pthread *)data;
-	x_limit = obj->x[1];
-	y_limit = obj->y[1];
-	y = obj->y[0] - 1;
+	x_limit = obj->x;
+	y_limit = obj->y;
+	y = -1;
 	while (++y < y_limit)
 	{
-		x = obj->x[0] - 1;
+		x = -1;
 		while (++x < x_limit)
 		{
-			get_pixel(x, y, obj->rt, obj->sdl->img_data);
-			++obj->rt->count;
+			if ((x % obj->size) == obj->index)
+			{
+				get_pixel(x, y, obj->rt, obj->sdl->img_data);
+				++obj->rt->count;
+			}
 		}
 	}
 	return (NULL);
