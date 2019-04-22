@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/22 19:27:31 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/22 20:48:40 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,25 +169,5 @@ fclean: clean
 	@make -C $(KISS_DIR) fclean
 
 re: fclean all
-
-test: all
-	@echo "$(GREEN)Testing...$(NC)"
-	@./RT scene/test1.json
-
-scene: all
-	@echo "$(GREEN)Testing...$(NC)"
-	@./RT scene/scene.json
-
-march: all
-	@echo "$(GREEN)Testing...$(NC)"
-	@./RT scene/march.json
-
-kk: all
-	@echo "$(GREEN)Testing...$(NC)"
-	@./RT scene/kk.json
-
-allf: all
-	@echo "$(GREEN)Testing...$(NC)"
-	@./RT scene/all_figures.json
 
 .PHONY: all clean fclean re test

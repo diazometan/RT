@@ -64,7 +64,7 @@
 				"texture":"chess_board",
 				"x_displace":0,
 				"y_displace":0,
-				"specular":5,
+				"specular":100,
 				"texture_div":0,
 				"center":[-2,0,8],
 				"radius_in":0.5,
