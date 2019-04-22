@@ -69,16 +69,26 @@
 			{
 				"shape":"difference",
 				"id":5,
-				"color":[255,0,0],
+				"color":[0,139,139],
+				"specular":500,
 				"child_one":2,
 				"child_two":7
+			},
+			{
+				"shape":"plane",
+				"id":10,
+				"color":[255,255,0],
+				"specular":1000,
+				"reflection":0.5,
+				"center":[0,-1,0],
+				"direction":[0,0,0]
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
-				"intensity":0.6,
-				"center":[0,0,0]
+				"intensity":0.4,
+				"center":[2,1,0]
 			},
 			{
 				"type":"ambient",
@@ -86,12 +96,12 @@
 			}
 		],
 		"camera":{
-			"center":[0,0,0],
-			"direction":[0,0,0]
+			"center":[2,1,0],
+			"direction":[-20,33,0]
 		},
 		"physics":{
 			"reflection_depth":1,
-			"pixel_division":1,
+			"pixel_division":2,
 			"threads":8
 		}
 	}

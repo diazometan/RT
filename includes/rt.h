@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 21:20:43 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 16:13:27 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char				*init_lighting(char *s, t_light **head);
 int					init_physics(char *s, t_rt *rt);
 void				free_args(t_shape *shape, t_light *light,
 									t_texture *texture);
+void				*check_memory(void *new);
 
 void				create_img(t_rt *rt, t_sdl *sdl);
 int					trace_ray(t_vec3 *dir, t_rt *rt, int depth);
@@ -181,7 +182,7 @@ double				smooth_noise(t_rt *rt, double x, double y);
 t_vec3				noise(t_rt *rt, double x, double y);
 t_vec3				wood(t_rt *rt, int x, int y);
 t_vec3				marble(t_rt *rt, int x, int y);
-t_vec3				chess_board(int x, int y);
+t_vec3				chess_board(t_rt *rt, int x, int y);
 
 void				set_color(t_rt *rt, int rgb_m[3], double light);
 void				set_color_cartoon(t_rt *rt, int rgb_m[3], double light);

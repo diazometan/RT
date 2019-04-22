@@ -4,27 +4,29 @@
 			{
 				"id":0,
 				"shape":"sphere",
-				"color":[0,0,255],
-				"center":[-2,0,4],
-				"texture":"noise",
-				"x_displace":0,
+				"color":[0,255,255],
+				"center":[1.1,0,1],
+				"texture":"face",
+				"x_displace":0.7,
 				"y_displace":0,
 				"texture_div":0,
-				"radius":0.5,
+				"specular":500,
+				"radius":0.2,
 				"direction":[0,0,0]
 			},
 			{
 				"id":0,
 				"shape":"cylinder",
 				"color":[0,0,255],
-				"center":[-1,0,4],
-				"texture":"noise",
+				"center":[-1,2,4],
+				"texture":"chess_board",
 				"x_displace":0,
 				"y_displace":0,
 				"texture_div":0,
+				"specular":50,
 				"radius":0.5,
 				"height":0.5,
-				"direction":[0,60,0]
+				"direction":[60,0,60]
 			},
 			{
 				"id":0,
@@ -36,21 +38,39 @@
 				"y_displace":0,
 				"texture_div":15,
 				"radius_in":0.5,
+				"specular":5,
 				"radius_out":1.0,
-				"direction":[0,0,1]
+				"direction":[0,0,0]
 			},
 			{
 				"id":0,
 				"shape":"box",
 				"color":[255,255,255],
-				"texture":"noise",
+				"texture":"brick",
+				"normal_mapping":"nm_brick",
 				"radius":0,
 				"x_displace":0,
 				"y_displace":0,
 				"texture_div":0,
+				"specular":100,
 				"center":[0,-0.5,2],
 				"sides":[0.5,0.5,0.5],
-				"direction":[0,1,0]
+				"direction":[0,180,0]
+			},
+			{
+				"shape":"cone",
+				"id":1,
+				"color":[0,0,255],
+				"texture":"can",
+				"x_displace":0,
+				"y_displace":0,
+				"specular":5,
+				"texture_div":600,
+				"center":[-2,0,8],
+				"radius_in":0.5,
+				"radius_out":1.5,
+				"height":1.5,
+				"direction":[0,0,0]
 			},
 			{
 				"id":0,
@@ -63,7 +83,7 @@
 				"texture_div":0,
 				"height":1,
 				"radius":0.5,
-				"direction":[0,1,0]
+				"direction":[0,0,0]
 			},
 			{
 				"id":0,
@@ -72,9 +92,24 @@
 				"texture":"noise",
 				"x_displace":0,
 				"y_displace":0,
+				"specular":1000,
+				"reflection":0.5,
 				"texture_div":200,
 				"center":[0,-1,0],
-				"direction":[0,1,0]
+				"direction":[0,0,0]
+			},
+			{
+				"id":0,
+				"shape":"elipsoid",
+				"color":[0,255,255],
+				"texture":"wood",
+				"x_displace":0,
+				"y_displace":0,
+				"texture_div":0,
+				"reflection":0.2,
+				"sides":[0.8,0.4,0.4],
+				"center":[-1.5,0,2],
+				"direction":[0,0,90]
 			}
 		],
 		"lighting":[
@@ -93,7 +128,7 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection_depth":1,
+			"reflection_depth":2,
 			"pixel_division":1,
 			"threads":8
 		}

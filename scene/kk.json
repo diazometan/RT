@@ -3,32 +3,56 @@
 		"objects":[
 			{
 				"id":0,
-				"shape":"elipsoid",
+				"shape":"capsule",
 				"color":[0,0,255],
 				"specular":500,
-				"reflection":0.3,
-				"center":[2,0,4],
-				"sides":[2,1,3],
+				"center":[0,-1,4],
+				"radius":0.8,
+				"height":3.5,
 				"direction":[0,0,0]
 			},
 			{
-				"id":0,
-				"shape":"cylinder",
+				"id":1,
+				"shape":"sphere",
 				"color":[0,0,255],
-				"center":[-1,1,4],
+				"specular":50,
+				"center":[-1,-0.5,4],
 				"radius":1,
-				"height":2,
+				"direction":[0,0,0]
+			},
+			{
+				"id":2,
+				"shape":"sphere",
+				"specular":50,
+				"color":[0,0,255],
+				"center":[1,-0.5,4],
+				"radius":1,
 				"direction":[0,0,0]
 			},
 			{
 				"id":0,
 				"shape":"plane",
 				"color":[0,0,255],
-				"texture":"checkboard",
 				"reflection":0.5,
 				"specular":1000,
 				"center":[0,-1,0],
 				"direction":[0,1,0]
+			},
+			{
+				"shape":"blend",
+				"id":4,
+				"color":[255,0,0],
+				"child_one":0,
+				"child_two":1
+			},
+			{
+				"shape":"blend",
+				"id":5,
+				"color":[255,0,0],
+				"specular":500,
+				"reflection":0.5,
+				"child_one":4,
+				"child_two":2
 			}
 		],
 		"lighting":[
@@ -57,8 +81,8 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection depth":3,
-			"pixel division":1,
+			"reflection_depth":3,
+			"pixel_division":1,
 			"threads":8
 		}
 	}

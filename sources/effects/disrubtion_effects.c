@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 17:04:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/18 13:03:35 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 15:42:42 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ double		turbulence(t_rt *rt, double x, double y, double size)
 	return (128.0 * value / initial_size);
 }
 
-t_vec3		chess_board(int x, int y)
+t_vec3		chess_board(t_rt *rt, int x, int y)
 {
 	if ((((y / 10) % 2) == ((x / 10) % 2)))
-		return ((t_vec3) {255.0, 255.0, 255.0});
+		return ((t_vec3) {rt->color.x, rt->color.y, rt->color.z});
 	return ((t_vec3) {0.0, 0.0, 0.0});
 }
 

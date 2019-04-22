@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 18:29:18 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/22 16:19:36 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,30 @@
 
 static int		init_sdl(t_sdl *sdl)
 {
-	// SDL_Surface *wall;
-
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		printf("SDL_Init Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	sdl->win = SDL_CreateWindow("RT", 1050, 400, 600, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALWAYS_ON_TOP);
+	sdl->win = SDL_CreateWindow("RT", 1050, 400, 600, 600, SDL_WINDOW_SHOWN
+				| SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALWAYS_ON_TOP);
 	if (sdl->win == NULL)
 	{
 		printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
 		return (1);
 	}
 	sdl->surf = SDL_GetWindowSurface(sdl->win);
-	//sdl->progress = SDL_GetWindowSurface(sdl->win);
 	if (sdl->surf == NULL)
 	{
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	//sdl->img_data = (int *)sdl->surf->pixels;
-	sdl->img_data = (int *)malloc(sizeof(int) * 600 * 600);
+	sdl->img_data = (int *)check_memory(malloc(sizeof(int) * 600 * 600));
 	sdl->pro_data = (int *)sdl->surf->pixels;
 	return (0);
 }
 
-void	init_rt_fields(t_rt *rt)
+void			init_rt_fields(t_rt *rt)
 {
 	rt->head_shapes = NULL;
 	rt->head_light = NULL;
@@ -54,10 +51,10 @@ void	init_rt_fields(t_rt *rt)
 	rt->y_e_bar = rt->y_s_bar + rt->win_height * 0.066;
 }
 
-int	init_rt(t_rt *rt, char *config_file)
+int				init_rt(t_rt *rt, char *config_file)
 {
-	int		fd;
-	char	*file;
+	int			fd;
+	char		*file;
 
 	init_rt_fields(rt);
 	if ((fd = open(config_file, O_RDONLY)) < 0)
@@ -79,24 +76,32 @@ int	init_rt(t_rt *rt, char *config_file)
 	return (0);
 }
 
-int		main(int args, char **argv)
+void			*check_memory(void *new)
 {
-	t_rt	rt;
-	t_sdl	sdl;
+	if (new == NULL)
+	{
+		ft_putendl(MEMORY);
+		exit(1);
+	}
+	return (new);
+}
+
+int				main(int args, char **argv)
+{
+	t_rt		rt;
+	t_sdl		sdl;
 
 	srand48(time(NULL));
-	// if (args != 1)
-	// {
-	// 	ft_putendl("usage: ./RT");
-	// 	return (1);
-	// }
 	generate_noise(&rt);
- 	 if (init_rt(&rt, argv[1]))
-		return (0);
 
 	if (init_sdl(&sdl))
 		return (1);
-	//ui_main(&rt, &sdl);
+	if (args == 1)
+		ui_main(&rt, &sdl);
+
+	if (init_rt(&rt, argv[1]))
+		return (1);
+
 	//TEMPORARY CHECK FOR CONFIG PARSER
 	t_shape *h_s = rt.head_shapes;
 	t_light *h_l = rt.head_light;

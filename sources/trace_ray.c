@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 19:36:59 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/21 18:43:23 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:14:06 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_shape			*calculation_distance(t_trace *dist, t_rt *rt, t_vec3 *dir)
 		if (head->child == 0)
 		{
 			dist->d = shape_summ(&from, head);
-			if (head->transparency > 0)
+			if (head->transparency > 0 || head->refraction > 1)
 				dist->d = fabs(dist->d);
 			if (dist->d < dist->min_distance)
 			{
@@ -45,7 +45,7 @@ int				trace_ray(t_vec3 *dir, t_rt *rt, int depth)
 	t_trace		dist;
 	t_shape		*closest;
 
-	dist.max_distance = 100;
+	dist.max_distance = 200;
 	dist.epsilon = 10e-9;
 	dist.t = 0.0001;
 	while (dist.t < dist.max_distance)

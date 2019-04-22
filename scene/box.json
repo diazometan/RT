@@ -2,18 +2,43 @@
 	"scene":{
 		"objects":[
 			{
+				"shape":"box",
+				"id":0,
+				"color":[255,0,0],
+				"center":[0,0,3],
+				"radius":0,
+				"sides":[0.5,0.5,0.5],
+				"direction":[0,0,0]
+			},
+			{
 				"shape":"sphere",
 				"id":1,
-				"color":[168,53,186],
-				"texture":"noise",
-				"normal_mapping":"nm_brick",
-				"x_displace":0,
-				"y_displace":0,
-				"texture_div":0,
-				"sides":[1,1,1],
-				"radius":1,
-				"center":[0,0,5],
+				"color":[255,0,0],
+				"center":[0,0,3],
+				"radius":0.65,
 				"direction":[0,0,0]
+			},
+			{
+				"shape":"difference",
+				"id":2,
+				"color":[255,0,0],
+				"child_one":0,
+				"child_two":1
+			},
+			{
+				"shape":"sphere",
+				"id":4,
+				"color":[255,0,0],
+				"center":[0,0,3],
+				"radius":0.65,
+				"direction":[0,0,0]
+			},
+			{
+				"shape":"intersect",
+				"id":3,
+				"color":[255,0,0],
+				"child_one":2,
+				"child_two":4
 			}
 		],
 		"lighting":[

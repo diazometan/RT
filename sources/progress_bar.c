@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   progress_bar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgyles <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 16:23:13 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 18:26:39 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/04/22 16:06:13 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void		progress_bar(double progress, t_rt *rt, t_sdl *sdl)
 	x_e = rt->x_s_bar + rt->x_length_bar * progress;
 	while (++x_s < x_e)
 	{
-		y_s = rt->y_s_bar;
+		y_s = rt->y_s_bar + (y_e - rt->y_s_bar) * (1.0 - ((x_s - rt->x_s_bar) / (double)(rt->x_length_bar)));
 		while (++y_s < y_e)
-			sdl->pro_data[x_s + y_s * 600] = 0x00AA00;
+			sdl->pro_data[x_s + y_s * 600] = (int)(0xAA * ((x_s - rt->x_s_bar) / (double)(rt->x_length_bar))) << 8;
 		SDL_UpdateWindowSurface(sdl->win);
 	}
 }

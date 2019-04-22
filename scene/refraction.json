@@ -3,42 +3,45 @@
 		"objects":[
 			{
 				"shape":"sphere",
-				"id":1,
+				"id":0,
 				"color":[0,255,0],
-				"center":[-2,0,4],
-				"reflection":0.4,
+				"center":[1,0,9],
+				"reflection":0.5,
+				"specular":500,
+				"radius":1.0,
+				"direction":[0,0,0]
+			},
+			{
+				"shape":"sphere",
+				"id":0,
+				"color":[255,0,0],
+				"center":[0,0,5],
+				"refraction":1.3,
 				"specular":10,
 				"radius":1.0,
 				"direction":[0,0,0]
 			},
 			{
 				"shape":"sphere",
-				"id":1,
+				"id":0,
 				"color":[0,0,255],
-				"reflection":0.3,
-				"specular":500,
-				"center":[2,0,4],
+				"center":[-1,0,9],
+				"specular":10,
 				"radius":1.0,
 				"direction":[0,0,0]
 			},
 			{
-				"shape":"sphere",
-				"id":1,
-				"color":[255,0,0],
-				"specular":500,
-				"reflection":0.2,
-				"center":[0,-1,3],
-				"radius":1.0,
-				"direction":[0,0,0]
-			},
-			{
+				"id":0,
 				"shape":"plane",
-				"id":1,
-				"color":[255,255,0],
+				"color":[0,0,255],
+				"texture":"noise",
+				"x_displace":0,
+				"y_displace":0,
 				"specular":1000,
 				"reflection":0.5,
-				"center":[0,-1.0,0],
-				"direction":[0,1,0]
+				"texture_div":200,
+				"center":[0,-1,0],
+				"direction":[0,0,0]
 			}
 		],
 		"lighting":[
@@ -48,9 +51,9 @@
 				"center":[2,1,0]
 			},
 			{
-				"type":"directional",
-				"intensity":0.2,
-				"direction":[1,4,4]
+				"type":"point",
+				"intensity":0.6,
+				"center":[-2,1,0]
 			},
 			{
 				"type":"ambient",
@@ -62,9 +65,9 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection_depth":3,
+			"reflection_depth":1,
 			"pixel_division":1,
-			"threads":1
+			"threads":8
 		}
 	}
 }

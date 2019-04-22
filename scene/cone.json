@@ -2,33 +2,37 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"plane",
-				"id":0,
-				"color":[255,255,0],
-				"center":[1,-1,5],
-				"direction":[0,0,0]
-			},{
 				"shape":"cone",
-				"id":1,
+				"id":0,
 				"color":[0,0,255],
-				"texture":"can",
-				"x_displace":0,
-				"y_displace":0,
-				"texture_div":600,
-				"center":[0,0,6],
-				"radius_in":0.5,
-				"radius_out":1.5,
-				"height":1.5,
+				"center":[0,0.5,4],
+				"radius_in":0.2,
+				"radius_out":0.7,
+				"height":0.8,
 				"direction":[0,0,0]
+			},
+			{
+				"shape":"box",
+				"id":1,
+				"color":[255,0,0],
+				"center":[0,0,4],
+				"radius":0,
+				"sides":[0.5,0.5,0.5],
+				"direction":[0,0,0]
+			},
+			{
+				"shape":"mix",
+				"id":2,
+				"color":[255,0,0],
+				"child_one":0,
+				"child_two":1
 			}
 		],
 		"lighting":[
 			{
-				"type":"spot",
+				"type":"point",
 				"intensity":0.6,
-				"center":[0,10,6],
-				"direction":[0,-1,0],
-				"view_angle":30
+				"center":[2,1,0]
 			},
 			{
 				"type":"ambient",
