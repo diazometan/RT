@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 10:51:40 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/22 17:33:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 19:33:09 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int		init_sdl(t_sdl *sdl)
 	}
 	sdl->img_data = (int *)check_memory(malloc(sizeof(int) * 600 * 600));
 	sdl->pro_data = (int *)sdl->surf->pixels;
+	ft_bzero(sdl->surf->pixels, 600 * 600 * 4);
 	return (0);
 }
 
@@ -45,10 +46,7 @@ void			init_rt_fields(t_rt *rt)
 	rt->color_scheme = STANDART;
 	rt->win_width = 600;
 	rt->win_height = 600;
-	rt->x_s_bar = rt->win_width / 5 * 2;
-	rt->x_length_bar = rt->win_width / 5 * 3 - rt->x_s_bar;
-	rt->y_s_bar = rt->win_height / 2;
-	rt->y_e_bar = rt->y_s_bar + rt->win_height * 0.066;
+	rt->total_pixels = rt->win_height * rt->win_width;
 }
 
 int				init_rt(t_rt *rt, char *config_file)
