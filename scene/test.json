@@ -73,8 +73,8 @@
 			}
 		],
 		"camera":{
-			"center":[-3,1,7],
-			"direction":[0,-90,0]
+			"center":[0,1,1],
+			"direction":[0,0,0]
 		},
 		"physics":{
 			"reflection_depth":2,

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 18:54:37 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 21:35:00 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:55:44 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	init_fun_allocator(char *s, t_shape *new, t_shape **head,
 	init_specular(s, &new->specular);
 	init_function(new);
 	init_function_texture(new);
-	if (new->figure > 0 && new->figure < 12)
+	if ((new->figure > 0 && new->figure < 12) || new->figure == 17)
 		form_shape(s, new, head_textures);
 	else
 		form_group(s, new, head);

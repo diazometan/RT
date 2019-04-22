@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:26:16 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 18:44:30 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:53:39 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			init_function_texture(t_shape *new)
 {
-	if (new->figure == PLANE)
+	if (new->figure == PLANE || new->figure == HALF_SPACE)
 		new->map_texture = &plane_texture;
 	else if (new->figure == SPHERE || new->figure == ELIPSIOD
 			|| new->figure == CAPSULE)
@@ -47,6 +47,8 @@ void			init_function(t_shape *new)
 {
 	if (new->figure == PLANE)
 		new->gd_fun = &gd_plane;
+	if (new->figure == HALF_SPACE)
+		new->gd_fun = &gd_half_space;
 	else if (new->figure == SPHERE)
 		new->gd_fun = &gd_sphere;
 	else if (new->figure == CYLINDER)

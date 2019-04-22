@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 14:17:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 20:41:52 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:47:45 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define DIFFERENCE 14
 # define BLEND 15
 # define MIX 16
+# define HALF_SPACE 17
 
 # define POINT 1
 # define DIRECTIONAL 2

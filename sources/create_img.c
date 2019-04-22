@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 21:37:05 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 19:26:56 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,19 @@ void			*create_img_pthread(void *data)
 	t_pthread	*obj;
 
 	obj = (t_pthread *)data;
-	x_limit = obj->x[1];
-	y_limit = obj->y[1];
-	y = obj->y[0] - 1;
+	x_limit = obj->x;
+	y_limit = obj->y;
+	y = -1;
 	while (++y < y_limit)
 	{
-		x = obj->x[0] - 1;
+		x = -1;
 		while (++x < x_limit)
 		{
-			get_pixel(x, y, obj->rt, obj->sdl->img_data);
-			++obj->rt->count;
+			if ((y % obj->size) == obj->index)
+			{
+				get_pixel(x, y, obj->rt, obj->sdl->img_data);
+				++obj->rt->count;
+			}
 		}
 	}
 	return (NULL);
@@ -105,8 +108,7 @@ void			*create_img_pthread(void *data)
 void			create_img(t_rt *rt, t_sdl *sdl)
 {
 	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
-	draw_borders(rt, sdl);
-	sleep(1);
+	//draw_borders(rt, sdl);
 	create_pthread(rt, sdl);
 	ft_memcpy(sdl->surf->pixels, (void *)sdl->img_data,
 				rt->win_width * rt->win_height * 4);

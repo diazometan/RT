@@ -6,22 +6,22 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 18:12:31 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/04/22 16:15:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:34:36 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_pthread	init_t_pthread(t_rt *rt, t_sdl *sdl, int x[2], int y[2])
+t_pthread	init_t_pthread(t_rt *rt, t_sdl *sdl, int xy[2], int si[2])
 {
 	t_pthread	obj;
 
 	obj.rt = rt;
 	obj.sdl = sdl;
-	obj.x[0] = x[0];
-	obj.x[1] = x[1];
-	obj.y[0] = y[0];
-	obj.y[1] = y[1];
+	obj.x = xy[0];
+	obj.y = xy[1];
+	obj.size = si[0];
+	obj.index = si[1];
 	return (obj);
 }
 
@@ -42,8 +42,8 @@ void		body_pthread(t_rt *rt, t_sdl *sdl, t_body_pthread body_pthread)
 		body_pthread.new_rts[index].count = 0;
 		body_pthread.blocks[index] =
 			init_t_pthread(&(body_pthread.new_rts[index]), sdl,
-			(int[2]){start, finish},
-			(int[2]){0, rt->win_height});
+			(int[2]){rt->win_width, rt->win_height},
+			(int[2]){body_pthread.size, index});
 		(void)pthread_create(&body_pthread.tid[index], NULL,
 			create_img_pthread, &body_pthread.blocks[index]);
 	}

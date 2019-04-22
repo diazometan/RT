@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 10:25:27 by rgyles            #+#    #+#              #
-#    Updated: 2019/04/21 18:29:22 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/04/22 19:27:31 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ KISS_SDL = $(KISS_DIR)/kisssdl.a
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-FLAGS = -O2 -g -Wall -Wextra #-Werror
+FLAGS = -O2 -g -Wall -Wextra -Werror
 
 SDL =  -F ./includes/frameworks/ -framework SDL2 \
 								-framework SDL2_image \

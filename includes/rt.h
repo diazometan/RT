@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 19:14:44 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/22 16:13:27 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:32:59 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,10 @@ typedef struct		s_pthread
 {
 	t_rt			*rt;
 	t_sdl			*sdl;
-	int				x[2];
-	int				y[2];
+	int				x;
+	int				y;
+	int				size;
+	int				index;
 }					t_pthread;
 
 typedef struct		s_body_pthread

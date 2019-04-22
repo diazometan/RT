@@ -88,7 +88,7 @@
 			{
 				"id":0,
 				"shape":"plane",
-				"color":[0,0,255],
+				"color":[0,255,255],
 				"texture":"noise",
 				"x_displace":0,
 				"y_displace":0,

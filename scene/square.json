@@ -2,41 +2,36 @@
 	"scene":{
 		"objects":[
 			{
-				"shape":"cone",
+				"shape":"half_space",
 				"id":0,
-				"color":[0,0,255],
-				"center":[0,0.5,4],
-				"radius_in":0.2,
-				"radius_out":0.7,
-				"height":0.8,
-				"direction":[0,0,0]
-			},
-			{
-				"shape":"box",
-				"id":1,
 				"color":[255,0,0],
-				"center":[0,0,4],
-				"radius":0,
-				"sides":[0.5,0.5,0.5],
+				"center":[0,-1,0],
 				"direction":[0,0,0]
 			},
 			{
-				"shape":"mix",
+				"shape":"half_space",
 				"id":2,
 				"color":[255,0,0],
+				"center":[0,-1,0],
+				"direction":[0,0,90]
+			},
+			{
+				"shape":"difference",
+				"id":5,
+				"color":[255,0,0],
 				"child_one":0,
-				"child_two":1
+				"child_two":2
 			}
 		],
 		"lighting":[
 			{
 				"type":"point",
 				"intensity":0.6,
-				"center":[2,1,0]
+				"center":[0,0,0]
 			},
 			{
 				"type":"ambient",
-				"intensity":0.0
+				"intensity":0.2
 			}
 		],
 		"camera":{
@@ -44,7 +39,7 @@
 			"direction":[0,0,0]
 		},
 		"physics":{
-			"reflection_depth":2,
+			"reflection_depth":3,
 			"pixel_division":1,
 			"threads":8
 		}

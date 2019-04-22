@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 13:11:24 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/21 13:04:09 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:50:44 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int	identify_operation(char *start)
 		return (BLEND);
 	else if (strcequ(start, "\"mix\"", ','))
 		return (MIX);
+	else if (strcequ(start, "\"half_space\"", ','))
+		return (HALF_SPACE);
 	else
 		return (-1);
 }

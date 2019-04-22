@@ -10,7 +10,7 @@
 				"direction":[0,0,0]
 			},
 			{
-				"shape":"plane",
+				"shape":"half_space",
 				"id":1,
 				"color":[255,255,0],
 				"center":[0,-1,0],
@@ -20,8 +20,8 @@
 				"shape":"intersect",
 				"id":2,
 				"color":[255,0,0],
-				"child_one":0,
-				"child_two":1
+				"child_one":1,
+				"child_two":0
 			}
 		],
 		"lighting":[
@@ -32,7 +32,7 @@
 			},
 			{
 				"type":"ambient",
-				"intensity":0.0
+				"intensity":0.2
 			}
 		],
 		"camera":{
