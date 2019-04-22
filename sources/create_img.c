@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:29:08 by rgyles            #+#    #+#             */
-/*   Updated: 2019/04/22 15:33:21 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/04/22 17:26:11 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void			*create_img_pthread(void *data)
 		x = -1;
 		while (++x < x_limit)
 		{
-			if ((x % obj->size) == obj->index)
+			if ((y % obj->size) == obj->index)
 			{
 				get_pixel(x, y, obj->rt, obj->sdl->img_data);
 				++obj->rt->count;
@@ -109,7 +109,6 @@ void			create_img(t_rt *rt, t_sdl *sdl)
 {
 	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
 	draw_borders(rt, sdl);
-	sleep(1);
 	create_pthread(rt, sdl);
 	ft_memcpy(sdl->surf->pixels, (void *)sdl->img_data,
 				rt->win_width * rt->win_height * 4);

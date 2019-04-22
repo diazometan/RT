@@ -6,7 +6,6 @@
 				"id":1,
 				"color":[168,53,186],
 				"texture":"brick",
-				"normal_mapping":"nm_brick",
 				"x_displace":0,
 				"y_displace":0,
 				"texture_div":600,
