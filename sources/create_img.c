@@ -104,8 +104,6 @@ void			*create_img_pthread(void *data)
 
 void			create_img(t_rt *rt, t_sdl *sdl)
 {
-	ft_bzero(sdl->surf->pixels, rt->win_height * rt->win_width * 4);
-	draw_borders(rt, sdl);
 	sleep(1);
 	create_pthread(rt, sdl);
 	ft_memcpy(sdl->surf->pixels, (void *)sdl->img_data,

@@ -69,10 +69,7 @@ typedef struct		s_rt
 {
 	int				win_width;
 	int				win_height;
-	int				x_s_bar;
-	int				x_length_bar;
-	int				y_s_bar;
-	int				y_e_bar;
+	int				total_pixels;
 	int				p_division;
 	int				depth;
 	int				sample;
@@ -111,7 +108,6 @@ typedef struct		s_body_pthread
 	t_rt			*new_rts;
 }					t_body_pthread;
 
-void				draw_borders(t_rt *rt, t_sdl *sdl);
 void				progress_bar(double progress, t_rt *rt, t_sdl *sdl);
 
 char				*get_file(int fd);

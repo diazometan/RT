@@ -14,8 +14,6 @@
 
 static int		init_sdl(t_sdl *sdl)
 {
-	// SDL_Surface *wall;
-
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		printf("SDL_Init Error: %s\n", SDL_GetError());
@@ -28,15 +26,14 @@ static int		init_sdl(t_sdl *sdl)
 		return (1);
 	}
 	sdl->surf = SDL_GetWindowSurface(sdl->win);
-	//sdl->progress = SDL_GetWindowSurface(sdl->win);
 	if (sdl->surf == NULL)
 	{
 		printf("SDL_GetWindowSurface Error: %s\n", SDL_GetError());
 		return (1);
 	}
-	//sdl->img_data = (int *)sdl->surf->pixels;
 	sdl->img_data = (int *)malloc(sizeof(int) * 600 * 600);
 	sdl->pro_data = (int *)sdl->surf->pixels;
+	ft_bzero(sdl->surf->pixels, 600 * 600 * 4);
 	return (0);
 }
 
@@ -48,10 +45,7 @@ void	init_rt_fields(t_rt *rt)
 	rt->color_scheme = STANDART;
 	rt->win_width = 600;
 	rt->win_height = 600;
-	rt->x_s_bar = rt->win_width / 5 * 2;
-	rt->x_length_bar = rt->win_width / 5 * 3 - rt->x_s_bar;
-	rt->y_s_bar = rt->win_height / 2;
-	rt->y_e_bar = rt->y_s_bar + rt->win_height * 0.066;
+	rt->total_pixels = rt->win_height * rt->win_width;
 }
 
 int	init_rt(t_rt *rt, char *config_file)
